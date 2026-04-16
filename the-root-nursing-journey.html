@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Root — 나는 미국 간호사 여정 어디까지 왔을까?</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F7F5F0;--bark:#16342C;--soil:#365046;--moss:#244C41;--moss-light:#E6F0EB;--sage:#7FA89A;--clay:#8F6A52;--clay-light:#F4ECE7;--sand:#DAD7CF;--mist:#EEF3F0;--font-d:'DM Serif Display',serif;--font-b:'DM Sans',sans-serif;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-b);background:var(--cream);color:var(--bark);min-height:100vh;overflow-x:hidden;}
+
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;position:relative;background:var(--bark);overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,#2D5A4D 0%,#16342C 58%,#0D201B 100%);}
+.rings{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+.ring{position:absolute;border-radius:50%;border:1px solid rgba(210,231,221,0.10);}
+.r1{width:200px;height:200px;}.r2{width:360px;height:360px;}.r3{width:540px;height:540px;border-color:rgba(210,231,221,0.07);}.r4{width:720px;height:720px;border-color:rgba(210,231,221,0.05);}.r5{width:920px;height:920px;border-color:rgba(210,231,221,0.03);}
+.hero-content{position:relative;z-index:2;max-width:600px;}
+.hero-tag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:#CFE2D9;margin-bottom:1.5rem;padding:6px 16px;border:0.5px solid rgba(207,226,217,0.35);border-radius:20px;}
+.hero h1{font-family:var(--font-d);font-size:clamp(2.8rem,8vw,5rem);color:#F8FBF9;line-height:1.08;margin-bottom:0.5rem;}
+.hero h1 em{font-style:italic;color:#B9D1C7;}
+.hero-sub{font-size:15px;color:rgba(248,251,249,0.72);line-height:1.7;margin-bottom:2.5rem;font-weight:300;}
+.hero-btn{display:inline-block;padding:14px 36px;background:#F1F7F4;color:var(--bark);border:none;border-radius:2px;font-family:var(--font-b);font-size:14px;font-weight:500;cursor:pointer;letter-spacing:0.04em;transition:all 0.2s;}
+.hero-btn:hover{background:#E3EEE8;transform:translateY(-1px);}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:rgba(247,243,238,0.35);font-size:11px;letter-spacing:0.1em;display:flex;flex-direction:column;align-items:center;gap:8px;animation:ph 2s ease-in-out infinite;}
+.scroll-arr{width:1px;height:28px;background:linear-gradient(to bottom,transparent,rgba(247,243,238,0.3));}
+@keyframes ph{0%,100%{opacity:0.5}50%{opacity:1}}
+
+.quiz-sec{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:4rem 1.5rem;background:var(--cream);}
+.quiz-wrap{max-width:640px;width:100%;}
+.quiz-hdr{margin-bottom:2.5rem;text-align:center;}
+.quiz-hdr h2{font-family:var(--font-d);font-size:clamp(1.8rem,5vw,2.8rem);color:var(--bark);margin-bottom:0.5rem;}
+.quiz-hdr p{font-size:15px;color:var(--soil);opacity:0.78;}
+.prog-wrap{height:2px;background:var(--sand);border-radius:1px;margin-bottom:2rem;overflow:hidden;}
+.prog-fill{height:100%;background:var(--moss);border-radius:1px;transition:width 0.5s ease;}
+.step-track{display:flex;align-items:center;margin-bottom:2.5rem;}
+.sdot{width:10px;height:10px;border-radius:50%;background:var(--sand);flex-shrink:0;transition:all 0.3s;}
+.sdot.active{background:var(--moss);transform:scale(1.3);}
+.sdot.done{background:var(--moss);opacity:0.5;}
+.sline{flex:1;height:1px;background:var(--sand);transition:background 0.3s;}
+.sline.done{background:var(--moss);opacity:0.5;}
+
+.q-card{background:white;border:0.5px solid var(--sand);border-radius:4px;padding:2.5rem;margin-bottom:1rem;animation:su 0.4s ease;box-shadow:0 8px 24px rgba(22,52,44,0.05);}
+@keyframes su{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.q-num{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay);margin-bottom:1rem;}
+.q-txt{font-family:var(--font-d);font-size:clamp(1.3rem,3vw,1.75rem);color:var(--bark);line-height:1.3;margin-bottom:0.75rem;}
+.q-sub{font-size:13px;color:var(--soil);opacity:0.72;line-height:1.6;margin-bottom:2rem;}
+.q-opts{display:flex;flex-direction:column;gap:10px;}
+.qbtn{display:flex;align-items:center;gap:14px;padding:14px 18px;border:0.5px solid var(--sand);border-radius:3px;background:#FBFCFB;cursor:pointer;font-family:var(--font-b);font-size:14px;color:var(--bark);transition:all 0.2s;text-align:left;}
+.qbtn.yes:hover{border-color:var(--moss);background:var(--moss-light);transform:translateX(4px);}
+.qbtn.no:hover{border-color:var(--clay);background:var(--clay-light);transform:translateX(4px);}
+.qbtn-icon{width:32px;height:32px;border-radius:50%;border:0.5px solid var(--sand);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;background:white;}
+.qbtn-lbl{font-weight:500;color:var(--bark);}
+.qbtn-desc{font-size:12px;color:var(--soil);opacity:0.62;margin-top:1px;}
+.q-nav{display:flex;gap:8px;margin-top:0;}
+.q-nav-btn{flex:1;padding:10px;background:transparent;color:var(--soil);border:0.5px solid var(--sand);border-radius:3px;font-family:var(--font-b);font-size:12px;cursor:pointer;transition:all 0.15s;}
+.q-nav-btn:hover{background:var(--mist);}
+
+.res-card{background:white;border:0.5px solid var(--sand);border-radius:4px;padding:2.5rem;animation:su 0.4s ease;box-shadow:0 8px 24px rgba(22,52,44,0.05);}
+.res-badge{display:inline-flex;align-items:center;padding:5px 12px;border-radius:2px;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:1.25rem;}
+.bs{background:var(--moss-light);color:var(--moss);}
+.bm{background:#F3EFE6;color:#6E5441;}
+.bf{background:#E5F0EA;color:var(--moss);}
+.res-stage{font-family:var(--font-d);font-size:clamp(1.4rem,4vw,2rem);color:var(--bark);margin-bottom:0.75rem;line-height:1.2;white-space:pre-line;}
+.res-desc{font-size:14px;color:var(--soil);line-height:1.7;margin-bottom:1.5rem;opacity:0.88;}
+.nxt-steps{border-top:0.5px solid var(--sand);padding-top:1.5rem;margin-bottom:1.5rem;}
+.nxt-lbl{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--soil);opacity:0.5;margin-bottom:1rem;}
+.nxt-item{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;}
+.nxt-num{width:22px;height:22px;border-radius:50%;background:var(--bark);color:#F7FBF9;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-weight:500;}
+.nxt-t{font-size:14px;font-weight:500;color:var(--bark);}
+.nxt-d{font-size:12px;color:var(--soil);opacity:0.7;margin-top:2px;line-height:1.5;}
+.uw-banner{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#F8F4ED;border:0.5px solid #E1C9AA;border-radius:3px;margin-bottom:1.5rem;}
+.uw-ico{width:36px;height:36px;background:var(--clay);border-radius:4px;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:500;flex-shrink:0;}
+.uw-ttl{font-size:13px;font-weight:500;color:var(--bark);}
+.uw-sub{font-size:11px;color:var(--soil);opacity:0.6;}
+.uw-link{font-size:12px;color:var(--clay);text-decoration:none;font-weight:500;white-space:nowrap;}
+.jen-note{display:flex;gap:12px;padding:16px;background:var(--mist);border-radius:3px;margin-bottom:1.5rem;}
+.jen-av{width:36px;height:36px;border-radius:50%;background:var(--moss);display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:500;flex-shrink:0;}
+.jen-msg{font-size:13px;color:var(--soil);line-height:1.6;}
+.jen-msg strong{color:var(--bark);}
+.res-acts{display:flex;flex-direction:column;gap:8px;}
+.btn-main{width:100%;padding:14px;background:var(--bark);color:#F7FBF9;border:none;border-radius:3px;font-family:var(--font-b);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;}
+.btn-main:hover{background:#102720;}
+.btn-ghost{width:100%;padding:12px;background:transparent;color:var(--soil);border:0.5px solid var(--sand);border-radius:3px;font-family:var(--font-b);font-size:13px;cursor:pointer;transition:all 0.2s;}
+.btn-ghost:hover{background:var(--mist);}
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.ssel-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:1rem;}
+.ssel-btn{padding:12px;border:0.5px solid var(--sand);border-radius:3px;background:#FBFCFB;cursor:pointer;font-family:var(--font-b);font-size:13px;font-weight:500;color:var(--bark);transition:all 0.2s;text-align:center;}
+.ssel-btn:hover{border-color:var(--moss);background:var(--moss-light);}
+.ssel-btn small{display:block;font-size:11px;font-weight:400;color:var(--soil);opacity:0.6;margin-top:2px;}
+.sc-tbl{border:0.5px solid var(--sand);border-radius:3px;overflow:hidden;margin-bottom:8px;}
+.sc-hdr{display:grid;grid-template-columns:120px 1fr;background:var(--mist);padding:7px 12px;font-size:11px;font-weight:500;color:var(--soil);letter-spacing:0.04em;}
+.sc-row{display:grid;grid-template-columns:120px 1fr;padding:8px 12px;font-size:12px;border-top:0.5px solid var(--sand);}
+.sc-row:nth-child(odd){background:#FBFCFB;}
+.sc-en{font-weight:500;color:var(--bark);}
+.sc-sc{color:var(--soil);}
+.info-box{background:var(--moss-light);border:0.5px solid rgba(36,76,65,0.18);border-radius:3px;padding:12px 14px;margin-bottom:1.5rem;font-size:13px;color:#1E3D34;line-height:1.6;}
+.warn-box{background:#FEF7ED;border:0.5px solid #E8C98A;border-radius:3px;padding:12px 14px;margin-bottom:1rem;font-size:13px;color:#6B4C1E;line-height:1.6;}
+.warn-box strong{color:#4A3010;}
+
+/* Compact toggle */
+.compact-toggle{border:0.5px solid var(--sand);border-radius:3px;margin-bottom:1.5rem;overflow:hidden;}
+.compact-header{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:#FBFCFB;cursor:pointer;user-select:none;transition:background 0.15s;}
+.compact-header:hover{background:var(--mist);}
+.compact-header-left{display:flex;align-items:center;gap:8px;}
+.compact-pill{font-size:10px;font-weight:500;padding:2px 8px;border-radius:10px;background:#E8F0FB;color:#185FA5;}
+.compact-title{font-size:13px;font-weight:500;color:var(--bark);}
+.compact-sub{font-size:11px;color:var(--soil);opacity:0.6;margin-top:1px;}
+.compact-arrow{font-size:12px;color:var(--soil);opacity:0.5;transition:transform 0.2s;flex-shrink:0;}
+.compact-body{display:none;padding:14px;border-top:0.5px solid var(--sand);background:white;}
+.compact-body.open{display:block;}
+.compact-states{font-size:11px;color:var(--soil);line-height:2;font-family:var(--font-b);display:flex;flex-wrap:wrap;gap:4px;margin:10px 0;}
+.cs-pill{padding:2px 8px;background:var(--mist);border-radius:10px;font-size:11px;color:var(--soil);}
+.compact-note{font-size:12px;color:#1E3D34;background:var(--moss-light);padding:10px 12px;border-radius:3px;margin-top:10px;line-height:1.6;}
+
+.state-sec{background:white;padding:5rem 1.5rem;border-top:0.5px solid var(--sand);}
+.state-inner{max-width:900px;margin:0 auto;}
+.eyebrow{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--clay);margin-bottom:1rem;}
+.sec-title{font-family:var(--font-d);font-size:clamp(1.8rem,4vw,2.5rem);color:var(--bark);margin-bottom:0.5rem;line-height:1.15;}
+.sec-sub{font-size:15px;color:var(--soil);opacity:0.72;margin-bottom:2.5rem;}
+.flt-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.5rem;}
+.flt-btn{padding:6px 16px;border:0.5px solid var(--sand);border-radius:20px;background:transparent;font-family:var(--font-b);font-size:12px;color:var(--soil);cursor:pointer;transition:all 0.15s;}
+.flt-btn:hover{background:var(--mist);}
+.flt-btn.on{background:var(--bark);color:#F7FBF9;border-color:var(--bark);}
+.leg-row{display:flex;gap:16px;margin-bottom:1.25rem;flex-wrap:wrap;}
+.leg{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--soil);opacity:0.7;}
+.leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.cnt-lbl{font-size:12px;color:var(--soil);opacity:0.55;margin-bottom:1rem;}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;}
+.sc{background:#FBFCFB;border:0.5px solid var(--sand);border-radius:4px;padding:1rem 1.1rem;cursor:pointer;transition:border-color 0.15s;}
+.sc:hover{border-color:#AEBDB5;}
+.sc.open{border-color:var(--soil);}
+.sc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
+.sc-name{font-size:15px;font-weight:500;color:var(--bark);}
+.sc-sub2{font-size:11px;color:var(--soil);opacity:0.6;margin-top:2px;}
+.sc-bgs{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px;}
+.bg{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;}
+.bg-e{background:#E7F0EB;color:#1F6351;}
+.bg-m{background:#F4EEE4;color:#785A43;}
+.bg-h{background:#F4E7E1;color:#8B4030;}
+.bg-c{background:#E8F0FB;color:#185FA5;}
+.bg-g{background:var(--mist);color:var(--soil);}
+.bg-w{background:#FEF7ED;color:#7A5020;}
+.stars{display:flex;gap:2px;margin-top:8px;}
+.star{width:9px;height:9px;border-radius:1px;}
+.star.on{background:var(--moss);}
+.star.off{background:var(--sand);}
+.sc-meta{font-size:11px;color:var(--soil);opacity:0.6;margin-top:8px;}
+.arr{font-size:13px;color:var(--soil);opacity:0.5;transition:transform 0.2s;flex-shrink:0;margin-top:2px;}
+.sc.open .arr{transform:rotate(180deg);}
+.sc-detail{display:none;border-top:0.5px solid var(--sand);padding-top:10px;margin-top:10px;}
+.sc.open .sc-detail{display:block;}
+.dr{display:flex;gap:8px;margin-bottom:8px;align-items:flex-start;}
+.dl{font-size:11px;font-weight:500;color:var(--soil);opacity:0.55;width:76px;flex-shrink:0;padding-top:1px;}
+.dv{font-size:12px;color:var(--bark);line-height:1.5;flex:1;}
+.dv.ok{color:#1F6351;}.dv.warn{color:#7D5A3F;}.dv.bad{color:#8B4030;}
+.tip-b{background:var(--mist);border-radius:3px;padding:8px 10px;margin-top:8px;font-size:12px;color:var(--soil);line-height:1.5;}
+.tip-b strong{color:var(--bark);}
+footer{background:var(--bark);color:rgba(247,243,238,0.45);text-align:center;padding:2rem;font-size:12px;}
+footer a{color:#C6DDD3;text-decoration:none;}
+</style>
+</head>
+<body>
+
+<section class="hero" id="hero">
+  <div class="rings"><div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div><div class="ring r4"></div><div class="ring r5"></div></div>
+  <div class="hero-content">
+    <div class="hero-tag">The Root · Jennifer Minja Lee</div>
+    <h1>나는 미국 간호사<br>여정 <em>어디까지</em> 왔을까?</h1>
+    <p class="hero-sub">5가지 질문으로 지금 내 단계를 파악하고<br>다음 스텝을 명확하게 알아봐요.</p>
+    <button class="hero-btn" onclick="startQuiz()">지금 내 단계 확인하기 →</button>
+  </div>
+  <div class="scroll-hint"><span>SCROLL</span><div class="scroll-arr"></div></div>
+</section>
+
+<section class="quiz-sec" id="quiz-sec">
+  <div class="quiz-wrap">
+    <div class="quiz-hdr">
+      <h2>나의 여정 찾기</h2>
+      <p>솔직하게 답하면 정확한 단계가 나와요</p>
+    </div>
+    <div class="prog-wrap"><div class="prog-fill" id="prog" style="width:0%"></div></div>
+    <div class="step-track" id="track">
+      <div class="sdot active" id="d0"></div><div class="sline" id="l0"></div>
+      <div class="sdot" id="d1"></div><div class="sline" id="l1"></div>
+      <div class="sdot" id="d2"></div><div class="sline" id="l2"></div>
+      <div class="sdot" id="d3"></div><div class="sline" id="l3"></div>
+      <div class="sdot" id="d4"></div><div class="sline" id="l4"></div>
+      <div class="sdot" id="d5"></div>
+    </div>
+    <div id="qc"></div>
+  </div>
+</section>
+
+<section class="state-sec" id="state-sec">
+  <div class="state-inner">
+    <div class="eyebrow">State Guide</div>
+    <h2 class="sec-title">주별 요구사항<br>한눈에 보기</h2>
+    <p class="sec-sub">어느 주로 갈지 결정할 때 가장 중요한 기준들을 정리했어요</p>
+    <div class="flt-row">
+      <button class="flt-btn on" onclick="setF('all',this)">전체 8개 주</button>
+      <button class="flt-btn" onclick="setF('easy',this)">입문 추천</button>
+      <button class="flt-btn" onclick="setF('compact',this)">Compact 주</button>
+      <button class="flt-btn" onclick="setF('no_cp',this)">CP 불필요</button>
+      <button class="flt-btn" onclick="setF('no_ssn',this)">SSN 없이 가능</button>
+    </div>
+    <div class="leg-row">
+      <div class="leg"><div class="leg-dot" style="background:#244C41"></div>친화도 (별 5개 만점)</div>
+      <div class="leg"><div class="leg-dot" style="background:#185FA5"></div>Compact 주 (거주 후 다중 면허)</div>
+      <div class="leg"><div class="leg-dot" style="background:#8B4030"></div>까다로운 주</div>
+    </div>
+    <div class="cnt-lbl" id="cnt">8개 주 표시 중</div>
+    <div class="cards-grid" id="sgrid"></div>
+  </div>
+</section>
+
+<footer>
+  <p>The Root · Jennifer Minja Lee · 1st generation immigrant RN</p>
+  <p style="margin-top:6px;"><a href="https://www.youtube.com/@JenniferMinjaLee" target="_blank">YouTube</a> · <a href="https://jenniferminjalee.substack.com" target="_blank">Substack</a></p>
+  <p style="margin-top:10px;font-size:11px;opacity:0.6;">정보는 참고용이며 실제 지원 전 해당 주 간호사 면허 위원회에 반드시 확인하세요. 최종 업데이트: 2026년 4월</p>
+</footer>
+
+<script>
+const Qs=[
+  {id:'degree',  n:'Q1 of 5', t:'간호학 학위가 있으신가요?',
+   s:'어느 나라든 인가받은 간호학과라면 가능 — 영어권 대학일 필요 없어요.',
+   yes:{next:'license'}, no:{r:'no_degree'}},
+  {id:'license', n:'Q2 of 5', t:'국내 간호사 면허증이 있으신가요?',
+   s:'한국 기준: 간호사 국가고시 합격 후 발급된 면허증',
+   yes:{next:'nclex'}, no:{r:'no_license'}},
+  {id:'nclex',   n:'Q3 of 5', t:'NCLEX-RN을 통과하셨나요?',
+   s:'National Council Licensure Examination for Registered Nurse',
+   yes:{next:'clinical'}, no:{r:'needs_nclex'}},
+  {id:'clinical',n:'Q4 of 5', t:'임상 경력이 있으신가요?',
+   s:'임상 경력이 영주권 스폰서를 찾는 데 핵심이에요. 미국에서 일하고 싶은 부서의 경력이 있을수록 유리해요.',
+   yes:{next:'english'}, no:{r:'no_clinical'}},
+  {id:'english', n:'Q5 of 5', t:'비자스크린용 영어 점수가 있으신가요?',
+   s:'TOEFL / IELTS / TOEIC / PTE 등 — 점수가 있다면 비자스크린 단계로 바로 넘어갈 수 있어요.',
+   yes:{r:'needs_visascreen'}, no:{r:'needs_english'}}
+];
+
+const compactStates=['AL','AZ','AR','CO','CT','DE','FL','GA','GU','ID','IN','IA','KS','KY','LA','ME','MD','MS','MO','MT','NE','NH','NJ','NM','NC','ND','OH','OK','PA','RI','SC','SD','TN','TX','UT','VT','VA','VI','WA','WV','WI','WY'];
+
+function compactToggleHTML(){
+  const pills=compactStates.map(s=>`<span class="cs-pill">${s}</span>`).join('');
+  return `
+  <div class="compact-toggle">
+    <div class="compact-header" onclick="toggleCompact(this)">
+      <div class="compact-header-left">
+        <span class="compact-pill">Compact NLC</span>
+        <div>
+          <div class="compact-title">Compact States란? (클릭해서 보기)</div>
+          <div class="compact-sub">42개 주 참여 — 면허 상호인정 협약</div>
+        </div>
+      </div>
+      <span class="compact-arrow">▾</span>
+    </div>
+    <div class="compact-body">
+      <p style="font-size:13px;color:var(--soil);line-height:1.7;margin-bottom:10px;">
+        Compact 주(NLC 가입 주)에서 면허를 취득하면, 미국 거주지를 확립한 후 별도 시험 없이 다른 Compact 주에서도 진료할 수 있어요.
+      </p>
+      <strong style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--soil);opacity:0.6;">현재 Compact 주 (42개)</strong>
+      <div class="compact-states">${pills}</div>
+      <div class="warn-box">
+        <strong>중요 — 국제 간호사에게 적용되는 현실</strong><br>
+        해외에서 지원하는 경우 Compact 주에 지원해도 <strong>처음엔 Single State License(단일 주 면허)</strong>만 발급돼요. Compact 다중 면허는 미국에 이민해서 해당 주에 거주지를 확립한 후에 업그레이드할 수 있어요.<br><br>
+        지금 당장 Compact 주로 지원하지 않아도 걱정 말아요 — 나중에 <strong>면허 이전(Endorsement)</strong>으로 다른 주로 이동할 수 있어요. 지금은 지원 가능한 주로 먼저 지원하는 게 좋아요.
+      </div>
+    </div>
+  </div>`;
+}
+
+function toggleCompact(header){
+  const body=header.nextElementSibling;
+  const arrow=header.querySelector('.compact-arrow');
+  body.classList.toggle('open');
+  arrow.style.transform=body.classList.contains('open')?'rotate(180deg)':'rotate(0deg)';
+}
+
+const engTableHTML=`
+  <div style="margin-bottom:1.5rem;">
+    <div style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--soil);opacity:0.5;margin-bottom:10px;">비자스크린용 영어 점수 기준 (2026년 4월 기준)</div>
+    <div class="sc-tbl">
+      <div class="sc-hdr"><span>시험</span><span>최저 점수</span></div>
+      <div class="sc-row"><span class="sc-en">TOEFL iBT</span><span class="sc-sc">Overall 81 / R+L+W 합 57 / Speaking 24</span></div>
+      <div class="sc-row"><span class="sc-en">IELTS</span><span class="sc-sc">Overall 6.5 / Speaking 7.0</span></div>
+      <div class="sc-row"><span class="sc-en">TOEIC</span><span class="sc-sc">R+L 725 / Writing 150 / Speaking 160</span></div>
+      <div class="sc-row"><span class="sc-en">PTE Academic</span><span class="sc-sc">Overall 55 / R·L·W·S 각 50</span></div>
+      <div class="sc-row"><span class="sc-en">Cambridge</span><span class="sc-sc">Overall 176 / Speaking 185</span></div>
+      <div class="sc-row"><span class="sc-en">MET</span><span class="sc-sc">Overall 55 / Speaking 55</span></div>
+      <div class="sc-row"><span class="sc-en">OET</span><span class="sc-sc">R·L·W 300 / Speaking 350</span></div>
+    </div>
+    <div style="font-size:11px;color:var(--soil);opacity:0.55;margin-bottom:12px;">재택(at-home) 시험 불인정 · 영어 성적 유효기간 2년 · 비자스크린 유효기간 5년</div>
+    <div class="info-box">NCLEX 합격 후 병원을 먼저 찾아도 되고, 비자스크린 완료 후 찾아도 돼요. 순서는 유연하게 가져가세요!</div>
+  </div>`;
+
+const Rs={
+  no_degree:{
+    badge:'bs', bl:'Stage 0 — 시작 전',
+    stage:'간호학 학위부터\n시작해봐요',
+    desc:'미국 간호사가 되려면 인가받은 간호학과 학위가 첫 번째 조건이에요. 영어권 대학일 필요 없고, 어느 나라든 인가받은 간호학과면 돼요.',
+    steps:[
+      {t:'인가받은 간호학과 입학', d:'한국, 필리핀, 인도 등 — 나라 상관없이 인가 기관 여부가 중요'},
+      {t:'졸업 후 국내 간호사 면허 취득', d:'국내 면허가 있어야 NCLEX-RN 응시 가능'}
+    ],
+    uworld:false, eng:false, statesel:false, compact:false,
+    j:'학위 취득부터 미국 취업까지 보통 6-10년이 걸려요. 하지만 한 걸음씩 가다 보면 분명히 도착할 수 있어요. 저도 그랬거든요.'
+  },
+  no_license:{
+    badge:'bs', bl:'Stage 1 — 면허 취득 필요',
+    stage:'국내 간호사 면허가\n필요해요',
+    desc:'미국 NCLEX-RN 시험에 응시하려면 국내 간호사 면허가 필수예요. 한국의 경우 간호사 국가고시에 합격해야 해요.',
+    steps:[
+      {t:'간호사 국가고시 응시', d:'간호대 졸업 후 응시 가능'},
+      {t:'면허 취득 후 NCLEX 준비 시작', d:'국시 내용과 겹치는 부분 많아 국시 취득 직후 추천'}
+    ],
+    uworld:false, eng:false, statesel:false, compact:false,
+    j:'NCLEX 시험 신청 요건 중 하나가 해외 대학을 졸업한 경우 해당 국가 면허 보유인 경우 가능해요.'
+  },
+  needs_nclex:{
+    badge:'bm', bl:'Stage 2 — NCLEX 준비',
+    stage:'NCLEX-RN,\n이게 핵심이에요',
+    desc:'국내 면허가 있다면 NCLEX-RN에 응시할 수 있어요. 각 주마다 응시 조건이 다르지만 대부분 New York 주로 응시를 해요.',
+    steps:[
+      {t:'응시할 주(State) 선택', d:'대부분 New York 주로 응시 — 영어시험 없이 지원 가능해서 추천'},
+      {t:'ATT 신청 및 시험 등록', d:'Pearson VUE를 통해 시험 일정 예약'},
+      {t:'NCLEX-RN 합격', d:'75-150문제, CAT 방식 — 유형 파악이 합격의 핵심'}
+    ],
+    uworld:true, eng:false, statesel:true, compact:true,
+    j:'NCLEX는 CAT 방식이라 문제 수가 달라져요. 얼마나 많이 푸냐보다 어떤 유형인지 파악하는 게 중요해요. 저는 UWorld로 준비했어요.'
+  },
+  no_clinical:{
+    badge:'bm', bl:'Stage 3 — 임상 경력 쌓는 중',
+    stage:'임상 경력을\n먼저 쌓는 걸 추천해요',
+    desc:'경력 없이도 미국 취업이 가능한 루트는 있지만, 현실적으로 좋은 조건의 병원이나 스폰서를 찾기 위해서는 임상 경력이 매우 중요한 요소예요.',
+    steps:[
+      {t:'국내 병원에서 임상 경력 쌓기', d:'최소 1-2년 권장 — Med-Surg, ICU, ER 선호도 높음'},
+      {t:'희망 부서 중심으로 경험 쌓기', d:'미국에서 일하고 싶은 부서와 동일한 경력이 있으면 훨씬 유리해요'},
+      {t:'경력 조건은 에이전시에 직접 확인', d:'미국 잡마켓마다 조건이 달라요. 주변보다 본인 신분을 지원할 에이전시에 직접 문의하는 게 가장 정확해요'}
+    ],
+    uworld:false, eng:false, statesel:false, compact:false,
+    j:'경력이 없다고 해서 불가능한 건 아니지만, 현실적으로 선택지가 많이 좁아져요. 가능하면 1년이라도 쌓고 가는 걸 추천해요.'
+  },
+  needs_visascreen:{
+    badge:'bm', bl:'Stage 4 — 비자스크린 진행',
+    stage:'비자스크린으로\n넘어가요',
+    desc:'영어 점수가 있다면 비자스크린 단계로 바로 진행할 수 있어요. 필요한 서류와 영어 점수 유효기간을 체크하면서 진행하세요.',
+    steps:[
+      {t:'CGFNS 계정 생성 및 서류 준비', d:'고졸 졸업증명서, 간호학 성적증명서, 면허 공증, NCLEX 확인서, 여권 사진'},
+      {t:'영어 점수 제출', d:'비자스크린 기준 점수를 CGFNS에 직접 제출 (재택 시험 불가)'},
+      {t:'비자스크린 완료 후 병원 컨택', d:'NCLEX 합격 후 먼저 병원을 찾아도 돼요 — 순서는 유연하게'}
+    ],
+    uworld:false, eng:true, statesel:false, compact:false,
+    j:'이미 영어 점수가 있다면 비자스크린을 진행하면서 병원이나 에이전시를 같이 보는 전략도 가능해요.'
+  },
+  needs_english:{
+    badge:'bm', bl:'Stage 4 — 영어 점수 준비',
+    stage:'에이전시를 컨택하면서\n영어 점수를 준비하세요',
+    desc:'영어 점수가 아직 없다면 에이전시를 먼저 컨택하면서 비자스크린용 영어 점수를 준비하세요. 병행하면 시간을 더 아낄 수 있어요.',
+    steps:[
+      {t:'에이전시 먼저 컨택', d:'현재 내 상황에서 가능한 스폰서 루트와 서류 방향을 먼저 확인해요'},
+      {t:'비자스크린용 영어 시험 준비', d:'아래 기준표에서 내가 응시할 시험과 목표 점수를 확인하세요'},
+      {t:'영어 점수 확보 후 비자스크린 진행', d:'점수 제출이 가능해지면 바로 다음 단계로 넘어가요'}
+    ],
+    uworld:false, eng:true, statesel:false, compact:false,
+    j:'영어 점수가 아직 없어도 괜찮아요. 에이전시 컨택과 영어 준비를 병행하는 게 오히려 현실적인 루트가 될 수 있어요.'
+  }
+};
+
+const stSel={
+  'California':{note:'교육과정 까다로움 — 모성/노인 필수'},
+  'Texas':{note:'빠른 처리, Compact 주'},
+  'New York':{note:'영어시험 없이 지원 가능 — 가장 추천'},
+  'Florida':{note:'Compact, 처리 빠름'},
+  'Washington':{note:'Compact, Seattle 수요'},
+  'Illinois':{note:'CGFNS 전용, SSN 불필요'}
+};
+
+let cur=0, history=[];
+
+function startQuiz(){
+  document.getElementById('hero').style.display='none';
+  document.getElementById('quiz-sec').scrollIntoView({behavior:'smooth'});
+  history=[];
+  rQ(0);
+}
+
+function rQ(idx){
+  cur=idx; updP(idx);
+  const q=Qs[idx];
+  const backBtn=history.length>0?`<button class="q-nav-btn" onclick="goBack()">← 이전으로 돌아가기</button>`:'';
+  document.getElementById('qc').innerHTML=`
+    <div class="q-card">
+      <div class="q-num">${q.n}</div>
+      <div class="q-txt">${q.t}</div>
+      <div class="q-sub">${q.s}</div>
+      <div class="q-opts">
+        <button class="qbtn yes" onclick="ans('${q.id}',true)">
+          <div class="qbtn-icon">✓</div>
+          <div><div class="qbtn-lbl">네, 있어요</div><div class="qbtn-desc">다음 단계로 진행</div></div>
+        </button>
+        <button class="qbtn no" onclick="ans('${q.id}',false)">
+          <div class="qbtn-icon">→</div>
+          <div><div class="qbtn-lbl">아직 없어요</div><div class="qbtn-desc">현재 단계 확인하기</div></div>
+        </button>
+      </div>
+    </div>
+    <div class="q-nav">
+      ${backBtn}
+      <button class="q-nav-btn" onclick="resetQ()">처음부터 다시 하기</button>
+    </div>`;
+}
+
+function ans(qId, isYes){
+  const q=Qs.find(x=>x.id===qId);
+  history.push(cur);
+  setD(cur,'done');
+  if(isYes){ if(q.yes.r) showR(q.yes.r); else rQ(Qs.findIndex(x=>x.id===q.yes.next)); }
+  else { if(q.no.r) showR(q.no.r); else rQ(Qs.findIndex(x=>x.id===q.no.next)); }
+}
+
+function goBack(){
+  if(!history.length) return;
+  const prev=history.pop();
+  rQ(prev);
+}
+
+function navBtns(){
+  return `<div class="btn-row">
+    <button class="btn-ghost" onclick="goBack()">← 이전으로 돌아가기</button>
+    <button class="btn-ghost" onclick="resetQ()">처음부터 다시 하기</button>
+  </div>`;
+}
+
+function showR(key){
+  const r=Rs[key]; if(!r) return;
+  updP(Qs.length);
+  const stepsH=r.steps.map((s,i)=>`<div class="nxt-item"><div class="nxt-num">${i+1}</div><div><div class="nxt-t">${s.t}</div><div class="nxt-d">${s.d}</div></div></div>`).join('');
+  const uwH=r.uworld?`<div class="uw-banner"><div class="uw-ico">UW</div><div style="flex:1"><div class="uw-ttl">UWorld NCLEX-RN</div><div class="uw-sub">Jennifer 추천 — NCLEX 합격률 높이는 문제은행</div></div><a href="https://uworld.com" class="uw-link" target="_blank">시작하기 →</a></div>`:'';
+  const selH=r.statesel?`<div style="margin-bottom:1rem;"><div style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--soil);opacity:0.5;margin-bottom:10px;">어느 주로 가고 싶으세요?</div><div class="ssel-grid">${Object.entries(stSel).map(([s,v])=>`<button class="ssel-btn" onclick="this.closest('.ssel-grid').querySelectorAll('.ssel-btn').forEach(b=>{b.style.borderColor='';b.style.background=''});this.style.borderColor='var(--moss)';this.style.background='var(--moss-light)'">${s}<small>${v.note}</small></button>`).join('')}</div><div style="font-size:12px;color:var(--soil);opacity:0.55;margin-top:6px;">상세 요구사항은 아래 State Guide에서 확인하세요 ↓</div></div>`:'';
+  const compactH=r.compact? compactToggleHTML() :'';
+  const engH=r.eng? engTableHTML :'';
+
+  document.getElementById('qc').innerHTML=`
+    <div class="res-card">
+      <span class="res-badge ${r.badge}">${r.bl}</span>
+      <div class="res-stage">${r.stage}</div>
+      <div class="res-desc">${r.desc}</div>
+      ${selH}${compactH}${engH}
+      <div class="nxt-steps"><div class="nxt-lbl">다음 단계</div>${stepsH}</div>
+      ${uwH}
+      <div class="jen-note"><div class="jen-av">JL</div><div class="jen-msg"><strong>Jennifer의 메모 —</strong> ${r.j}</div></div>
+      <div class="res-acts">
+        <button class="btn-main" onclick="location.href='https://www.youtube.com/@JenniferMinjaLee'">Jennifer YouTube에서 자세히 보기 →</button>
+        <button class="btn-ghost" onclick="document.getElementById('state-sec').scrollIntoView({behavior:'smooth'})">주별 요구사항 보기 ↓</button>
+        ${navBtns()}
+      </div>
+    </div>`;
+}
+
+function updP(step){
+  document.getElementById('prog').style.width=Math.round(step/Qs.length*100)+'%';
+  for(let i=0;i<=Qs.length;i++){
+    const d=document.getElementById('d'+i); if(!d) continue;
+    d.className='sdot'+(i<step?' done':i===step?' active':'');
+    const l=document.getElementById('l'+i); if(l) l.className='sline'+(i<step?' done':'');
+  }
+}
+function setD(i,c){const d=document.getElementById('d'+i);if(d)d.className='sdot '+c;}
+function resetQ(){history=[];cur=0;updP(0);rQ(0);document.getElementById('quiz-sec').scrollIntoView({behavior:'smooth'});}
+
+/* STATE DATA */
+const SD=[
+  {n:'California',a:'CA',sub:'West Coast 대표 주',diff:'hard',dl:'까다로움',compact:false,fr:2,cp:false,ssn:true,eng:true,time:'4-6개월',tags:['높은 급여','한인 커뮤니티'],
+   ces:'CES Professional Report (CGFNS)',
+   engD:'TOEFL iBT — Overall 81 / Speaking 24 기준, 엄격 적용',
+   att:'제한 없음',
+   sp:'교육과정 심사 까다로움 — 노인간호학/모성간호학 이수 필수. 동시 임상(concurrent clinicals) 별도 요건 확인 필요.',
+   tip:'CA는 요구조건이 가장 까다롭지만 급여가 높고 한인 커뮤니티가 큰 것이 장점. 서류 준비에 충분한 시간을 잡을 것.'},
+  {n:'Texas',a:'TX',sub:'국제 간호사 최다 선택 주',diff:'easy',dl:'입문 추천',compact:true,fr:5,cp:false,ssn:false,eng:true,time:'2-3개월',tags:['Compact','처리 빠름','한인 커뮤니티'],
+   ces:'CES Professional Report (CGFNS 또는 타 기관)',
+   engD:'TOEFL / IELTS / TOEIC 등 — 기준 유연',
+   att:'제한 없음',
+   sp:'CGFNS CP 불필요. SSN 없이 지원 가능. Compact 주 — 미국 거주 후 다중 면허로 업그레이드 가능.',
+   tip:'국제 간호사에게 가장 인기 있는 주. 처리 속도 빠르고 요구사항 합리적. 단, 해외 지원 시 처음엔 Single State License만 발급돼요.'},
+  {n:'New York',a:'NY',sub:'국제 간호사 NCLEX 응시 1순위',diff:'easy',dl:'입문 추천',compact:false,fr:5,cp:false,ssn:false,eng:false,time:'3-6개월',tags:['영어시험 면제','SSN 불필요','무제한 재응시'],
+   ces:'CVS (CGFNS의 NY 전용 서비스) 또는 NYSED 직접 신청',
+   engD:'NCLEX 합격으로 영어 능력 인정 — 별도 영어시험 없이 면허 신청 가능',
+   att:'무제한',
+   sp:'NCLEX 합격이 영어 증명. SSN 없이 신청 가능(임시 ID 부여). CGFNS CP 불필요. Non-compact 주. 처리 기간 3-6개월(지원자 많아 지연 가능).',
+   tip:'영어시험 없이 NCLEX를 먼저 보고 싶은 사람에게 최적. 대부분의 국제 간호사가 NY주로 응시해요. 단, VisaScreen용 영어점수는 이민 시 별도 필요.'},
+  {n:'Florida',a:'FL',sub:'Southeast 친화적 주',diff:'easy',dl:'입문 추천',compact:true,fr:4,cp:false,ssn:false,eng:true,time:'2-3개월',tags:['Compact','처리 빠름'],
+   ces:'CES Professional Report (CGFNS 또는 타 기관)',
+   engD:'TOEFL / IELTS 표준 기준',
+   att:'제한 없음',
+   sp:'CGFNS CP 불필요. Compact 주(거주 후 다중 면허). SSN 없이 신청 가능한 경우 있음.',
+   tip:'처리 속도 빠르고 국제 간호사 수요 많음. TX와 함께 가장 추천되는 주.'},
+  {n:'Illinois',a:'IL',sub:'Chicago 대형 병원 허브',diff:'mid',dl:'중간',compact:false,fr:3,cp:false,ssn:false,eng:true,time:'3-4개월',tags:['SSN 불필요','CGFNS 전용'],
+   ces:'CGFNS CES만 인정 — 타 기관 불가',
+   engD:'TOEFL / IELTS 필요 — 영어로 교육받은 증명 시 면제 가능',
+   att:'제한 없음',
+   sp:'CGFNS CES만 인정(타 기관 불가). SSN 없이 신청 가능. Non-compact 주.',
+   tip:'Chicago 대형 병원 다수. CES 기관이 CGFNS로 제한되어 있으니 다른 기관 쓰지 말 것.'},
+  {n:'Washington',a:'WA',sub:'Pacific Northwest, Compact',diff:'mid',dl:'중간',compact:true,fr:3,cp:false,ssn:true,eng:true,time:'3-4개월',tags:['Compact','Seattle 수요'],
+   ces:'CES Professional Report (CGFNS)',
+   engD:'TOEFL / IELTS 표준 기준',
+   att:'제한 없음',
+   sp:'Compact 주(거주 후 다중 면허). CGFNS CP 불필요. Seattle 지역 간호사 수요 높음.',
+   tip:'Compact라 거주 후 면허 활용도 높음. SSN 필요한 점 미리 준비.'},
+  {n:'Michigan',a:'MI',sub:'Midwest, CGFNS 전용',diff:'mid',dl:'중간',compact:false,fr:3,cp:false,ssn:true,eng:true,time:'3-5개월',tags:['CGFNS 전용'],
+   ces:'CGFNS CES만 인정 — 타 기관 불가',
+   engD:'TOEFL / IELTS 표준 기준',
+   att:'제한 없음',
+   sp:'CGFNS CES만 인정. SSN 필요. Non-compact 주.',
+   tip:'IL과 마찬가지로 CGFNS만 인정. 처리 기간 다소 길 수 있으니 여유 있게 준비.'},
+  {n:'Connecticut',a:'CT',sub:'CP 필수 대표 주',diff:'hard',dl:'까다로움',compact:false,fr:1,cp:true,ssn:true,eng:true,time:'6-10개월',tags:['CP 필수','처리 느림'],
+   ces:'CGFNS Certification Program (CP) 필수 — CES 불가',
+   engD:'TOEFL / IELTS + CGFNS Qualifying Exam 반드시 통과 필요',
+   att:'제한 있음',
+   sp:'NCLEX 응시 전 CGFNS CP(Qualifying Exam 포함) 필수. 가장 까다로운 주 중 하나.',
+   tip:'CP 때문에 전체 프로세스가 6-12개월 더 걸릴 수 있음. 처음 주 선택 시 비추천.'}
+];
+
+function mkStars(n){return Array.from({length:5},(_,i)=>`<div class="star ${i<n?'on':'off'}"></div>`).join('');}
+
+function renderSD(f){
+  const fil=SD.filter(s=>{
+    if(f==='all') return true;
+    if(f==='easy') return s.diff==='easy';
+    if(f==='compact') return s.compact;
+    if(f==='no_cp') return !s.cp;
+    if(f==='no_ssn') return !s.ssn;
+  });
+  document.getElementById('cnt').textContent=fil.length+'개 주 표시 중';
+  document.getElementById('sgrid').innerHTML=fil.map(s=>`
+    <div class="sc" onclick="this.classList.toggle('open')">
+      <div class="sc-top">
+        <div style="flex:1">
+          <div class="sc-name">${s.n} <span style="font-size:12px;font-weight:400;opacity:0.5">(${s.a})</span></div>
+          <div class="sc-sub2">${s.sub}</div>
+          <div class="sc-bgs">
+            <span class="bg ${s.diff==='easy'?'bg-e':s.diff==='hard'?'bg-h':'bg-m'}">${s.dl}</span>
+            ${s.compact?'<span class="bg bg-c">Compact</span>':''}
+            ${s.cp?'<span class="bg bg-h">CP 필수</span>':'<span class="bg bg-e">CP 불필요</span>'}
+            ${!s.ssn?'<span class="bg bg-g">SSN 불필요</span>':''}
+            ${!s.eng?'<span class="bg bg-e">영어시험 면제</span>':''}
+          </div>
+          <div class="stars">${mkStars(s.fr)}</div>
+        </div>
+        <div class="arr">▾</div>
+      </div>
+      <div class="sc-meta">처리 ${s.time} · ${s.tags.slice(0,2).join(' · ')}</div>
+      <div class="sc-detail">
+        <div class="dr"><span class="dl">학력 평가</span><span class="dv">${s.ces}</span></div>
+        <div class="dr"><span class="dl">영어 시험</span><span class="dv ${s.eng?'warn':'ok'}">${s.engD}</span></div>
+        <div class="dr"><span class="dl">SSN</span><span class="dv ${s.ssn?'warn':'ok'}">${s.ssn?'신청 전 필요':'없이 지원 가능'}</span></div>
+        <div class="dr"><span class="dl">재응시</span><span class="dv">${s.att}</span></div>
+        <div class="dr"><span class="dl">특이사항</span><span class="dv">${s.sp}</span></div>
+        <div class="tip-b"><strong>Jennifer's tip —</strong> ${s.tip}</div>
+      </div>
+    </div>`).join('');
+}
+
+function setF(f,btn){
+  document.querySelectorAll('.flt-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderSD(f);
+}
+
+renderSD('all');
+rQ(0);
+
+new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting&&!document.getElementById('qc').innerHTML)rQ(0);});
+},{threshold:0.3}).observe(document.getElementById('quiz-sec'));
+</script>
+</body>
+</html>
