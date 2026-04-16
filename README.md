@@ -13,8 +13,7 @@ The Root는
 
 ## ✨ Live Demo
 
-👉 https://your-link.vercel.app  
-(여기에 너 Vercel 링크 넣기)
+👉 https://theroot-theta.vercel.app/
 
 ---
 
