@@ -621,9 +621,9 @@ function setF(f,btn){document.querySelectorAll('.flt-btn').forEach(b=>b.classLis
 /* ── GREEN CARD TRACKER ── */
 const phases=[
   {id:'i140',name:'I-140 접수',badge:'I-140 Immigrant Petition',items:[{t:'에이전시/병원 스폰서 확정',n:'EB-3 스폰서를 해줄 고용주 확정'},{t:'노동허가(PERM) 승인 확인',n:'스폰서가 DOL에 PERM 제출 — 승인까지 수개월 소요'},{t:'I-140 서류 준비',n:'여권, 간호사 면허, 학위, 성적증명서, 경력증명서 등'},{t:'I-140 접수 및 승인',n:'USCIS에 접수 — 승인 후 Priority Date 기록'},{t:'Priority Date 기록',n:'이 날짜가 비자 순서를 결정해요'}]},
-  {id:'ds260',name:'DS-260 작성',badge:'Online Immigrant Visa Application',items:[{t:'NVC 케이스 번호 수령',n:'I-140 승인 후 NVC에서 이메일 발송'},{t:'CEAC 포털 계정 생성',n:'travel.state.gov — DS-260 온라인 작성'},{t:'DS-260 양식 작성 및 제출',n:'본인 + 동반 가족 모두 작성 필요'},{t:'공증 서류 NVC 제출',n:'여권, 출생증명서, 결혼증명서, 경찰증명서 등'},{t:'NVC 서류 검토 완료',n:'Documentarily Complete 이메일 수령'}]},
-  {id:'p3',name:'P3 — 인터뷰 준비',badge:'Interview Preparation Packet',items:[{t:'P3 패킷 수령',n:'NVC에서 발송 — 인터뷰 준비 시작 신호'},{t:'의료검진 예약 및 완료',n:'지정 의료기관에서만 가능 — 봉투 절대 열지 말 것'},{t:'경찰증명서 발급',n:'경찰청 또는 온라인 신청 — 유효기간 확인'},{t:'재정보증서(I-864) 서명 완료',n:'고용주 또는 가족 스폰서가 서명'},{t:'인터뷰 서류 최종 점검',n:'여권, 사진, 의료봉투, 경찰증명서 등'}]},
-  {id:'p4',name:'P4 — 인터뷰 날짜',badge:'Interview Appointment',items:[{t:'P4 인터뷰 날짜 수령',n:'주한 미국 대사관(서울) 날짜 확인'},{t:'인터뷰 당일 서류 최종 준비',n:'체크리스트 두 번 확인 — 누락 시 인터뷰 불가'},{t:'인터뷰 완료',n:''},{t:'비자 스티커 여권 수령',n:'인터뷰 후 며칠 내 EMS 또는 직접 수령'},{t:'입국 유효기간 확인',n:'비자 만료 전 반드시 입국'}]},
+  {id:'ds260',name:'DS-260 작성',badge:'Online Immigrant Visa Application',items:[{t:'NVC 케이스 번호 수령',n:'I-140 승인 후 NVC에서 이메일 발송'},{t:'CEAC 포털 계정 생성',n:'travel.state.gov — DS-260 온라인 작성'},{t:'DS-260 양식 작성 및 제출',n:'본인 + 동반 가족 모두 작성 필요'},{t:'공증 서류 NVC 제출',n:'여권, 출생증명서, 결혼증명서, 범죄회보기록서 등'},{t:'NVC 서류 검토 완료',n:'Documentarily Complete 이메일 수령'}]},
+  {id:'p3',name:'P3 — 인터뷰 준비',badge:'Interview Preparation Packet',items:[{t:'P3 패킷 수령',n:'NVC에서 발송 — 인터뷰 준비 시작 신호'},{t:'의료검진 예약 및 완료',n:'지정 의료기관에서만 가능 — 봉투 절대 열지 말 것'},{t:'범죄회보기록서 발급',n:'경찰청 또는 온라인 신청 — 유효기간 확인'},{t:'인터뷰 서류 최종 점검',n:'여권, 사진, 의료봉투, 범죄회보기록서 등'}]},
+  {id:'p4',name:'P4 — 인터뷰 날짜',badge:'Interview Appointment',items:[{t:'P4 인터뷰 날짜 수령',n:'주한 미국 대사관(서울) 날짜 확인'},{t:'인터뷰 당일 서류 최종 준비',n:'비자스크린 포함 체크리스트 두 번 확인 — 누락 시 인터뷰 불가'},{t:'인터뷰 완료',n:''},{t:'비자 스티커 여권 수령',n:'인터뷰 후 며칠 내 EMS 또는 직접 수령'},{t:'입국 유효기간 확인',n:'비자 만료 전 반드시 입국'}]},
   {id:'entry',name:'입국 & 영주권 수령',badge:'Entry & Green Card',items:[{t:'미국 입국 (POE 통과)',n:'입국 심사관에게 이민 서류 제시 — I-551 도장'},{t:'Green Card(I-551) 우편 수령',n:'입국 후 2-4주 내 등록 주소로 발송'},{t:'Green Card 정보 확인',n:'이름, 생년월일, 만료일 오류 즉시 확인'},{t:'랜딩 체크리스트 시작',n:'SSN, 은행, 면허 등 미국 생활 기반 만들기'}]}
 ];
 let grState={};
