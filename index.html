@@ -543,10 +543,14 @@ function showPage(id){
 /* ── QUIZ DATA ── */
 const Qs=[
   {id:'degree',n:'Q1 of 5',t:'간호학 학위가 있으신가요?',s:'어느 나라든 인가받은 간호학과라면 가능 — 영어권 대학일 필요 없어요.',yes:{next:'license'},no:{r:'no_degree'}},
-  {id:'license',n:'Q2 of 5',t:'국내 간호사 면허증이 있으신가요?',s:'한국 기준: 간호사 국가고시 합격 후 발급된 면허증',yes:{next:'nclex'},no:{r:'no_license'}},
-  {id:'nclex',n:'Q3 of 5',t:'NCLEX-RN을 통과하셨나요?',s:'National Council Licensure Examination for Registered Nurse',yes:{next:'clinical'},no:{r:'needs_nclex'}},
-  {id:'clinical',n:'Q4 of 5',t:'임상 경력이 있으신가요?',s:'임상 경력이 영주권 스폰서를 찾는 데 핵심이에요.',yes:{next:'english'},no:{r:'no_clinical'}},
-  {id:'english',n:'Q5 of 5',t:'비자스크린용 영어 점수가 있으신가요?',s:'TOEFL / IELTS(ACADEMIC) / TOEIC / PTE 등',yes:{r:'needs_visascreen'},no:{r:'needs_english'}}
+  {id:'license',n:'Q2 of 5',t:'국내 간호사 면허증이 있으신가요?',s:'한국 기준: 간호사 국가고시 합격 후 발급된 면허증',yes:{next:'nclex_clinical'},no:{r:'no_license'}},
+  {id:'nclex_clinical',n:'Q3 of 5',t:'현재 해당하는 것을 선택해주세요',s:'지금 상황에 가장 가까운 것을 골라주세요.',multi:true,options:[
+    {label:'NCLEX-RN 합격했어요',desc:'미국 간호사 면허 시험 통과',value:'nclex'},
+    {label:'임상 경력이 있어요',desc:'국내 또는 해외 임상 경험',value:'clinical'},
+    {label:'둘 다 있어요',desc:'NCLEX + 임상 경력 모두 보유',value:'both'},
+    {label:'아직 없어요',desc:'NCLEX도 경력도 준비 중',value:'neither'}
+  ]},
+  {id:'english',n:'Q4 of 5',t:'비자스크린용 영어 점수가 있으신가요?',s:'TOEFL / IELTS / TOEIC / PTE 등',yes:{r:'needs_visascreen'},no:{r:'needs_english'}}
 ];
 const compactStates=['AL','AZ','AR','CO','CT','DE','FL','GA','GU','ID','IN','IA','KS','KY','LA','ME','MD','MS','MO','MT','NE','NH','NJ','NM','NC','ND','OH','OK','PA','RI','SC','SD','TN','TX','UT','VT','VA','VI','WA','WV','WI','WY'];
 function compactToggleHTML(){
@@ -571,13 +575,62 @@ function rQ(idx){
   cur=idx;updP(idx);
   const q=Qs[idx];
   const backBtn=history.length>0?`<button class="q-nav-btn" onclick="goBack()">← 이전으로 돌아가기</button>`:'';
-  document.getElementById('qc').innerHTML=`<div class="q-card"><div class="q-num">${q.n}</div><div class="q-txt">${q.t}</div><div class="q-sub">${q.s}</div><div class="q-opts"><button class="qbtn yes" onclick="ans('${q.id}',true)"><div class="qbtn-icon">✓</div><div><div class="qbtn-lbl">네, 있어요</div><div class="qbtn-desc">다음 단계로 진행</div></div></button><button class="qbtn no" onclick="ans('${q.id}',false)"><div class="qbtn-icon">→</div><div><div class="qbtn-lbl">아직 없어요</div><div class="qbtn-desc">현재 단계 확인하기</div></div></button></div></div><div class="q-nav">${backBtn}<button class="q-nav-btn" onclick="resetQ()">처음부터 다시 하기</button></div>`;
+
+  if(q.multi){
+    document.getElementById('qc').innerHTML=`<div class="q-card">
+      <div class="q-num">${q.n}</div>
+      <div class="q-txt">${q.t}</div>
+      <div class="q-sub">${q.s}</div>
+      <div class="q-opts">
+        ${q.options.map(opt=>`
+          <button class="qbtn yes" onclick="ansMulti('${opt.value}')">
+            <div class="qbtn-icon">→</div>
+            <div>
+              <div class="qbtn-lbl">${opt.label}</div>
+              <div class="qbtn-desc">${opt.desc}</div>
+            </div>
+          </button>`).join('')}
+      </div>
+    </div>
+    <div class="q-nav">
+      ${backBtn}
+      <button class="q-nav-btn" onclick="resetQ()">처음부터 다시 하기</button>
+    </div>`;
+  } else {
+    document.getElementById('qc').innerHTML=`<div class="q-card">
+      <div class="q-num">${q.n}</div>
+      <div class="q-txt">${q.t}</div>
+      <div class="q-sub">${q.s}</div>
+      <div class="q-opts">
+        <button class="qbtn yes" onclick="ans('${q.id}',true)">
+          <div class="qbtn-icon">✓</div>
+          <div><div class="qbtn-lbl">네, 있어요</div><div class="qbtn-desc">다음 단계로 진행</div></div>
+        </button>
+        <button class="qbtn no" onclick="ans('${q.id}',false)">
+          <div class="qbtn-icon">→</div>
+          <div><div class="qbtn-lbl">아직 없어요</div><div class="qbtn-desc">현재 단계 확인하기</div></div>
+        </button>
+      </div>
+    </div>
+    <div class="q-nav">
+      ${backBtn}
+      <button class="q-nav-btn" onclick="resetQ()">처음부터 다시 하기</button>
+    </div>`;
+  }
 }
 function ans(qId,isYes){
   const q=Qs.find(x=>x.id===qId);
   history.push(cur);setD(cur,'done');
   if(isYes){if(q.yes.r)showR(q.yes.r);else rQ(Qs.findIndex(x=>x.id===q.yes.next));}
   else{if(q.no.r)showR(q.no.r);else rQ(Qs.findIndex(x=>x.id===q.no.next));}
+}
+
+function ansMulti(value){
+  history.push(cur);setD(cur,'done');
+  if(value==='both'){rQ(Qs.findIndex(x=>x.id==='english'));}
+  else if(value==='nclex'){showR('no_clinical');}
+  else if(value==='clinical'){showR('needs_nclex');}
+  else{showR('needs_nclex');}
 }
 function goBack(){if(!history.length)return;const p=history.pop();rQ(p);}
 function navBtns(){return `<div class="btn-row"><button class="btn-ghost" onclick="goBack()">← 이전으로 돌아가기</button><button class="btn-ghost" onclick="resetQ()">처음부터 다시 하기</button></div>`;}
