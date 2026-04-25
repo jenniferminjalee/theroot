@@ -635,8 +635,7 @@ function ansMulti(value){
 function goBack(){
   if(!history.length)return;
   const p=history.pop();
-  cur=p;
-  updP(p);
+  cur=p;updP(p);
   const q=Qs[p];
   const backBtn=history.length>0?`<button class="q-nav-btn" onclick="goBack()">← 이전으로 돌아가기</button>`:'';
   if(q.multi){
@@ -645,7 +644,9 @@ function goBack(){
     document.getElementById('qc').innerHTML=`<div class="q-card"><div class="q-num">${q.n}</div><div class="q-txt">${q.t}</div><div class="q-sub">${q.s}</div><div class="q-opts"><button class="qbtn yes" onclick="ans('${q.id}',true)"><div class="qbtn-icon">✓</div><div><div class="qbtn-lbl">네, 있어요</div><div class="qbtn-desc">다음 단계로 진행</div></div></button><button class="qbtn no" onclick="ans('${q.id}',false)"><div class="qbtn-icon">→</div><div><div class="qbtn-lbl">아직 없어요</div><div class="qbtn-desc">현재 단계 확인하기</div></div></button></div></div><div class="q-nav">${backBtn}<button class="q-nav-btn" onclick="resetQ()">처음부터 다시 하기</button></div>`;
   }
 }
-function navBtns(){return `<div class="btn-row"><button class="btn-ghost" onclick="goBack()">← 이전으로 돌아가기</button><button class="btn-ghost" onclick="resetQ()">처음부터 다시 하기</button></div>`;}
+function navBtns(){
+  return `<div class="btn-row"><button class="btn-ghost" onclick="goBack()">← 이전으로 돌아가기</button><button class="btn-ghost" onclick="resetQ()">처음부터 다시 하기</button></div>`;
+}
 function showR(key){
   const r=Rs[key];if(!r)return;
   updP(Qs.length);
@@ -663,7 +664,7 @@ function showR(key){
   const compactH=r.compact?compactToggleHTML():'';
   const engH=r.eng?engTableHTML:'';
   const nextBtn=r.nextPage?`<button class="btn-teal" onclick="showPage('${r.nextPage}')">${r.nextPage==='tracker'?'영주권 트래킹 시작하기 →':r.nextPage==='bulletin'?'이민문호 확인하기 →':'다음 단계로 →'}</button>`:'';
-  document.getElementById('qc').innerHTML=`<div class="res-card"><span class="res-badge ${r.badge}">${r.bl}</span><div class="res-stage">${r.stage}</div><div class="res-desc">${r.desc}</div>${selH}${compactH}${engH}<div class="nxt-steps"><div class="nxt-lbl">다음 단계</div>${stepsH}</div>${uwH}${agencyH}<div class="jen-note"><div class="jen-av">JL</div><div class="jen-msg"><strong>Jennifer의 메모 —</strong> ${r.j}</div></div><div class="res-acts">${nextBtn}<button class="btn-main" onclick="location.href='https://www.youtube.com/@JenniferMinjaLee'">Jennifer YouTube에서 자세히 보기 →</button><button class="btn-ghost" onclick="document.getElementById('state-sec').scrollIntoView({behavior:'smooth'})">주별 요구사항 보기 ↓</button>${navBtns()}</div></div>`;
+  document.getElementById('qc').innerHTML=`<div class="res-card"><span class="res-badge ${r.badge}">${r.bl}</span><div class="res-stage">${r.stage}</div><div class="res-desc">${r.desc}</div>${selH}${compactH}${engH}<div class="nxt-steps"><div class="nxt-lbl">다음 단계</div>${stepsH}</div>${uwH}${agencyH}<div class="jen-note"><div class="jen-av">JL</div><div class="jen-msg"><strong>Jennifer의 메모 —</strong> ${r.j}</div></div><div class="res-acts">${nextBtn}<button class="btn-main" onclick="location.href='https://www.youtube.com/@JenniferMinjaLee'">Jennifer YouTube에서 자세히 보기 →</button>${r.statesel?`<button class="btn-ghost" onclick="document.getElementById('state-sec').scrollIntoView({behavior:'smooth'})">주별 요구사항 보기 ↓</button>`:''}${navBtns()}</div></div>`;
 }
 function updP(step){
   document.getElementById('prog').style.width=Math.round(step/Qs.length*100)+'%';
