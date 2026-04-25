@@ -632,7 +632,19 @@ function ansMulti(value){
   else if(value==='clinical'){showR('needs_nclex');}
   else{showR('needs_nclex');}
 }
-function goBack(){if(!history.length)return;const p=history.pop();rQ(p);}
+function goBack(){
+  if(!history.length)return;
+  const p=history.pop();
+  cur=p;
+  updP(p);
+  const q=Qs[p];
+  const backBtn=history.length>0?`<button class="q-nav-btn" onclick="goBack()">← 이전으로 돌아가기</button>`:'';
+  if(q.multi){
+    document.getElementById('qc').innerHTML=`<div class="q-card"><div class="q-num">${q.n}</div><div class="q-txt">${q.t}</div><div class="q-sub">${q.s}</div><div class="q-opts">${q.options.map(opt=>`<button class="qbtn yes" onclick="ansMulti('${opt.value}')"><div class="qbtn-icon">→</div><div><div class="qbtn-lbl">${opt.label}</div><div class="qbtn-desc">${opt.desc}</div></div></button>`).join('')}</div></div><div class="q-nav">${backBtn}<button class="q-nav-btn" onclick="resetQ()">처음부터 다시 하기</button></div>`;
+  } else {
+    document.getElementById('qc').innerHTML=`<div class="q-card"><div class="q-num">${q.n}</div><div class="q-txt">${q.t}</div><div class="q-sub">${q.s}</div><div class="q-opts"><button class="qbtn yes" onclick="ans('${q.id}',true)"><div class="qbtn-icon">✓</div><div><div class="qbtn-lbl">네, 있어요</div><div class="qbtn-desc">다음 단계로 진행</div></div></button><button class="qbtn no" onclick="ans('${q.id}',false)"><div class="qbtn-icon">→</div><div><div class="qbtn-lbl">아직 없어요</div><div class="qbtn-desc">현재 단계 확인하기</div></div></button></div></div><div class="q-nav">${backBtn}<button class="q-nav-btn" onclick="resetQ()">처음부터 다시 하기</button></div>`;
+  }
+}
 function navBtns(){return `<div class="btn-row"><button class="btn-ghost" onclick="goBack()">← 이전으로 돌아가기</button><button class="btn-ghost" onclick="resetQ()">처음부터 다시 하기</button></div>`;}
 function showR(key){
   const r=Rs[key];if(!r)return;
