@@ -982,7 +982,13 @@ renderSD('all');
 initGR();
 initLanding();
 loadSavedProgress();
-new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting&&!document.getElementById('qc').innerHTML){rQ(0);}});},{threshold:0.3}).observe(document.getElementById('quiz-sec'));
+new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting && document.getElementById('qc').innerHTML===''){
+      rQ(0);
+    }
+  });
+},{threshold:0.3}).observe(document.getElementById('quiz-sec'));
 </script>
 </body>
 </html>
