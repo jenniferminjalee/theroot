@@ -591,7 +591,7 @@ function showR(key){
   <div style="flex:1;">
     <div style="font-size:14px;font-weight:500;color:var(--bark);margin-bottom:8px;">에이전시 리스트가 필요하신가요?</div>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSdJgaMlCAl-DALxLgWT2k-IAg8Jhwq31QdWn8JyH-Fta_ZF6g/viewform?usp=send_form" target="_blank" style="display:inline-block;font-size:13px;color:var(--clay);font-weight:500;text-decoration:none;border-bottom:1px solid var(--clay);margin-bottom:8px;">낫이팅게일샘의 정리 자료 보기 →</a>
-    <div style="font-size:13px;color:var(--soil);opacity:0.5;"><a href="https://www.instagram.com/noteatingale" target="_blank" style="color:var(--soil);text-decoration:none;">@noteatingale</a> · 외부 링크 · Google Form</div>
+    <div style="font-size:13px;color:var(--soil);opacity:0.5;"><a href="https://www.instagram.com/noteatingale" target="_blank" style="color:var(--soil);text-decoration:none;"> 자료제공 @noteatingale</a>· 유료 자료 · 신청 페이지 </div>
   </div>
 </div>`:'';
   const selH=r.statesel?`<div style="margin-bottom:1rem;"><div style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--soil);opacity:0.5;margin-bottom:10px;">어느 주로 가고 싶으세요?</div><div class="ssel-grid">${Object.entries(stSel).map(([s,v])=>`<button class="ssel-btn" onclick="this.closest('.ssel-grid').querySelectorAll('.ssel-btn').forEach(b=>{b.style.borderColor='';b.style.background=''});this.style.borderColor='var(--moss)';this.style.background='var(--moss-light)'">${s}<small>${v.note}</small></button>`).join('')}</div><div style="font-size:12px;color:var(--soil);opacity:0.55;margin-top:6px;">상세 요구사항은 아래 State Guide에서 확인하세요 ↓</div></div>`:'';
