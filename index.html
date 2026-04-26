@@ -658,7 +658,7 @@ function showR(key){
   const r=Rs[key];if(!r)return;
   updP(Qs.length);
   const stepsH=r.steps.map((s,i)=>`<div class="nxt-item"><div class="nxt-num">${i+1}</div><div><div class="nxt-t">${s.t}</div><div class="nxt-d">${s.d}</div></div></div>`).join('');
-  const uwH=r.uworld?`<div class="uw-banner"><div class="uw-ico">UW</div><div style="flex:1"><div class="uw-ttl">UWorld NCLEX-RN</div><div class="uw-sub">Jennifer 제휴링크 — NCLEX 합격률 높이는 문제은행</div></div><a href="https://tidd.ly/3OW24vo" class="uw-link" target="_blank">시작하기 →</a></div>`:'';
+  const uwH=r.uworld?`<div class="uw-banner"><div class="uw-ico">UW</div><div style="flex:1"><div class="uw-ttl">UWorld NCLEX-RN</div><div class="uw-sub">Jennifer Affiliate link — NCLEX 준비에 많이 활용되는 대표 문제은행</div></div><a href="https://tidd.ly/3OW24vo" class="uw-link" target="_blank">자세히 보기 →</a></div>`:'';
   const agencyH=(key==='needs_english'||key==='needs_visascreen')?`<div style="display:flex;align-items:flex-start;gap:12px;padding:16px;background:#F3EFE6;border-radius:3px;margin-bottom:8px;">
   <div style="font-size:14px;flex-shrink:0;">📋</div>
   <div style="flex:1;">
