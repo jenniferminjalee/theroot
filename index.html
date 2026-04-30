@@ -335,10 +335,10 @@ footer a{color:#C6DDD3;text-decoration:none;}
     <div class="gnav-logo" onclick="showPage('home')">The <em>Root</em></div>
     <div class="gnav-tabs">
       <button class="gnav-tab" onclick="window.location.href='/quiz'">미국 생존 테스트</button>
-      <button class="gnav-tab on" onclick="showPage('home')">여정 진단</button>
-      <button class="gnav-tab" onclick="showPage('tracker')">영주권 트래킹</button>
-      <button class="gnav-tab" onclick="showPage('landing')">랜딩 체크리스트</button>
-      <button class="gnav-tab" onclick="showPage('bulletin')">이민문호<span class="dot"></span></button>
+      <button class="gnav-tab on" id="tab-home" onclick="showPage('home')">여정 진단</button>
+      <button class="gnav-tab" id="tab-tracker" onclick="showPage('tracker')">영주권 트래킹</button>
+      <button class="gnav-tab" id="tab-landing" onclick="showPage('landing')">랜딩 체크리스트</button>
+      <button class="gnav-tab" id="tab-bulletin" onclick="showPage('bulletin')">이민문호<span class="dot"></span></button>
     </div>
   </div>
 </nav>
@@ -534,8 +534,8 @@ function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.gnav-tab').forEach(t=>t.classList.remove('on'));
   document.getElementById('page-'+id).classList.add('on');
-  const tabs={home:0,tracker:1,landing:2,bulletin:3};
-  document.querySelectorAll('.gnav-tab')[tabs[id]]?.classList.add('on');
+  const tabs={home:'tab-home',tracker:'tab-tracker',landing:'tab-landing',bulletin:'tab-bulletin'};
+  document.getElementById(tabs[id])?.classList.add('on');
   if(id==='home'){
     const hero=document.getElementById('hero');
     if(hero) hero.style.display='flex';
