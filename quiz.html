@@ -715,7 +715,7 @@ function showResult() {
       </div>
       <div class="result-actions">
         <button class="retry-btn" onclick="retry()">↺ 다시 하기</button>
-        <button class="save-btn" onclick="saveImage(this)">📸 이미지 저장</button>
+        <button class="save-btn" onclick="shareResult(this)">🔗 친구에게 공유하기</button>
         <a class="root-btn" href="/">The Root 보러 가기 🌿</a>
       </div>
     </div>`;
@@ -724,49 +724,31 @@ function showResult() {
   }, 100);
 }
 
-function saveImage(btn) {
+async function shareResult(btn) {
   const r = results[totals.indexOf(Math.max(...totals))];
-  const card = document.getElementById('capture-card');
-  card.innerHTML = `
-    <div class="cap-header">
-      <div class="cap-logo">the <span>root</span></div>
-      <div class="cap-tag">미국 생존 진단</div>
-    </div>
-    <div class="cap-top">
-      <div class="cap-emoji">${r.emoji}</div>
-      <div>
-        <div class="cap-type-label">${r.typeLabel}</div>
-        <div class="cap-title">${r.title}</div>
-        <div class="cap-subtitle">${r.subtitle}</div>
-      </div>
-    </div>
-    <div class="cap-desc">${r.desc}</div>
-    <div class="cap-bars-label">항목별 점수</div>
-    ${r.bars.map(b => `
-      <div class="cap-bar-row">
-        <div class="cap-bar-name">${b.name}</div>
-        <div class="cap-bar-track"><div class="cap-bar-fill" style="width:${b.val}%;background:${b.color}"></div></div>
-        <div class="cap-bar-val">${b.val}</div>
-      </div>`).join('')}
-    <div class="cap-footer-text">the root · 미국 생존 자가진단 · @jenniferminjalee </div>
-  `;
-  btn.disabled = true;
-  btn.textContent = '저장 중...';
-  setTimeout(() => {
-    html2canvas(card, {
-      scale: 2,
-      backgroundColor: '#f7f4ef',
-      useCORS: true,
-      logging: false
-    }).then(canvas => {
-      const a = document.createElement('a');
-      a.download = `theroot-미국생존유형-${r.subtitle.replace(/\s/g,'')}.png`;
-      a.href = canvas.toDataURL('image/png');
-      a.click();
-      btn.disabled = false;
-      btn.textContent = '📸 이미지 저장';
-    });
-  }, 100);
+  const shareData = {
+    title: '나의 미국 생존 유형 — The Root',
+    text: `나는 ${r.title} (${r.subtitle}) 🌿\n\n너는 어떤 유형이야? 10문항으로 알아봐!`,
+    url: 'https://theroot-theta.vercel.app/quiz'
+  };
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+    } catch(e) {
+      if (e.name !== 'AbortError') fallbackCopy(btn, shareData);
+    }
+  } else {
+    fallbackCopy(btn, shareData);
+  }
+}
+
+function fallbackCopy(btn, shareData) {
+  const text = `${shareData.text}\n${shareData.url}`;
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✓ 링크 복사됨!';
+    setTimeout(() => { btn.textContent = orig; }, 2000);
+  });
 }
 
 function retry() {
