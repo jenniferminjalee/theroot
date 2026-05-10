@@ -325,6 +325,219 @@ footer a{color:#C6DDD3;text-decoration:none;}
 .capture-card .cc-footer{margin-top:32px;padding-top:20px;border-top:0.5px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between;}
 .capture-card .cc-brand{font-size:12px;color:rgba(247,243,238,0.3);}
 .capture-card .cc-url{font-size:12px;color:var(--sage);}
+
+/* ── CLINICAL ENGLISH QUIZ ── */
+.cq-hero{background:#F3F1EA;padding:2.4rem 1.5rem;text-align:center;position:relative;overflow:hidden;border-bottom:0.5px solid rgba(22,52,44,0.08);}
+.cq-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 12%,rgba(143,169,155,0.32),transparent 46%),linear-gradient(180deg,#E6EEE7 0%,#F3F1EA 52%,#FAF8F4 100%);}
+.cq-hero-content{position:relative;z-index:2;}
+.cq-hero-tag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:#4F6B59;background:rgba(255,255,255,0.50);padding:5px 14px;border:0.5px solid rgba(95,125,107,0.20);border-radius:20px;margin-bottom:12px;}
+.cq-hero-title{font-family:var(--font-d);font-size:clamp(1.8rem,5vw,2.8rem);color:#223127;line-height:1.1;margin-bottom:8px;letter-spacing:-0.025em;}
+.cq-hero-title em{font-style:italic;color:#5F7D6B;}
+.cq-hero-sub{font-size:14px;color:#56655A;margin-bottom:1.5rem;}
+.cq-streak{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(255,255,255,0.58);border:0.5px solid rgba(95,125,107,0.14);border-radius:20px;font-size:12px;color:#56655A;}
+.cq-streak-num{font-weight:700;color:#4F6B59;}
+
+.cq-body{max-width:640px;margin:0 auto;padding:2rem 1.5rem;}
+
+/* 카테고리 필터 */
+.cq-cats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem;}
+.cq-cat{padding:6px 14px;border:0.5px solid var(--sand);border-radius:20px;font-size:12px;font-weight:500;color:var(--soil);background:#FBFCFB;cursor:pointer;transition:all 0.15s;font-family:var(--font-b);}
+.cq-cat:hover{background:var(--mist);}
+.cq-cat.on{background:var(--bark);color:#F8FBF9;border-color:var(--bark);}
+
+/* 퀴즈 카드 */
+.cq-card{background:white;border:0.5px solid var(--sand);border-radius:4px;padding:2rem;box-shadow:0 4px 20px rgba(22,52,44,0.06);animation:fadeUp 0.4s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.cq-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
+.cq-cat-pill{font-size:10px;font-weight:500;padding:3px 10px;border-radius:10px;letter-spacing:0.06em;text-transform:uppercase;}
+.cq-num{font-size:12px;color:var(--soil);opacity:0.5;}
+.cq-q{font-family:var(--font-d);font-size:clamp(1.1rem,3vw,1.4rem);color:var(--bark);line-height:1.4;margin-bottom:0.5rem;}
+.cq-context{font-size:13px;color:var(--soil);opacity:0.7;line-height:1.6;margin-bottom:1.5rem;padding:10px 14px;background:var(--mist);border-radius:3px;border-left:2px solid var(--moss);}
+.cq-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem;}
+.cq-opt{display:flex;align-items:flex-start;gap:12px;padding:13px 16px;border:0.5px solid var(--sand);border-radius:3px;cursor:pointer;transition:all 0.15s;background:#FBFCFB;text-align:left;font-family:var(--font-b);}
+.cq-opt:hover:not(.disabled){border-color:var(--moss);background:var(--moss-light);transform:translateX(3px);}
+.cq-opt.disabled{cursor:default;}
+.cq-opt.correct{border-color:#1F6351;background:#E8F4ED;}
+.cq-opt.wrong{border-color:#8B4030;background:#F4E7E1;}
+.cq-opt-key{width:26px;height:26px;border-radius:50%;border:0.5px solid var(--sand);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0;background:white;}
+.cq-opt.correct .cq-opt-key{background:#1F6351;color:white;border-color:#1F6351;}
+.cq-opt.wrong .cq-opt-key{background:#8B4030;color:white;border-color:#8B4030;}
+.cq-opt-text{font-size:14px;color:var(--bark);line-height:1.5;flex:1;}
+.cq-opt.correct .cq-opt-text{color:#1F6351;}
+.cq-opt.wrong .cq-opt-text{opacity:0.6;}
+
+/* 정답 해설 */
+.cq-explain{display:none;margin-top:12px;padding:14px 16px;background:#F3EFE6;border-radius:3px;animation:fadeUp 0.3s ease;}
+.cq-explain.show{display:block;}
+.cq-explain-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;}
+.cq-jen-av{width:28px;height:28px;border-radius:50%;background:var(--moss);display:flex;align-items:center;justify-content:center;font-size:10px;color:white;font-weight:700;flex-shrink:0;}
+.cq-explain-text{font-size:13px;color:#4A3A2A;line-height:1.6;flex:1;}
+.cq-tip{font-size:12px;color:var(--clay);margin-top:6px;font-style:italic;}
+
+/* 결과 */
+.cq-result-card{background:white;border:0.5px solid var(--sand);border-radius:4px;padding:2rem;text-align:center;box-shadow:0 4px 20px rgba(22,52,44,0.06);}
+.cq-score-ring{width:90px;height:90px;border-radius:50%;background:var(--bark);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1rem;}
+.cq-score-num{font-size:28px;font-weight:500;color:#F8FBF9;line-height:1;}
+.cq-score-total{font-size:12px;color:var(--sage);}
+.cq-result-msg{font-family:var(--font-d);font-size:1.4rem;color:var(--bark);margin-bottom:0.5rem;}
+.cq-result-sub{font-size:13px;color:var(--soil);opacity:0.7;margin-bottom:1.5rem;line-height:1.6;}
+.cq-share-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:1rem;}
+.cq-share-btn{padding:8px 18px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:none;font-family:var(--font-b);transition:all 0.15s;}
+.cq-share-kakao{background:#FAE100;color:#3A1D1D;}
+.cq-share-link{background:var(--bark);color:white;}
+.cq-retry-btn{width:100%;padding:13px;background:var(--moss-light);color:var(--moss);border:0.5px solid rgba(36,76,65,0.2);border-radius:3px;font-family:var(--font-b);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.15s;}
+.cq-retry-btn:hover{background:#C8E4D5;}
+
+/* 진행 바 */
+.cq-prog{height:3px;background:var(--sand);border-radius:2px;margin-bottom:1.5rem;overflow:hidden;}
+.cq-prog-fill{height:100%;background:var(--moss);border-radius:2px;transition:width 0.4s ease;}
+
+/* 다음 버튼 */
+.cq-next-btn{width:100%;padding:13px;background:var(--bark);color:#F7FBF9;border:none;border-radius:3px;font-family:var(--font-b);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;display:none;margin-top:8px;}
+.cq-next-btn.show{display:block;}
+.cq-next-btn:hover{background:var(--moss);}
+
+
+/* ── HERO V2 ── */
+.hero-v2{background:var(--bark);position:relative;overflow:hidden;}
+.hero-v2::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 100% 80% at 30% 50%,#2D5A4D 0%,#16342C 55%,#0D201B 100%);}
+.hero-v2-inner{position:relative;z-index:2;max-width:1000px;margin:0 auto;padding:4rem 2rem;display:grid;grid-template-columns:1fr 420px;gap:3rem;align-items:center;}
+@media(max-width:768px){.hero-v2-inner{grid-template-columns:1fr;gap:2rem;padding:2.5rem 1.5rem;}}
+
+.hero-tag-v2{display:inline-block;font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:#7FA89A;padding:5px 14px;border:0.5px solid rgba(127,168,154,0.3);border-radius:20px;margin-bottom:1.25rem;}
+.hero-title-v2{font-family:var(--font-d);font-size:clamp(2.2rem,5vw,3.8rem);color:#F8FBF9;line-height:1.08;margin-bottom:0.75rem;}
+.hero-title-v2 em{font-style:italic;color:#B9D1C7;}
+.hero-sub-v2{font-size:15px;color:rgba(248,251,249,0.65);line-height:1.7;margin-bottom:2rem;font-weight:300;}
+.hero-cta-v2{display:inline-block;padding:14px 32px;background:#F1F7F4;color:var(--bark);border:none;border-radius:3px;font-family:var(--font-b);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;}
+.hero-cta-v2:hover{background:#E3EEE8;transform:translateY(-1px);}
+.hero-social-proof{display:flex;align-items:center;gap:10px;margin-top:1.25rem;}
+.hero-dots{display:flex;gap:4px;}
+.hero-dot{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.2);}
+.hero-social-proof span{font-size:12px;color:rgba(248,251,249,0.55);line-height:1.5;}
+.hero-mini-story{margin-top:1rem;padding-left:14px;border-left:2px solid rgba(185,209,199,0.35);font-size:13px;color:rgba(248,251,249,0.58);line-height:1.65;max-width:460px;}
+.hero-cta-note{font-size:12px;color:rgba(248,251,249,0.42);margin-top:10px;}
+.mission-card{background:rgba(248,251,249,0.96);border:0.5px solid rgba(255,255,255,0.25);border-radius:14px;padding:1.6rem;box-shadow:0 24px 70px rgba(0,0,0,0.28);}
+.mission-kicker{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay);margin-bottom:10px;}
+.mission-title{font-family:var(--font-d);font-size:1.55rem;color:var(--bark);line-height:1.22;margin-bottom:10px;}
+.mission-desc{font-size:13px;color:var(--soil);opacity:0.76;line-height:1.7;margin-bottom:1rem;}
+.mission-steps{display:grid;gap:8px;margin-top:12px;}
+.mission-step{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;background:var(--mist);border-radius:6px;}
+.mission-num{width:22px;height:22px;border-radius:50%;background:var(--bark);color:#F8FBF9;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.mission-step strong{display:block;font-size:13px;color:var(--bark);margin-bottom:2px;}
+.mission-step span{font-size:11px;color:var(--soil);opacity:0.65;line-height:1.4;}
+
+/* 임상영어 카드 */
+.hero-quiz-card{background:white;border-radius:12px;padding:1.5rem;box-shadow:0 20px 60px rgba(0,0,0,0.3);}
+.hero-quiz-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.hero-quiz-label{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--soil);opacity:0.6;}
+.hero-quiz-new{font-size:10px;font-weight:700;padding:2px 8px;background:#E8F4ED;color:#1F6351;border-radius:10px;}
+.hero-quiz-expr{font-family:var(--font-d);font-size:1.5rem;color:var(--bark);margin-bottom:8px;line-height:1.3;}
+.hero-quiz-q{font-size:13px;color:var(--soil);opacity:0.7;margin-bottom:14px;}
+.hero-quiz-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:12px;}
+.hero-quiz-opt{padding:9px 14px;border:0.5px solid var(--sand);border-radius:3px;background:#FBFCFB;font-family:var(--font-b);font-size:13px;color:var(--bark);cursor:pointer;text-align:left;transition:all 0.15s;}
+.hero-quiz-opt:hover{border-color:var(--moss);background:var(--moss-light);}
+.hero-quiz-opt.correct{border-color:#1F6351;background:#E8F4ED;color:#1F6351;}
+.hero-quiz-opt.wrong{border-color:#8B4030;background:#F4E7E1;color:#8B4030;}
+.hero-quiz-result{padding:10px 12px;border-radius:3px;font-size:12px;line-height:1.6;margin-bottom:10px;}
+.hero-quiz-more{width:100%;padding:10px;background:var(--bark);color:#F8FBF9;border:none;border-radius:3px;font-family:var(--font-b);font-size:13px;font-weight:500;cursor:pointer;transition:background 0.15s;}
+.hero-quiz-more:hover{background:var(--moss);}
+
+/* ── EXPLORE ── */
+.explore-sec{background:var(--cream);padding:3.5rem 1.5rem;}
+.explore-inner{max-width:1000px;margin:0 auto;}
+.explore-hdr{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;}
+.explore-title{font-family:var(--font-d);font-size:1.5rem;color:var(--bark);}
+.explore-sub{font-size:13px;color:var(--soil);opacity:0.65;margin-top:2px;}
+.explore-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+@media(max-width:640px){.explore-grid{grid-template-columns:1fr;}}
+.explore-card{background:white;border:0.5px solid var(--sand);border-radius:4px;padding:1.35rem;cursor:pointer;transition:all 0.2s;min-height:168px;}
+.explore-card.featured{background:var(--bark);border-color:var(--bark);grid-column:1 / -1;min-height:auto;display:grid;grid-template-columns:auto 1fr auto;gap:1rem;align-items:center;}
+.explore-card.featured .explore-icon{margin-bottom:0;font-size:26px;}
+.explore-card.featured .explore-card-desc{margin-bottom:0;}
+.explore-card.featured .explore-card-title,.explore-card.featured .explore-card-desc,.explore-card.featured .explore-card-btn{color:#F8FBF9;}
+.explore-card.featured .explore-card-en{color:rgba(248,251,249,0.5);}
+.explore-card.featured:hover{background:#102720;}
+@media(max-width:640px){.explore-card.featured{grid-template-columns:1fr;gap:0;}.explore-card.featured .explore-icon{margin-bottom:10px;}}
+.explore-card:hover{border-color:var(--moss);transform:translateY(-3px);box-shadow:0 10px 26px rgba(22,52,44,0.10);}
+.explore-icon{font-size:22px;margin-bottom:10px;}
+.explore-card-title{font-size:14px;font-weight:500;color:var(--bark);margin-bottom:2px;}
+.explore-card-en{font-size:11px;color:var(--soil);opacity:0.5;margin-bottom:8px;}
+.explore-card-desc{font-size:12px;color:var(--soil);opacity:0.7;line-height:1.5;margin-bottom:12px;}
+.explore-card-btn{font-size:12px;color:var(--moss);font-weight:500;}
+
+/* ── BOTTOM ── */
+.home-bottom-sec{background:white;border-top:0.5px solid var(--sand);padding:3rem 1.5rem;}
+.home-bottom-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:640px){.home-bottom-inner{grid-template-columns:1fr;}}
+.home-newsletter-card{background:var(--bark);border-radius:4px;padding:1.75rem;}
+.home-nl-icon{font-size:24px;margin-bottom:10px;}
+.home-nl-title{font-family:var(--font-d);font-size:1.25rem;color:#F8FBF9;margin-bottom:8px;}
+.home-nl-sub{font-size:13px;color:rgba(248,251,249,0.6);line-height:1.6;margin-bottom:1.25rem;}
+.home-nl-btn{display:inline-block;padding:10px 20px;background:#F1F7F4;color:var(--bark);border-radius:3px;text-decoration:none;font-size:13px;font-weight:500;transition:all 0.15s;}
+.home-nl-btn:hover{background:white;}
+.home-jennifer-card{background:var(--mist);border:0.5px solid var(--sand);border-radius:4px;padding:1.75rem;display:flex;flex-direction:column;justify-content:center;}
+.home-jl-quote{font-family:var(--font-d);font-size:1.3rem;color:var(--bark);font-style:italic;line-height:1.4;margin-bottom:8px;}
+.home-jl-name{font-size:13px;font-weight:500;color:var(--moss);margin-bottom:8px;}
+.home-jl-desc{font-size:12px;color:var(--soil);opacity:0.65;line-height:1.5;margin-bottom:1rem;}
+.home-jl-btn{display:inline-block;padding:9px 18px;background:var(--bark);color:#F8FBF9;border-radius:3px;text-decoration:none;font-size:12px;font-weight:500;transition:all 0.15s;width:fit-content;}
+.home-jl-btn:hover{background:var(--moss);}
+
+
+/* ── SAGE LATTE HERO OVERRIDE ── */
+.gnav{background:rgba(246,243,236,0.92);backdrop-filter:blur(14px);border-bottom:0.5px solid rgba(22,52,44,0.10);}
+.gnav-logo{color:#20342B;}
+.gnav-logo em{color:#5F7D6B;}
+.gnav-tab{color:rgba(32,52,43,0.56);}
+.gnav-tab:hover{color:#20342B;background:rgba(95,125,107,0.10);}
+.gnav-tab.on{color:#20342B;background:rgba(95,125,107,0.14);}
+
+.hero-v2{background:#F3F1EA;position:relative;overflow:hidden;border-bottom:0.5px solid rgba(22,52,44,0.08);}
+.hero-v2::before{content:'';position:absolute;inset:0;background:
+  radial-gradient(circle at 18% 18%, rgba(143,169,155,0.38) 0%, rgba(143,169,155,0.18) 28%, transparent 56%),
+  radial-gradient(circle at 88% 8%, rgba(143,106,82,0.12) 0%, rgba(143,106,82,0.06) 30%, transparent 58%),
+  linear-gradient(180deg,#E6EEE7 0%,#F3F1EA 48%,#FAF8F4 100%);
+}
+.hero-v2::after{content:'';position:absolute;left:8%;right:8%;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,rgba(22,52,44,0.10),transparent);}
+.hero-v2-inner{max-width:1080px;padding:4.4rem 2rem 4rem;grid-template-columns:minmax(0,1.05fr) minmax(320px,0.82fr);gap:3rem;align-items:center;}
+.hero-tag-v2{color:#4F6B59;background:rgba(255,255,255,0.52);border:0.5px solid rgba(95,125,107,0.20);box-shadow:0 8px 20px rgba(22,52,44,0.03);}
+.hero-title-v2{color:#223127;letter-spacing:-0.035em;text-wrap:balance;}
+.hero-title-v2 em{color:#5F7D6B;}
+.hero-sub-v2{color:#56655A;font-weight:400;max-width:500px;}
+.hero-cta-v2{background:#4F6B59;color:#FBFCFB;border-radius:999px;padding:14px 30px;box-shadow:0 14px 30px rgba(79,107,89,0.18);}
+.hero-cta-v2:hover{background:#3F5848;transform:translateY(-2px);box-shadow:0 18px 38px rgba(79,107,89,0.22);}
+.hero-cta-note{color:rgba(34,49,39,0.46);}
+.hero-mini-story{border-left:2px solid rgba(95,125,107,0.30);color:#647167;background:rgba(255,255,255,0.42);padding:12px 14px;border-radius:0 12px 12px 0;margin-top:1.35rem;max-width:520px;}
+.hero-social-proof{display:none!important;}
+.hero-dot{background:linear-gradient(135deg,#E6EEE7,#FFFFFF);border:1px solid rgba(95,125,107,0.14);box-shadow:0 4px 12px rgba(22,52,44,0.05);}
+.hero-social-proof span{color:#6A756D!important;}
+.hero-quiz-card-soft{background:linear-gradient(135deg,rgba(255,255,255,0.74),rgba(243,241,234,0.86));backdrop-filter:blur(16px);border:0.5px solid rgba(95,125,107,0.12);border-radius:22px;box-shadow:0 22px 58px rgba(22,52,44,0.09);} 
+.hero-quiz-card-soft .hero-quiz-expr{color:#223127;}
+.hero-quiz-card-soft .hero-quiz-more{background:#4F6B59;border-radius:999px;}
+.hero-quiz-card-soft .hero-quiz-more:hover{background:#3F5848;}
+.hero-quiz-card-soft .hero-quiz-opt{border-radius:12px;background:rgba(250,248,244,0.82);border-color:rgba(95,125,107,0.15);}
+.hero-quiz-card-soft .hero-quiz-opt:hover{background:#E6EEE7;border-color:#8FA99B;transform:translateX(2px);}
+.explore-sec{background:#FAF8F4;padding-top:3.2rem;}
+.explore-card{border-radius:16px;border-color:rgba(22,52,44,0.10);box-shadow:0 6px 20px rgba(22,52,44,0.035);}
+.explore-card:hover{box-shadow:0 14px 34px rgba(22,52,44,0.09);}
+.explore-card.featured{background:#4F6B59;border-color:#4F6B59;border-radius:18px;box-shadow:0 18px 38px rgba(79,107,89,0.16);}
+.home-newsletter-card{border-radius:18px;background:linear-gradient(135deg,#4F6B59 0%,#365046 100%);}
+.home-jennifer-card{border-radius:18px;background:#F4F0E8;}
+@media(max-width:768px){.hero-v2-inner{grid-template-columns:1fr;padding:3rem 1.35rem 2.8rem;gap:1.7rem;}.hero-quiz-card-soft{border-radius:18px}.gnav-inner{padding:0 1rem}.gnav-tabs{overflow-x:auto;max-width:72vw;}.hero-title-v2{font-size:clamp(2rem,10vw,3rem);}.hero-mini-story{font-size:12.5px;}}
+
+
+/* ── NEWSLETTER POPUP ── */
+.nl-overlay{position:fixed;inset:0;background:rgba(13,32,27,0.48);display:none;align-items:center;justify-content:center;padding:1.25rem;z-index:1000;backdrop-filter:blur(4px);}
+.nl-overlay.show{display:flex;}
+.nl-modal{width:100%;max-width:430px;background:#FBFCFB;border:0.5px solid rgba(255,255,255,0.5);border-radius:10px;box-shadow:0 24px 80px rgba(0,0,0,0.25);padding:1.6rem;position:relative;animation:su 0.25s ease;}
+.nl-close{position:absolute;top:12px;right:12px;width:28px;height:28px;border:none;border-radius:50%;background:var(--mist);color:var(--soil);cursor:pointer;font-size:16px;}
+.nl-kicker{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay);margin-bottom:8px;}
+.nl-title{font-family:var(--font-d);font-size:1.7rem;line-height:1.15;color:var(--bark);margin-bottom:8px;}
+.nl-desc{font-size:13px;color:var(--soil);opacity:0.75;line-height:1.65;margin-bottom:16px;}
+.nl-list{display:grid;gap:7px;margin-bottom:18px;}
+.nl-list div{font-size:12px;color:var(--soil);background:var(--mist);border-radius:4px;padding:8px 10px;}
+.nl-primary{display:block;width:100%;text-align:center;padding:13px 16px;background:var(--bark);color:#F8FBF9;border-radius:4px;text-decoration:none;font-size:14px;font-weight:500;margin-bottom:8px;}
+.nl-secondary{width:100%;padding:10px;border:none;background:transparent;color:var(--soil);font-size:12px;cursor:pointer;font-family:var(--font-b);}
+
 </style>
 </head>
 <body>
@@ -334,10 +547,11 @@ footer a{color:#C6DDD3;text-decoration:none;}
   <div class="gnav-inner">
     <div class="gnav-logo" onclick="showPage('home')">The <em>Root</em></div>
     <div class="gnav-tabs">
-      <button class="gnav-tab" onclick="window.location.href='/quiz'">미국 생존 테스트</button>
-      <button class="gnav-tab on" id="tab-home" onclick="showPage('home')">여정 진단</button>
-      <button class="gnav-tab" id="tab-tracker" onclick="showPage('tracker')">영주권 트래킹</button>
-      <button class="gnav-tab" id="tab-landing" onclick="showPage('landing')">랜딩 체크리스트</button>
+      <button class="gnav-tab on" id="tab-home" onclick="showPage('home')">홈</button>
+      <button class="gnav-tab" id="tab-quiz" onclick="showPage('quiz');initClinicalQuiz();">임상영어</button>
+      <button class="gnav-tab" id="tab-adapt" onclick="showPage('adapt');initAdaptQuiz();">적응테스트</button>
+      <button class="gnav-tab" id="tab-tracker" onclick="showPage('tracker')">영주권</button>
+      <button class="gnav-tab" id="tab-landing" onclick="showPage('landing')">랜딩</button>
       <button class="gnav-tab" id="tab-bulletin" onclick="showPage('bulletin')">이민문호<span class="dot"></span></button>
     </div>
   </div>
@@ -345,24 +559,132 @@ footer a{color:#C6DDD3;text-decoration:none;}
 
 <!-- PAGE: HOME (여정 진단) -->
 <div class="page on" id="page-home">
-  <section class="hero" id="hero">
-    <div class="rings"><div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div><div class="ring r4"></div><div class="ring r5"></div></div>
-    <div class="hero-content">
-      <div class="hero-tag">The Root · Jennifer Minja Lee</div>
-      <h1>나는 미국 간호사<br>여정 <em>어디까지</em> 왔을까?</h1>
-      <p class="hero-sub">5가지 질문으로 지금 내 단계를 파악하고<br>다음 스텝을 명확하게 알아봐요.</p>
-      <button class="hero-btn" onclick="startQuiz()">지금 내 단계 확인하기 →</button>
-      <div class="hero-tools">
-        <button class="hero-tool-btn" onclick="window.location.href='/quiz'">미국 생존 테스트</button>
-        <button class="hero-tool-btn" onclick="showPage('tracker')">영주권 트래킹</button>
-        <button class="hero-tool-btn" onclick="showPage('landing')">랜딩 체크리스트</button>
-        <button class="hero-tool-btn" onclick="showPage('bulletin')">이민문호 확인</button>
+  <section class="hero-v2" id="hero">
+  <div class="hero-v2-inner">
+
+    <!-- LEFT: 메인 카피 -->
+    <div class="hero-left">
+      <div class="hero-tag-v2">The Root · U.S. RN Journey Hub</div>
+      <h1 class="hero-title-v2">
+        미국 간호사 여정,<br>지금 <em>어디쯤</em> 왔을까요?
+      </h1>
+      <p class="hero-sub-v2">NCLEX부터 VisaScreen, 영주권, 랜딩까지.<br>내 상황에 맞는 다음 스텝을 먼저 확인해보세요.</p>
+      <button class="hero-cta-v2" onclick="startJourneyQuiz()">여정 진단 시작하기 →</button>
+      <div class="hero-cta-note">5가지 질문 · 1분 안에 결과 확인</div>
+      <div class="hero-mini-story">From NCLEX to landing in California — Jennifer가 직접 지나온 길을 바탕으로 만든, 내가 처음 미국 간호사를 준비할 때 있었으면 했던 가이드.</div>
+    </div>
+
+    <!-- RIGHT: 오늘의 임상 영어 카드 -->
+    <div class="hero-right">
+      <div class="hero-quiz-card hero-quiz-card-soft">
+        <div class="hero-quiz-card-top">
+          <span class="hero-quiz-label">오늘의 임상 영어</span>
+          <span class="hero-quiz-new">NEW</span>
+        </div>
+        <div class="hero-quiz-expr" id="hero-expr">"He's been out of it."</div>
+        <div class="hero-quiz-q">뜻은 무엇일까요?</div>
+        <div class="hero-quiz-opts" id="hero-opts">
+          <button class="hero-quiz-opt" onclick="heroQuizAns(0)">A. 퇴근했다</button>
+          <button class="hero-quiz-opt" onclick="heroQuizAns(1)">B. 의식이 혼미하다</button>
+          <button class="hero-quiz-opt" onclick="heroQuizAns(2)">C. 화가 났다</button>
+          <button class="hero-quiz-opt" onclick="heroQuizAns(3)">D. 졸려한다</button>
+        </div>
+        <div class="hero-quiz-result" id="hero-result" style="display:none;"></div>
+        <button class="hero-quiz-more" onclick="showPage('quiz');initClinicalQuiz();">임상영어 퀴즈 더 풀기 →</button>
       </div>
     </div>
-    <div class="scroll-hint"><span>SCROLL</span><div class="scroll-arr"></div></div>
-  </section>
 
-  <section class="quiz-sec" id="quiz-sec">
+  </div>
+</section>
+
+<!-- EXPLORE CARDS -->
+<section class="explore-sec">
+  <div class="explore-inner">
+    <div class="explore-hdr">
+      <span style="font-size:16px;">🌿</span>
+      <div>
+        <div class="explore-title">다음 스텝을 고르세요</div>
+        <div class="explore-sub">처음이라면 여정 진단부터. 필요한 도구는 아래에서 바로 이어가요.</div>
+      </div>
+    </div>
+    <div class="explore-grid">
+      <div class="explore-card featured" onclick="startJourneyQuiz()">
+        <div class="explore-icon">🧭</div>
+        <div>
+          <div class="explore-card-title">먼저, 여정 진단하기</div>
+          <div class="explore-card-en">Main Journey Test</div>
+          <div class="explore-card-desc">내가 NCLEX 전인지, 영어 점수 단계인지, 비자스크린/영주권 단계인지 1분 안에 확인해요.</div>
+        </div>
+        <div class="explore-card-btn">가장 먼저 시작하기 →</div>
+      </div>
+      <div class="explore-card" onclick="showPage('adapt');initAdaptQuiz();">
+        <div class="explore-icon">🌎</div>
+        <div class="explore-card-title">미국 적응 테스트</div>
+        <div class="explore-card-en">Adjustment Test</div>
+        <div class="explore-card-desc">영어보다 더 중요한 마인드셋과 생활 적응력을 확인해요.</div>
+        <div class="explore-card-btn">테스트 해보기 →</div>
+      </div>
+      <div class="explore-card" onclick="showPage('quiz');initClinicalQuiz();">
+        <div class="explore-icon">🗣️</div>
+        <div class="explore-card-title">임상 영어 퀴즈</div>
+        <div class="explore-card-en">Clinical English</div>
+        <div class="explore-card-desc">미국 병원에서 실제로 쓰는 표현을 매일 익혀보세요.</div>
+        <div class="explore-card-btn">퀴즈 풀러가기 →</div>
+      </div>
+      <div class="explore-card" onclick="showPage('tracker')">
+        <div class="explore-icon">📍</div>
+        <div class="explore-card-title">영주권 진행 확인하기</div>
+        <div class="explore-card-en">Green Card Tracker</div>
+        <div class="explore-card-desc">I-140부터 입국까지, 내 케이스가 어디쯤 왔는지 단계별로 정리해요.</div>
+        <div class="explore-card-btn">진행상황 확인하기 →</div>
+      </div>
+      <div class="explore-card" onclick="showPage('landing')">
+        <div class="explore-icon">🧳</div>
+        <div class="explore-card-title">미국 랜딩 준비 체크리스트</div>
+        <div class="explore-card-en">Landing Checklist</div>
+        <div class="explore-card-desc">입국 첫날부터 3개월까지, 놓치기 쉬운 기본 세팅을 하나씩 체크해요.</div>
+        <div class="explore-card-btn">체크리스트 보기 →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER + COMMUNITY -->
+<section class="home-bottom-sec">
+  <div class="home-bottom-inner">
+
+    <!-- 뉴스레터 -->
+    <div class="home-newsletter-card">
+      <div class="home-nl-icon">✉️</div>
+      <div class="home-nl-title">매주 미국 병원 영어와<br>간호사 여정 업데이트 받기 💌</div>
+      <div class="home-nl-sub">임상 영어 표현, Visa Bulletin, NCLEX/비자스크린 팁, 그리고 캘리포니아 RN Jennifer의 현실적인 미국 병원 이야기를 보내드려요.</div>
+      <a href="https://jenniferminjalee.substack.com/" target="_blank" class="home-nl-btn" onclick="trackEvent('newsletter_home_click')">무료 뉴스레터 받아보기 →</a>
+    </div>
+
+    <!-- Jennifer 소개 -->
+    <div class="home-jennifer-card">
+      <div class="home-jl-quote">“I built the guide I wish I had.”</div>
+      <div class="home-jl-name">— Jennifer Minja Lee, RN</div>
+      <div class="home-jl-desc">한국에서 간호사로 시작해 NCLEX를 보고, 캘리포니아 병원에 정착한 1st generation immigrant RN. The Root는 그 길을 먼저 걸어본 사람의 현실적인 지도예요.</div>
+      <a href="https://www.youtube.com/@JenniferMinjaLee" target="_blank" class="home-jl-btn">Jennifer 이야기 보기 →</a>
+    </div>
+
+  </div>
+</section>
+
+
+
+  <footer>
+    <p>The Root · Jennifer Minja Lee · 1st generation immigrant RN</p>
+    <p style="margin-top:6px;font-size:13px;"><a href="https://www.youtube.com/@JenniferMinjaLee" target="_blank">YouTube</a> · <a href="https://jenniferminjalee.substack.com" target="_blank">Substack 구독하러 가기</a></p>
+    <p style="margin-top:10px;font-size:13px;"><a href="mailto:jenniferminjalee@gmail.com?subject=The%20Root%20Feedback">제니퍼에게 피드백 보내기 🤍</a></p>
+    <p style="margin-top:10px;font-size:11px;opacity:0.6;">정보는 참고용이며 실제 지원 전 해당 주 간호사 면허 위원회에 반드시 확인하세요. 최종 업데이트: 2026년 4월</p>
+  </footer>
+</div>
+
+<!-- PAGE: JOURNEY QUIZ (여정 진단) -->
+<div class="page" id="page-journey">
+<section class="quiz-sec" id="quiz-sec">
     <div class="quiz-wrap">
       <div class="quiz-hdr">
         <h2>나의 여정 찾기</h2>
@@ -380,49 +702,14 @@ footer a{color:#C6DDD3;text-decoration:none;}
       <div id="qc"></div>
     </div>
   </section>
-
-  <section class="state-sec" id="state-sec">
-    <div class="state-inner">
-      <div class="eyebrow">State Guide</div>
-      <h2 class="sec-title">주별 요구사항<br>한눈에 보기</h2>
-      <p class="sec-sub">어느 주로 갈지 결정할 때 가장 중요한 기준들을 정리했어요</p>
-      <div class="flt-row">
-        <button class="flt-btn on" onclick="setF('all',this)">전체 8개 주</button>
-        <button class="flt-btn" onclick="setF('easy',this)">입문 추천</button>
-        <button class="flt-btn" onclick="setF('compact',this)">Compact 주</button>
-        <button class="flt-btn" onclick="setF('no_cp',this)">CP 불필요</button>
-        <button class="flt-btn" onclick="setF('no_ssn',this)">SSN 없이 가능</button>
-      </div>
-      <div class="leg-row">
-        <div class="leg"><div class="leg-dot" style="background:#244C41"></div>친화도 (별 5개 만점)</div>
-        <div class="leg"><div class="leg-dot" style="background:#185FA5"></div>Compact 주 (거주 후 다중 면허)</div>
-        <div class="leg"><div class="leg-dot" style="background:#8B4030"></div>까다로운 주</div>
-      </div>
-      <div class="cnt-lbl" id="cnt">8개 주 표시 중</div>
-      <div class="cards-grid" id="sgrid"></div>
-    </div>
-  </section>
-
-  <footer>
-    <p>The Root · Jennifer Minja Lee · 1st generation immigrant RN</p>
-    <p style="margin-top:6px;font-size:13px;"><a href="https://www.youtube.com/@JenniferMinjaLee" target="_blank">YouTube</a> · <a href="https://jenniferminjalee.substack.com" target="_blank">Substack 구독하러 가기</a></p>
-    <p style="margin-top:10px;font-size:13px;"><a href="mailto:jenniferminjalee@gmail.com?subject=The%20Root%20Feedback">제니퍼에게 피드백 보내기 🤍</a></p>
-    <p style="margin-top:10px;font-size:11px;opacity:0.6;">정보는 참고용이며 실제 지원 전 해당 주 간호사 면허 위원회에 반드시 확인하세요. 최종 업데이트: 2026년 4월</p>
-  </footer>
 </div>
 
 <!-- PAGE: TRACKER (영주권) -->
 <div class="page" id="page-tracker">
   <div class="dash-page">
     <div class="dash-eyebrow">Green Card Tracker</div>
-    <h2 class="dash-title">영주권 진행 트래킹</h2>
-    <p class="dash-sub">I-140부터 입국까지 — 단계별 체크리스트로 내 진행 상황을 관리하세요.</p>
-    <div class="share-bar">
-      <span class="share-label">🌿 도움이 됐다면 공유해요</span>
-      <button class="share-btn sb-link" onclick="copyLink()">링크 복사</button>
-      <button class="share-btn sb-email" onclick="shareEmail()">이메일로 보내기</button>
-      <button class="share-btn sb-link" onclick="sendFeedback()">제니퍼에게 피드백 🤍</button>
-    </div>
+    <h2 class="dash-title">영주권 진행 확인하기</h2>
+    <p class="dash-sub">I-140부터 입국까지 — 단계별 체크리스트로 내 케이스 진행 상황을 정리하세요.</p>
     <div class="stat-row">
       <div class="stat-b"><div class="stat-n" id="gr-done">0</div><div class="stat-l">완료 항목</div></div>
       <div class="stat-b"><div class="stat-n" id="gr-total">0</div><div class="stat-l">전체 항목</div></div>
@@ -441,14 +728,8 @@ footer a{color:#C6DDD3;text-decoration:none;}
 <div class="page" id="page-landing">
   <div class="dash-page">
     <div class="dash-eyebrow">Landing Checklist</div>
-    <h2 class="dash-title">미국 랜딩 후<br>체크리스트</h2>
-    <p class="dash-sub">입국 첫 주부터 3개월까지 — 하나씩 체크하면서 미국 생활 기반을 만들어요.</p>
-    <div class="share-bar">
-      <span class="share-label">🌿 도움이 됐다면 공유해요</span>
-      <button class="share-btn sb-link" onclick="copyLink()">링크 복사</button>
-      <button class="share-btn sb-email" onclick="shareEmail()">이메일로 보내기</button>
-      <button class="share-btn sb-link" onclick="sendFeedback()">제니퍼에게 피드백 🤍</button>
-    </div>
+    <h2 class="dash-title">미국 랜딩 준비<br>체크리스트</h2>
+    <p class="dash-sub">입국 첫 주부터 3개월까지 — 미국 생활 기반을 하나씩 차분하게 세팅해요.</p>
     <div class="stat-row">
       <div class="stat-b"><div class="stat-n" id="l-done">0</div><div class="stat-l">완료</div></div>
       <div class="stat-b"><div class="stat-n" id="l-total">0</div><div class="stat-l">전체</div></div>
@@ -465,6 +746,112 @@ footer a{color:#C6DDD3;text-decoration:none;}
     <button class="save-progress-btn" onclick="saveProgress('land')" style="margin-top:1rem;">진행 상황 저장하기 💾</button>
     <button class="capture-btn" onclick="captureProgress('land')" id="capture-land-btn">📸 내 진행상황 이미지로 저장하기</button>
   </div>
+</div>
+
+
+<!-- PAGE: QUIZ -->
+<div class="page" id="page-quiz">
+
+  <!-- 히어로 -->
+  <div class="cq-hero">
+    <div class="cq-hero-content">
+      <div class="cq-hero-tag">Clinical English Quiz</div>
+      <h2 class="cq-hero-title">임상 영어<br><em>실전 퀴즈</em></h2>
+      <p class="cq-hero-sub">미국 병원에서 실제로 쓰는 영어 — Jennifer가 직접 만들었어요</p>
+      <div class="cq-streak">🔥 연속 <span class="cq-streak-num" id="cq-streak-num">0</span>일 도전 중</div>
+      <div style="margin-top:12px;">
+        <a href="https://jenniferminjalee.substack.com/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:7px 16px;background:rgba(255,255,255,0.62);border:0.5px solid rgba(95,125,107,0.16);border-radius:20px;text-decoration:none;font-size:12px;color:#4F6B59;transition:all 0.15s;">
+          💌 매주 새 문제 · 뉴스레터 구독하기 →
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="cq-body">
+
+    <!-- 카테고리 -->
+    <div class="cq-cats" id="cq-cats"></div>
+
+    <!-- 진행 바 -->
+    <div class="cq-prog"><div class="cq-prog-fill" id="cq-prog-fill" style="width:0%"></div></div>
+
+    <!-- 퀴즈 -->
+    <div id="cq-quiz-wrap">
+      <div class="cq-card">
+        <div class="cq-meta">
+          <span class="cq-cat-pill" id="cq-cat-pill"></span>
+          <span class="cq-num" id="cq-qnum"></span>
+        </div>
+        <div class="cq-q" id="cq-question"></div>
+        <div class="cq-context" id="cq-context"></div>
+        <div class="cq-opts" id="cq-opts"></div>
+        <div class="cq-explain" id="cq-explain">
+          <div class="cq-explain-top">
+            <div class="cq-jen-av">JL</div>
+            <div class="cq-explain-text" id="cq-explain-text"></div>
+          </div>
+          <div class="cq-tip" id="cq-tip"></div>
+        </div>
+        <button class="cq-next-btn" id="cq-next-btn" onclick="nextQ()">다음 문제 →</button>
+      </div>
+    </div>
+
+    <!-- 결과 -->
+    <div id="cq-result" style="display:none;">
+      <div class="cq-result-card">
+        <div class="cq-score-ring">
+          <div class="cq-score-num" id="cq-score-num"></div>
+          <div class="cq-score-total" id="cq-score-total"></div>
+        </div>
+        <div class="cq-result-msg" id="cq-result-msg"></div>
+        <div class="cq-result-sub" id="cq-result-sub"></div>
+        <div class="cq-share-row">
+          <button class="cq-share-btn cq-share-link" onclick="shareQuizResult()">결과 공유하기 🌿</button>
+        </div>
+        <button class="cq-retry-btn" onclick="retryQuiz()">다시 풀기 →</button>
+      </div>
+
+      <!-- Jennifer 노트 -->
+      <div style="display:flex;gap:10px;padding:14px 16px;background:#F3EFE6;border-radius:3px;margin-top:10px;">
+        <div style="width:28px;height:28px;border-radius:50%;background:var(--moss);display:flex;align-items:center;justify-content:center;font-size:10px;color:white;font-weight:700;flex-shrink:0;">JL</div>
+        <div style="font-size:12px;color:#4A3A2A;line-height:1.6;">임상 영어는 단어 암기보다 <strong>상황 맥락</strong>이 중요해요. 매주 뉴스레터에서 실제 병원 표현을 더 같이 익혀봐요. 🌿</div>
+      </div>
+      <a href="https://jenniferminjalee.substack.com/" target="_blank" style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--bark);border-radius:3px;text-decoration:none;margin-top:8px;">
+        <div>
+          <div style="font-size:13px;font-weight:500;color:#F8FBF9;">💌 뉴스레터 구독하고 표현 더 알아보기</div>
+          <div style="font-size:11px;color:rgba(248,251,249,0.5);margin-top:2px;">임상 영어 · 미국 병원 이야기 · 이민문호 업데이트</div>
+        </div>
+        <span style="color:#7FA89A;font-size:13px;">→</span>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- PAGE: ADAPT -->
+<div class="page" id="page-adapt">
+  <div class="dash-page">
+    <div class="dash-eyebrow">Adjustment Test</div>
+    <h2 class="dash-title">나는 미국에서<br>잘 살 수 있을까?</h2>
+    <p class="dash-sub">영어 실력보다 마인드셋과 행동 패턴으로 보는 10문항 미국 생존 유형 테스트예요.<br>솔직하게 답할수록 정확해져요.</p>
+    <div class="dash-card" id="adapt-card">
+      <div class="cq-prog"><div class="cq-prog-fill" id="adapt-prog" style="width:0%"></div></div>
+      <div class="q-num" id="adapt-num"></div>
+      <div class="q-txt" id="adapt-question"></div>
+      <div class="q-sub" id="adapt-sub"></div>
+      <div class="q-opts" id="adapt-opts"></div>
+    </div>
+    <div id="adapt-result" style="display:none;"></div>
+    <div class="dash-card" style="background:var(--bark);margin-top:12px;">
+      <div style="font-size:13px;font-weight:500;color:#F8FBF9;margin-bottom:6px;">✉️ The Root 업데이트 받아가기</div>
+      <div style="font-size:12px;color:rgba(248,251,249,0.6);line-height:1.6;margin-bottom:14px;">임상 영어, 미국 병원 이야기, 이민문호 업데이트, 그리고 Jennifer의 현실적인 여정을 받아보세요.</div>
+      <a href="https://jenniferminjalee.substack.com/" target="_blank" style="display:inline-block;padding:10px 18px;background:#F1F7F4;color:var(--bark);border-radius:3px;text-decoration:none;font-size:13px;font-weight:500;">무료 뉴스레터 받아보기 →</a>
+    </div>
+  </div>
+</div>
+
 </div>
 
 <!-- PAGE: BULLETIN (이민문호) -->
@@ -522,6 +909,24 @@ footer a{color:#C6DDD3;text-decoration:none;}
   </div>
 </div>
 
+
+<!-- NEWSLETTER POPUP -->
+<div class="nl-overlay" id="newsletter-popup" onclick="if(event.target===this) closeNewsletterPopup()">
+  <div class="nl-modal">
+    <button class="nl-close" onclick="closeNewsletterPopup()" aria-label="Close">×</button>
+    <div class="nl-kicker">The Root Letter</div>
+    <div class="nl-title">미국 병원 영어와<br>간호사 여정 업데이트.</div>
+    <div class="nl-desc">The Root 뉴스레터에서는 임상 영어, 이민문호, NCLEX/비자스크린 팁, 그리고 Jennifer의 현실적인 미국 병원 이야기를 매주 정리해드려요.</div>
+    <div class="nl-list">
+      <div>🗣️ 실제 병원에서 쓰는 임상 영어 표현</div>
+      <div>📌 NCLEX · VisaScreen · 영주권 여정 팁</div>
+      <div>🌿 1st generation immigrant nurse의 솔직한 이야기</div>
+    </div>
+    <a class="nl-primary" href="https://jenniferminjalee.substack.com/" target="_blank" onclick="trackEvent('newsletter_popup_click'); closeNewsletterPopup();">무료 뉴스레터 받아보기 →</a>
+    <button class="nl-secondary" onclick="closeNewsletterPopup(true)">오늘은 괜찮아요</button>
+  </div>
+</div>
+
 <!-- CAPTURE CARD (hidden, rendered to image) -->
 <div class="capture-card" id="capture-card"></div>
 
@@ -534,12 +939,8 @@ function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.gnav-tab').forEach(t=>t.classList.remove('on'));
   document.getElementById('page-'+id).classList.add('on');
-  const tabs={home:'tab-home',tracker:'tab-tracker',landing:'tab-landing',bulletin:'tab-bulletin'};
+  const tabs={home:'tab-home',journey:'tab-home',tracker:'tab-tracker',quiz:'tab-quiz',adapt:'tab-adapt',landing:'tab-landing',bulletin:'tab-bulletin'};
   document.getElementById(tabs[id])?.classList.add('on');
-  if(id==='home'){
-    const hero=document.getElementById('hero');
-    if(hero) hero.style.display='flex';
-  }
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -564,7 +965,7 @@ const engTableHTML=`<div style="margin-bottom:1.5rem;"><div style="font-size:11p
 const Rs={
   no_degree:{badge:'bs',bl:'Stage 0 — 시작 전',stage:'간호학 학위부터\n시작해봐요',desc:'미국 간호사가 되려면 인가받은 간호학과 학위가 첫 번째 조건이에요.',steps:[{t:'인가받은 간호학과 입학',d:'한국, 필리핀, 인도 등 — 나라 상관없이 인가 기관 여부가 중요'},{t:'졸업 후 국내 간호사 면허 취득',d:'국내 면허가 있어야 NCLEX-RN 응시 가능'}],uworld:false,eng:false,statesel:false,compact:false,j:'학위 취득부터 미국 취업까지 보통 6-10년이 걸려요. 한 걸음씩 가다 보면 분명히 도착할 수 있어요.',nextPage:null},
   no_license:{badge:'bs',bl:'Stage 1 — 면허 취득 필요',stage:'국내 간호사 면허가\n필요해요',desc:'미국 NCLEX-RN 시험에 응시하려면 국내 간호사 면허가 필수예요.',steps:[{t:'간호사 국가고시 응시',d:'간호대 졸업 후 응시 가능'},{t:'면허 취득 후 NCLEX 준비 시작',d:'국시 내용과 겹치는 부분 많아 국시 취득 직후 추천'}],uworld:false,eng:false,statesel:false,compact:false,j:'NCLEX 시험 신청 요건 중 하나가 해외 대학을 졸업한 경우 해당 국가 면허 보유인 경우 가능해요.',nextPage:null},
-  needs_nclex:{badge:'bm',bl:'Stage 2 — NCLEX 준비',stage:'NCLEX-RN,\n이게 핵심이에요',desc:'국내 면허가 있다면 NCLEX-RN에 응시할 수 있어요. 대부분 New York 주로 응시해요.',steps:[{t:'응시할 주(State) 선택',d:'대부분 New York 주로 응시 — 영어시험 없이 지원 가능해서 추천'},{t:'ATT 신청 및 시험 등록',d:'Pearson VUE를 통해 시험 일정 예약'},{t:'NCLEX-RN 합격',d:'85-150문제, CAT 방식 — 유형 파악이 합격의 핵심'}],uworld:true,eng:false,statesel:true,compact:true,j:'NCLEX는 CAT 방식이라 문제 수가 달라져요. 얼마나 많이 푸냐보다 어떤 유형인지 파악하는 게 중요해요.',nextPage:null},
+  needs_nclex:{badge:'bm',bl:'Stage 2 — NCLEX 준비',stage:'NCLEX-RN,\n이게 핵심이에요',desc:'국내 면허가 있다면 NCLEX-RN에 응시할 수 있어요. 대부분 New York 주로 응시해요.',steps:[{t:'응시할 주(State) 선택',d:'대부분 New York 주로 응시 — 영어시험 없이 지원 가능해서 추천'},{t:'ATT 신청 및 시험 등록',d:'Pearson VUE를 통해 시험 일정 예약'},{t:'NCLEX-RN 합격',d:'75-150문제, CAT 방식 — 유형 파악이 합격의 핵심'}],uworld:true,eng:false,statesel:true,compact:true,j:'NCLEX는 CAT 방식이라 문제 수가 달라져요. 얼마나 많이 푸냐보다 어떤 유형인지 파악하는 게 중요해요.',nextPage:null},
   no_clinical:{badge:'bm',bl:'Stage 3 — 임상 경력 쌓는 중',stage:'임상 경력을\n먼저 쌓는 걸 추천해요',desc:'경력 없이도 가능하지만 좋은 조건의 스폰서를 찾기 위해서는 임상 경력이 매우 중요해요.',steps:[{t:'국내 병원에서 임상 경력 쌓기',d:'최소 1-2년 권장 — Med-Surg, ICU, ER 선호도 높음'},{t:'희망 부서 중심으로 경험 쌓기',d:'미국에서 일하고 싶은 부서와 동일한 경력이 있으면 훨씬 유리해요'},{t:'경력 조건은 에이전시에 직접 확인',d:'미국 잡마켓마다 조건이 달라요. 에이전시에 직접 문의하는 게 가장 정확해요'}],uworld:false,eng:false,statesel:false,compact:false,j:'미국 임상은 한국이랑 많이 달라요. 경험이 있을수록 현장 적응이 빨라요.',nextPage:null},
   needs_visascreen:{badge:'bm',bl:'Stage 4 — 비자스크린 진행',stage:'비자스크린으로\n넘어가요',desc:'영어 점수가 있다면 비자스크린 단계로 바로 진행할 수 있어요.',steps:[{t:'CGFNS 계정 생성 및 서류 준비',d:'고졸 졸업증명서, 간호학 성적증명서, 면허 공증, NCLEX 확인서, 여권 사진'},{t:'영어 점수 제출',d:'비자스크린 기준 점수를 CGFNS에 직접 제출 (재택 시험 불가)'},{t:'비자스크린 완료 후 병원 컨택',d:'NCLEX 합격 후 먼저 병원을 찾아도 돼요 — 순서는 유연하게'}],uworld:false,eng:true,statesel:false,compact:false,j:'이미 영어 점수가 있다면 비자스크린을 진행하면서 병원이나 에이전시를 같이 보는 전략도 가능해요.',nextPage:'tracker'},
   needs_english:{badge:'bm',bl:'Stage 4 — 영어 점수 준비',stage:'에이전시를 컨택하면서\n영어 점수를 준비하세요',desc:'영어 점수가 아직 없다면 에이전시를 먼저 컨택하면서 비자스크린용 영어 점수를 준비하세요.',steps:[{t:'에이전시 먼저 컨택',d:'현재 내 상황에서 가능한 스폰서 루트와 서류 방향을 먼저 확인해요'},{t:'비자스크린용 영어 시험 준비',d:'아래 기준표에서 내가 응시할 시험과 목표 점수를 확인하세요'},{t:'영어 점수 확보 후 비자스크린 진행',d:'점수 제출이 가능해지면 바로 다음 단계로 넘어가요'}],uworld:false,eng:true,statesel:false,compact:false,j:'영어 점수가 아직 없어도 괜찮아요. 에이전시 컨택과 영어 준비를 병행하는 게 현실적인 루트예요.',nextPage:'bulletin'},
@@ -573,7 +974,7 @@ const Rs={
 const stSel={'California':{note:'교육과정 까다로움 — 모성/노인 필수'},'Texas':{note:'빠른 처리, Compact 주'},'New York':{note:'영어시험 없이 지원 가능 — 가장 추천'},'Florida':{note:'Compact, 처리 빠름'},'Washington':{note:'Compact, Seattle 수요'},'Illinois':{note:'CGFNS 전용, SSN 불필요'}};
 
 let cur=0,history=[];
-function startQuiz(){const hero=document.getElementById('hero');if(hero) hero.style.display='none';document.getElementById('quiz-sec').scrollIntoView({behavior:'smooth'});history=[];rQ(0);}
+function startJourneyQuiz(){showPage('journey');history=[];rQ(0);trackEvent('journey_quiz_start');}
 function rQ(idx){
   cur=idx;updP(idx);
   const q=Qs[idx];
@@ -659,6 +1060,7 @@ function navBtns(){
 }
 function showR(key){
   const r=Rs[key];if(!r)return;
+  trackEvent('journey_quiz_complete',{result:key});
   updP(Qs.length);
   const stepsH=r.steps.map((s,i)=>`<div class="nxt-item"><div class="nxt-num">${i+1}</div><div><div class="nxt-t">${s.t}</div><div class="nxt-d">${s.d}</div></div></div>`).join('');
   const uwH=r.uworld?`<div class="uw-banner"><div class="uw-ico">UW</div><div style="flex:1"><div class="uw-ttl">UWorld NCLEX-RN</div><div class="uw-sub">Jennifer Affiliate link — NCLEX 준비에 많이 활용되는 대표 문제은행</div></div><a href="http://tidd.ly/3OW24vo" class="uw-link" target="_blank">자세히 보기 →</a></div>`:'';
@@ -666,15 +1068,15 @@ function showR(key){
   <div style="font-size:14px;flex-shrink:0;">📋</div>
   <div style="flex:1;">
     <div style="font-size:14px;font-weight:500;color:var(--bark);margin-bottom:8px;">에이전시 리스트가 필요하신가요?</div>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc8yHmiTCbCp7oFTKG-EU7FSi_EXrh99Q39tiZ8OOLhk64BKg/viewform" target="_blank" style="display:inline-block;font-size:13px;color:var(--clay);font-weight:500;text-decoration:none;border-bottom:1px solid var(--clay);margin-bottom:8px;">낫이팅게일샘의 정리 자료 보기 →</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdJgaMlCAl-DALxLgWT2k-IAg8Jhwq31QdWn8JyH-Fta_ZF6g/viewform?usp=send_form" target="_blank" style="display:inline-block;font-size:13px;color:var(--clay);font-weight:500;text-decoration:none;border-bottom:1px solid var(--clay);margin-bottom:8px;">낫이팅게일샘의 정리 자료 보기 →</a>
     <div style="font-size:13px;color:var(--soil);opacity:0.5;"><a href="https://www.instagram.com/noteatingale" target="_blank" style="color:var(--soil);text-decoration:none;"> 자료제공 @noteatingale</a>· 유료 자료 · 신청 페이지 </div>
   </div>
 </div>`:'';
   const selH=r.statesel?`<div style="margin-bottom:1rem;"><div style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--soil);opacity:0.5;margin-bottom:10px;">어느 주로 가고 싶으세요?</div><div class="ssel-grid">${Object.entries(stSel).map(([s,v])=>`<button class="ssel-btn" onclick="this.closest('.ssel-grid').querySelectorAll('.ssel-btn').forEach(b=>{b.style.borderColor='';b.style.background=''});this.style.borderColor='var(--moss)';this.style.background='var(--moss-light)'">${s}<small>${v.note}</small></button>`).join('')}</div><div style="font-size:12px;color:var(--soil);opacity:0.55;margin-top:6px;">상세 요구사항은 아래 State Guide에서 확인하세요 ↓</div></div>`:'';
   const compactH=r.compact?compactToggleHTML():'';
   const engH=r.eng?engTableHTML:'';
-  const nextBtn=r.nextPage?`<button class="btn-teal" onclick="showPage('${r.nextPage}')">${r.nextPage==='tracker'?'영주권 트래킹 시작하기 →':r.nextPage==='bulletin'?'이민문호 확인하기 →':'다음 단계로 →'}</button>`:'';
-  document.getElementById('qc').innerHTML=`<div class="res-card"><span class="res-badge ${r.badge}">${r.bl}</span><div class="res-stage">${r.stage}</div><div class="res-desc">${r.desc}</div>${selH}${compactH}${engH}<div class="nxt-steps"><div class="nxt-lbl">다음 단계</div>${stepsH}</div>${uwH}${agencyH}<div class="jen-note"><div class="jen-av">JL</div><div class="jen-msg"><strong>Jennifer의 메모 —</strong> ${r.j}</div></div><div class="res-acts">${nextBtn}<button class="btn-main" onclick="location.href='https://www.youtube.com/@JenniferMinjaLee'">Jennifer YouTube에서 자세히 보기 →</button>${r.statesel?`<button class="btn-ghost" onclick="document.getElementById('state-sec').scrollIntoView({behavior:'smooth'})">주별 요구사항 보기 ↓</button>`:''}${navBtns()}</div></div>`;
+  const nextBtn=r.nextPage?`<button class="btn-teal" onclick="showPage('${r.nextPage}')">${r.nextPage==='tracker'?'영주권 진행 확인하기 →':r.nextPage==='bulletin'?'이민문호 확인하기 →':'다음 단계로 →'}</button>`:'';
+  document.getElementById('qc').innerHTML=`<div class="res-card"><span class="res-badge ${r.badge}">${r.bl}</span><div class="res-stage">${r.stage}</div><div class="res-desc">${r.desc}</div>${selH}${compactH}${engH}<div class="nxt-steps"><div class="nxt-lbl">다음 단계</div>${stepsH}</div>${uwH}${agencyH}<div class="jen-note"><div class="jen-av">JL</div><div class="jen-msg"><strong>Jennifer의 메모 —</strong> ${r.j}</div></div><div class="res-acts">${nextBtn}<button class="btn-main" onclick="location.href='https://www.youtube.com/@JenniferMinjaLee'">Jennifer YouTube에서 자세히 보기 →</button>${navBtns()}</div></div>`;
 
   setTimeout(scrollToQuizTop, 50);
 }
@@ -683,7 +1085,7 @@ function updP(step){
   for(let i=0;i<=Qs.length;i++){const d=document.getElementById('d'+i);if(!d)continue;d.className='sdot'+(i<step?' done':i===step?' active':'');const l=document.getElementById('l'+i);if(l)l.className='sline'+(i<step?' done':'');}
 }
 function setD(i,c){const d=document.getElementById('d'+i);if(d)d.className='sdot '+c;}
-function resetQ(){history=[];cur=0;updP(0);rQ(0);const hero=document.getElementById('hero');if(hero) hero.style.display='flex';window.scrollTo({top:0,behavior:'smooth'});}
+function resetQ(){history=[];cur=0;updP(0);rQ(0);window.scrollTo({top:0,behavior:'smooth'});}
 
 /* ── STATE DATA ── */
 const SD=[
@@ -820,6 +1222,34 @@ function checkPD(){
 /* ── SHARE & SAVE ── */
 const SITE_URL='https://theroot-theta.vercel.app/';
 const SITE_MSG='미국 간호사 여정, 지금 내 단계를 확인해봐요! 🌿 The Root by Jennifer Minja Lee';
+
+function trackEvent(name,params={}){
+  if(typeof gtag==='function'){gtag('event',name,params);}
+}
+
+function openNewsletterPopup(){
+  const pop=document.getElementById('newsletter-popup');
+  if(pop)pop.classList.add('show');
+}
+function showNewsletterPopup(){
+  openNewsletterPopup();
+}
+function closeNewsletterPopup(skipToday=false){
+  const pop=document.getElementById('newsletter-popup');
+  if(pop)pop.classList.remove('show');
+  sessionStorage.setItem('theroot_popup_seen_v2','1');
+  if(skipToday){localStorage.setItem('theroot_popup_skip_date_v2',new Date().toDateString());}
+}
+function scheduleNewsletterPopup(){
+  const skipped=localStorage.getItem('theroot_popup_skip_date_v2')===new Date().toDateString();
+  const seen=sessionStorage.getItem('theroot_popup_seen_v2')==='1';
+  if(skipped||seen)return;
+  setTimeout(()=>{
+    const hasAnswered=document.getElementById('cq-result')?.style.display==='block';
+    if(!hasAnswered)openNewsletterPopup();
+  },2500);
+}
+
 
 function showToast(msg){
   const t=document.getElementById('toast');
@@ -990,18 +1420,362 @@ function captureProgress(type){
   }
 }
 
+
+/* ── CLINICAL ENGLISH QUIZ DATA ── */
+const quizDB=[
+  // ── 기본 임상 용어 ──
+  {
+    cat:'임상 용어',color:'#E8F4ED',txtColor:'#1F6351',
+    q:'"The patient appears diaphoretic." 에서 diaphoretic 의 뜻은?',
+    context:'나이트 쉬프트 중 환자 상태를 동료에게 전달하는 상황입니다.',
+    opts:['호흡이 가쁜','땀이 많이 나는','얼굴이 창백한','의식이 혼미한'],
+    ans:1,
+    explain:'Diaphoretic = 발한(發汗), 즉 땀이 많이 나는 상태예요. 심근경색, 저혈당, 패혈증 등에서 자주 나타나요. 차트에 자주 등장하는 단어니까 꼭 기억해요!',
+    tip:'diaphoretic = sweating profusely / pallor = 창백함 / cyanotic = 청색증'
+  },
+  {
+    cat:'임상 용어',color:'#E8F4ED',txtColor:'#1F6351',
+    q:'"Patient is lethargic but arousable." 에서 lethargic 의 의미는?',
+    context:'아침 라운딩 중 담당 의사에게 환자 상태를 보고하는 상황입니다.',
+    opts:['통증을 심하게 호소하는','기운 없고 졸린 상태','혼란스러워하는','불안해하는'],
+    ans:1,
+    explain:'Lethargic = 무기력하고 졸린 상태예요. Arousable = 자극에 반응해서 깨울 수 있는. 즉 "졸려 보이지만 깨울 수 있다"는 뜻이에요. Mental status 표현은 차트에 매우 자주 나와요.',
+    tip:'Alert → Lethargic → Obtunded → Stuporous → Comatose 순으로 의식 수준이 낮아져요'
+  },
+  {
+    cat:'임상 용어',color:'#E8F4ED',txtColor:'#1F6351',
+    q:'"The wound has serosanguineous drainage." 에서 serosanguineous 는?',
+    context:'수술 후 상처 드레싱 교환 중 차트에 기록해야 합니다.',
+    opts:['고름이 섞인 황색 분비물','연한 분홍빛의 맑은 분비물','짙은 적색의 혈성 분비물','냄새 나는 갈색 분비물'],
+    ans:1,
+    explain:'Sero(장액성) + sanguineous(혈성) = 맑고 연한 분홍빛 분비물이에요. 수술 후 초기에 정상적으로 나올 수 있어요. 색깔 변화가 있으면 감염 신호일 수 있어요.',
+    tip:'serous=맑은 / sanguineous=혈성 / serosanguineous=연분홍 / purulent=화농성(고름)'
+  },
+  // ── 환자 소통 영어 ──
+  {
+    cat:'환자 소통',color:'#EEEDFE',txtColor:'#3C3489',
+    q:'환자에게 "You need to be NPO" 라고 했을 때 더 자연스러운 표현은?',
+    context:'내일 수술 예정인 환자에게 금식을 설명해야 합니다.',
+    opts:['"You cannot eat or drink anything after midnight, including water."','"NPO means nil per os in Latin."','"The doctor ordered NPO for you."','"Please fast from tonight."'],
+    ans:0,
+    explain:'의료 전문 용어(NPO, nil per os)보다 환자가 이해할 수 있는 일상 언어로 설명해야 해요. "including water"를 꼭 강조해야 환자 오해를 막을 수 있어요.',
+    tip:'Plain language 원칙: 환자 교육은 항상 쉬운 영어로! 6학년 수준 언어 권장'
+  },
+  {
+    cat:'환자 소통',color:'#EEEDFE',txtColor:'#3C3489',
+    q:'환자가 통증을 호소할 때 "Where does it hurt?" 보다 더 정확한 표현은?',
+    context:'환자 사정(assessment) 중 통증 위치를 확인해야 합니다.',
+    opts:['"Can you point to where the pain is?"','"Is it your stomach?"','"Does your chest hurt?"','"Tell me about the pain."'],
+    ans:0,
+    explain:'"Point to where" 는 언어 장벽이 있는 환자에게도 효과적이에요. 환자가 직접 가리키게 하면 오해가 줄어요. 특히 한국 환자들에게 영어로 설명하기 어려울 때 유용해요.',
+    tip:'"Can you point to..." = 위치 확인 / "On a scale of 0-10..." = 강도 확인'
+  },
+  {
+    cat:'환자 소통',color:'#EEEDFE',txtColor:'#3C3489',
+    q:'"I need to take your vitals." 를 환자에게 설명할 때 vitals 를 어떻게 풀어 말할까요?',
+    context:'새벽 4시에 환자에게 활력징후 측정을 알려야 합니다.',
+    opts:['"I need to check your blood pressure, heart rate, temperature, and oxygen level."','"I need to do your vitals now."','"It is time for your vital signs check."','"I need to take some readings."'],
+    ans:0,
+    explain:'"Vitals"는 의료인들끼리 쓰는 약어예요. 환자에게는 구체적으로 뭘 측정하는지 알려주면 불안감이 줄어요. 특히 새벽에 갑자기 깨울 때 미리 설명하면 더 좋아요.',
+    tip:'BP = blood pressure / HR = heart rate / O2 sat = oxygen saturation / Temp = temperature'
+  },
+  // ── 인수인계 표현 ──
+  {
+    cat:'인수인계',color:'#E8F0FB',txtColor:'#185FA5',
+    q:'"The patient is A&Ox3" 에서 x3 이 의미하는 것은?',
+    context:'데이 쉬프트에서 나이트 쉬프트로 인수인계 중입니다.',
+    opts:['3번 낙상한 적이 있다','사람·장소·시간을 모두 인식하고 있다','3가지 약물을 투여 중이다','3번 수혈을 받았다'],
+    ans:1,
+    explain:'A&O = Alert and Oriented. x3 = person(자신이 누구인지) + place(지금 어디 있는지) + time(날짜·시간)을 모두 알고 있다는 뜻이에요. x4는 여기에 event(왜 입원했는지)가 추가돼요.',
+    tip:'A&Ox1=person only / x2=+place / x3=+time / x4=+event (why here)'
+  },
+  {
+    cat:'인수인계',color:'#E8F0FB',txtColor:'#185FA5',
+    q:'"The patient has been febrile since 2am." 에서 febrile 의 뜻은?',
+    context:'아침 인수인계에서 야간 동료가 전달하는 내용입니다.',
+    opts:['구토를 하는','열이 있는','통증을 호소하는','잠을 못 자는'],
+    ans:1,
+    explain:'Febrile = 발열이 있는 (fever). 반대말은 afebrile(열이 없는)이에요. "Has been febrile since 2am"은 새벽 2시부터 열이 지속되고 있다는 뜻이에요.',
+    tip:'febrile = 열 있는 / afebrile = 열 없는 / low-grade fever = 37.5~38.3°C'
+  },
+  // ── 약물·처치 영어 ──
+  {
+    cat:'약물·처치',color:'#FEF7ED',txtColor:'#854F0B',
+    q:'"Administer 2L O2 via nasal cannula PRN" 에서 PRN 의 뜻은?',
+    context:'처방전을 보고 산소를 투여해야 하는 상황입니다.',
+    opts:['즉시 투여','필요할 때 투여','매시간 투여','의사 확인 후 투여'],
+    ans:1,
+    explain:'PRN = Pro Re Nata (라틴어) = "필요할 때". 즉 SpO2가 떨어지거나 환자가 호흡곤란을 호소할 때 투여해요. 이 경우 산소포화도 기준을 확인하고 투여 판단을 해요.',
+    tip:'PRN vs Scheduled: PRN=필요시 / q4h=4시간마다 / BID=하루 2번 / TID=하루 3번'
+  },
+  {
+    cat:'약물·처치',color:'#FEF7ED',txtColor:'#854F0B',
+    q:'"Hold metoprolol if HR is below 60." 에서 Hold 의 의미는?',
+    context:'차트 처방 확인 중 hold parameter를 읽고 있습니다.',
+    opts:['약을 천천히 투여하라','해당 조건이면 투여하지 말라','약을 따뜻하게 보관하라','의사에게 먼저 확인하라'],
+    ans:1,
+    explain:'"Hold" = 투여하지 말라(withhold). Hold parameter는 약을 투여하기 전 확인해야 할 조건이에요. HR이 60 미만이면 메토프롤롤을 투여하지 않고 의사에게 notify해요.',
+    tip:'Hold = 투여 보류 / Discontinue = 처방 중단 / Restart = 재개'
+  },
+  // ── Telemetry 영어 ──
+  {
+    cat:'Telemetry',color:'#F4E7E1',txtColor:'#8B4030',
+    q:'"The patient is in NSR with occasional PACs." 에서 NSR 의 뜻은?',
+    context:'Telemetry 유닛 인수인계 중 리듬 설명을 듣고 있습니다.',
+    opts:['비정상 동방 리듬','정상 동방 리듬','빠른 심실 리듬','불규칙한 심방 리듬'],
+    ans:1,
+    explain:'NSR = Normal Sinus Rhythm (정상 동방 리듬). PAC = Premature Atrial Contraction (조기 심방 수축). "NSR with occasional PACs"는 기본적으로 정상 리듬이지만 가끔 조기 심방 수축이 있다는 뜻이에요.',
+    tip:'NSR=정상 / A-fib=심방세동 / SVT=발작성 상실성 빈맥 / VT=심실빈맥'
+  },
+];
+
+let cqFiltered=[...quizDB];
+let cqIdx=0;
+let cqScore=0;
+let cqAnswered=false;
+let cqStreak=parseInt(localStorage.getItem('cq_streak')||'0');
+let cqLastDate=localStorage.getItem('cq_last_date')||'';
+let cqSelectedCat='전체';
+
+function initClinicalQuiz(){
+  // streak 계산
+  const today=new Date().toDateString();
+  if(cqLastDate===today){
+    // 오늘 이미 풀었어도 streak 유지
+  } else if(cqLastDate===new Date(Date.now()-86400000).toDateString()){
+    // 어제 풀었으면 streak 유지
+  } else if(cqLastDate!==''){
+    cqStreak=0;
+    localStorage.setItem('cq_streak','0');
+  }
+  document.getElementById('cq-streak-num').textContent=cqStreak;
+  renderCats();
+  startClinicalQuiz();
+}
+
+function renderCats(){
+  const cats=['전체',...new Set(quizDB.map(q=>q.cat))];
+  const el=document.getElementById('cq-cats');
+  el.innerHTML=cats.map(c=>`<button class="cq-cat ${c===cqSelectedCat?'on':''}" onclick="setCat('${c}')">${c}</button>`).join('');
+}
+
+function setCat(cat){
+  cqSelectedCat=cat;
+  cqFiltered=cat==='전체'?[...quizDB]:quizDB.filter(q=>q.cat===cat);
+  cqIdx=0;cqScore=0;
+  renderCats();
+  startClinicalQuiz();
+  document.getElementById('cq-result').style.display='none';
+  document.getElementById('cq-quiz-wrap').style.display='block';
+}
+
+function startClinicalQuiz(){
+  // shuffle
+  cqFiltered=cqFiltered.sort(()=>Math.random()-0.5);
+  cqIdx=0;cqScore=0;cqAnswered=false;
+  showQ();
+}
+
+function showQ(){
+  if(cqIdx>=cqFiltered.length){showResult();return;}
+  const q=cqFiltered[cqIdx];
+  cqAnswered=false;
+  document.getElementById('cq-prog-fill').style.width=Math.round(cqIdx/cqFiltered.length*100)+'%';
+  document.getElementById('cq-cat-pill').textContent=q.cat;
+  document.getElementById('cq-cat-pill').style.background=q.color;
+  document.getElementById('cq-cat-pill').style.color=q.txtColor;
+  document.getElementById('cq-qnum').textContent=(cqIdx+1)+' / '+cqFiltered.length;
+  document.getElementById('cq-question').textContent=q.q;
+  document.getElementById('cq-context').textContent=q.context;
+  document.getElementById('cq-opts').innerHTML=q.opts.map((o,i)=>
+    `<button class="cq-opt" onclick="answerQ(${i})" id="opt-${i}">
+      <div class="cq-opt-key">${String.fromCharCode(65+i)}</div>
+      <div class="cq-opt-text">${o}</div>
+    </button>`).join('');
+  document.getElementById('cq-explain').className='cq-explain';
+  document.getElementById('cq-next-btn').className='cq-next-btn';
+}
+
+function answerQ(sel){
+  if(cqAnswered)return;
+  cqAnswered=true;
+  const q=cqFiltered[cqIdx];
+  const isCorrect=sel===q.ans;
+  if(isCorrect)cqScore++;
+
+  document.querySelectorAll('.cq-opt').forEach((el,i)=>{
+    el.classList.add('disabled');
+    if(i===q.ans)el.classList.add('correct');
+    else if(i===sel&&!isCorrect)el.classList.add('wrong');
+  });
+
+  const expEl=document.getElementById('cq-explain');
+  expEl.className='cq-explain show';
+  document.getElementById('cq-explain-text').innerHTML=q.explain;
+  document.getElementById('cq-tip').textContent='💡 '+q.tip;
+  document.getElementById('cq-next-btn').className='cq-next-btn show';
+  document.getElementById('cq-next-btn').textContent=cqIdx+1<cqFiltered.length?'다음 문제 →':'결과 보기 →';
+}
+
+function nextQ(){
+  cqIdx++;
+  showQ();
+}
+
+function showResult(){
+  document.getElementById('cq-quiz-wrap').style.display='none';
+  const res=document.getElementById('cq-result');
+  res.style.display='block';
+  const pct=Math.round(cqScore/cqFiltered.length*100);
+  document.getElementById('cq-score-num').textContent=cqScore;
+  document.getElementById('cq-score-total').textContent='/'+cqFiltered.length;
+
+  let msg,sub;
+  if(pct>=80){msg='훌륭해요! 🌿';sub='미국 임상 영어 실력이 탄탄해요. 계속 유지하세요!';}
+  else if(pct>=60){msg='잘하고 있어요!';sub='조금 더 연습하면 완벽해질 거예요.';}
+  else{msg='같이 공부해봐요 💪';sub='틀린 문제 해설을 다시 읽어보고 도전해요!';}
+  document.getElementById('cq-result-msg').textContent=msg;
+  document.getElementById('cq-result-sub').textContent=sub;
+
+  trackEvent('clinical_quiz_complete',{score:cqScore,total:cqFiltered.length});
+  setTimeout(()=>openNewsletterPopup(),900);
+
+  // streak update
+  const today=new Date().toDateString();
+  if(cqLastDate!==today){
+    cqStreak++;
+    localStorage.setItem('cq_streak',cqStreak);
+    localStorage.setItem('cq_last_date',today);
+    document.getElementById('cq-streak-num').textContent=cqStreak;
+  }
+}
+
+function retryQuiz(){
+  document.getElementById('cq-result').style.display='none';
+  document.getElementById('cq-quiz-wrap').style.display='block';
+  startClinicalQuiz();
+}
+
+function shareQuizResult(){
+  const score=document.getElementById('cq-score-num').textContent;
+  const total=cqFiltered.length;
+  const text='오늘 The Root 임상 영어 퀴즈 '+score+'/'+total+' 맞혔어요! 🌿\nhttps://theroot-theta.vercel.app/';
+  navigator.clipboard.writeText(text).then(()=>showToast('결과가 복사됐어요! 공유해봐요 🌿'));
+}
+
+
+/* ── HERO QUIZ ── */
+const heroQuizData=[
+  {expr:'"He\'s been out of it."',opts:['퇴근했다','의식이 혼미하다','화가 났다','졸려한다'],ans:1,explain:'out of it = 의식이 혼미한, 정신이 없는 상태. 약 부작용이나 컨디션 저하 시 자주 써요.'},
+  {expr:'"The patient is diaphoretic."',opts:['호흡이 가쁜','창백한','땀이 많이 나는','어지러운'],ans:2,explain:'diaphoretic = 발한, 땀을 많이 흘리는 상태. 심근경색, 저혈당 등에서 나타나요.'},
+  {expr:'"She\'s febrile."',opts:['열이 있는','기침하는','통증 있는','졸린'],ans:0,explain:'febrile = 발열이 있는. afebrile = 열이 없는. 차트에 자주 등장해요.'},
+  {expr:'"The patient appears lethargic."',opts:['불안해하는','기운 없고 졸린','통증 심한','혼란스러운'],ans:1,explain:'lethargic = 무기력하고 졸린 상태. 의식 수준 표현 중 하나예요.'},
+];
+let heroQuizIdx=Math.floor(Math.random()*heroQuizData.length);
+let heroAnswered=false;
+
+function initHeroQuiz(){
+  const exprEl=document.getElementById('hero-expr');
+  if(!exprEl)return;
+  const q=heroQuizData[heroQuizIdx];
+  exprEl.textContent=q.expr;
+  const opts=document.getElementById('hero-opts');
+  if(opts) opts.innerHTML=q.opts.map((o,i)=>`<button class="hero-quiz-opt" onclick="heroQuizAns(${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join('');
+  heroAnswered=false;
+  const res=document.getElementById('hero-result');
+  if(res) res.style.display='none';
+}
+
+function heroQuizAns(sel){
+  if(heroAnswered)return;
+  heroAnswered=true;
+  const q=heroQuizData[heroQuizIdx];
+  document.querySelectorAll('.hero-quiz-opt').forEach((el,i)=>{
+    if(i===q.ans)el.classList.add('correct');
+    else if(i===sel&&sel!==q.ans)el.classList.add('wrong');
+    el.disabled=true;
+  });
+  const res=document.getElementById('hero-result');
+  if(res){
+    res.style.display='block';
+    res.style.background=sel===q.ans?'#E8F4ED':'#FEF7ED';
+    res.style.color=sel===q.ans?'#1F6351':'#854F0B';
+    res.textContent=(sel===q.ans?'✓ 정답! ':'✗ 오답. ')+q.explain;
+  }
+}
+
+
+
+/* ── ADAPT QUIZ (merged 10Q) ── */
+const adaptQs=[
+  {q:"미국에서 처음 모르는 사람이 갑자기 말을 걸어왔다. 어떻게 반응할 것 같아?",s:"미국 생활은 예상 밖의 small talk에서 시작될 때가 많아요.",opts:[{t:"오, 반갑네! 나도 대화 시작하지 뭐 😄",scores:[3,1,0,0,1]},{t:"어색하지만... 일단 웃으면서 대답은 해 🙂",scores:[1,2,1,0,1]},{t:"속으로는 당황, 겉으로는 뻣뻣하게 대응 😅",scores:[0,1,2,1,1]},{t:"왜 말을 거는 거지...? 경계 모드 발동 🤨",scores:[0,0,1,3,1]}]},
+  {q:"미국 마트에서 계산한 금액이 이상한 것 같아. 어떻게 할 거야?",s:"내 권리를 말하는 연습도 미국 생활 적응의 일부예요.",opts:[{t:"바로 직원 불러서 확인 요청! 내 돈 지켜야지 💪",scores:[3,1,0,0,1]},{t:"영어로 뭐라고 해야 할지 구글링 먼저 하고 말한다 🔍",scores:[1,3,0,0,1]},{t:"금액 차이가 크면 말하고, 조금이면 그냥 넘긴다",scores:[1,2,1,1,0]},{t:"그냥 나온다. 싸우기 귀찮아 😮‍💨",scores:[0,0,1,2,3]}]},
+  {q:"미국 직장 동료들이 퇴근 후 happy hour 가자고 한다. 근데 넌 피곤한 상태야.",s:"네트워킹과 에너지 관리 사이의 균형을 보는 질문이에요.",opts:[{t:"당연히 가지! 네트워킹이 곧 커리어야 🍻",scores:[3,1,0,0,0]},{t:"한 시간만 얼굴 비추고 먼저 나온다",scores:[2,2,0,0,1]},{t:"피곤하다고 솔직히 말하고 다음엔 꼭 간다고 한다",scores:[1,2,1,1,0]},{t:"어...오늘 선약이 있다고 둘러댄다 (없음)",scores:[0,0,1,2,3]}]},
+  {q:"미국에서 의사한테 갔더니 설명이 너무 빠르고 어려워. 어떻게 해?",s:"의료 상황에서는 모르면 다시 묻는 용기가 특히 중요해요.",opts:[{t:'"Sorry, can you slow down?" 바로 말한다',scores:[3,1,0,0,0]},{t:"그 자리에서 구글 번역기 꺼낸다 📱",scores:[1,3,0,0,1]},{t:"반쯤 이해한 채로 나와서 나중에 검색한다",scores:[0,1,2,1,2]},{t:"아무 말도 못하고 고개만 끄덕끄덕...",scores:[0,0,1,2,3]}]},
+  {q:"미국 생활비가 생각보다 2배는 더 비싸. 어떻게 대처할 거야?",s:"미국 생활은 수입보다 고정비와 선택이 더 크게 느껴질 때가 많아요.",opts:[{t:"수입 늘릴 방법 먼저 찾는다 (부업, 이직 등)",scores:[3,1,0,0,0]},{t:"지출 항목 하나하나 다 분석하고 줄인다 📊",scores:[1,3,1,0,0]},{t:"뭔가 해야 하는데... 일단 이번 달은 버티고 생각한다",scores:[0,1,2,1,1]},{t:"스트레스 받아서 쇼핑으로 해소한다 (악순환)",scores:[0,0,0,1,3]}]},
+  {q:'미국 친구 집에 초대받았는데 음식이 내 취향이 아니야. 친구가 "맛있어?" 묻는다면?',s:"솔직함과 배려 사이의 밸런스를 보는 질문이에요.",opts:[{t:'"Honestly, it\'s a bit different but I appreciate it!" 솔직하게',scores:[3,1,0,0,0]},{t:'"It\'s interesting!" 적당히 긍정적으로 넘어간다',scores:[2,2,0,0,0]},{t:'"So good!" 거짓말이지만 분위기상 어쩔 수 없다',scores:[1,1,1,2,1]},{t:"억지로 다 먹고 속으로 후회한다 😭",scores:[0,0,1,1,3]}]},
+  {q:"비자/영주권 관련 서류 작업이 산더미야. 어떻게 처리해?",s:"미국 생활은 결국 서류와 시스템을 다루는 힘이 필요해요.",opts:[{t:"이민 변호사 고용, 전문가한테 맡기는 게 최고야",scores:[3,1,0,0,0]},{t:"관련 커뮤니티, 포럼 다 뒤져서 혼자 해결한다 🔍",scores:[1,3,1,0,0]},{t:"아는 한국인 선배한테 물어본다",scores:[1,2,1,1,0]},{t:"마감 직전까지 미루다가 허겁지겁 한다",scores:[0,0,0,1,3]}]},
+  {q:"미국 직장에서 내 아이디어를 동료가 자기 것처럼 발표했어. 어떻게 할 거야?",s:"자기주장과 기록 문화에 얼마나 익숙한지 보는 질문이에요.",opts:[{t:'그 자리에서 바로 "Actually, that was my idea" 말한다 🗣️',scores:[3,0,0,0,0]},{t:"나중에 1:1로 조용히 이야기한다",scores:[2,2,0,0,0]},{t:"그냥 넘어가지만, 다음엔 email로 기록 남긴다",scores:[1,2,1,1,0]},{t:"억울하지만 참는다... 괜히 분위기 망칠까 봐",scores:[0,0,1,2,3]}]},
+  {q:"미국에서 처음 운전을 해야 하는 상황이야. 한국이랑 달라서 긴장된다.",s:"낯선 시스템을 어떻게 익히는지 보는 질문이에요.",opts:[{t:"유튜브 미리 보고, 연습 충분히 하고 도전! 🚗",scores:[3,2,0,0,0]},{t:"미국 운전법 공부하고 처음엔 익숙한 루트만 간다",scores:[1,3,1,0,0]},{t:"Uber/Lyft 쓰다가 어쩔 수 없을 때 운전한다",scores:[1,1,2,1,0]},{t:"두렵다. 최대한 피한다. 차 없이 살 방법을 찾겠다",scores:[0,0,1,2,3]}]},
+  {q:"미국에서 힘든 날, 외롭고 지칠 때 어떻게 버텨?",s:"외로움을 다루는 방식은 장기 적응력과 연결돼요.",opts:[{t:"미국 친구/동료한테 먼저 연락한다. 현지 네트워크 키워야지",scores:[3,1,0,0,0]},{t:"한국 가족/친구랑 통화하면서 충전한다 📞",scores:[2,2,1,0,0]},{t:"혼자 있는 걸 즐기면서 취미로 극복한다",scores:[1,2,2,1,0]},{t:"한인 커뮤니티에서만 위안을 찾는다 (코리아타운...)",scores:[0,1,2,2,1]}]}
+];
+const adaptResults=[
+  {emoji:"🦅",title:"이미 절반은 미국인이야",subtitle:"TYPE 01 — 미국형 인간",desc:"적극적이고 자기주장 확실하고 변화를 즐기는 타입. 미국 문화와 궁합이 좋아서 적응 속도가 빠를 가능성이 높아요.",bars:[['적응력',95],['소통력',90],['자기주장',88],['현지화',85]],advice:["네트워킹 능력은 미국 커리어에서 큰 무기예요.","자기주장이 분명한 점은 미국 직장에서 장점이 될 수 있어요.","항상 ON 상태로 살면 번아웃이 올 수 있으니 에너지 관리도 필요해요."]},
+  {emoji:"🗺️",title:"준비된 자만이 살아남는다",subtitle:"TYPE 02 — 전략형 생존자",desc:"감정보다 정보로 움직이는 타입. 적응이 아주 빠르진 않아도, 한 번 배운 것은 자기 시스템으로 만드는 힘이 있어요.",bars:[['적응력',78],['정보력',95],['실행력',65],['유연성',60]],advice:["서류, 세금, 비자처럼 복잡한 영역에서 꼼꼼함이 빛나요.","완벽하게 준비되길 기다리다 기회를 놓치지 않도록 작게라도 시작해보세요.","예상 밖 상황에 대한 즉흥 대처 연습이 도움이 돼요."]},
+  {emoji:"🌱",title:"시간이 걸리지만 결국 핀다",subtitle:"TYPE 03 — 느린 개화형",desc:"처음엔 에너지가 많이 들 수 있지만, 한 번 자리 잡으면 오래 버티는 타입이에요. 초반 6개월~1년을 잘 넘기는 전략이 중요해요.",bars:[['적응력',50],['안정성',80],['끈기',72],['유연성',45]],advice:["안정적인 루틴을 만들면 적응 속도가 빨라질 수 있어요.","한인 커뮤니티와 현지 커뮤니티를 균형 있게 활용해보세요.","영어 소통 불편함을 조금씩 자주 마주치는 연습이 필요해요."]},
+  {emoji:"🏯",title:"미국에 살지만 한국처럼 산다",subtitle:"TYPE 04 — 한인타운 생존형",desc:"한인 커뮤니티 안에서 안정감을 얻는 타입. 나쁜 건 아니지만, 미국 주류 시스템과의 연결을 조금씩 넓히면 생활 반경이 훨씬 넓어져요.",bars:[['적응력',35],['공동체력',85],['독립성',30],['현지화',20]],advice:["한인 커뮤니티는 든든한 자산이에요.","다만 영어와 현지 시스템을 피하기만 하면 커리어 선택지가 좁아질 수 있어요.","올해 목표를 ‘미국인 친구/동료와 편하게 대화하기’로 잡아보세요."]},
+  {emoji:"😮‍💨",title:"미국이 체질에 안 맞을 수도 있어",subtitle:"TYPE 05 — 빠른 귀국 예비군",desc:"회피하고 참는 방식이 익숙하다면 미국 생활이 더 버겁게 느껴질 수 있어요. 하지만 이 결과는 포기 신호가 아니라 준비 신호예요.",bars:[['적응력',20],['자기주장',15],['유연성',30],['현지화',10]],advice:["자기 의사 표현 훈련이 가장 시급해요. 영어보다 더 중요할 수 있어요.","작은 상황부터 ‘Can you explain that again?’처럼 말하는 연습을 해보세요.","천천히 적응하면 돼요. 준비 없이 혼자 버티는 것만 피하면 됩니다."]}
+];
+let adaptIdx=0,adaptAnswers=[],adaptTotals=[0,0,0,0,0],lastAdaptResult=null;
+function initAdaptQuiz(){
+  adaptIdx=0;adaptAnswers=[];adaptTotals=[0,0,0,0,0];lastAdaptResult=null;
+  const card=document.getElementById('adapt-card');
+  const result=document.getElementById('adapt-result');
+  if(!card||!result)return;
+  card.style.display='block';result.style.display='none';
+  renderAdaptQ();trackEvent('adapt_quiz_start');
+}
+function renderAdaptQ(){
+  const q=adaptQs[adaptIdx];
+  document.getElementById('adapt-prog').style.width=Math.round((adaptIdx+1)/adaptQs.length*100)+'%';
+  document.getElementById('adapt-num').textContent='Q'+(adaptIdx+1)+' of '+adaptQs.length;
+  document.getElementById('adapt-question').textContent=q.q;
+  document.getElementById('adapt-sub').textContent=q.s;
+  document.getElementById('adapt-opts').innerHTML=q.opts.map((o,i)=>`<button class="qbtn yes" onclick="answerAdapt(${i})"><div class="qbtn-icon">${i+1}</div><div><div class="qbtn-lbl">${o.t}</div></div></button>`).join('');
+}
+function answerAdapt(optIdx){
+  adaptAnswers[adaptIdx]=optIdx;
+  if(adaptIdx>=adaptQs.length-1){showAdaptResult();return;}
+  adaptIdx++;renderAdaptQ();
+}
+function pickAdaptResult(){
+  adaptTotals=[0,0,0,0,0];
+  adaptAnswers.forEach((a,qi)=>{adaptQs[qi].opts[a].scores.forEach((s,i)=>adaptTotals[i]+=s);});
+  return adaptResults[adaptTotals.indexOf(Math.max(...adaptTotals))];
+}
+function showAdaptResult(){
+  lastAdaptResult=pickAdaptResult();
+  document.getElementById('adapt-card').style.display='none';
+  const box=document.getElementById('adapt-result');
+  box.style.display='block';
+  const bars=lastAdaptResult.bars.map(b=>`<div style="display:flex;align-items:center;gap:10px;margin-bottom:9px;"><div style="width:72px;font-size:12px;color:var(--soil);opacity:.75;">${b[0]}</div><div style="flex:1;height:6px;background:var(--sand);border-radius:4px;overflow:hidden;"><div style="height:100%;width:${b[1]}%;background:var(--moss);border-radius:4px;"></div></div><div style="font-size:12px;color:var(--soil);opacity:.55;width:30px;text-align:right;">${b[1]}</div></div>`).join('');
+  const advice=lastAdaptResult.advice.map((t,i)=>`<div class="nxt-item"><div class="nxt-num">${i+1}</div><div><div class="nxt-t">${t}</div></div></div>`).join('');
+  box.innerHTML=`<div class="res-card"><span class="res-badge bf">Adjustment Result</span><div style="font-size:34px;margin-bottom:8px;">${lastAdaptResult.emoji}</div><div class="res-stage">${lastAdaptResult.title}</div><div style="font-size:13px;font-weight:500;color:var(--clay);margin-bottom:12px;">${lastAdaptResult.subtitle}</div><div class="res-desc">${lastAdaptResult.desc}</div><div style="border-top:0.5px solid var(--sand);padding-top:1.3rem;margin-bottom:1.3rem;"><div class="nxt-lbl">항목별 점수</div>${bars}</div><div class="nxt-steps"><div class="nxt-lbl">Jennifer의 솔직한 조언</div>${advice}</div><div class="jen-note"><div class="jen-av">JL</div><div class="jen-msg"><strong>Jennifer의 메모 —</strong> 미국 적응은 영어만의 문제가 아니에요. 질문하는 힘, 다시 시작하는 힘, 그리고 나를 돌보는 루틴이 진짜 뿌리가 돼요.</div></div><div class="res-acts"><button class="btn-main" onclick="shareAdaptResult()">결과 공유하기 🌿</button><button class="btn-teal" onclick="showNewsletterPopup();trackEvent('newsletter_adapt_result_click')">무료 뉴스레터 받아보기 →</button><button class="btn-ghost" onclick="initAdaptQuiz()">다시 테스트하기 →</button></div></div>`;
+  trackEvent('adapt_quiz_complete');
+}
+function shareAdaptResult(){
+  if(!lastAdaptResult)return;
+  const text=`나는 ${lastAdaptResult.title} (${lastAdaptResult.subtitle}) 🌿\n\nThe Root에서 미국 적응 테스트 해보기\n${SITE_URL}`;
+  if(navigator.share){navigator.share({title:'나의 미국 생존 유형 — The Root',text,url:SITE_URL}).catch(()=>{});}
+  else{navigator.clipboard.writeText(text).then(()=>showToast('결과가 복사됐어요! 공유해봐요 🌿'));}
+}
+
 /* ── INIT ── */
-renderSD('all');
 initGR();
 initLanding();
 loadSavedProgress();
-new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting && document.getElementById('qc').innerHTML===''){
-      rQ(0);
-    }
-  });
-},{threshold:0.3}).observe(document.getElementById('quiz-sec'));
+initHeroQuiz();
+scheduleNewsletterPopup();
 </script>
 </body>
 </html>
