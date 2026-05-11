@@ -658,7 +658,7 @@ footer a{color:#C6DDD3;text-decoration:none;}
       <div class="home-nl-icon">✉️</div>
       <div class="home-nl-title">매주 미국 병원 영어와<br>간호사 여정 업데이트 받기 💌</div>
       <div class="home-nl-sub">임상 영어 표현, Visa Bulletin, NCLEX/비자스크린 팁, 그리고 캘리포니아 RN Jennifer의 현실적인 미국 병원 이야기를 보내드려요.</div>
-      <a href="https://jenniferminjalee.substack.com/" target="_blank" class="home-nl-btn" onclick="trackEvent('newsletter_home_click')">무료 뉴스레터 받아보기 →</a>
+      <a href="https://jenniferminjalee.substack.com/" target="_blank" class="home-nl-btn" onclick="trackEvent('newsletter_home_click');if(typeof gtag!=='undefined')gtag('event','newsletter_click',{location:'home'});">무료 뉴스레터 받아보기 →</a>
     </div>
 
     <!-- Jennifer 소개 -->
@@ -916,7 +916,7 @@ footer a{color:#C6DDD3;text-decoration:none;}
     <button class="nl-close" onclick="closeNewsletterPopup()" aria-label="Close">×</button>
     <div class="nl-kicker">The Root Letter</div>
     <div class="nl-title">미국 병원 영어와<br>간호사 여정 업데이트.</div>
-    <div class="nl-desc">뉴스레터에서는 임상 영어, 이민문호, NCLEX/비자스크린 팁, 그리고 Jennifer의 현실적인 미국 병원 이야기를 매주 정리해드려요.</div>
+    <div class="nl-desc">The Root 뉴스레터에서는 임상 영어, 이민문호, NCLEX/비자스크린 팁, 그리고 Jennifer의 현실적인 미국 병원 이야기를 매주 정리해드려요.</div>
     <div class="nl-list">
       <div>🗣️ 실제 병원에서 쓰는 임상 영어 표현</div>
       <div>📌 NCLEX · VisaScreen · 영주권 여정 팁</div>
@@ -935,19 +935,15 @@ footer a{color:#C6DDD3;text-decoration:none;}
 
 <script>
 /* ── PAGE ROUTING ── */
-function showPage(id, pushHistory=true){
+function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.gnav-tab').forEach(t=>t.classList.remove('on'));
   document.getElementById('page-'+id).classList.add('on');
   const tabs={home:'tab-home',journey:'tab-home',tracker:'tab-tracker',quiz:'tab-quiz',adapt:'tab-adapt',landing:'tab-landing',bulletin:'tab-bulletin'};
   document.getElementById(tabs[id])?.classList.add('on');
   window.scrollTo({top:0,behavior:'smooth'});
-  if(pushHistory) history.pushState({page:id}, '', '#'+id);
+  if(typeof gtag!=='undefined') gtag('event','tab_view',{tab_name:id});
 }
-window.addEventListener('popstate', function(e){
-  const id = e.state?.page || 'home';
-  showPage(id, false);
-});
 
 /* ── QUIZ DATA ── */
 const Qs=[
@@ -978,12 +974,12 @@ const Rs={
 };
 const stSel={'California':{note:'교육과정 까다로움 — 모성/노인 필수'},'Texas':{note:'빠른 처리, Compact 주'},'New York':{note:'영어시험 없이 지원 가능 — 가장 추천'},'Florida':{note:'Compact, 처리 빠름'},'Washington':{note:'Compact, Seattle 수요'},'Illinois':{note:'CGFNS 전용, SSN 불필요'}};
 
-let cur=0,quizHistory=[];
-function startJourneyQuiz(){showPage('journey');quizHistory=[];rQ(0);trackEvent('journey_quiz_start');}
+let cur=0,history=[];
+function startJourneyQuiz(){showPage('journey');history=[];rQ(0);trackEvent('journey_quiz_start');}
 function rQ(idx){
   cur=idx;updP(idx);
   const q=Qs[idx];
-  const backBtn=quizHistory.length>0?`<button class="q-nav-btn" onclick="goBack()">← 이전으로 돌아가기</button>`:'';
+  const backBtn=history.length>0?`<button class="q-nav-btn" onclick="goBack()">← 이전으로 돌아가기</button>`:'';
 
   if(q.multi){
     document.getElementById('qc').innerHTML=`<div class="q-card">
@@ -1029,24 +1025,24 @@ function rQ(idx){
 }
 function ans(qId,isYes){
   const q=Qs.find(x=>x.id===qId);
-  quizHistory.push(cur);setD(cur,'done');
+  history.push(cur);setD(cur,'done');
   if(isYes){if(q.yes.r)showR(q.yes.r);else rQ(Qs.findIndex(x=>x.id===q.yes.next));}
   else{if(q.no.r)showR(q.no.r);else rQ(Qs.findIndex(x=>x.id===q.no.next));}
 }
 
 function ansMulti(value){
-  quizHistory.push(cur);setD(cur,'done');
+  history.push(cur);setD(cur,'done');
   if(value==='both'){rQ(Qs.findIndex(x=>x.id==='english'));}
   else if(value==='nclex'){showR('no_clinical');}
   else if(value==='clinical'){showR('needs_nclex');}
   else{showR('needs_nclex');}
 }
 function goBack(){
-  if(!quizHistory.length)return;
-  const p=quizHistory.pop();
+  if(!history.length)return;
+  const p=history.pop();
   cur=p;updP(p);
   const q=Qs[p];
-  const backBtn=quizHistory.length>0?`<button class="q-nav-btn" onclick="goBack()">← 이전으로 돌아가기</button>`:'';
+  const backBtn=history.length>0?`<button class="q-nav-btn" onclick="goBack()">← 이전으로 돌아가기</button>`:'';
   if(q.multi){
     document.getElementById('qc').innerHTML=`<div class="q-card"><div class="q-num">${q.n}</div><div class="q-txt">${q.t}</div><div class="q-sub">${q.s}</div><div class="q-opts">${q.options.map(opt=>`<button class="qbtn yes" onclick="ansMulti('${opt.value}')"><div class="qbtn-icon">→</div><div><div class="qbtn-lbl">${opt.label}</div><div class="qbtn-desc">${opt.desc}</div></div></button>`).join('')}</div></div><div class="q-nav">${backBtn}<button class="q-nav-btn" onclick="resetQ()">처음부터 다시 하기</button></div>`;
   } else {
@@ -1068,12 +1064,12 @@ function showR(key){
   trackEvent('journey_quiz_complete',{result:key});
   updP(Qs.length);
   const stepsH=r.steps.map((s,i)=>`<div class="nxt-item"><div class="nxt-num">${i+1}</div><div><div class="nxt-t">${s.t}</div><div class="nxt-d">${s.d}</div></div></div>`).join('');
-  const uwH=r.uworld?`<div class="uw-banner"><div class="uw-ico">UW</div><div style="flex:1"><div class="uw-ttl">UWorld NCLEX-RN</div><div class="uw-sub">Jennifer Affiliate link — NCLEX 준비에 많이 활용되는 대표 문제은행</div></div><a href="http://tidd.ly/3OW24vo" class="uw-link" target="_blank">자세히 보기 →</a></div>`:'';
+  const uwH=r.uworld?`<div class="uw-banner"><div class="uw-ico">UW</div><div style="flex:1"><div class="uw-ttl">UWorld NCLEX-RN</div><div class="uw-sub">Jennifer Affiliate link — NCLEX 준비에 많이 활용되는 대표 문제은행</div></div><a href="http://tidd.ly/3OW24vo" class="uw-link" target="_blank" onclick="if(typeof gtag!=='undefined')gtag('event','affiliate_click',{link_name:'uworld'});">자세히 보기 →</a></div>`:'';
   const agencyH=(key==='needs_english'||key==='needs_visascreen')?`<div style="display:flex;align-items:flex-start;gap:12px;padding:16px;background:#F3EFE6;border-radius:3px;margin-bottom:8px;">
   <div style="font-size:14px;flex-shrink:0;">📋</div>
   <div style="flex:1;">
     <div style="font-size:14px;font-weight:500;color:var(--bark);margin-bottom:8px;">에이전시 리스트가 필요하신가요?</div>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc8yHmiTCbCp7oFTKG-EU7FSi_EXrh99Q39tiZ8OOLhk64BKg/viewform" target="_blank" style="display:inline-block;font-size:13px;color:var(--clay);font-weight:500;text-decoration:none;border-bottom:1px solid var(--clay);margin-bottom:8px;">낫이팅게일샘의 정리 자료 보기 →</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdJgaMlCAl-DALxLgWT2k-IAg8Jhwq31QdWn8JyH-Fta_ZF6g/viewform?usp=send_form" target="_blank" style="display:inline-block;font-size:13px;color:var(--clay);font-weight:500;text-decoration:none;border-bottom:1px solid var(--clay);margin-bottom:8px;" onclick="if(typeof gtag!=='undefined')gtag('event','affiliate_click',{link_name:'noteatingale'});">낫이팅게일샘의 정리 자료 보기 →</a>
     <div style="font-size:13px;color:var(--soil);opacity:0.5;"><a href="https://www.instagram.com/noteatingale" target="_blank" style="color:var(--soil);text-decoration:none;"> 자료제공 @noteatingale</a>· 유료 자료 · 신청 페이지 </div>
   </div>
 </div>`:'';
@@ -1090,7 +1086,7 @@ function updP(step){
   for(let i=0;i<=Qs.length;i++){const d=document.getElementById('d'+i);if(!d)continue;d.className='sdot'+(i<step?' done':i===step?' active':'');const l=document.getElementById('l'+i);if(l)l.className='sline'+(i<step?' done':'');}
 }
 function setD(i,c){const d=document.getElementById('d'+i);if(d)d.className='sdot '+c;}
-function resetQ(){quizHistory=[];cur=0;updP(0);rQ(0);window.scrollTo({top:0,behavior:'smooth'});}
+function resetQ(){history=[];cur=0;updP(0);rQ(0);window.scrollTo({top:0,behavior:'smooth'});}
 
 /* ── STATE DATA ── */
 const SD=[
@@ -1503,15 +1499,6 @@ const quizDB=[
     explain:'Febrile = 발열이 있는 (fever). 반대말은 afebrile(열이 없는)이에요. "Has been febrile since 2am"은 새벽 2시부터 열이 지속되고 있다는 뜻이에요.',
     tip:'febrile = 열 있는 / afebrile = 열 없는 / low-grade fever = 37.5~38.3°C'
   },
-  {
-    cat:'인수인계',color:'#E8F0FB',txtColor:'#185FA5',
-    q:'"He is been out of it."의 뜻은?',
-    context:'쉬프트 중 환자 상태를 동료에게 전달하는 상황.',
-    opts:['퇴근했다','의식이 혼미하다','화가 났다','졸려한다'],
-    ans:1,
-    explain:'out of it = 의식이 혼미한, 정신이 없는 상태예요. 약 부작용이나 컨디션 저하 시 동료들 사이에서 자주 쓰는 표현이에요. 차트보다 구두 인계에서 자주 나와요.',
-    tip:'out of it ≈ confused · lethargic = 무기력하고 졸린 · altered = 의식 변화'
-  },
   // ── 약물·처치 영어 ──
   {
     cat:'약물·처치',color:'#FEF7ED',txtColor:'#854F0B',
@@ -1583,7 +1570,7 @@ function setCat(cat){
   document.getElementById('cq-quiz-wrap').style.display='block';
 }
 
-function startClinicalQuiz(){
+function startClinicalQuiz(){if(typeof gtag!=='undefined')gtag('event','quiz_start',{quiz_name:'clinical'});
   // shuffle
   cqFiltered=cqFiltered.sort(()=>Math.random()-0.5);
   cqIdx=0;cqScore=0;cqAnswered=false;
