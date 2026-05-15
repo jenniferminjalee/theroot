@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -61,4 +61,4 @@ Respond ONLY in this exact JSON format, no extra text, no markdown:
     console.error('Quiz generation error:', error);
     res.status(500).json({ error: 'Failed to generate question' });
   }
-}
+};
