@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>임상 영어 퀴즈 — The Root</title>
+<meta name="description" content="미국 병원에서 실제로 쓰이는 임상 영어를 퀴즈로 배워보세요. SBAR 소통, 응급 상황, 환자 교육 영어까지 — The Root by Jennifer Minja Lee">
+<meta property="og:title" content="임상 영어 퀴즈 — The Root">
+<meta property="og:description" content="미국 간호사가 꼭 알아야 할 임상 영어를 매번 새로운 문제로 연습해요.">
+<meta property="og:url" content="https://theroot-theta.vercel.app/quiz">
+<meta property="og:site_name" content="The Root">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --moss: #1D6B4A;
+  --moss-hover: #175a3e;
+  --moss-light: #EBF5EF;
+  --bark: #5C3D2E;
+  --cream: #FAF7F2;
+  --cream-dark: #F0EDE7;
+  --text: #1C1C1A;
+  --text-mid: #4a4a46;
+  --text-muted: #8a8880;
+  --border: rgba(28,107,74,0.15);
+  --border-light: rgba(28,28,26,0.08);
+  --correct-bg: #EBF5EF;
+  --correct-text: #145c3a;
+  --wrong-bg: #FDF0EF;
+  --wrong-text: #9B2C2C;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans: 'DM Sans', -apple-system, sans-serif;
+}
+
+body {
+  font-family: var(--sans);
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ── NAV ── */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid var(--border-light);
+  background: var(--cream);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 20px;
+  color: var(--moss);
+  text-decoration: none;
+  letter-spacing: -0.3px;
+}
+
+.nav-logo span { color: var(--bark); }
+
+.nav-back {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.2s;
+}
+.nav-back:hover { color: var(--moss); }
+
+/* ── HERO ── */
+.hero {
+  text-align: center;
+  padding: 3rem 1.5rem 2.5rem;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.hero-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--moss);
+  background: var(--moss-light);
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(26px, 5vw, 38px);
+  color: var(--text);
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+}
+
+.hero p {
+  font-size: 15px;
+  color: var(--text-mid);
+  line-height: 1.65;
+}
+
+/* ── MAIN LAYOUT ── */
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 1.25rem 5rem;
+}
+
+/* ── CATEGORY PILLS ── */
+.cat-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+.cat-pill {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 15px;
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  background: white;
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.cat-pill:hover { border-color: var(--moss); color: var(--moss); }
+.cat-pill.active {
+  background: var(--moss);
+  border-color: var(--moss);
+  color: white;
+}
+
+/* ── STREAK ── */
+.streak-wrap {
+  display: flex;
+  gap: 7px;
+  justify-content: center;
+  margin-bottom: 1.75rem;
+  min-height: 14px;
+}
+
+.s-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--cream-dark);
+  transition: background 0.3s;
+}
+.s-dot.hit { background: var(--moss); }
+.s-dot.miss { background: #E05252; }
+
+/* ── QUIZ CARD ── */
+.card {
+  background: white;
+  border-radius: 18px;
+  border: 1px solid var(--border-light);
+  padding: 2rem;
+  margin-bottom: 1rem;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.cat-badge {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--moss);
+  background: var(--moss-light);
+  padding: 4px 11px;
+  border-radius: 20px;
+}
+
+.q-num {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.q-text {
+  font-family: var(--serif);
+  font-size: 21px;
+  color: var(--text);
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.q-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+/* ── OPTIONS ── */
+.options { display: flex; flex-direction: column; gap: 10px; }
+
+.opt {
+  font-family: var(--sans);
+  font-size: 14.5px;
+  text-align: left;
+  padding: 13px 16px;
+  border: 1px solid var(--border-light);
+  border-radius: 11px;
+  background: white;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.16s;
+  line-height: 1.5;
+  width: 100%;
+}
+
+.opt:hover:not(:disabled) {
+  border-color: var(--moss);
+  background: var(--moss-light);
+}
+
+.opt.correct {
+  border-color: var(--moss);
+  background: var(--correct-bg);
+  color: var(--correct-text);
+  font-weight: 500;
+}
+
+.opt.wrong {
+  border-color: #E05252;
+  background: var(--wrong-bg);
+  color: var(--wrong-text);
+}
+
+.opt:disabled { cursor: default; }
+
+/* ── FEEDBACK ── */
+.feedback {
+  margin-top: 1.25rem;
+  padding: 14px 16px;
+  border-radius: 11px;
+  font-size: 14px;
+  line-height: 1.65;
+  display: none;
+}
+
+.feedback.show { display: block; }
+.feedback.correct { background: var(--correct-bg); border-left: 3px solid var(--moss); color: var(--correct-text); }
+.feedback.wrong { background: var(--wrong-bg); border-left: 3px solid #E05252; color: var(--wrong-text); }
+
+.feedback-lbl { font-weight: 600; margin-bottom: 5px; font-size: 13px; letter-spacing: 0.3px; }
+
+/* ── BOTTOM ROW ── */
+.bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem 0;
+}
+
+.score-txt {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.score-txt strong { color: var(--moss); font-weight: 600; }
+
+.next-btn {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 10px 24px;
+  background: var(--moss);
+  color: white;
+  border: none;
+  border-radius: 11px;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.next-btn.show { opacity: 1; pointer-events: all; }
+.next-btn:hover { background: var(--moss-hover); }
+
+/* ── LOADING ── */
+.loading {
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.spinner {
+  width: 30px; height: 30px;
+  border: 2px solid var(--moss-light);
+  border-top-color: var(--moss);
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.loading-txt {
+  font-family: var(--serif);
+  font-size: 17px;
+  color: var(--moss);
+}
+
+.loading-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+/* ── ERROR ── */
+.error-box {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--wrong-text);
+}
+
+.error-box button {
+  margin-top: 1rem;
+  font-family: var(--sans);
+  font-size: 13px;
+  padding: 9px 20px;
+  border: 1px solid #E05252;
+  border-radius: 10px;
+  background: none;
+  color: #E05252;
+  cursor: pointer;
+}
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 12px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-light);
+  margin-top: 3rem;
+}
+
+footer a { color: var(--moss); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+@media (max-width: 480px) {
+  nav { padding: 1rem 1.25rem; }
+  .hero { padding: 2rem 1.25rem 1.5rem; }
+  .card { padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">the root<span>.</span></a>
+  <a class="nav-back" href="/">← 홈으로</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag">Clinical English</div>
+  <h1>임상 영어 퀴즈</h1>
+  <p>미국 병원 현장에서 쓰이는 진짜 영어를 연습해요.<br>매번 새로운 문제가 생성돼요.</p>
+</section>
+
+<main>
+  <div class="cat-row">
+    <button class="cat-pill active" data-cat="all" onclick="setCategory('all', this)">All topics</button>
+    <button class="cat-pill" data-cat="sbar" onclick="setCategory('sbar', this)">SBAR 소통</button>
+    <button class="cat-pill" data-cat="teaching" onclick="setCategory('teaching', this)">Patient teaching</button>
+    <button class="cat-pill" data-cat="charting" onclick="setCategory('charting', this)">약어 & 차팅</button>
+    <button class="cat-pill" data-cat="emergency" onclick="setCategory('emergency', this)">응급 상황</button>
+    <button class="cat-pill" data-cat="slang" onclick="setCategory('slang', this)">환자 슬랭</button>
+  </div>
+
+  <div class="streak-wrap" id="streak"></div>
+
+  <div id="area"></div>
+
+  <div class="bottom-row">
+    <div class="score-txt">맞은 문제: <strong id="sc">0</strong> / <span id="tot">0</span></div>
+    <button class="next-btn" id="nextBtn" onclick="load()">다음 문제 →</button>
+  </div>
+</main>
+
+<footer>
+  © 2026 Jennifer Minja Lee &nbsp;·&nbsp; <a href="/">The Root</a> &nbsp;·&nbsp; All rights reserved
+</footer>
+
+<script>
+let cat = 'all', score = 0, total = 0, history = [], answered = false;
+
+function setCategory(c, btn) {
+  cat = c;
+  document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  score = 0; total = 0; history = []; answered = false;
+  document.getElementById('sc').textContent = 0;
+  document.getElementById('tot').textContent = 0;
+  document.getElementById('nextBtn').classList.remove('show');
+  renderStreak();
+  load();
+}
+
+function renderStreak() {
+  document.getElementById('streak').innerHTML = history
+    .map(h => `<div class="s-dot ${h ? 'hit' : 'miss'}"></div>`).join('');
+}
+
+async function load() {
+  answered = false;
+  document.getElementById('nextBtn').classList.remove('show');
+  document.getElementById('area').innerHTML = `
+    <div class="loading">
+      <div class="spinner"></div>
+      <div class="loading-txt">문제 생성 중...</div>
+      <div class="loading-sub">AI가 새 임상 영어 문제를 만들고 있어요</div>
+    </div>`;
+
+  try {
+    const res = await fetch('/api/quiz', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ category: cat })
+    });
+
+    if (!res.ok) throw new Error('API error');
+    const q = await res.json();
+    render(q);
+  } catch (e) {
+    document.getElementById('area').innerHTML = `
+      <div class="error-box">
+        <p>문제를 불러오지 못했어요. 잠시 후 다시 시도해주세요.</p>
+        <button onclick="load()">다시 시도</button>
+      </div>`;
+  }
+}
+
+function render(q) {
+  total++;
+  document.getElementById('tot').textContent = total;
+
+  document.getElementById('area').innerHTML = `
+    <div class="card">
+      <div class="card-top">
+        <span class="cat-badge">${q.category}</span>
+        <span class="q-num">#${total}</span>
+      </div>
+      <div class="q-text">${q.question}</div>
+      ${q.korean_hint ? `<div class="q-hint">${q.korean_hint}</div>` : ''}
+      <div class="options" id="opts">
+        ${q.choices.map((c, i) => `
+          <button class="opt" onclick="pick(${i}, ${q.correct_index}, this)">${c}</button>
+        `).join('')}
+      </div>
+      <div class="feedback" id="fb">
+        <div class="feedback-lbl" id="fb-lbl"></div>
+        <div id="fb-body"></div>
+      </div>
+    </div>`;
+
+  window._currentQ = q;
+}
+
+function pick(chosen, correct, btn) {
+  if (answered) return;
+  answered = true;
+
+  const opts = document.querySelectorAll('.opt');
+  opts.forEach((o, i) => {
+    o.disabled = true;
+    if (i === correct) o.classList.add('correct');
+    if (i === chosen && chosen !== correct) o.classList.add('wrong');
+  });
+
+  const isRight = chosen === correct;
+  if (isRight) score++;
+  history.push(isRight);
+
+  document.getElementById('sc').textContent = score;
+  renderStreak();
+
+  const q = window._currentQ;
+  const fb = document.getElementById('fb');
+  fb.className = `feedback show ${isRight ? 'correct' : 'wrong'}`;
+  document.getElementById('fb-lbl').textContent = isRight ? '✓ Correct!' : `✗ 정답: ${q.choices[correct]}`;
+  document.getElementById('fb-body').textContent = q.explanation;
+
+  document.getElementById('nextBtn').classList.add('show');
+}
+
+load();
+</script>
+</body>
+</html>
