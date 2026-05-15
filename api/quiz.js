@@ -3,37 +3,19 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { category } = req.body;
+  const { category } = req.body || {};
 
-  const catLabels = {
-    all: 'Pick a random category from: SBAR communication, patient teaching, nursing abbreviations & charting, emergency situations, or patient symptom slang.',
-    sbar: 'Category: SBAR communication with doctors and colleagues',
-    teaching: 'Category: Patient teaching and discharge education',
-    charting: 'Category: Nursing abbreviations and charting English',
-    emergency: 'Category: Emergency and rapid response situations',
-    slang: 'Category: Patient symptom slang and informal expressions'
+  const catMap = {
+    sbar: 'SBAR communication with doctors and colleagues',
+    teaching: 'Patient teaching and discharge education',
+    charting: 'Nursing abbreviations and charting English',
+    emergency: 'Emergency and rapid response situations',
+    slang: 'Patient symptom slang and informal expressions'
   };
 
-  const systemPrompt = `You are a clinical English quiz generator for Korean nurses working in the US. Generate ONE multiple-choice question.
+  const catInstruction = catMap[category] || 'Pick any one clinical English category randomly';
 
-${catLabels[category] || catLabels.all}
-
-Rules:
-- Question must test real, practical clinical English used in US hospitals
-- 4 answer choices, exactly one correct
-- Include a brief Korean hint/context (1 sentence) to help understand the situation
-- Explanation should be educational and practical (2-3 sentences max)
-- Vary difficulty across requests: easy vocab, moderate phrases, harder idiomatic expressions
-
-Respond ONLY in this exact JSON format, no extra text, no markdown:
-{
-  "category": "SBAR소통|Patient Teaching|약어&차팅|응급상황|환자슬랭",
-  "question": "...",
-  "korean_hint": "...",
-  "choices": ["A. ...", "B. ...", "C. ...", "D. ..."],
-  "correct_index": 0,
-  "explanation": "..."
-}`;
+  const systemPrompt = 'You are a clinical English quiz generator for Korean nurses in the US. Category: ' + catInstruction + '. Generate ONE multiple-choice question. Rules: test real practical clinical English, 4 choices exactly one correct, include a brief Korean hint (1 sentence), explanation 2-3 sentences. Respond ONLY with valid JSON, no markdown, no backticks: {"category":"short category name in Korean","question":"...","korean_hint":"...","choices":["A. ...","B. ...","C. ...","D. ..."],"correct_index":0,"explanation":"..."}';
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -45,20 +27,31 @@ Respond ONLY in this exact JSON format, no extra text, no markdown:
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
+        max_tokens: 800,
         system: systemPrompt,
-        messages: [{ role: 'user', content: 'Generate a clinical English quiz question now.' }]
+        messages: [{ role: 'user', content: 'Generate the quiz question now.' }]
       })
     });
 
     const data = await response.json();
-    const raw = data.content?.find(b => b.type === 'text')?.text || '';
-    const clean = raw.replace(/```json|```/g, '').trim();
-    const question = JSON.parse(clean);
 
+    if (!data.content || !data.content[0]) {
+      console.error('Unexpected API response:', JSON.stringify(data));
+      return res.status(500).json({ error: 'Invalid API response' });
+    }
+
+    const raw = data.content[0].text || '';
+    const jsonMatch = raw.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) {
+      console.error('No JSON found in:', raw);
+      return res.status(500).json({ error: 'No JSON in response' });
+    }
+
+    const question = JSON.parse(jsonMatch[0]);
     res.status(200).json(question);
+
   } catch (error) {
-    console.error('Quiz generation error:', error);
-    res.status(500).json({ error: 'Failed to generate question' });
+    console.error('Quiz generation error:', error.message);
+    res.status(500).json({ error: error.message });
   }
 };
