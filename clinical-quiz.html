@@ -6,508 +6,276 @@
 <title>임상 영어 퀴즈 — The Root</title>
 <meta name="description" content="미국 병원에서 실제로 쓰이는 임상 영어를 퀴즈로 배워보세요. SBAR 소통, 응급 상황, 환자 교육 영어까지 — The Root by Jennifer Minja Lee">
 <meta property="og:title" content="임상 영어 퀴즈 — The Root">
-<meta property="og:description" content="미국 간호사가 꼭 알아야 할 임상 영어를 매번 새로운 문제로 연습해요.">
-<meta property="og:url" content="https://theroot-theta.vercel.app/quiz">
+<meta property="og:description" content="미국 간호사가 꼭 알아야 할 임상 영어를 퀴즈로 연습해요.">
+<meta property="og:url" content="https://theroot-theta.vercel.app/clinical-quiz">
 <meta property="og:site_name" content="The Root">
 <meta property="og:locale" content="ko_KR">
-<meta name="twitter:card" content="summary_large_image">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --moss: #1D6B4A;
-  --moss-hover: #175a3e;
-  --moss-light: #EBF5EF;
-  --bark: #5C3D2E;
-  --cream: #FAF7F2;
-  --cream-dark: #F0EDE7;
-  --text: #1C1C1A;
-  --text-mid: #4a4a46;
-  --text-muted: #8a8880;
-  --border: rgba(28,107,74,0.15);
-  --border-light: rgba(28,28,26,0.08);
-  --correct-bg: #EBF5EF;
-  --correct-text: #145c3a;
-  --wrong-bg: #FDF0EF;
-  --wrong-text: #9B2C2C;
-  --serif: 'DM Serif Display', Georgia, serif;
-  --sans: 'DM Sans', -apple-system, sans-serif;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --moss:#1D6B4A;--moss-h:#175a3e;--moss-l:#EBF5EF;
+  --bark:#5C3D2E;--cream:#FAF7F2;--cream-d:#F0EDE7;
+  --text:#1C1C1A;--text-m:#4a4a46;--text-mu:#8a8880;
+  --bl:rgba(28,28,26,0.08);--ok-bg:#EBF5EF;--ok-t:#145c3a;
+  --no-bg:#FDF0EF;--no-t:#9B2C2C;
+  --serif:'DM Serif Display',Georgia,serif;
+  --sans:'DM Sans',-apple-system,sans-serif;
 }
-
-body {
-  font-family: var(--sans);
-  background: var(--cream);
-  color: var(--text);
-  min-height: 100vh;
-}
-
-/* ── NAV ── */
-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.25rem 2rem;
-  border-bottom: 1px solid var(--border-light);
-  background: var(--cream);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-
-.nav-logo {
-  font-family: var(--serif);
-  font-size: 20px;
-  color: var(--moss);
-  text-decoration: none;
-  letter-spacing: -0.3px;
-}
-
-.nav-logo span { color: var(--bark); }
-
-.nav-back {
-  font-size: 13px;
-  color: var(--text-muted);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  transition: color 0.2s;
-}
-.nav-back:hover { color: var(--moss); }
-
-/* ── HERO ── */
-.hero {
-  text-align: center;
-  padding: 3rem 1.5rem 2.5rem;
-  max-width: 640px;
-  margin: 0 auto;
-}
-
-.hero-tag {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--moss);
-  background: var(--moss-light);
-  padding: 4px 12px;
-  border-radius: 20px;
-  margin-bottom: 1rem;
-}
-
-.hero h1 {
-  font-family: var(--serif);
-  font-size: clamp(26px, 5vw, 38px);
-  color: var(--text);
-  line-height: 1.25;
-  margin-bottom: 0.75rem;
-}
-
-.hero p {
-  font-size: 15px;
-  color: var(--text-mid);
-  line-height: 1.65;
-}
-
-/* ── MAIN LAYOUT ── */
-main {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 0 1.25rem 5rem;
-}
-
-/* ── CATEGORY PILLS ── */
-.cat-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 2rem;
-  justify-content: center;
-}
-
-.cat-pill {
-  font-family: var(--sans);
-  font-size: 13px;
-  font-weight: 500;
-  padding: 7px 15px;
-  border: 1px solid var(--border-light);
-  border-radius: 20px;
-  background: white;
-  color: var(--text-mid);
-  cursor: pointer;
-  transition: all 0.18s;
-}
-
-.cat-pill:hover { border-color: var(--moss); color: var(--moss); }
-.cat-pill.active {
-  background: var(--moss);
-  border-color: var(--moss);
-  color: white;
-}
-
-/* ── STREAK ── */
-.streak-wrap {
-  display: flex;
-  gap: 7px;
-  justify-content: center;
-  margin-bottom: 1.75rem;
-  min-height: 14px;
-}
-
-.s-dot {
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  background: var(--cream-dark);
-  transition: background 0.3s;
-}
-.s-dot.hit { background: var(--moss); }
-.s-dot.miss { background: #E05252; }
-
-/* ── QUIZ CARD ── */
-.card {
-  background: white;
-  border-radius: 18px;
-  border: 1px solid var(--border-light);
-  padding: 2rem;
-  margin-bottom: 1rem;
-}
-
-.card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.25rem;
-}
-
-.cat-badge {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--moss);
-  background: var(--moss-light);
-  padding: 4px 11px;
-  border-radius: 20px;
-}
-
-.q-num {
-  font-size: 13px;
-  color: var(--text-muted);
-}
-
-.q-text {
-  font-family: var(--serif);
-  font-size: 21px;
-  color: var(--text);
-  line-height: 1.5;
-  margin-bottom: 0.5rem;
-}
-
-.q-hint {
-  font-size: 13px;
-  color: var(--text-muted);
-  font-style: italic;
-  margin-bottom: 1.5rem;
-  line-height: 1.5;
-}
-
-/* ── OPTIONS ── */
-.options { display: flex; flex-direction: column; gap: 10px; }
-
-.opt {
-  font-family: var(--sans);
-  font-size: 14.5px;
-  text-align: left;
-  padding: 13px 16px;
-  border: 1px solid var(--border-light);
-  border-radius: 11px;
-  background: white;
-  color: var(--text);
-  cursor: pointer;
-  transition: all 0.16s;
-  line-height: 1.5;
-  width: 100%;
-}
-
-.opt:hover:not(:disabled) {
-  border-color: var(--moss);
-  background: var(--moss-light);
-}
-
-.opt.correct {
-  border-color: var(--moss);
-  background: var(--correct-bg);
-  color: var(--correct-text);
-  font-weight: 500;
-}
-
-.opt.wrong {
-  border-color: #E05252;
-  background: var(--wrong-bg);
-  color: var(--wrong-text);
-}
-
-.opt:disabled { cursor: default; }
-
-/* ── FEEDBACK ── */
-.feedback {
-  margin-top: 1.25rem;
-  padding: 14px 16px;
-  border-radius: 11px;
-  font-size: 14px;
-  line-height: 1.65;
-  display: none;
-}
-
-.feedback.show { display: block; }
-.feedback.correct { background: var(--correct-bg); border-left: 3px solid var(--moss); color: var(--correct-text); }
-.feedback.wrong { background: var(--wrong-bg); border-left: 3px solid #E05252; color: var(--wrong-text); }
-
-.feedback-lbl { font-weight: 600; margin-bottom: 5px; font-size: 13px; letter-spacing: 0.3px; }
-
-/* ── BOTTOM ROW ── */
-.bottom-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.25rem 0;
-}
-
-.score-txt {
-  font-size: 13px;
-  color: var(--text-muted);
-}
-
-.score-txt strong { color: var(--moss); font-weight: 600; }
-
-.next-btn {
-  font-family: var(--sans);
-  font-size: 14px;
-  font-weight: 500;
-  padding: 10px 24px;
-  background: var(--moss);
-  color: white;
-  border: none;
-  border-radius: 11px;
-  cursor: pointer;
-  transition: background 0.2s, opacity 0.2s;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.next-btn.show { opacity: 1; pointer-events: all; }
-.next-btn:hover { background: var(--moss-hover); }
-
-/* ── LOADING ── */
-.loading {
-  text-align: center;
-  padding: 4rem 1rem;
-}
-
-.spinner {
-  width: 30px; height: 30px;
-  border: 2px solid var(--moss-light);
-  border-top-color: var(--moss);
-  border-radius: 50%;
-  animation: spin 0.75s linear infinite;
-  margin: 0 auto 1rem;
-}
-
-@keyframes spin { to { transform: rotate(360deg); } }
-
-.loading-txt {
-  font-family: var(--serif);
-  font-size: 17px;
-  color: var(--moss);
-}
-
-.loading-sub {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-top: 6px;
-}
-
-/* ── ERROR ── */
-.error-box {
-  text-align: center;
-  padding: 3rem 1rem;
-  color: var(--wrong-text);
-}
-
-.error-box button {
-  margin-top: 1rem;
-  font-family: var(--sans);
-  font-size: 13px;
-  padding: 9px 20px;
-  border: 1px solid #E05252;
-  border-radius: 10px;
-  background: none;
-  color: #E05252;
-  cursor: pointer;
-}
-
-/* ── FOOTER ── */
-footer {
-  text-align: center;
-  padding: 2rem;
-  font-size: 12px;
-  color: var(--text-muted);
-  border-top: 1px solid var(--border-light);
-  margin-top: 3rem;
-}
-
-footer a { color: var(--moss); text-decoration: none; }
-footer a:hover { text-decoration: underline; }
-
-@media (max-width: 480px) {
-  nav { padding: 1rem 1.25rem; }
-  .hero { padding: 2rem 1.25rem 1.5rem; }
-  .card { padding: 1.5rem; }
-}
+body{font-family:var(--sans);background:var(--cream);color:var(--text);min-height:100vh}
+nav{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 2rem;border-bottom:1px solid var(--bl);background:var(--cream);position:sticky;top:0;z-index:10}
+.nav-logo{font-family:var(--serif);font-size:20px;color:var(--moss);text-decoration:none;letter-spacing:-.3px}
+.nav-logo span{color:var(--bark)}
+.nav-back{font-size:13px;color:var(--text-mu);text-decoration:none;transition:color .2s}
+.nav-back:hover{color:var(--moss)}
+.hero{text-align:center;padding:3rem 1.5rem 2.5rem;max-width:640px;margin:0 auto}
+.hero-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--moss);background:var(--moss-l);padding:4px 12px;border-radius:20px;margin-bottom:1rem}
+.hero h1{font-family:var(--serif);font-size:clamp(26px,5vw,38px);line-height:1.25;margin-bottom:.75rem}
+.hero p{font-size:15px;color:var(--text-m);line-height:1.65}
+main{max-width:640px;margin:0 auto;padding:0 1.25rem 5rem}
+.cat-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:2rem;justify-content:center}
+.cat-pill{font-family:var(--sans);font-size:13px;font-weight:500;padding:7px 15px;border:1px solid var(--bl);border-radius:20px;background:white;color:var(--text-m);cursor:pointer;transition:all .18s}
+.cat-pill:hover{border-color:var(--moss);color:var(--moss)}
+.cat-pill.active{background:var(--moss);border-color:var(--moss);color:white}
+.streak-wrap{display:flex;gap:7px;justify-content:center;margin-bottom:1.75rem;min-height:14px;flex-wrap:wrap}
+.s-dot{width:10px;height:10px;border-radius:50%;background:var(--cream-d);transition:background .3s}
+.s-dot.hit{background:var(--moss)}.s-dot.miss{background:#E05252}
+.card{background:white;border-radius:18px;border:1px solid var(--bl);padding:2rem;margin-bottom:1rem}
+.card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem}
+.cat-badge{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--moss);background:var(--moss-l);padding:4px 11px;border-radius:20px}
+.q-num{font-size:13px;color:var(--text-mu)}
+.q-text{font-family:var(--serif);font-size:21px;color:var(--text);line-height:1.5;margin-bottom:.5rem}
+.q-hint{font-size:13px;color:var(--text-mu);font-style:italic;margin-bottom:1.5rem;line-height:1.5}
+.options{display:flex;flex-direction:column;gap:10px}
+.opt{font-family:var(--sans);font-size:14.5px;text-align:left;padding:13px 16px;border:1px solid var(--bl);border-radius:11px;background:white;color:var(--text);cursor:pointer;transition:all .16s;line-height:1.5;width:100%}
+.opt:hover:not(:disabled){border-color:var(--moss);background:var(--moss-l)}
+.opt.correct{border-color:var(--moss);background:var(--ok-bg);color:var(--ok-t);font-weight:500}
+.opt.wrong{border-color:#E05252;background:var(--no-bg);color:var(--no-t)}
+.opt:disabled{cursor:default}
+.feedback{margin-top:1.25rem;padding:14px 16px;border-radius:11px;font-size:14px;line-height:1.65;display:none}
+.feedback.show{display:block}
+.feedback.correct{background:var(--ok-bg);border-left:3px solid var(--moss);color:var(--ok-t)}
+.feedback.wrong{background:var(--no-bg);border-left:3px solid #E05252;color:var(--no-t)}
+.fb-lbl{font-weight:600;margin-bottom:5px;font-size:13px}
+.bottom-row{display:flex;justify-content:space-between;align-items:center;padding:.25rem 0}
+.score-txt{font-size:13px;color:var(--text-mu)}
+.score-txt strong{color:var(--moss);font-weight:600}
+.next-btn{font-family:var(--sans);font-size:14px;font-weight:500;padding:10px 24px;background:var(--moss);color:white;border:none;border-radius:11px;cursor:pointer;transition:background .2s,opacity .2s;opacity:0;pointer-events:none}
+.next-btn.show{opacity:1;pointer-events:all}
+.next-btn:hover{background:var(--moss-h)}
+footer{text-align:center;padding:2rem;font-size:12px;color:var(--text-mu);border-top:1px solid var(--bl);margin-top:3rem}
+footer a{color:var(--moss);text-decoration:none}
+@media(max-width:480px){nav{padding:1rem 1.25rem}.hero{padding:2rem 1.25rem 1.5rem}.card{padding:1.5rem}}
 </style>
 </head>
 <body>
-
 <nav>
   <a class="nav-logo" href="/">the root<span>.</span></a>
   <a class="nav-back" href="/">← 홈으로</a>
 </nav>
-
 <section class="hero">
   <div class="hero-tag">Clinical English</div>
   <h1>임상 영어 퀴즈</h1>
-  <p>미국 병원 현장에서 쓰이는 진짜 영어를 연습해요.<br>매번 새로운 문제가 생성돼요.</p>
+  <p>미국 병원 현장에서 쓰이는 진짜 영어를 연습해요.<br>100문제 · 매번 랜덤으로 출제돼요.</p>
 </section>
-
 <main>
   <div class="cat-row">
-    <button class="cat-pill active" data-cat="all" onclick="setCategory('all', this)">All topics</button>
-    <button class="cat-pill" data-cat="sbar" onclick="setCategory('sbar', this)">SBAR 소통</button>
-    <button class="cat-pill" data-cat="teaching" onclick="setCategory('teaching', this)">Patient teaching</button>
-    <button class="cat-pill" data-cat="charting" onclick="setCategory('charting', this)">약어 & 차팅</button>
-    <button class="cat-pill" data-cat="emergency" onclick="setCategory('emergency', this)">응급 상황</button>
-    <button class="cat-pill" data-cat="slang" onclick="setCategory('slang', this)">환자 슬랭</button>
+    <button class="cat-pill active" data-cat="all" onclick="setCat('all',this)">All topics</button>
+    <button class="cat-pill" data-cat="SBAR소통" onclick="setCat('SBAR소통',this)">SBAR 소통</button>
+    <button class="cat-pill" data-cat="Patient Teaching" onclick="setCat('Patient Teaching',this)">Patient teaching</button>
+    <button class="cat-pill" data-cat="약어&차팅" onclick="setCat('약어&차팅',this)">약어 & 차팅</button>
+    <button class="cat-pill" data-cat="응급상황" onclick="setCat('응급상황',this)">응급 상황</button>
+    <button class="cat-pill" data-cat="환자슬랭" onclick="setCat('환자슬랭',this)">환자 슬랭</button>
   </div>
-
   <div class="streak-wrap" id="streak"></div>
-
   <div id="area"></div>
-
   <div class="bottom-row">
     <div class="score-txt">맞은 문제: <strong id="sc">0</strong> / <span id="tot">0</span></div>
-    <button class="next-btn" id="nextBtn" onclick="load()">다음 문제 →</button>
+    <button class="next-btn" id="nextBtn" onclick="next()">다음 문제 →</button>
   </div>
 </main>
-
-<footer>
-  © 2026 Jennifer Minja Lee &nbsp;·&nbsp; <a href="/">The Root</a> &nbsp;·&nbsp; All rights reserved
-</footer>
-
+<footer>© 2026 Jennifer Minja Lee · <a href="/">The Root</a> · All rights reserved</footer>
 <script>
-let cat = 'all', score = 0, total = 0, history = [], answered = false;
+const Q = [
+{cat:'SBAR소통',q:'A nurse is calling a doctor about a patient. Which SBAR opening is most appropriate?',hint:'의사에게 환자 상태를 전화로 보고하는 상황이야.',choices:['A. "Hey doc, my patient is not doing well."','B. "This is Nurse Kim calling from 4 East. I\'m calling about Mr. Johnson in room 412."','C. "Doctor, come quickly!"','D. "My patient needs you right now."'],ans:1,exp:'"Situation" in SBAR starts with your name, unit, and the patient\'s name and room. Always identify yourself and the patient clearly.'},
+{cat:'SBAR소통',q:'During SBAR, what does the "B" (Background) section include?',hint:'SBAR에서 Background 섹션에 뭘 넣는지 묻는 거야.',choices:['A. What you need from the doctor','B. Your assessment of the patient','C. Patient\'s admission diagnosis, relevant history, and current medications','D. Vital signs from the last hour'],ans:2,exp:'Background includes the admission diagnosis, relevant medical history, and pertinent medications — the context the doctor needs.'},
+{cat:'SBAR소통',q:'A patient\'s BP drops to 80/50. Which SBAR Assessment is best?',hint:'혈압이 급격히 떨어진 환자 상황이야.',choices:['A. "I think something is wrong."','B. "The patient looks bad."','C. "I\'m concerned the patient may be going into septic shock."','D. "His pressure is low."'],ans:2,exp:'A good Assessment gives a clear clinical impression. "Concerned about septic shock" communicates urgency and a specific diagnosis.'},
+{cat:'SBAR소통',q:'What does the "R" in SBAR stand for, and what should you include?',hint:'SBAR의 마지막 단계야.',choices:['A. Report — document everything in the chart','B. Recommendation — state what you need (order, bedside visit, transfer)','C. Review — go over the patient\'s history','D. Response — wait for the doctor to speak'],ans:1,exp:'Recommendation is where you clearly ask for what you need: "I\'d like you to come evaluate the patient." Being specific helps the doctor respond efficiently.'},
+{cat:'SBAR소통',q:'A coworker says "Can you give me a quick hand-off on your patient?" What do they want?',hint:'교대 시 동료가 환자 정보를 요청하는 상황이야.',choices:['A. Help lifting the patient','B. A brief patient summary for shift change','C. A copy of the chart','D. Help with a procedure'],ans:1,exp:'"Hand-off" means transferring patient care information to the next nurse at shift change.'},
+{cat:'SBAR소통',q:'The doctor says "Keep me in the loop." What does this mean?',hint:'의사가 환자 상태 변화에 대해 부탁하는 말이야.',choices:['A. Call me every hour','B. Write everything in the chart','C. Continue to update me if anything changes','D. Don\'t call unless it\'s an emergency'],ans:2,exp:'"Keep me in the loop" means continue to inform me of updates. It\'s a common phrase ensuring ongoing communication.'},
+{cat:'SBAR소통',q:'You need to tell the doctor a patient\'s condition has worsened. Which phrase is most professional?',hint:'환자 상태 악화를 의사에게 보고하는 상황이야.',choices:['A. "He\'s getting worse fast."','B. "I\'m calling to report a change in patient status."','C. "Something bad is happening."','D. "You need to come now!"'],ans:1,exp:'"Change in patient status" is standard clinical language that signals urgency professionally.'},
+{cat:'SBAR소통',q:'What is "read-back" used for in clinical communication?',hint:'의사로부터 구두 오더를 받을 때 사용하는 안전 기법이야.',choices:['A. Reading the patient\'s chart out loud','B. Repeating a verbal order back to confirm accuracy','C. Documenting orders in the chart','D. Reading discharge instructions to patients'],ans:1,exp:'"Read-back" is a safety technique where you repeat a verbal order back to the prescriber to confirm you heard it correctly.'},
+{cat:'SBAR소통',q:'A nurse says she\'s going to "loop in" the social worker. What does this mean?',hint:'다학제 팀 협력 상황이야.',choices:['A. She will contact and include the social worker in care','B. She will train the social worker','C. She will document in the social worker\'s notes','D. She will ask the social worker to observe'],ans:0,exp:'"Loop in" means to include someone in a conversation or plan.'},
+{cat:'SBAR소통',q:'What does it mean when a nurse says "I\'m escalating this to the charge nurse"?',hint:'상황이 심각해져서 상위 직급에 보고하는 상황이야.',choices:['A. She is complaining about the patient','B. She is increasing the patient\'s pain medication','C. She is reporting the situation to a higher level of authority for help','D. She is transferring the patient'],ans:2,exp:'"Escalating" means bringing a concern to a higher level of authority when the current level is insufficient.'},
+{cat:'SBAR소통',q:'A charge nurse says "Give me a heads up if his pressure drops." What is she asking?',hint:'차지 너스가 부탁하는 말이야.',choices:['A. Measure blood pressure every hour','B. Notify her in advance if the BP decreases','C. Start an IV immediately','D. Document vital signs more frequently'],ans:1,exp:'"Heads up" means an early warning. She wants to be informed proactively if the situation changes.'},
+{cat:'SBAR소통',q:'The doctor asks "What\'s your gut feeling about this patient?" What is being asked?',hint:'의사가 너의 직관적인 판단을 물어보는 거야.',choices:['A. Whether the patient ate today','B. If there are abdominal symptoms','C. Your clinical intuition about whether the patient is deteriorating','D. What the patient\'s GI history is'],ans:2,exp:'"Gut feeling" refers to clinical intuition. This is your chance to express concerns like "Something doesn\'t feel right."'},
+{cat:'SBAR소통',q:'During a code, the team leader says "Push 1mg epi!" What should the responding nurse do?',hint:'코드 상황에서 약물 투여 지시를 받았어.',choices:['A. Give the medication immediately without confirming','B. Ask why epi is needed','C. Confirm: "1mg epi, pushing now!"','D. Document first, then give the medication'],ans:2,exp:'Closed-loop communication is essential during a code. Confirm the order by repeating it and announce when you execute it.'},
+{cat:'SBAR소통',q:'A doctor says "I\'ll put in an order" when discussing treatment. What does this mean?',hint:'의사가 치료 계획에 대해 말하는 상황이야.',choices:['A. The doctor will call the pharmacy directly','B. The doctor will enter a prescription/order in the system','C. The doctor will fill out paperwork','D. The doctor will call another specialist'],ans:1,exp:'"Put in an order" means the doctor will enter a medical order into the EMR system.'},
+{cat:'SBAR소통',q:'A doctor says "I\'m not buying it." during your assessment report. What does this mean?',hint:'의사가 네 임상 판단에 동의하지 않는 상황이야.',choices:['A. He doesn\'t have money','B. He disagrees with your clinical assessment','C. He wants more tests before deciding','D. He is too busy to listen'],ans:1,exp:'"I\'m not buying it" means "I disagree." If a doctor dismisses your concern, document it and consider escalating.'},
+{cat:'SBAR소통',q:'During handoff, a nurse says "Watch out for this one." What does she mean?',hint:'교대 시 동료 너스가 특정 환자에 대해 경고하는 상황이야.',choices:['A. The patient is physically dangerous','B. This patient requires extra attention or monitoring','C. The patient is about to be discharged','D. The patient has an infection'],ans:1,exp:'"Watch out for this one" is an informal warning that a patient needs extra vigilance.'},
+{cat:'SBAR소통',q:'What is a "SBAR note" in documentation?',hint:'차팅에서 SBAR 형식을 사용하는 상황이야.',choices:['A. A sticky note on the patient\'s door','B. A written communication using SBAR format in the patient\'s chart','C. A handoff checklist','D. A shift assignment sheet'],ans:1,exp:'A SBAR note organizes written communication in the chart using Situation-Background-Assessment-Recommendation format.'},
+{cat:'SBAR소통',q:'You are on the phone with a doctor who says "I\'ll have to call you back." What should you say?',hint:'의사가 나중에 다시 전화하겠다고 할 때야.',choices:['A. "Okay, goodbye."','B. "When can I expect your call? This patient is a priority."','C. "I\'ll just wait then."','D. "Never mind, I\'ll figure it out."'],ans:1,exp:'If a patient needs timely attention, communicate the urgency. Asking for an estimated callback ensures the patient doesn\'t fall through the cracks.'},
+{cat:'SBAR소통',q:'What does "Advance diet as tolerated" mean on a doctor\'s order?',hint:'식이 오더를 해석하는 상황이야.',choices:['A. Keep patient on current diet permanently','B. Gradually progress diet from liquids to regular food based on patient tolerance','C. Give the patient whatever they want','D. Consult dietary immediately'],ans:1,exp:'"Advance diet as tolerated" means progress from liquid to soft to regular diet based on tolerance — no nausea, vomiting, or discomfort at each stage.'},
+{cat:'SBAR소통',q:'A patient\'s family calls demanding to speak with "whoever is in charge." Who should respond?',hint:'화난 가족이 전화한 상황이야.',choices:['A. Tell them the doctor will call back','B. Transfer to administration','C. The charge nurse should speak with them to address concerns','D. Ask the family to come in person'],ans:2,exp:'The charge nurse handles escalated family concerns. This is part of the charge nurse\'s role in patient and family relations.'},
+{cat:'Patient Teaching',q:'A patient says "I don\'t understand why I need this medication." What is the best response?',hint:'환자가 약 복용 이유를 모르는 상황이야.',choices:['A. "Just take it, the doctor ordered it."','B. "Let me explain what this medication does and why it\'s important for you."','C. "Read the pamphlet I gave you."','D. "Ask your doctor when he comes in."'],ans:1,exp:'Effective patient teaching requires explaining the "why." Patients who understand their medications are more likely to be compliant.'},
+{cat:'Patient Teaching',q:'What does the "teach-back" method mean in patient education?',hint:'환자 교육에서 효과적인 방법이야.',choices:['A. Giving the patient written materials to take home','B. Having the patient repeat or demonstrate what they learned to confirm understanding','C. Teaching the same information multiple times','D. Playing educational videos for the patient'],ans:1,exp:'Teach-back asks patients to explain in their own words or demonstrate. "Can you show me how you\'ll take your insulin?" verifies understanding.'},
+{cat:'Patient Teaching',q:'What is the "15-15 rule" for hypoglycemia management?',hint:'저혈당 관리 교육이야.',choices:['A. Check blood sugar 15 minutes after every meal','B. Eat 15 grams of fast-acting carbs, wait 15 minutes, recheck blood sugar','C. Take 15 units of insulin if sugar is below 15','D. Call 911 if sugar drops 15 points'],ans:1,exp:'The 15-15 rule: consume 15g of fast-acting carbs (juice, glucose tablets), wait 15 minutes, recheck. If still low, repeat.'},
+{cat:'Patient Teaching',q:'What does "NPO after midnight" mean? How would you explain it to a patient?',hint:'수술 전 환자에게 NPO를 설명하는 상황이야.',choices:['A. "No physical objects near your bed after midnight."','B. "Nothing by mouth — no food, water, or any drinks after midnight."','C. "No pain medication after midnight."','D. "You can have clear liquids after midnight."'],ans:1,exp:'NPO means nothing by mouth. Be specific: no food, drinks, or gum. Some medications may be taken with a small sip of water per physician orders.'},
+{cat:'Patient Teaching',q:'A patient on warfarin asks "Can I eat salad?" How should you respond?',hint:'와파린 복용 환자의 식이 교육이야.',choices:['A. "No, absolutely no green vegetables."','B. "Yes, but keep your intake of leafy greens consistent — don\'t suddenly change amounts."','C. "Only iceberg lettuce is safe."','D. "Ask your pharmacist."'],ans:1,exp:'Warfarin patients should keep Vitamin K intake consistent. Sudden changes affect INR levels. Consistency is the key message.'},
+{cat:'Patient Teaching',q:'A patient with CHF needs teaching on daily monitoring. What is most important?',hint:'울혈성 심부전 환자의 자가 모니터링 교육이야.',choices:['A. Check blood pressure twice daily','B. Weigh daily at same time, same scale — report 2-3 lb gain in a day or 5 lb in a week','C. Count your pulse every morning','D. Measure your ankles daily'],ans:1,exp:'Daily weights are the gold standard for CHF monitoring. Rapid weight gain indicates fluid retention. Specific thresholds give patients clear action points.'},
+{cat:'Patient Teaching',q:'A patient says "I feel fine now, do I still need to finish my antibiotics?"',hint:'항생제 복용 교육이야.',choices:['A. "If you feel better, you can stop."','B. "Yes, always complete the full course to prevent resistance and ensure infection is fully treated."','C. "Take half the remaining dose."','D. "Ask your pharmacist."'],ans:1,exp:'Stopping antibiotics early leads to recurrence and antibiotic resistance. Feeling better does not mean the infection is fully eradicated.'},
+{cat:'Patient Teaching',q:'A patient is going home on oxygen therapy. What safety teaching is critical?',hint:'가정 산소 치료 안전 교육이야.',choices:['A. "Keep the oxygen tank in a closet when not in use."','B. "No smoking or open flames within 10 feet of oxygen equipment."','C. "You can turn up the oxygen if you feel short of breath."','D. "Oxygen is safe around candles."'],ans:1,exp:'Oxygen is highly flammable. No smoking or open flames near oxygen. Patients should never self-adjust flow rates without physician guidance.'},
+{cat:'Patient Teaching',q:'A patient needs to learn insulin injection technique. What is the BEST teaching approach?',hint:'인슐린 주사 교육이야.',choices:['A. Give written instructions only','B. Show, demonstrate, then have patient return-demonstrate','C. Explain verbally and document','D. Have family member learn instead'],ans:1,exp:'Psychomotor skills require demonstration and return demonstration. Multi-modal teaching (visual, verbal, hands-on) improves retention.'},
+{cat:'Patient Teaching',q:'When teaching a patient with low health literacy, what is most effective?',hint:'건강 문해력이 낮은 환자를 교육하는 상황이야.',choices:['A. Give detailed written handouts','B. Use plain language (5th-6th grade level), pictures, and teach-back','C. Use medical terminology so they take it seriously','D. Have them watch educational videos only'],ans:1,exp:'Plain language, visual aids, and teach-back are most effective. Avoid jargon, use short sentences.'},
+{cat:'Patient Teaching',q:'A patient with limited English proficiency needs discharge teaching. What should you do?',hint:'영어가 서툰 환자에게 퇴원 교육을 해야 해.',choices:['A. Speak loudly and slowly in English','B. Have the family member translate','C. Use a qualified medical interpreter','D. Give written materials in English'],ans:2,exp:'A qualified medical interpreter ensures accurate communication and protects patient rights. Family members may omit or alter information.'},
+{cat:'Patient Teaching',q:'What should you include when teaching post-surgical wound care warning signs?',hint:'수술 후 퇴원하는 환자 교육이야.',choices:['A. "Just come back if something feels wrong."','B. "Watch for increased redness, swelling, warmth, drainage, or fever over 101°F."','C. "Your wound should heal on its own."','D. "Check the wound once a day."'],ans:1,exp:'REEDA guides wound teaching: Redness, Edema, Ecchymosis, Discharge, Approximation. Specific signs help patients know when to seek care.'},
+{cat:'Patient Teaching',q:'How would you explain activity restrictions after cardiac catheterization?',hint:'심장 카테터 검사 후 퇴원 교육이야.',choices:['A. "Rest for a week."','B. "No heavy lifting over 10 lbs for 24-48 hours, no driving for 24 hours, keep insertion site dry."','C. "You can resume all activities tomorrow."','D. "Just take it easy for a few days."'],ans:1,exp:'Post-cath instructions include specific restrictions: no heavy lifting, no driving (sedation), site care, and warning signs like bleeding or hematoma.'},
+{cat:'Patient Teaching',q:'A patient doesn\'t speak English and nods during teaching. What should you do?',hint:'환자가 이해하지 못하는 것 같은데 고개를 끄덕이는 상황이야.',choices:['A. Assume they understood since they nodded','B. Document teaching was completed','C. Use teach-back: "Can you show me how you\'ll do this at home?"','D. Give written materials in English'],ans:2,exp:'Nodding doesn\'t confirm understanding. Teach-back with demonstration is the only way to verify comprehension across language barriers.'},
+{cat:'Patient Teaching',q:'When should a patient call 911 vs. call their doctor\'s office?',hint:'퇴원 후 언제 응급실을 가야 하는지 교육하는 상황이야.',choices:['A. Always call the doctor first','B. Call 911 for chest pain, difficulty breathing, or stroke symptoms; call doctor for non-urgent concerns','C. Go to the ER for any new symptom','D. Only call 911 if unconscious'],ans:1,exp:'FAST (Face drooping, Arm weakness, Speech difficulty, Time to call 911) for stroke and chest pain/breathing difficulty always warrant 911.'},
+{cat:'Patient Teaching',q:'How should you explain proper blood pressure measurement technique?',hint:'가정 혈압 측정 교육이야.',choices:['A. "Just use any automatic cuff on your wrist."','B. "Sit quietly 5 minutes, use proper cuff size, bare upper arm, take 2 readings 1 minute apart."','C. "Measure it after exercise for accuracy."','D. "Take it whenever you feel sick."'],ans:1,exp:'Proper BP technique: rest 5 min, empty bladder, sit with back supported, feet flat, arm at heart level, proper cuff size.'},
+{cat:'Patient Teaching',q:'What is the most important COPD inhaler teaching point?',hint:'COPD 환자의 흡입기 교육이야.',choices:['A. "Use your rescue inhaler before your maintenance inhaler always."','B. "Shake, exhale fully, inhale slowly and deeply, hold breath 10 seconds."','C. "Inhale as fast as possible for best effect."','D. "Use the inhaler only when symptoms are severe."'],ans:1,exp:'Proper inhaler technique: shake, exhale fully, inhale slowly/deeply, hold 10 seconds. Demonstrate and have patient return-demonstrate.'},
+{cat:'Patient Teaching',q:'A patient asks "How do I know if my incision is healing normally?"',hint:'수술 상처 회복에 대한 교육이야.',choices:['A. "It should look perfect after one week."','B. "Normal healing: mild swelling and bruising decrease each day, edges come together, no increasing pain."','C. "Any redness means infection."','D. "Come in daily for wound checks."'],ans:1,exp:'Normal healing shows progressive improvement: decreasing swelling, approximated edges, reducing pain. Any worsening or fever warrants contact with the provider.'},
+{cat:'Patient Teaching',q:'A patient with a new colostomy needs discharge teaching. What is essential?',hint:'결장루를 가진 환자의 퇴원 교육이야.',choices:['A. Only how to empty the pouch','B. Pouch care, skin care, diet, activity restrictions, and when to call the doctor','C. Diet instructions only','D. Just the home health agency name'],ans:1,exp:'Comprehensive ostomy teaching: pouch management, peristomal skin care, dietary modifications, activity restrictions, and warning signs.'},
+{cat:'Patient Teaching',q:'A patient says "I\'m not a pill person." What might this indicate?',hint:'환자의 약 복용 태도에 대한 표현이야.',choices:['A. The patient cannot swallow pills','B. The patient may have a history of poor medication compliance','C. The patient prefers injections','D. The patient is allergic to medications'],ans:1,exp:'"Not a pill person" often means the patient avoids medications. Explore concerns about side effects, cost, or beliefs.'},
+{cat:'약어&차팅',q:'What does "PRN" mean on a medication order?',hint:'약 오더에서 자주 보이는 약어야.',choices:['A. Per routine need','B. As needed','C. Before meals','D. At bedtime'],ans:1,exp:'"PRN" from Latin "pro re nata" means as needed. PRN medications are given based on patient need, not a fixed schedule.'},
+{cat:'약어&차팅',q:'A chart says "Patient c/o SOB." What does this mean?',hint:'차팅에서 흔히 보이는 표현이야.',choices:['A. Patient complains of shortness of breath','B. Patient confused, oriented to self only','C. Patient care order, special observation','D. Patient chart shows oxygen below normal'],ans:0,exp:'"c/o" means complains of and "SOB" means shortness of breath.'},
+{cat:'약어&차팅',q:'What does "A&Ox4" mean in nursing documentation?',hint:'신경학적 상태를 기록할 때 쓰이는 표현이야.',choices:['A. Awake and oriented to person, place, time, and event','B. Alert and observed four times','C. Ambulatory and oriented to four extremities','D. Awake, alert — four assessments done'],ans:0,exp:'"A&Ox4" means alert and oriented to person, place, time, and event — indicating intact cognition.'},
+{cat:'약어&차팅',q:'What does "TID" mean on a medication order?',hint:'약 복용 빈도 관련 약어야.',choices:['A. Twice a day','B. Three times a day','C. Take if distressed','D. Total infusion dose'],ans:1,exp:'"TID" from Latin "ter in die" means three times a day. QD=daily, BID=twice/day, TID=3x/day, QID=4x/day.'},
+{cat:'약어&차팅',q:'A nurse documents "Pt. denies CP, N/V." What does this mean?',hint:'환자의 증상 부재를 기록한 차팅이야.',choices:['A. Patient denies chest pain, nausea, and vomiting','B. Patient denied care plan, no visit','C. Patient discontinued pain, no vitals','D. Patient developed chest pressure, nausea visible'],ans:0,exp:'"CP" = chest pain, "N/V" = nausea and vomiting. "Denies" means the patient reports not having these symptoms.'},
+{cat:'약어&차팅',q:'What does "STAT" mean when written on an order?',hint:'급박한 상황에서 쓰이는 약어야.',choices:['A. Standard treatment and therapy','B. Immediately — right away, without delay','C. Start treatment after testing','D. Scheduled time and timing'],ans:1,exp:'"STAT" from Latin "statim" means immediately. STAT orders require urgent action.'},
+{cat:'약어&차팅',q:'What does "I&O" mean and why is it important?',hint:'입원 환자 모니터링에서 중요한 측정이야.',choices:['A. Information and observation — for daily notes','B. Intake and output — measures fluid balance to detect dehydration or fluid overload','C. Intervention and outcomes — for care planning','D. Isolation and observation — for infection control'],ans:1,exp:'"I&O" tracks all fluids in (oral, IV) and out (urine, drainage). Essential for CHF, renal failure, post-op patients.'},
+{cat:'약어&차팅',q:'A chart reads "VSS." What does this mean?',hint:'바이탈 사인 관련 약어야.',choices:['A. Very serious situation','B. Vital signs stable','C. Visual signs satisfactory','D. Verified surgical site'],ans:1,exp:'"VSS" means vital signs stable — HR, BP, RR, temp, and O2 sat are within normal/expected ranges.'},
+{cat:'약어&차팅',q:'What is the meaning of "Hx" and "Dx" in medical charting?',hint:'의무기록에서 흔히 쓰이는 약어들이야.',choices:['A. Hx = history, Dx = diagnosis','B. Hx = heart exam, Dx = drug reaction','C. Hx = hydration, Dx = discharge','D. Hx = hypertension, Dx = diabetic'],ans:0,exp:'"Hx" = history, "Dx" = diagnosis. Also: Tx = treatment, Sx = symptoms, Rx = prescription.'},
+{cat:'약어&차팅',q:'A doctor\'s order says "Ambulate BID with assist." What should the nurse do?',hint:'의사 오더를 해석하는 상황이야.',choices:['A. Keep patient in bed, check BID','B. Help the patient walk twice a day','C. Bathe patient twice daily with assistance','D. Take blood pressure twice a day'],ans:1,exp:'"Ambulate" = walk, "BID" = twice a day, "with assist" = with nursing help. Walk the patient twice daily.'},
+{cat:'약어&차팅',q:'A nurse charts "BS clear, abdomen soft, NT." What does "NT" mean?',hint:'복부 검진 기록이야.',choices:['A. Not tested','B. Non-tender','C. Normal tone','D. No tympany'],ans:1,exp:'"NT" means non-tender. In abdominal documentation: BS = bowel sounds, soft = soft abdomen, NT = no pain with palpation.'},
+{cat:'약어&차팅',q:'What does "DNR" mean and who can establish it?',hint:'말기 환자 케어에서 중요한 법적 문서야.',choices:['A. Do Not Resuscitate — established by physician based on patient/family wishes','B. Do Not Restart — any nurse can write this','C. Delayed Nursing Response — for low priority patients','D. Discharge Not Ready — administrative use'],ans:0,exp:'"DNR" = Do Not Resuscitate. Must be a physician order based on informed consent. Nurses cannot write DNR orders.'},
+{cat:'약어&차팅',q:'What does "NKDA" mean in a patient\'s chart?',hint:'알레르기 관련 차팅이야.',choices:['A. No known drug allergies','B. Not known, document again — incomplete history','C. New kidney disease alert','D. No known dietary allergies'],ans:0,exp:'"NKDA" = No Known Drug Allergies. Always verify with the patient before giving medications.'},
+{cat:'약어&차팅',q:'What does "q4h PRN pain" mean on a medication order?',hint:'진통제 오더를 해석하는 상황이야.',choices:['A. Give pain medication every 4 hours on a fixed schedule','B. Give pain medication every 4 hours as needed when patient reports pain','C. Give pain medication 4 times only','D. Give pain medication before every procedure'],ans:1,exp:'"q4h" = every 4 hours, "PRN" = as needed. Give up to every 4 hours only when the patient has pain.'},
+{cat:'약어&차팅',q:'A chart reads "UO 20mL/hr x 3hrs." Should the nurse be concerned?',hint:'소변량 모니터링 상황이야.',choices:['A. No, this is normal urine output','B. Yes — normal UO is at least 0.5mL/kg/hr, this suggests oliguria','C. Only if the patient complains of pain','D. No, as long as the patient is drinking'],ans:1,exp:'Normal UO ≥0.5 mL/kg/hr (typically 30+ mL/hr). 20 mL/hr suggests oliguria — possible dehydration, hypotension, or AKI.'},
+{cat:'약어&차팅',q:'What does "S/S" mean in nursing documentation?',hint:'증상과 징후를 기록할 때 쓰이는 약어야.',choices:['A. Signs and symptoms','B. Surgical site','C. System scan','D. Safety status'],ans:0,exp:'"S/S" = signs and symptoms. Signs are objective findings; symptoms are subjective complaints.'},
+{cat:'약어&차팅',q:'What does "WDWN" mean in a physical assessment note?',hint:'신체검진 소견을 기록할 때 쓰이는 표현이야.',choices:['A. Wound developing well, no necrosis','B. Well-developed, well-nourished','C. Within defined wellness norms','D. Weak, dizzy, weak nails'],ans:1,exp:'"WDWN" = well-developed, well-nourished. A general appearance descriptor indicating healthy appearance.'},
+{cat:'약어&차팅',q:'What does "PMH: HTN, DM2, CAD" mean?',hint:'환자의 과거 병력 기록이야.',choices:['A. Past medical history: hypertension, type 2 diabetes, coronary artery disease','B. Primary history: high temperature, dental problems, cardiac arrest','C. Previous medications: heparin, dextrose, calcium','D. Mental health: trauma, depression, confusion'],ans:0,exp:'"PMH" = past medical history. HTN = hypertension, DM2 = type 2 diabetes, CAD = coronary artery disease.'},
+{cat:'약어&차팅',q:'What does "NPO" stand for and when is it used?',hint:'수술 전이나 검사 전에 자주 보이는 지시야.',choices:['A. No physical objects — for fall precautions','B. Nil per os (nothing by mouth) — before surgery, procedures, or for aspiration risk','C. Normal patient output — to track fluids','D. Night protocol order — for sleeping medications'],ans:1,exp:'"NPO" = nothing by mouth. Ordered before surgeries, procedures, or for patients at aspiration risk.'},
+{cat:'약어&차팅',q:'A patient\'s chart shows "allergies: PCN — rash." What does PCN mean?',hint:'알레르기 기록에서 약물 약어를 해석하는 상황이야.',choices:['A. Potassium chloride','B. Penicillin','C. Phenobarbital','D. Promethazine'],ans:1,exp:'"PCN" is the abbreviation for penicillin. Documenting the specific reaction (rash) is essential — it helps differentiate intolerance from true allergy.'},
+{cat:'응급상황',q:'A patient becomes unresponsive. What is your FIRST action?',hint:'환자가 갑자기 반응이 없어졌을 때야.',choices:['A. Call the doctor immediately','B. Check for responsiveness, call for help, activate rapid response or code','C. Start CPR immediately','D. Get the crash cart first'],ans:1,exp:'First assess responsiveness, then simultaneously call for help and activate the code team. CPR follows assessment.'},
+{cat:'응급상황',q:'What triggers a rapid response team (RRT) activation?',hint:'빠른 대응팀을 호출하는 상황이야.',choices:['A. Any patient who complains of pain','B. A deteriorating patient before cardiac arrest — early intervention to prevent a code','C. Only when a patient stops breathing','D. When a family member is upset'],ans:1,exp:'RRT is activated for acute deterioration BEFORE arrest. Warning signs: HR <40 or >130, SBP <90, RR <8 or >28, O2 sat <90%.'},
+{cat:'응급상황',q:'What does RACE stand for in a fire emergency?',hint:'병원 화재 대피 절차야.',choices:['A. Remove patients, Activate alarm, Contain fire, Extinguish or Evacuate','B. Respond, Alert, Call 911, Evacuate','C. Rescue, Assess, Contain, Exit','D. Remove, Alert staff, Call, Evacuate'],ans:0,exp:'RACE: Remove patients from danger, Activate the alarm, Contain the fire (close doors), Extinguish if safe or Evacuate.'},
+{cat:'응급상황',q:'A patient is having a tonic-clonic seizure. What should you do FIRST?',hint:'경련 발작 환자를 돌보는 상황이야.',choices:['A. Restrain the patient to prevent injury','B. Put something in the mouth to prevent tongue biting','C. Protect from injury, position on side, call for help, time the seizure','D. Give seizure medication immediately'],ans:2,exp:'During a seizure: protect from injury (no restraints), turn lateral to prevent aspiration, time it, call for help. Never put anything in the mouth.'},
+{cat:'응급상황',q:'A patient is in anaphylaxis. What is the FIRST medication to give?',hint:'아나필락시스 응급 처치야.',choices:['A. Diphenhydramine (Benadryl) IV','B. Epinephrine 0.3-0.5mg IM into outer thigh','C. Methylprednisolone IV','D. Albuterol inhaler'],ans:1,exp:'Epinephrine IM is the first-line treatment for anaphylaxis. Antihistamines and steroids are adjuncts, not first-line.'},
+{cat:'응급상황',q:'What are the signs of increased intracranial pressure (Cushing\'s Triad)?',hint:'뇌압 상승 징후를 알아야 해.',choices:['A. Bradycardia, hypertension, irregular respirations, decreased LOC, pupil changes','B. Tachycardia, hypotension, fever, and confusion','C. Headache alone is sufficient','D. Peripheral edema and SOB'],ans:0,exp:'Cushing\'s Triad (late ICP sign): hypertension with widened pulse pressure, bradycardia, irregular respirations. Also: decreased LOC, unequal pupils, projectile vomiting.'},
+{cat:'응급상황',q:'A patient\'s O2 saturation drops to 88%. What is your first action?',hint:'산소 포화도가 갑자기 떨어진 상황이야.',choices:['A. Call the doctor immediately','B. Assess the patient first, check probe placement, apply O2, reposition','C. Increase oxygen to 15L immediately','D. Document and continue monitoring'],ans:1,exp:'First check probe placement (cold extremities, nail polish cause false readings). Then assess patient, apply O2, reposition, notify MD if no improvement.'},
+{cat:'응급상황',q:'What is the FAST stroke assessment tool?',hint:'뇌졸중 증상 평가 도구야.',choices:['A. Fever, Altered consciousness, Seizure, Tachycardia','B. Face drooping, Arm weakness, Speech difficulty, Time to call 911','C. Flushing, Abdominal pain, SOB, Temperature','D. Fall risk, Ambulation, Safety, Transfer'],ans:1,exp:'FAST: Face drooping, Arm weakness, Speech difficulty, Time to call 911. Time is brain — act immediately.'},
+{cat:'응급상황',q:'A patient\'s potassium is 2.8 mEq/L. What is the main concern?',hint:'저칼륨혈증 환자 모니터링이야.',choices:['A. Risk for constipation only','B. Risk for life-threatening cardiac arrhythmias — notify physician immediately','C. This is a normal value','D. Risk for hyperglycemia'],ans:1,exp:'Normal K+ is 3.5-5.0 mEq/L. Hypokalemia at 2.8 risks cardiac arrhythmia. Monitor ECG for U waves. Notify MD immediately.'},
+{cat:'응급상황',q:'A blood transfusion causes fever and chills within 15 minutes. What do you do?',hint:'수혈 중 부작용이 나타난 상황이야.',choices:['A. Slow the transfusion rate and observe','B. Stop transfusion, maintain IV with NS, notify MD, keep blood bag for lab','C. Give Tylenol and continue','D. Document and monitor — febrile reactions are expected'],ans:1,exp:'Any transfusion reaction: STOP blood immediately, keep IV patent with NS, notify MD and blood bank, return blood bag and tubing.'},
+{cat:'응급상황',q:'A patient on heparin has an aPTT of 180 seconds (therapeutic range 60-100). What do you do?',hint:'헤파린 과다 투여 상황이야.',choices:['A. Continue — higher is better for anticoagulation','B. Hold the heparin drip and notify the physician — bleeding risk','C. Increase the drip rate','D. Wait for the next scheduled lab'],ans:1,exp:'aPTT >120 seconds = supratherapeutic, serious bleeding risk. Hold the drip, notify MD. Protamine sulfate may be ordered as reversal.'},
+{cat:'응급상황',q:'A patient suddenly has glucose of 42 mg/dL and is confused. What do you do?',hint:'저혈당 응급 상황이야.',choices:['A. Give insulin per sliding scale','B. Give 15-20g fast-acting carbs if conscious, or D50W IV if unconscious','C. Call the doctor before doing anything','D. Give orange juice and check back in an hour'],ans:1,exp:'BG <70 = hypoglycemia. If conscious: 15g fast-acting carbs. If unconscious: D50W 25-50mL IV push per protocol. Recheck in 15 min.'},
+{cat:'응급상황',q:'What are signs of tension pneumothorax?',hint:'긴장성 기흉 징후를 알아야 해.',choices:['A. Absent breath sounds one side, tracheal deviation away, hypotension, distended neck veins','B. Fever, productive cough, increased breath sounds','C. Bilateral crackles and pink frothy sputum','D. Bradycardia and hypertension'],ans:0,exp:'Tension pneumothorax: absent breath sounds (affected side), tracheal deviation (away), hypotension, JVD. Life-threatening — immediate needle decompression needed.'},
+{cat:'응급상황',q:'A patient on PCA is unresponsive with RR of 6. What do you suspect?',hint:'자가 통증 조절 장치 과다 투여 상황이야.',choices:['A. The patient is sleeping','B. Opioid overdose — stop PCA, give naloxone, call for help','C. Give more medication — patient is in pain','D. Increase oxygen only'],ans:1,exp:'RR <8 with unresponsiveness after PCA = opioid overdose. STOP PCA, give naloxone (Narcan), call for help. Narcan has shorter half-life — may need repeat doses.'},
+{cat:'응급상황',q:'What does "code blue" mean and what is the nurse\'s immediate role?',hint:'코드 블루 상황에서 너스의 역할이야.',choices:['A. Fire — evacuate patients','B. Cardiac/respiratory arrest — begin CPR, activate code team, get crash cart','C. Violent patient — call security','D. Missing patient — search the unit'],ans:1,exp:'Code blue = cardiac or respiratory arrest. Nurse: call the code, start high-quality CPR, get crash cart/defibrillator, assign roles when team arrives.'},
+{cat:'응급상황',q:'A patient says "I feel like something is terribly wrong." Vitals are normal. What should you do?',hint:'환자의 주관적 호소가 있지만 바이탈은 정상인 상황이야.',choices:['A. Reassure the patient vitals are fine','B. Document and continue monitoring','C. Take the concern seriously, do full assessment, consider rapid response','D. Ask patient to rest and check back later'],ans:2,exp:'"Feeling of impending doom" is a recognized clinical symptom. Trust your patient. Normal vitals don\'t rule out serious conditions.'},
+{cat:'환자슬랭',q:'A patient says "I\'ve been feeling under the weather lately." What do they mean?',hint:'환자가 몸 상태를 일상적인 표현으로 말하는 상황이야.',choices:['A. They have been outside in bad weather','B. They have been feeling generally unwell or sick','C. They have weather-related joint pain','D. They are depressed about the climate'],ans:1,exp:'"Under the weather" means feeling mildly ill or not well. Follow up: "Can you tell me more about how you\'ve been feeling?"'},
+{cat:'환자슬랭',q:'A patient says "My stomach is killing me." What should you assess?',hint:'환자가 복통을 강한 표현으로 말하는 상황이야.',choices:['A. Assess for suicidal ideation','B. Assess abdominal pain using PQRST — location, severity, onset, character','C. Call security','D. Give pain medication immediately'],ans:1,exp:'"Killing me" is a hyperbole for severe pain. Use PQRST: Precipitating, Quality, Radiation, Severity, Timing.'},
+{cat:'환자슬랭',q:'A patient says "I\'ve been passing out." What should you assess?',hint:'환자가 실신을 일상 표현으로 말하는 상황이야.',choices:['A. Insomnia and sleep disorders','B. Syncope — assess for cardiac causes, orthostatic hypotension, neurological issues','C. Fatigue and exhaustion','D. Drug abuse'],ans:1,exp:'"Passing out" = syncope. Assess: frequency, duration, prodromal symptoms, activity at time. Rule out cardiac arrhythmia.'},
+{cat:'환자슬랭',q:'A patient says "I\'ve got the runs." What does this mean?',hint:'소화기 증상을 표현하는 속어야.',choices:['A. The patient exercises daily','B. The patient has diarrhea','C. The patient has leg cramps','D. The patient has urinary frequency'],ans:1,exp:'"The runs" is a common colloquial term for diarrhea. Assess frequency, consistency, blood, duration, recent antibiotics.'},
+{cat:'환자슬랭',q:'A patient says "My heart is racing." How should you respond?',hint:'환자가 두근거림을 표현하는 상황이야.',choices:['A. Reassure the patient it\'s probably anxiety','B. Assess HR and rhythm, get ECG, ask about associated symptoms','C. Give a beta-blocker immediately','D. Tell the patient to take deep breaths'],ans:1,exp:'"Heart racing" = palpitations. Assess: HR, rhythm, onset, duration, associated symptoms. A 12-lead ECG may be indicated.'},
+{cat:'환자슬랭',q:'A patient says "I feel like I\'m going to jump out of my skin." What might this describe?',hint:'환자가 극도의 불안이나 불편함을 표현하는 상황이야.',choices:['A. Severe anxiety, akathisia, or extreme discomfort','B. Itching from a rash','C. Feeling of dissociation','D. Excitement about going home'],ans:0,exp:'"Jump out of my skin" describes extreme restlessness or discomfort. Consider akathisia, severe anxiety, or opioid withdrawal.'},
+{cat:'환자슬랭',q:'A patient says "I\'ve been a little off my rocker lately." What might this indicate?',hint:'노인 환자가 인지 변화를 표현하는 상황이야.',choices:['A. Balance problems','B. Cognitive changes, confusion, or memory issues','C. Back pain from a rocking chair','D. Mood swings from medication'],ans:1,exp:'"Off my rocker" means confused or not thinking clearly. Could indicate delirium, UTI, new dementia, or medication side effects.'},
+{cat:'환자슬랭',q:'A patient says "I\'m all backed up." What GI symptom are they describing?',hint:'소화기 증상을 표현하는 속어야.',choices:['A. Diarrhea','B. Constipation','C. Gas and bloating','D. Nausea'],ans:1,exp:'"All backed up" = constipation. Assess last bowel movement, diet, fluid intake, medications (especially opioids, iron).'},
+{cat:'환자슬랭',q:'A patient says "I\'ve been getting the cold sweats at night." What might this indicate?',hint:'환자가 야간 증상을 표현하는 상황이야.',choices:['A. Nightmares only','B. Night sweats — associated with infection, TB, lymphoma, menopause, or hypoglycemia','C. Cold room temperature','D. Anxiety disorder'],ans:1,exp:'"Cold sweats" at night = diaphoresis. Can indicate infection, tuberculosis, lymphoma, menopause, or nocturnal hypoglycemia.'},
+{cat:'환자슬랭',q:'A patient says "My breathing is kind of wonky." What should you assess?',hint:'환자가 호흡에 문제가 있음을 표현하는 상황이야.',choices:['A. Mental status only','B. Respiratory rate, depth, O2 saturation, lung sounds','C. Cardiac rhythm only','D. Anxiety level'],ans:1,exp:'"Wonky" means irregular or not normal. Assess RR, depth, O2 sat, lung sounds, accessory muscle use.'},
+{cat:'환자슬랭',q:'A patient says "I\'ve had this nasty cough." What follow-up is most important?',hint:'환자의 기침 증상을 사정하는 상황이야.',choices:['A. "How nasty on a scale of 1-10?"','B. "How long, productive or dry, any blood, fever, shortness of breath?"','C. "Do you smoke?"','D. "Did you try cough syrup?"'],ans:1,exp:'For cough: duration, character (dry vs productive), sputum color/blood, associated fever/SOB/chest pain. These guide diagnosis.'},
+{cat:'환자슬랭',q:'A patient says "I\'m pooped." In a clinical context, what do you assess?',hint:'환자가 피로감을 표현하는 상황이야.',choices:['A. Bowel function only','B. Fatigue level, activity tolerance, and possible causes (anemia, infection, depression)','C. Sleep quality only','D. Nutrition status only'],ans:1,exp:'"Pooped" = exhausted. Assess fatigue severity, onset, activity tolerance. Rule out anemia, infection, hypothyroidism, depression.'},
+{cat:'환자슬랭',q:'A patient says "My sugar has been all over the place." What do they mean?',hint:'당뇨 환자가 혈당 조절에 대해 말하는 상황이야.',choices:['A. They have been eating too many sweets','B. Their blood glucose levels have been unstable and fluctuating','C. They don\'t like checking blood sugar','D. Their sugar cravings are strong'],ans:1,exp:'"All over the place" = variable and unstable. Assess: glucose log, diet, medication adherence, insulin technique.'},
+{cat:'환자슬랭',q:'A patient says "I\'ve been feeling loopy." What should you assess?',hint:'환자가 이상한 느낌을 표현하는 상황이야.',choices:['A. Joint pain and mobility','B. Altered mental status, medication side effects, or neurological changes','C. Nausea only','D. Vision problems'],ans:1,exp:'"Loopy" = confused or out of it. Assess orientation (A&Ox4), recent medications (opioids, benzos), blood glucose, electrolytes.'},
+{cat:'환자슬랭',q:'A patient says "I\'ve had pins and needles in my feet." What is this medically?',hint:'환자가 신경 증상을 일상 표현으로 말하는 상황이야.',choices:['A. Peripheral vascular disease','B. Paresthesia — associated with neuropathy, vitamin deficiency, or circulatory issues','C. Restless leg syndrome','D. Muscle cramps'],ans:1,exp:'"Pins and needles" = paresthesia (tingling/numbness). Common in diabetic neuropathy, B12 deficiency, poor circulation.'},
+{cat:'환자슬랭',q:'A patient says "I\'m not feeling myself today." What assessment is most appropriate?',hint:'환자가 전반적인 불편함을 모호하게 표현하는 상황이야.',choices:['A. Psychiatric assessment only','B. Comprehensive assessment — vitals, mental status, pain, compare to baseline','C. Ask what they normally feel like','D. Reassure them everyone has bad days'],ans:1,exp:'"Not feeling myself" is a non-specific complaint. Any change from baseline warrants a full head-to-toe assessment.'},
+{cat:'환자슬랭',q:'A patient describes chest pain as "a elephant sitting on my chest." What type of pain is this?',hint:'흉통의 성질을 환자가 묘사하는 방법이야.',choices:['A. Sharp stabbing pain','B. Pressure or crushing sensation — classic description of angina or MI','C. Burning pain suggesting GERD','D. Intermittent cramping'],ans:1,exp:'"Elephant on my chest" = classic crushing/pressure chest pain associated with angina or MI. Immediate ECG and cardiac workup needed.'},
+{cat:'환자슬랭',q:'A patient says "I\'ve been throwing up since yesterday." What is the medical term?',hint:'환자가 구토를 일상적인 말로 표현했어.',choices:['A. Diarrhea','B. Hematemesis','C. Emesis or vomiting','D. Regurgitation'],ans:2,exp:'"Throwing up" = vomiting (emesis). Follow up: how many episodes, amount, color, blood? Last oral intake?'},
+{cat:'환자슬랭',q:'A patient says "I\'m bone dry." What might this mean clinically?',hint:'환자가 자신의 상태를 설명하는 표현이야.',choices:['A. Extremely thirsty and possibly dehydrated','B. Their wound is dry','C. They haven\'t urinated in hours','D. They just had a bath'],ans:0,exp:'"Bone dry" = extremely dry, possibly severe dehydration. Assess skin turgor, mucous membranes, last oral intake, urine output.'},
+{cat:'환자슬랭',q:'A patient says "I feel dizzy as all get-out." What does this mean?',hint:'환자가 어지러움을 강조하는 표현이야.',choices:['A. They have been exercising too much','B. They have been extremely dizzy','C. They feel confused','D. They have been moving around too much'],ans:1,exp:'"As all get-out" means extremely. The patient is reporting severe dizziness. Assess orthostatic vitals, medications, neurological status.'}
+];
 
-function setCategory(c, btn) {
-  cat = c;
-  document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+let cat='all', score=0, total=0, history=[], answered=false, pool=[], idx=0;
+
+function shuffle(arr){return arr.sort(()=>Math.random()-0.5)}
+
+function setCat(c,btn){
+  cat=c;
+  document.querySelectorAll('.cat-pill').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  score = 0; total = 0; history = []; answered = false;
-  document.getElementById('sc').textContent = 0;
-  document.getElementById('tot').textContent = 0;
+  score=0;total=0;history=[];answered=false;
+  document.getElementById('sc').textContent=0;
+  document.getElementById('tot').textContent=0;
   document.getElementById('nextBtn').classList.remove('show');
   renderStreak();
-  load();
+  initPool();
+  render();
 }
 
-function renderStreak() {
-  document.getElementById('streak').innerHTML = history
-    .map(h => `<div class="s-dot ${h ? 'hit' : 'miss'}"></div>`).join('');
+function initPool(){
+  const filtered=cat==='all'?[...Q]:Q.filter(q=>q.cat===cat);
+  pool=shuffle([...filtered]);
+  idx=0;
 }
 
-async function load() {
-  answered = false;
+function renderStreak(){
+  document.getElementById('streak').innerHTML=history.map(h=>`<div class="s-dot ${h?'hit':'miss'}"></div>`).join('');
+}
+
+function next(){
+  answered=false;
   document.getElementById('nextBtn').classList.remove('show');
-  document.getElementById('area').innerHTML = `
-    <div class="loading">
-      <div class="spinner"></div>
-      <div class="loading-txt">문제 생성 중...</div>
-      <div class="loading-sub">AI가 새 임상 영어 문제를 만들고 있어요</div>
-    </div>`;
-
-  try {
-    const res = await fetch('/api/quiz', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ category: cat })
-    });
-
-    if (!res.ok) throw new Error('API error');
-    const q = await res.json();
-    render(q);
-  } catch (e) {
-    document.getElementById('area').innerHTML = `
-      <div class="error-box">
-        <p>문제를 불러오지 못했어요. 잠시 후 다시 시도해주세요.</p>
-        <button onclick="load()">다시 시도</button>
-      </div>`;
-  }
+  idx++;
+  if(idx>=pool.length){pool=shuffle([...pool]);idx=0;}
+  render();
 }
 
-function render(q) {
+function render(){
+  const q=pool[idx];
   total++;
-  document.getElementById('tot').textContent = total;
-
-  document.getElementById('area').innerHTML = `
+  document.getElementById('tot').textContent=total;
+  document.getElementById('area').innerHTML=`
     <div class="card">
       <div class="card-top">
-        <span class="cat-badge">${q.category}</span>
+        <span class="cat-badge">${q.cat}</span>
         <span class="q-num">#${total}</span>
       </div>
-      <div class="q-text">${q.question}</div>
-      ${q.korean_hint ? `<div class="q-hint">${q.korean_hint}</div>` : ''}
-      <div class="options" id="opts">
-        ${q.choices.map((c, i) => `
-          <button class="opt" onclick="pick(${i}, ${q.correct_index}, this)">${c}</button>
-        `).join('')}
+      <div class="q-text">${q.q}</div>
+      ${q.hint?`<div class="q-hint">${q.hint}</div>`:''}
+      <div class="options">
+        ${q.choices.map((c,i)=>`<button class="opt" onclick="pick(${i},${q.ans})">${c}</button>`).join('')}
       </div>
       <div class="feedback" id="fb">
-        <div class="feedback-lbl" id="fb-lbl"></div>
+        <div class="fb-lbl" id="fb-lbl"></div>
         <div id="fb-body"></div>
       </div>
     </div>`;
-
-  window._currentQ = q;
 }
 
-function pick(chosen, correct, btn) {
-  if (answered) return;
-  answered = true;
-
-  const opts = document.querySelectorAll('.opt');
-  opts.forEach((o, i) => {
-    o.disabled = true;
-    if (i === correct) o.classList.add('correct');
-    if (i === chosen && chosen !== correct) o.classList.add('wrong');
+function pick(chosen,correct){
+  if(answered)return;
+  answered=true;
+  const btns=document.querySelectorAll('.opt');
+  btns.forEach((b,i)=>{
+    b.disabled=true;
+    if(i===correct)b.classList.add('correct');
+    if(i===chosen&&chosen!==correct)b.classList.add('wrong');
   });
-
-  const isRight = chosen === correct;
-  if (isRight) score++;
-  history.push(isRight);
-
-  document.getElementById('sc').textContent = score;
+  const ok=chosen===correct;
+  if(ok)score++;
+  history.push(ok);
+  document.getElementById('sc').textContent=score;
   renderStreak();
-
-  const q = window._currentQ;
-  const fb = document.getElementById('fb');
-  fb.className = `feedback show ${isRight ? 'correct' : 'wrong'}`;
-  document.getElementById('fb-lbl').textContent = isRight ? '✓ Correct!' : `✗ 정답: ${q.choices[correct]}`;
-  document.getElementById('fb-body').textContent = q.explanation;
-
+  const q=pool[idx];
+  const fb=document.getElementById('fb');
+  fb.className=`feedback show ${ok?'correct':'wrong'}`;
+  document.getElementById('fb-lbl').textContent=ok?'✓ Correct!':`✗ 정답: ${q.choices[correct]}`;
+  document.getElementById('fb-body').textContent=q.exp;
   document.getElementById('nextBtn').classList.add('show');
 }
 
-load();
+initPool();
+render();
 </script>
 </body>
 </html>
