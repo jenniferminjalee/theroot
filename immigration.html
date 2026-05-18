@@ -622,7 +622,7 @@ a{text-decoration:none;color:inherit}
       <button class="gnav-tab" onclick="location.href='index.html'">Home</button>
       <button class="gnav-tab" onclick="location.href='clinical-quiz'">임상영어</button>
       <button class="gnav-tab on" onclick="location.href='immigration.html'">Immigration Hub</button>
-      <button class="gnav-tab" onclick="location.href='#bulletin'">문호 체크 <span class="dot"></span></button>
+      <button class="gnav-tab" onclick="showBulletin()">문호 체크 <span class="dot"></span></button>
     </div>
   </div>
 </nav>
@@ -808,5 +808,7 @@ function checkVisaDate(){
   }
 }
 </script>
+<script>
+function showBulletin() {window.location.href = "immigration.html#bulletin";}</script>
 </body>
 </html>
