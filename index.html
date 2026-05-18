@@ -1140,8 +1140,7 @@ function updP(step){
 }
 function setD(i,c){const d=document.getElementById('d'+i);if(d)d.className='sdot '+c;}
 function resetQ(){quizHistory=[];cur=0;updP(0);rQ(0);window.scrollTo({top:0,behavior:'smooth'});}
-window.addEventListener('DOMContentLoaded', () => {const params = new URLSearchParams(window.location.search);if(params.get('action') === 'journey'){startJourneyQuiz();}
-});
+const params = new URLSearchParams(window.location.search);if(params.get('action') === 'journey'){startJourneyQuiz();}
 
 /* ── STATE DATA ── */
 const SD=[
