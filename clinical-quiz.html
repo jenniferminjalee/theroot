@@ -81,18 +81,6 @@ main{max-width:680px;margin:0 auto;padding:1.5rem 1.25rem 5rem}
 .next-btn{font-family:var(--sans);font-size:14px;font-weight:500;padding:10px 24px;background:var(--moss);color:white;border:none;border-radius:11px;cursor:pointer;transition:background .2s,opacity .2s;opacity:0;pointer-events:none}
 .next-btn.show{opacity:1;pointer-events:all}
 .next-btn:hover{background:var(--moss-h)}
-
-/* ── GLOBAL NAV ── */
-.gnav{position:sticky;top:0;z-index:100;background:var(--bark);border-bottom:0.5px solid rgba(255,255,255,0.08);}
-.gnav-inner{display:flex;align-items:center;justify-content:center;gap:48px;height:72px;}
-.gnav-logo{font-family:var(--font-d);font-size:48px;color:#1E2E28;letter-spacing:-0.02em;}
-.gnav-logo em{font-style:italic;color:#6D8B7C;}
-.gnav-tabs{display:flex;gap:12px;}
-.gnav-tab{padding:10px 18px;font-size:14px;font-weight:500;color:#7E877F;border-radius:999px;background:transparent;}
-.gnav-tab:hover{color:#F8FBF9;background:rgba(255,255,255,0.08);}
-.gnav-tab.on{background:#E5E6DE;color:#1E2E28;}
-.gnav-tab.dot{width:5px;height:5px;border-radius:50%;background:#4ADE80;display:inline-block;margin-left:4px;vertical-align:middle;}
-
 /* progress page */
 .prog-hero{text-align:center;margin-bottom:2rem}
 .prog-hero h2{font-family:var(--serif);font-size:28px;margin-bottom:.4rem}
@@ -146,16 +134,9 @@ footer a{color:var(--moss);text-decoration:none}
 </style>
 </head>
 <body>
-<!-- GLOBAL NAV -->
-<nav class="gnav">
-  <div class="gnav-inner">
-    <div class="gnav-logo" onclick="window.location.href='clinical-quiz.html'">The<em>Root</em></div>
-    <div class="gnav-tabs">
-      <button class="gnav-tab on" id="tab-home" onclick="window.location.href='index.html'">홈</button>
-      <button class="gnav-tab" id="tab-quiz" onclick="window.location.href='clinical-quiz.html'">임상영어</button>
-      <button class="gnav-tab" id="tab-tracker" onclick="window.location.href='immigration.html'">Immigration Hub</button>
-    </div>
-  </div>
+<nav>
+  <a class="nav-logo" href="/">the root<span>.</span></a>
+  <a class="nav-back" href="/">← 홈으로</a>
 </nav>
 <section class="hero">
   <div class="hero-tag">Clinical English</div>
