@@ -661,7 +661,7 @@ footer a{color:#C6DDD3;text-decoration:none;}
       <button class="gnav-tab on" id="tab-home" onclick="showPage('home')">Home</button>
       <button class="gnav-tab" id="tab-quiz" onclick="window.location.href='clinical-quiz.html'">임상영어</button>
       <button class="gnav-tab" id="tab-tracker" onclick="window.location.href='immigration.html'">Immigration Hub</button>
-      <button class="gnav-tab" id="tab-bulletin" onclick="showPage('page-bulletin')">문호 체크 <span class="dot"></span></button>
+      <button class="gnav-tab" id="tab-bulletin" onclick="showPage('bulletin')">문호 체크 <span class="dot"></span></button>
     </div>
   </div>
 </nav>
@@ -1054,7 +1054,7 @@ function showPage(id, pushHistory=true){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.gnav-tab').forEach(t=>t.classList.remove('on'));
   document.getElementById('page-'+id).classList.add('on');
-  const tabs={home:'tab-home',journey:'tab-home',tracker:'tab-tracker',quiz:'tab-quiz',adapt:'tab-home',landing:'tab-tracker',bulletin:'tab-tracker'};
+  const tabs={home:'tab-home',journey:'tab-home',tracker:'tab-tracker',quiz:'tab-quiz',adapt:'tab-home',landing:'tab-tracker',bulletin:'tab-bulletin'};
   document.getElementById(tabs[id])?.classList.add('on');
   window.scrollTo({top:0,behavior:'smooth'});
   if(pushHistory) history.pushState({page:id}, '', '#'+pageHash(id));
