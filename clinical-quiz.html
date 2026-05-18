@@ -134,9 +134,16 @@ footer a{color:var(--moss);text-decoration:none}
 </style>
 </head>
 <body>
-<nav>
-  <a class="nav-logo" href="/">the root<span>.</span></a>
-  <a class="nav-back" href="/">← 홈으로</a>
+<nav class="gnav">
+  <div class="gnav-inner">
+    <div class="gnav-logo" onclick="location.href='index.html'">The <em>Root</em></div>
+    <div class="gnav-tabs">
+      <button class="gnav-tab" onclick="location.href='index.html'">Home</button>
+      <button class="gnav-tab" onclick="location.href='clinical-quiz.html'">임상영어</button>
+      <button class="gnav-tab on" onclick="location.href='immigration.html'">Immigration Hub</button>
+      <button class="gnav-tab" onclick="location.href='#bulletin'">문호 체크 <span class="dot"></span></button>
+    </div>
+  </div>
 </nav>
 <section class="hero">
   <div class="hero-tag">Clinical English</div>
