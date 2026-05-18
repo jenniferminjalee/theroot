@@ -51,7 +51,7 @@ body{font-family:var(--font-b);background:var(--cream);color:var(--bark);min-hei
 }
 
 .gnav-inner{
-  max-width:1180px;
+  max-width:980px;
   margin:0 auto;
   padding:0 2rem;
   display:flex;
@@ -661,7 +661,7 @@ footer a{color:#C6DDD3;text-decoration:none;}
       <button class="gnav-tab on" id="tab-home" onclick="showPage('home')">Home</button>
       <button class="gnav-tab" id="tab-quiz" onclick="window.location.href='clinical-quiz.html'">임상영어</button>
       <button class="gnav-tab" id="tab-tracker" onclick="window.location.href='immigration.html'">Immigration Hub</button>
-      <button class="gnav-tab" onclick="window.location.href='immigration.html#bulletin'">
+      <button class="gnav-tab" id="page-bulletin" onclick="showPage('bulletin')">
         문호 체크 <span class="dot"></span>
       </button>
     </div>
@@ -956,7 +956,7 @@ footer a{color:#C6DDD3;text-decoration:none;}
 
 </div>
 
-<!-- PAGE: BULLETIN (문호체크) -->
+<!-- PAGE: BULLETIN (문호 체크) -->
 <div class="page" id="page-bulletin">
   <div class="dash-page">
     <div class="dash-eyebrow">Visa Bulletin</div>
