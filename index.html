@@ -43,7 +43,7 @@ body{font-family:var(--font-b);background:var(--cream);color:var(--bark);min-hei
 /* ── GLOBAL NAV ── */
 .gnav{position:sticky;top:0;z-index:100;background:var(--bark);border-bottom:0.5px solid rgba(255,255,255,0.08);}
 .gnav-inner{max-width:960px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:52px;}
-.gnav-logo{font-family:var(--font-d);font-size:18px;color:#F8FBF9;letter-spacing:0.02em;cursor:pointer;}
+.gnav-logo{font-family:var(--font-d);font-size:24px;color:#F8FBF9;letter-spacing:0.02em;cursor:pointer;}
 .gnav-logo em{font-style:italic;color:#B9D1C7;}
 .gnav-tabs{display:flex;gap:2px;}
 .gnav-tab{padding:6px 12px;font-size:12px;font-weight:500;color:rgba(248,251,249,0.55);cursor:pointer;border-radius:20px;transition:all 0.15s;border:none;background:transparent;font-family:var(--font-b);white-space:nowrap;}
@@ -593,10 +593,7 @@ footer a{color:#C6DDD3;text-decoration:none;}
     <div class="gnav-tabs">
       <button class="gnav-tab on" id="tab-home" onclick="showPage('home')">홈</button>
       <button class="gnav-tab" id="tab-quiz" onclick="showPage('quiz');initClinicalQuiz();">임상영어</button>
-      <button class="gnav-tab" id="tab-adapt" onclick="showPage('adapt');initAdaptQuiz();">적응테스트</button>
       <button class="gnav-tab" id="tab-tracker" onclick="window.location.href='immigration.html'">Immigration Hub</button>
-      <button class="gnav-tab" id="tab-landing" onclick="showPage('landing')">랜딩</button>
-      <button class="gnav-tab" id="tab-bulletin" onclick="showPage('bulletin')">이민문호<span class="dot"></span></button>
     </div>
   </div>
 </nav>
@@ -686,6 +683,17 @@ footer a{color:#C6DDD3;text-decoration:none;}
         <p>뜻이 바로 떠오르지 않았다면, 오늘의 5문제로 감각을 익혀보세요.</p>
       </div>
       <button class="v2-secondary-btn" onclick="showPage('quiz');initClinicalQuiz();trackEvent('daily_clinical_home_click')">오늘의 5문제 풀기 →</button>
+    </div>
+  </section>
+
+  <section class="v2-daily-section" style="padding-top:0;">
+    <div class="v2-daily-card" style="background:var(--mist);border:0.5px solid var(--sand);">
+      <div>
+        <div class="v2-section-label" style="color:var(--clay);">For fun</div>
+        <h2 style="color:var(--bark);">나는 미국에서 잘 살 수 있을까?</h2>
+        <p style="color:var(--soil);opacity:0.75;">영어 실력보다 마인드셋으로 보는 미국 생존 유형 테스트. 10문항, 3분이면 충분해요.</p>
+      </div>
+      <button class="v2-secondary-btn" style="background:var(--bark);color:#F8FBF9;white-space:nowrap;" onclick="showPage('adapt');initAdaptQuiz();trackEvent('adapt_home_click')">테스트 해보기 →</button>
     </div>
   </section>
 
@@ -979,7 +987,7 @@ function showPage(id, pushHistory=true){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.gnav-tab').forEach(t=>t.classList.remove('on'));
   document.getElementById('page-'+id).classList.add('on');
-  const tabs={home:'tab-home',journey:'tab-home',tracker:'tab-tracker',quiz:'tab-quiz',adapt:'tab-adapt',landing:'tab-landing',bulletin:'tab-bulletin'};
+  const tabs={home:'tab-home',journey:'tab-home',tracker:'tab-tracker',quiz:'tab-quiz',adapt:'tab-home',landing:'tab-tracker',bulletin:'tab-tracker'};
   document.getElementById(tabs[id])?.classList.add('on');
   window.scrollTo({top:0,behavior:'smooth'});
   if(pushHistory) history.pushState({page:id}, '', '#'+pageHash(id));
