@@ -45,12 +45,13 @@ body{font-family:var(--font-b);background:var(--cream);color:var(--bark);min-hei
   position:sticky;
   top:0;
   z-index:100;
-  background:var(--bark);
-  border-bottom:0.5px solid rgba(255,255,255,0.08);
+  background:rgba(246,243,236,0.92);
+  backdrop-filter:blur(14px);
+  border-bottom:0.5px solid rgba(22,52,44,0.10);
 }
 
 .gnav-inner{
-  max-width:1080px;
+  max-width:960px;
   margin:0 auto;
   padding:0 1.5rem;
   display:flex;
@@ -62,30 +63,60 @@ body{font-family:var(--font-b);background:var(--cream);color:var(--bark);min-hei
 .gnav-logo{
   font-family:var(--font-d);
   font-size:24px;
-  color:#F8FBF9;
+  color:#20342B;
+  letter-spacing:0.02em;
+  cursor:pointer;
+  white-space:nowrap;
 }
 
 .gnav-logo em{
-  color:#B9D1C7;
   font-style:italic;
+  color:#5F7D6B;
 }
 
 .gnav-tabs{
   display:flex;
+  align-items:center;
   gap:2px;
 }
 
 .gnav-tab{
-  border:none;
-  background:transparent;
-  color:rgba(248,251,249,0.55);
+  appearance:none;
+  -webkit-appearance:none;
   padding:6px 12px;
+  font-family:var(--font-b);
+  font-size:12px;
+  font-weight:500;
+  color:rgba(32,52,43,0.56);
+  cursor:pointer;
   border-radius:20px;
+  transition:all 0.15s;
+  border:none;
+  outline:none;
+  box-shadow:none;
+  background:transparent;
+  white-space:nowrap;
+}
+
+.gnav-tab:hover{
+  color:#20342B;
+  background:rgba(95,125,107,0.10);
 }
 
 .gnav-tab.on{
-  background:rgba(255,255,255,0.12);
-  color:white;
+  color:#20342B;
+  background:rgba(95,125,107,0.14);
+}
+
+.gnav-tab .dot{
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:#4ADE80;
+  display:inline-block;
+  margin-left:4px;
+  vertical-align:middle;
+  box-shadow:0 0 0 3px rgba(74,222,128,.16);
 }
 /* ── PAGES ── */
 .page{display:none;}.page.on{display:block;}
@@ -625,12 +656,14 @@ footer a{color:#C6DDD3;text-decoration:none;}
 <!-- GLOBAL NAV -->
 <nav class="gnav">
   <div class="gnav-inner">
-    <div class="gnav-logo" onclick="location.href='index.html'">The <em>Root</em></div>
+    <div class="gnav-logo" onclick="showPage('home')">The <em>Root</em></div>
     <div class="gnav-tabs">
-      <button class="gnav-tab" onclick="location.href='index.html'">Home</button>
-      <button class="gnav-tab" onclick="location.href='clinical-quiz.html'">임상영어</button>
-      <button class="gnav-tab on" onclick="location.href='immigration.html'">Immigration Hub</button>
-      <button class="gnav-tab" onclick="location.href='#bulletin'">문호 체크 <span class="dot"></span></button>
+      <button class="gnav-tab on" id="tab-home" onclick="showPage('home')">Home</button>
+      <button class="gnav-tab" id="tab-quiz" onclick="window.location.href='clinical-quiz.html'">임상영어</button>
+      <button class="gnav-tab" id="tab-tracker" onclick="window.location.href='immigration.html'">Immigration Hub</button>
+      <button class="gnav-tab" onclick="window.location.href='immigration.html#bulletin'">
+        문호 체크 <span class="dot"></span>
+      </button>
     </div>
   </div>
 </nav>
