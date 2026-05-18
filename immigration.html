@@ -21,8 +21,12 @@
 </style>
 </head>
 <body>
-<nav class="nav"><div class="nav-inner"><a class="logo" href="index.html">The <em>Root</em></a><div class="nav-links"><a class="nav-link" href="index.html#quiz">Clinical English</a><a class="nav-link" href="index.html#journey">Journey Quiz</a><a class="nav-link" href="index.html">Home</a></div></div></nav>
-<header class="hero"><div class="hero-inner"><div><div class="kicker">Immigration Hub</div><h1>미국 간호사 준비,<br><em>이민과 정착 흐름</em> 한눈에 보기</h1><p>영주권, EB-3 비자문호, 입국 후 랜딩 준비까지. 복잡한 과정을 한꺼번에 쏟아내기보다, 오늘 확인해야 할 행동 중심으로 정리했어요.</p><div class="hero-actions"><a class="btn btn-primary" href="#tools">필요한 체크리스트 고르기 →</a><a class="btn btn-ghost" href="index.html#journey">내 단계 먼저 진단하기</a></div></div><aside class="tracker-card" aria-label="Priority Date tracker"><div class="tracker-top"><span class="tracker-title">Visa Bulletin Tracker</span><span class="tracker-pill">EB-3</span></div><p class="tracker-copy">내 Priority Date와 이번 달 문호 날짜를 넣어 현재 문호 안에 들어왔는지 빠르게 확인해보세요.</p><div class="tracker-fields"><div class="tracker-field"><label for="pdInput">My Priority Date</label><input id="pdInput" type="date"></div><div class="tracker-field"><label for="fadInput">Final Action Date / Dates for Filing</label><input id="fadInput" type="date"></div></div><div class="tracker-actions"><button type="button" onclick="checkVisaDate()">확인하기 →</button><a href="https://travel.state.gov/content/travel/en/legal/visa-law0/visa-bulletin.html" target="_blank" rel="noopener">공식 문호 보기</a></div><div class="tracker-result" id="visaResult"></div><p class="tracker-note">*간단 비교용 도구예요. 실제 케이스 진행은 공식 Visa Bulletin, 변호사, 에이전시 안내를 함께 확인하세요.</p></aside></div></header>
+<div class="nav-links">
+<a class="nav-link" href="index.html">Home</a>
+<a class="nav-link" href="index.html#quiz">임상영어</a>
+<a class="nav-link" href="immigration.html" style="color:var(--bark);font-weight:700;">Immigration Hub</a>
+<a class="nav-link" href="#bulletin">문호 체크</a>
+</div><header class="hero"><div class="hero-inner"><div><div class="kicker">Immigration Hub</div><h1>미국 간호사 준비,<br><em>이민과 정착 흐름</em> 한눈에 보기</h1><p>영주권, EB-3 비자문호, 입국 후 랜딩 준비까지. 복잡한 과정을 한꺼번에 쏟아내기보다, 오늘 확인해야 할 행동 중심으로 정리했어요.</p><div class="hero-actions"><a class="btn btn-primary" href="#tools">필요한 체크리스트 고르기 →</a><a class="btn btn-ghost" href="index.html#journey">내 단계 먼저 진단하기</a></div></div><aside class="tracker-card" id="bulletin" aria-label="Priority Date tracker"><div class="tracker-top"><span class="tracker-title">Visa Bulletin Tracker</span><span class="tracker-pill">EB-3</span></div><p class="tracker-copy">이번 달 EB-3 Final Action Date 기준으로 내 Priority Date 진행 가능성을 빠르게 확인해보세요.</p><div class="tracker-fields"><div class="tracker-field"><label for="pdInput">My Priority Date</label><input id="pdInput" type="date"></div><div class="tracker-actions"><button type="button" onclick="checkVisaDate()">확인하기 →</button><a href="https://travel.state.gov/content/travel/en/legal/visa-law0/visa-bulletin.html" target="_blank" rel="noopener">공식 문호 보기</a></div><div class="tracker-result" id="visaResult"></div><p class="tracker-note">*간단 비교용 도구예요. 실제 케이스 진행은 공식 Visa Bulletin, 변호사, 에이전시 안내를 함께 확인하세요.</p></aside></div></header>
 <main>
 <section class="section" id="tools"><div class="section-head"><div class="section-label">What do you need today?</div><h2>필요한 것만 바로 열어보세요.</h2><p>처음 온 분은 여정 진단을 먼저, 이미 진행 중인 분은 아래 체크리스트에서 바로 시작하면 돼요.</p></div><div class="hub-grid"><article class="hub-card featured"><div><span class="tag">Most Popular</span><div class="card-icon">🟢</div><h3>Green Card Checklist</h3><p>I-140부터 인터뷰, 입국까지. 내 영주권 진행 상황이 어디쯤인지 체크해요.</p><div class="mini-list"><div>Priority Date 기록</div><div>NVC / DS-260 / P3 / P4</div><div>입국 후 Green Card 수령</div></div></div><button class="card-btn" onclick="location.href='index.html#tracker'">Open checklist →</button></article><article class="hub-card"><div><span class="tag">Landing</span><div class="card-icon">✈️</div><h3>U.S. Landing Checklist</h3><p>미국 입국 후 첫 주부터 3개월까지, 놓치기 쉬운 생활 기반 세팅을 정리해요.</p><div class="mini-list"><div>SSN · 은행 · 핸드폰</div><div>운전면허 · 집 · 보험</div><div>401(k) · 신용카드</div></div></div><button class="card-btn" onclick="location.href='index.html#landing'">View checklist →</button></article><article class="hub-card"><div><span class="tag">Monthly Update</span><div class="card-icon">📅</div><h3>Visa Bulletin</h3><p>EB-3 문호와 Priority Date 기준을 확인해요. 매달 업데이트를 보기 좋은 형태로 정리합니다.</p><div class="mini-list"><div>EB-3 Final Action Date</div><div>Priority Date 입력 확인</div><div>공식 Visa Bulletin 링크</div></div></div><button class="card-btn" onclick="location.href='index.html#bulletin'">Check now →</button></article></div></section>
 <div class="trust-band"><div class="trust-inner"><div class="avatar">JL</div><div><div class="section-label">Been there</div><h2>제가 처음 미국 왔을 때도 이 부분이 제일 복잡했어요.</h2><p>서류 이름은 비슷하고, 단계는 길고, 사람마다 말이 달랐거든요. 그래서 The Root에서는 “오늘 내가 확인해야 할 것” 중심으로 정리해두려고 해요.</p></div><a class="btn btn-ghost" href="https://www.youtube.com/@JenniferMinjaLee" target="_blank">Jennifer 이야기 보기 →</a></div></div>
@@ -37,22 +41,22 @@ function formatVisaDate(v){
   return d.toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric'});
 }
 function checkVisaDate(){
+  const CURRENT_FAD = new Date('2024-06-01T00:00:00').getTime();
+function checkVisaDate(){
   const pd=document.getElementById('pdInput').value;
-  const fad=document.getElementById('fadInput').value;
   const box=document.getElementById('visaResult');
-  if(!pd||!fad){
+  if(!pd){
     box.className='tracker-result show';
-    box.innerHTML='두 날짜를 모두 입력해 주세요. Priority Date와 이번 달 문호 날짜가 필요해요.';
+    box.innerHTML='Priority Date를 입력해 주세요.';
     return;
   }
   const pdTime=new Date(pd+'T00:00:00').getTime();
-  const fadTime=new Date(fad+'T00:00:00').getTime();
-  box.className='tracker-result show';
-  if(pdTime<=fadTime){
-    box.innerHTML='<strong>문호 안에 들어왔을 가능성이 있어요.</strong><br>Priority Date '+formatVisaDate(pd)+'가 입력한 문호 날짜 '+formatVisaDate(fad)+'보다 빠르거나 같아요. 다음 단계 진행 가능 여부를 공식 안내로 확인하세요.';
-  }else{
-    const diff=Math.ceil((pdTime-fadTime)/(1000*60*60*24));
-    box.innerHTML='<strong>아직 대기 구간일 가능성이 있어요.</strong><br>Priority Date가 입력한 문호 날짜보다 약 '+diff+'일 뒤에 있어요. 다음 달 Visa Bulletin 업데이트를 계속 확인해보세요.';
+  if(pdTime<=CURRENT_FAD){
+    box.className='tracker-result show success';
+    box.innerHTML='<strong>문호 안에 들어왔을 가능성이 있어요 ✅</strong><br>현재 EB-3 Final Action Date 기준 진행 가능 여부를 확인해보세요.';
+  } else {
+    box.className='tracker-result show wait';
+    box.innerHTML='<strong>아직 대기 구간이에요 🌱</strong><br>다음 달 Visa Bulletin 업데이트를 확인해보세요.';
   }
 }
 </script>
