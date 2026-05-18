@@ -661,9 +661,7 @@ footer a{color:#C6DDD3;text-decoration:none;}
       <button class="gnav-tab on" id="tab-home" onclick="showPage('home')">Home</button>
       <button class="gnav-tab" id="tab-quiz" onclick="window.location.href='clinical-quiz.html'">임상영어</button>
       <button class="gnav-tab" id="tab-tracker" onclick="window.location.href='immigration.html'">Immigration Hub</button>
-      <button class="gnav-tab" id="page-bulletin"onclick="document.getElementById('page-bulletin').style.display='block'; window.scrollTo({top: document.getElementById('page-bulletin').offsetTop, behavior:'smooth'});">
-  문호 체크 <span class="dot"></span>
-      </button>
+      <button class="gnav-tab" onclick="showBulletin()">문호 체크 <span class="dot"></span></button>
     </div>
   </div>
 </nav>
@@ -1006,7 +1004,6 @@ footer a{color:#C6DDD3;text-decoration:none;}
         <div style="font-size:12px;margin-top:2px;">2024년 6월 1일 수준에서 멈춰 있어요. 추가 후퇴 가능성 경고 중.</div>
       </div>
     </div>
-
     <a href="https://travel.state.gov/content/travel/en/legal/visa-law0/visa-bulletin.html" target="_blank" style="display:block;text-align:center;padding:10px;font-size:12px;color:var(--moss);border:0.5px solid rgba(36,76,65,0.2);border-radius:3px;text-decoration:none;background:var(--moss-light);">공식 Visa Bulletin 원문 보기 →</a>
   </div>
 </div>
@@ -1215,6 +1212,9 @@ function updP(step){
 function setD(i,c){const d=document.getElementById('d'+i);if(d)d.className='sdot '+c;}
 function resetQ(){quizHistory=[];cur=0;updP(0);rQ(0);window.scrollTo({top:0,behavior:'smooth'});}
 const params = new URLSearchParams(window.location.search);if(params.get('action') === 'journey'){startJourneyQuiz();}
+function showBulletin() {document.querySelectorAll('.page').forEach(page => {page.style.display = 'none';});document.getElementById('page-bulletin').style.display = 'block';
+window.scrollTo({top: 0,behavior: 'smooth'});
+}
 
 /* ── STATE DATA ── */
 const SD=[
