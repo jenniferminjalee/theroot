@@ -41,16 +41,52 @@
 body{font-family:var(--font-b);background:var(--cream);color:var(--bark);min-height:100vh;overflow-x:hidden;}
 
 /* ── GLOBAL NAV ── */
-.gnav{position:sticky;top:0;z-index:100;background:var(--bark);border-bottom:0.5px solid rgba(255,255,255,0.08);}
-.gnav-inner{max-width:960px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:52px;}
-.gnav-logo{font-family:var(--font-d);font-size:24px;color:#F8FBF9;letter-spacing:0.02em;cursor:pointer;}
-.gnav-logo em{font-style:italic;color:#B9D1C7;}
-.gnav-tabs{display:flex;gap:2px;}
-.gnav-tab{padding:6px 12px;font-size:12px;font-weight:500;color:rgba(248,251,249,0.55);cursor:pointer;border-radius:20px;transition:all 0.15s;border:none;background:transparent;font-family:var(--font-b);white-space:nowrap;}
-.gnav-tab:hover{color:#F8FBF9;background:rgba(255,255,255,0.08);}
-.gnav-tab.on{color:#F8FBF9;background:rgba(255,255,255,0.12);}
-.gnav-tab .dot{width:5px;height:5px;border-radius:50%;background:#4ADE80;display:inline-block;margin-left:4px;vertical-align:middle;}
+.gnav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:var(--bark);
+  border-bottom:0.5px solid rgba(255,255,255,0.08);
+}
 
+.gnav-inner{
+  max-width:1080px;
+  margin:0 auto;
+  padding:0 1.5rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:52px;
+}
+
+.gnav-logo{
+  font-family:var(--font-d);
+  font-size:24px;
+  color:#F8FBF9;
+}
+
+.gnav-logo em{
+  color:#B9D1C7;
+  font-style:italic;
+}
+
+.gnav-tabs{
+  display:flex;
+  gap:2px;
+}
+
+.gnav-tab{
+  border:none;
+  background:transparent;
+  color:rgba(248,251,249,0.55);
+  padding:6px 12px;
+  border-radius:20px;
+}
+
+.gnav-tab.on{
+  background:rgba(255,255,255,0.12);
+  color:white;
+}
 /* ── PAGES ── */
 .page{display:none;}.page.on{display:block;}
 
@@ -589,11 +625,12 @@ footer a{color:#C6DDD3;text-decoration:none;}
 <!-- GLOBAL NAV -->
 <nav class="gnav">
   <div class="gnav-inner">
-    <div class="gnav-logo" onclick="showPage('home')">The <em>Root</em></div>
+    <div class="gnav-logo" onclick="location.href='index.html'">The <em>Root</em></div>
     <div class="gnav-tabs">
-      <button class="gnav-tab on" id="tab-home" onclick="showPage('home')">홈</button>
-      <button class="gnav-tab" id="tab-quiz" onclick="window.location.href='clinical-quiz.html'">임상영어</button>
-      <button class="gnav-tab" id="tab-tracker" onclick="window.location.href='immigration.html'">Immigration Hub</button>
+      <button class="gnav-tab" onclick="location.href='index.html'">Home</button>
+      <button class="gnav-tab" onclick="location.href='clinical-quiz.html'">임상영어</button>
+      <button class="gnav-tab on" onclick="location.href='immigration.html'">Immigration Hub</button>
+      <button class="gnav-tab" onclick="location.href='#bulletin'">문호 체크 <span class="dot"></span></button>
     </div>
   </div>
 </nav>
