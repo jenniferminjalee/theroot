@@ -26,11 +26,83 @@
   --radius:18px;
 }
 body{font-family:var(--sans);background:var(--cream);color:var(--text);min-height:100vh}
-nav{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 2rem;border-bottom:1px solid var(--bl);background:var(--cream);position:sticky;top:0;z-index:10}
-.nav-logo{font-family:var(--serif);font-size:20px;color:var(--moss);text-decoration:none;letter-spacing:-.3px}
-.nav-logo span{color:var(--bark)}
-.nav-back{font-size:13px;color:var(--text-mu);text-decoration:none;transition:color .2s}
-.nav-back:hover{color:var(--moss)}
+  
+/* ── ORIGINAL IMMIGRATION NAV RESTORE ── */
+.gnav{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:var(--bark);
+  border-bottom:0.5px solid rgba(255,255,255,0.08);
+}
+
+.gnav-inner{
+  max-width:1080px;
+  margin:0 auto;
+  padding:0 1.5rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:52px;
+}
+
+.gnav-logo{
+  font-family:var(--font-d);
+  font-size:24px;
+  color:#F8FBF9;
+  letter-spacing:0.02em;
+  cursor:pointer;
+  white-space:nowrap;
+}
+
+.gnav-logo em{
+  font-style:italic;
+  color:#B9D1C7;
+}
+
+.gnav-tabs{
+  display:flex;
+  gap:2px;
+  align-items:center;
+}
+
+.gnav-tab{
+  appearance:none;
+  -webkit-appearance:none;
+  padding:6px 12px;
+  font-size:12px;
+  font-weight:500;
+  color:rgba(248,251,249,0.55);
+  cursor:pointer;
+  border-radius:20px;
+  transition:all 0.15s;
+  border:none;
+  outline:none;
+  box-shadow:none;
+  background:transparent;
+  font-family:var(--font-b);
+  white-space:nowrap;
+}
+
+.gnav-tab:hover{
+  color:#F8FBF9;
+  background:rgba(255,255,255,0.08);
+}
+
+.gnav-tab.on{
+  color:#F8FBF9;
+  background:rgba(255,255,255,0.12);
+}
+
+.gnav-tab .dot{
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:#4ADE80;
+  display:inline-block;
+  margin-left:4px;
+  vertical-align:middle;
+}
 .hero{text-align:center;padding:2.5rem 1.5rem 1.5rem;max-width:680px;margin:0 auto}
 .hero-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--moss);background:var(--moss-l);padding:4px 12px;border-radius:20px;margin-bottom:.85rem}
 .hero h1{font-family:var(--serif);font-size:clamp(24px,5vw,36px);line-height:1.2;margin-bottom:.6rem}
