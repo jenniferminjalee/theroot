@@ -215,6 +215,37 @@ main{max-width:680px;margin:0 auto;padding:1.5rem 1.25rem 5rem}
 footer{text-align:center;padding:2rem;font-size:12px;color:var(--text-mu);border-top:1px solid var(--bl);margin-top:3rem}
 footer a{color:var(--moss);text-decoration:none}
 @media(max-width:500px){nav{padding:1rem 1.25rem}.hero{padding:1.75rem 1rem 1rem}.card{padding:1.5rem}.stat-num{font-size:26px}}
+
+/* ── DAILY STREAK BANNER ── */
+.daily-banner{background:white;border:1px solid var(--bl);border-radius:14px;padding:1rem 1.25rem;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.db-left{display:flex;align-items:center;gap:10px}
+.db-fire{font-size:22px;line-height:1}
+.db-streak{font-size:15px;font-weight:700;color:var(--text)}
+.db-streak span{color:var(--moss)}
+.db-freeze{font-size:12px;color:#3B82F6;background:#EFF6FF;padding:3px 9px;border-radius:999px}
+.db-right{text-align:right}
+.db-today{font-size:12px;color:var(--text-mu);margin-bottom:4px}
+.db-bar-bg{width:140px;height:6px;background:var(--cream-d);border-radius:3px;overflow:hidden}
+.db-bar-fill{height:100%;background:var(--moss);border-radius:3px;transition:width .5s ease}
+.db-pct{font-size:11px;color:var(--moss);margin-top:3px;text-align:right}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--bark);color:white;padding:12px 22px;border-radius:999px;font-size:14px;font-weight:600;opacity:0;transition:all .35s;z-index:50;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── BADGES ── */
+.badge-section{margin-bottom:2rem}
+.badge-section h3{font-size:15px;font-weight:600;margin-bottom:.25rem}
+.badge-section p{font-size:12px;color:var(--text-mu);margin-bottom:.75rem}
+.badge-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.badge-item{background:white;border:1px solid var(--bl);border-radius:14px;padding:1rem;text-align:center;transition:all .2s}
+.badge-item.unlocked{border-color:var(--moss);background:var(--moss-l)}
+.badge-icon{font-size:26px;margin-bottom:6px}
+.badge-name{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px}
+.badge-desc{font-size:11px;color:var(--text-mu);line-height:1.4}
+.badge-item.locked .badge-icon{filter:grayscale(1);opacity:.35}
+.badge-item.locked .badge-name{color:var(--text-mu)}
+@media(max-width:500px){.badge-grid{grid-template-columns:repeat(2,1fr)}.db-bar-bg{width:100px}}
 </style>
 </head>
 <body>
@@ -257,6 +288,19 @@ footer a{color:var(--moss);text-decoration:none}
       <button class="t-btn" id="btn-srs" onclick="setMode('srs')">복습 우선</button>
     </div>
   </div>
+  <!-- Daily Streak Banner -->
+  <div class="daily-banner" id="dailyBanner">
+    <div class="db-left">
+      <div class="db-fire" id="db-fire">💧</div>
+      <div class="db-streak"><span id="db-streak-num">0</span>일 연속</div>
+      <div class="db-freeze" id="db-freeze" style="display:none">❄️ freeze 1개</div>
+    </div>
+    <div class="db-right">
+      <div class="db-today" id="db-today-txt">오늘 0/5 문제</div>
+      <div class="db-bar-bg"><div class="db-bar-fill" id="db-bar" style="width:0%"></div></div>
+      <div class="db-pct" id="db-pct">0%</div>
+    </div>
+  </div>
   <div class="streak-wrap" id="streak"></div>
   <div id="area"></div>
   <div class="bottom-row">
@@ -279,6 +323,11 @@ footer a{color:var(--moss);text-decoration:none}
     <h3>복습 대기 중</h3>
     <div id="p-due-info"></div>
     <button class="start-review-btn" onclick="startReview()">복습 모드로 시작하기 →</button>
+  </div>
+  <div class="badge-section">
+    <h3>마일스톤 배지</h3>
+    <p>달성하면 자동으로 해금돼요 🏅</p>
+    <div class="badge-grid" id="badge-grid"></div>
   </div>
   <div class="mastery-section"><h3>카테고리별 숙련도</h3><div id="p-mastery"></div></div>
   <button class="reset-btn" onclick="confirmReset()">학습 기록 초기화</button>
@@ -583,6 +632,69 @@ function sendFeedback(){
   window.location.href=`mailto:jenniferminjalee@gmail.com?subject=${subject}&body=${body}`;
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeFeedback();});
+
+/* ── DAILY STREAK ── */
+const DAILY_KEY='theroot_daily';
+const BADGES=[
+  {id:'first',icon:'🌱',name:'첫 발걸음',desc:'첫 정답',fn:()=>loadHist().filter(Boolean).length>=1},
+  {id:'ten',icon:'📋',name:'차팅 시작',desc:'10문제 완료',fn:()=>loadHist().length>=10},
+  {id:'streak5',icon:'🔥',name:'5일 루틴',desc:'5일 연속 학습',fn:()=>loadDaily().streak>=5},
+  {id:'half',icon:'💪',name:'절반 왔어요',desc:'51문제 완료',fn:()=>loadHist().length>=51},
+  {id:'week',icon:'⭐',name:'1주일 루틴',desc:'7일 연속 학습',fn:()=>loadDaily().streak>=7},
+  {id:'all',icon:'🏥',name:'The Root RN',desc:'102문제 전체 완료',fn:()=>loadHist().length>=102},
+];
+function loadDaily(){try{return JSON.parse(localStorage.getItem(DAILY_KEY))||{streak:0,lastDate:'',todayCount:0,freeze:true};}catch{return{streak:0,lastDate:'',todayCount:0,freeze:true};}}
+function saveDaily(d){localStorage.setItem(DAILY_KEY,JSON.stringify(d));}
+function todayStr(){return new Date().toISOString().slice(0,10);}
+function yesterdayStr(){const d=new Date();d.setDate(d.getDate()-1);return d.toISOString().slice(0,10);}
+function updateDaily(){
+  const d=loadDaily();const today=todayStr();
+  if(d.lastDate===today){d.todayCount++;}
+  else if(d.lastDate===yesterdayStr()){d.streak++;d.todayCount=1;}
+  else if(d.lastDate===''){d.streak=1;d.todayCount=1;}
+  else{if(d.freeze){d.freeze=false;}else{d.streak=1;}d.todayCount=1;}
+  d.lastDate=today;saveDaily(d);renderDailyBanner();
+  if(d.todayCount===5)showToast('🔥 오늘 streak 완료! 5문제 달성!');
+}
+function renderDailyBanner(){
+  const d=loadDaily();const today=todayStr();
+  const count=d.lastDate===today?d.todayCount:0;
+  const pct=Math.min(100,Math.round(count/5*100));
+  document.getElementById('db-streak-num').textContent=d.streak;
+  document.getElementById('db-fire').textContent=d.streak>=7?'🔥':d.streak>=3?'🔥':'💧';
+  document.getElementById('db-today-txt').textContent=`오늘 ${count}/5 문제`;
+  document.getElementById('db-bar').style.width=pct+'%';
+  document.getElementById('db-pct').textContent=pct+'%';
+  document.getElementById('db-freeze').style.display=d.freeze?'':'none';
+}
+function showToast(msg){
+  let t=document.getElementById('toast-el');
+  if(!t){t=document.createElement('div');t.id='toast-el';t.className='toast';document.body.appendChild(t);}
+  t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);
+}
+function renderBadges(){
+  document.getElementById('badge-grid').innerHTML=BADGES.map(b=>{
+    const ok=b.fn();
+    return `<div class="badge-item ${ok?'unlocked':'locked'}"><div class="badge-icon">${ok?b.icon:'🔒'}</div><div class="badge-name">${b.name}</div><div class="badge-desc">${b.desc}</div></div>`;
+  }).join('');
+}
+/* renderProgress 확장 */
+const _rp=renderProgress;
+renderProgress=function(){_rp();renderBadges();};
+/* pick 확장 — 정답 시 daily 업데이트 */
+const _pick=pick;
+pick=function(chosen,correct,qid){_pick(chosen,correct,qid);if(chosen===correct)updateDaily();};
+/* confirmReset 확장 — daily도 초기화 */
+const _cr=confirmReset;
+confirmReset=function(){
+  if(confirm('모든 학습 기록을 초기화할까요? 되돌릴 수 없어요.')){
+    localStorage.removeItem(SRS_KEY);localStorage.removeItem(HIST_KEY);localStorage.removeItem(DAILY_KEY);
+    hist=[];score=0;total=0;
+    document.getElementById('sc').textContent=0;document.getElementById('tot').textContent=0;
+    initPool();render();renderStreak();renderProgress();renderDailyBanner();
+  }
+};
+renderDailyBanner();
 
 init();
 </script>
