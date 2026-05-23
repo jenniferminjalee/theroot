@@ -807,6 +807,12 @@ function checkVisaDate(){
     box.innerHTML = '<strong>아직 대기 구간일 가능성이 있어요 🌱</strong><br>입력한 Priority Date가 현재 EB-3 Final Action Date보다 약 ' + diff + '일 뒤에 있어요. 다음 달 Visa Bulletin 업데이트를 계속 확인해보세요.';
   }
 }
+  document.addEventListener('DOMContentLoaded', function() {
+  gtag('event', 'immigration_hub_view', {
+    event_category: 'feature',
+    event_label: 'immigration_hub'
+  });
+});
 </script>
 <script>
 function showBulletin() {window.location.href = "immigration.html#bulletin";}</script>
