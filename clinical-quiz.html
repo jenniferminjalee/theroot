@@ -514,7 +514,10 @@ function srsStatus(id){const d=loadSRS();const c=d[id];if(!c)return 'new';if(c.l
 /* ── STATE ── */
 let cat='all',mode='random',score=0,total=0,hist=[],answered=false,pool=[],idx=0;
 
-function init(){hist=loadHist();initPool();render();renderStreak();}
+function init(){gtag('event', 'clinical_quiz_start', {
+  event_category: 'quiz',
+  event_label: 'clinical'
+});hist=loadHist();initPool();render();renderStreak();}
 function showPage(p,btn){
   document.querySelectorAll('.page').forEach(e=>e.classList.remove('on'));
   document.querySelectorAll('.v-tab').forEach(b=>b.classList.remove('on'));
