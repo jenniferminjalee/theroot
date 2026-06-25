@@ -2228,7 +2228,7 @@ function injectHandoffAudio() {
   if (HANDOFF_AUDIO_URL) {
     el.innerHTML = `<audio controls style="width:100%;border-radius:8px;margin:8px 0;accent-color:#4ade80"><source src="${HANDOFF_AUDIO_URL}"></audio>`;
   } else {
-    el.innerHTML = `<div class="hf-no-audio">🎙️ HANDOFF_AUDIO_URL에 녹음 파일 URL을 설정하면 여기서 재생됩니다<br><span style="font-size:10px;opacity:.6">Google Drive → 공유 → 링크 복사 후 다운로드 링크로 변환</span></div>`;
+    el.innerHTML = '';
   }
 }
 
