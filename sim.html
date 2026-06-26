@@ -1318,15 +1318,17 @@ const MISSIONS=[
   {id:'arrive', time:'0645', title:'출근 — 스테이션 집합', room:'station', type:'visit'},
   {id:'report', time:'0700', title:'인수인계 받기', room:'station', type:'action',
    btn:'📋 나이트 간호사에게 리포트 받기',
-   voiceText:"Good morning. Room 420, Doe, Jane, 68-year-old female, rule out NSTEMI. She's on a heparin drip at 12 units per kilogram per hour. Tele shows sinus rhythm with rare PVCs. Troponin recheck is due at 0700. She's NPO after midnight for a possible AM cath. IV is a 20-gauge in the left forearm. Allergy to penicillin. You also have room 414, Lee, David, 75-year-old male, CHF exacerbation. He's on IV Lasix twice a day, 2 liters fluid restriction, daily weights. Lung sounds had some crackles at the bases this morning but he's stable right now.",
-   body:`<div class="em-banner"><b>ROOM 412 · DAVIS, ROBERT · 68M</b><br>
+   voiceText:"Good morning. Room 412, Davis Robert, 68-year-old male. Rule out NSTEMI. Allergy to PCN. He's on a heparin drip at 1200 units per hour. Tele shows sinus rhythm with rare PVCs. Troponin and aPTT recheck due now at 0700. NPO since midnight for a possible AM cath. IV is a 20-gauge in the left forearm. You also have Room 414, Lee David, 75-year-old male, CHF exacerbation with EF of 30%. Tele shows SR with RBBB. Plan to continue HD, fluid restriction 1.5 liters per day, daily weights. Lung sounds had crackles at the bases this morning but he's currently stable.",
+   body:`<div class="em-banner"><b>ROOM 412 · DAVIS, ROBERT · 68M</b> · Allergy: <b>PCN</b><br>
      CC: Chest pain · R/O NSTEMI<br>
-     Drip: <b>Heparin</b> 12 u/kg/hr · Tele: SR c̄ rare PVCs<br>
-     Next lab: <b>Troponin @ 0700</b> (recheck now) · Diet: <b>NPO</b> after MN (AM cath)<br>
-     IV: 20G L forearm · Allergy: PCN</div>
+     Drip: <b>Heparin 1200u/hr</b> · Tele: SR c&#x305; rare PVCs<br>
+     Next lab: <b>Troponin/aPTT @ 0700</b> · Diet: <b>MN NPO</b> (possible AM cath)<br>
+     IV: 20G L forearm</div>
      <div class="em-banner" style="margin-top:8px"><b>ROOM 414 · LEE, DAVID · 75M</b><br>
      CC: SOB · CHF exacerbation (EF 30%)<br>
-     Tx: IV Lasix BID · Fluid restriction 2L/day · Daily weights<br>
+     Tele: SR RBBB<br>
+     Tx: Continue HD · Fluid restriction <b>1.5L/day</b> · Daily weights<br>
+     PRN: Albuterol Neb (wheezing/SOB)<br>
      Lungs: crackles at bases (AM) · 현재 stable</div>
      <div id="handoff-am-player" class="m-audio-wrap"></div>
      오늘 두 명을 배정받았습니다. 나이트 간호사 Sarah의 리포트를 받았습니다.
@@ -1343,7 +1345,7 @@ const MISSIONS=[
        {name:'Nitroglycerin (NTG)', dose:'0.4mg SL', route:'Sublingual', schedule:'PRN q5min x3 (chest pain)', last:'-', flag:'prn'}
      ]},
      {room:'414', name:'Lee, David', meds:[
-       {name:'Furosemide (Lasix)', dose:'40mg', route:'IV', schedule:'BID 0900/1700', last:'어제 1700', flag:''},
+       {name:'Albuterol Neb', dose:'2.5mg/3mL', route:'Inhalation', schedule:'PRN q4h (wheezing/SOB)', last:'-', flag:'prn'},
        {name:'Aspirin', dose:'81mg', route:'PO', schedule:'Daily 0900', last:'어제 0900', flag:''},
        {name:'Metoprolol', dose:'25mg', route:'PO', schedule:'BID 0900/2100', last:'어제 2100', flag:''},
        {name:'Amlodipine', dose:'5mg', route:'PO', schedule:'Daily 0900', last:'어제 0900', flag:''},
@@ -1459,10 +1461,10 @@ const MISSIONS=[
      병원마다 번호가 다르지만, 대부분 <b>RRT</b> 또는 <b>Code Blue</b> 버튼이 있음.
      한국과 달리 간호사가 <b>직접</b> 판단해 호출할 권한이 있어요.<br><br>
      <b style="color:#ffd278">3. Doctor Notification (SBAR)</b><br>
-     <b>S</b>: "Mr. Davis in 412 is having chest pain, 8/10, new onset."<br>
-     <b>B</b>: "He's here for R/O NSTEMI, on heparin drip."<br>
-     <b>A</b>: "BP 160/95, HR 110, SpO₂ 94% on RA."<br>
-     <b>R</b>: "I'd like you to come assess. Would you like me to get a stat EKG and troponin?"<br><br>
+     <b>S</b>: "Mr. Davis in 412 is having chest pain, 8/10 — recurrent. His pain had been controlled but returned at 1300."<br>
+     <b>B</b>: "He's admitted for R/O NSTEMI, on heparin drip, scheduled for AM cath."<br>
+     <b>A</b>: "BP 160/95, HR 110, SpO₂ 94% on RA. 12-lead EKG done — no new ST elevation. NTG 0.4mg SL given x1."<br>
+     <b>R</b>: "I'd like you to come assess and consider expediting the cath. Stat troponin is pending."<br><br>
      <div style="background:rgba(255,200,90,0.15);padding:10px;border-radius:8px;font-size:12px;margin-bottom:8px">
      <b style="color:#ffd278">⚡ 1330 — Troponin 결과</b><br>
      0.12 → <b style="color:#ff6b6b">0.58 ng/mL</b> (uptrend). Dr. Kim 도착해서 확인 후:
@@ -1475,8 +1477,6 @@ const MISSIONS=[
    checks:[
      {n:'📋 Procedure 확인',
       detail:'1-vessel PCI with drug-eluting stent placement, right radial access. 시술 자체는 30-40분 정도 걸려요. 차트에서 시술 내용과 access site를 먼저 확인하는 습관!'},
-     {n:'💊 Heparin Gtt 상태 확인',
-      detail:'Heparin은 시술 <b>전·중에는</b> ACT(activated clotting time)를 보면서 cath lab에서 직접 조절하며 유지하는 게 표준이에요. 하지만 <b>시술 후</b>에는 계속 유지할지 중단할지가 병원·의사 프로토콜에 따라 달라요 — 출혈 위험이 있어서 점점 더 일찍 중단하는 경향이에요. 복귀 후 heparin이 계속 흐르고 있는지, 오더가 어떻게 났는지 반드시 직접 확인하는 습관이 중요해요.'},
      {n:'🩹 Radial Access Site',
       detail:'Radial band(압박 밴드) 착용 확인. 출혈, 부종, 혈종 없는지 확인. Femoral access와 달리 radial은 침상안정 시간이 짧고(보통 2-4시간), 환자가 더 빨리 움직일 수 있어요.'},
      {n:'✋ Distal Pulse Check (Radial/Ulnar)',
