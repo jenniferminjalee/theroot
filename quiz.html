@@ -3,759 +3,622 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>나는 미국에서 잘 살 수 있을까? — The Root</title>
-<meta name="description" content="10문항으로 알아보는 나의 미국 생존 유형. 마인드셋과 행동 패턴으로 판단하는 미국 적응 자가진단 — Jennifer Minja Lee의 The Root">
-<meta name="keywords" content="미국생활, 미국적응, 미국간호사, 미국이민, 한국인미국생활, The Root, Jennifer Minja Lee">
-<meta name="author" content="Jennifer Minja Lee">
-<link rel="canonical" href="https://theroot-theta.vercel.app/quiz">
-
-<!-- OG Tags -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://theroot-theta.vercel.app/quiz">
-<meta property="og:title" content="나는 미국에서 잘 살 수 있을까? — The Root">
-<meta property="og:description" content="10문항으로 알아보는 나의 미국 생존 유형. 마인드셋과 행동 패턴으로 — Jennifer Minja Lee">
-<meta property="og:image" content="https://theroot-theta.vercel.app/og-quiz.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<title>내 단계 찾기 — The Root</title>
+<meta name="description" content="미국 간호사 여정, 지금 내가 어느 단계인지 5가지 질문으로 파악해보세요. Jennifer Minja Lee · California RN">
+<meta property="og:title" content="내 단계 찾기 — The Root">
+<meta property="og:description" content="지금 내 단계와 다음 스텝을 1분 안에 확인해요.">
 <meta property="og:site_name" content="The Root">
 <meta property="og:locale" content="ko_KR">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://theroot-theta.vercel.app/quiz">
-<meta name="twitter:title" content="나는 미국에서 잘 살 수 있을까? — The Root">
-<meta name="twitter:description" content="10문항으로 알아보는 나의 미국 생존 유형. 마인드셋과 행동 패턴으로 판단해봐요.">
-<meta name="twitter:image" content="https://theroot-theta.vercel.app/og-quiz.png">
-<meta name="twitter:creator" content="@jenniferminjalee">
-
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --moss: #244C41;
-    --moss-mid: #3a6b5d;
-    --moss-light: #e8f0ee;
-    --bark: #6b4c35;
-    --soil: #4a3124;
-    --cream: #f7f4ef;
-    --cream-dark: #ede9e1;
-    --text: #1a2e28;
-    --text-mid: #4a5e58;
-    --text-light: #8a9e98;
-    --font-s: 'DM Serif Display', serif;
-    --font-b: 'DM Sans', sans-serif;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: var(--font-b);
-    background: var(--cream);
-    color: var(--text);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 1rem 4rem;
-  }
+:root{
+  --bg:#EEEADE;--bg-alt:#E6E1D4;--bg-deep:#2B4530;
+  --t1:#3A5840;--t2:#4E6B52;--t3:#8A9E7A;
+  --green:#3A5840;--green-mid:#4E6B52;--green-lt:#74C48A;
+  --green-pale:#C8E0CC;--green-ghost:#EBF4ED;
+  --gold:#8A8B3C;--amber:#8A6F3C;--amber-lt:#F5EDD8;
+  --white:#FEFCF8;--bdrw:#D4CEC4;
+  --r-sm:8px;--r-md:14px;--r-lg:20px;--r-xl:28px;
+  --max:600px;--g:24px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',system-ui,sans-serif;
+  background:var(--bg);color:var(--t1);
+  line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;
+}
 
-  /* ── HEADER ── */
-  .site-header {
-    width: 100%;
-    max-width: 680px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.5rem 0 1rem;
-    border-bottom: 0.5px solid rgba(36,76,65,0.15);
-    margin-bottom: 2.5rem;
-  }
-  .logo {
-    font-family: var(--font-s);
-    font-size: 22px;
-    color: var(--moss);
-    letter-spacing: -0.02em;
-  }
-  .logo span { color: var(--bark); font-style: italic; }
-  .tag {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-light);
-  }
+/* NAV */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(238,244,232,0.88);
+  backdrop-filter:blur(16px) saturate(160%);
+  border-bottom:1px solid rgba(58,88,64,0.10);
+  height:56px;display:flex;align-items:center;
+}
+.nav-inner{
+  max-width:var(--max);margin:0 auto;padding:0 var(--g);
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{font-size:17px;font-weight:800;letter-spacing:-0.032em;color:var(--t1);text-decoration:none;}
+.nav-logo em{color:var(--gold);font-style:normal;}
+.nav-back{font-size:13px;color:var(--t3);text-decoration:none;display:flex;align-items:center;gap:5px;transition:color .15s;}
+.nav-back:hover{color:var(--t1);}
 
-  /* ── HERO ── */
-  .hero {
-    width: 100%;
-    max-width: 680px;
-    text-align: center;
-    margin-bottom: 3rem;
-  }
-  .hero-eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--moss-mid);
-    margin-bottom: 0.75rem;
-  }
-  .hero h1 {
-    font-family: var(--font-s);
-    font-size: clamp(28px, 5vw, 42px);
-    color: var(--moss);
-    line-height: 1.2;
-    margin-bottom: 1rem;
-  }
-  .hero h1 em { color: var(--bark); font-style: italic; }
-  .hero p {
-    font-size: 15px;
-    color: var(--text-mid);
-    line-height: 1.7;
-    max-width: 480px;
-    margin: 0 auto;
-  }
+/* HERO */
+.hero{
+  background:
+    radial-gradient(ellipse 65% 100% at 0% 50%, rgba(140,178,128,0.52) 0%, transparent 62%),
+    radial-gradient(ellipse 50% 60% at 90% 10%, rgba(158,192,148,0.28) 0%, transparent 55%),
+    #DCE8D4;
+  padding:64px var(--g) 52px;text-align:center;
+}
+.hero-kicker{display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:var(--t3);margin-bottom:18px;}
+.hero-h1{font-size:clamp(36px,7vw,56px);font-weight:800;letter-spacing:-0.04em;line-height:1.08;color:var(--t1);margin-bottom:14px;}
+.hero-h1 em{color:var(--green-mid);font-style:normal;}
+.hero-sub{font-size:16px;color:var(--t2);line-height:1.72;max-width:380px;margin:0 auto 24px;}
+.hero-trust{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+.trust-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,0.65);border:1px solid rgba(58,88,64,0.12);
+  border-radius:99px;padding:7px 16px;font-size:12px;color:var(--t2);font-weight:500;
+}
+.trust-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;}
 
-  /* ── CARD ── */
-  .card {
-    width: 100%;
-    max-width: 680px;
-    background: white;
-    border: 0.5px solid rgba(36,76,65,0.15);
-    border-radius: 12px;
-    padding: 2rem;
-  }
+/* QUIZ WRAP */
+.quiz-wrap{max-width:var(--max);margin:0 auto;padding:48px var(--g) 80px;}
 
-  /* ── PROGRESS ── */
-  .progress-wrap { margin-bottom: 1.75rem; }
-  .progress-meta {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    color: var(--text-light);
-    margin-bottom: 8px;
-  }
-  .progress-bar {
-    height: 3px;
-    background: var(--cream-dark);
-    border-radius: 2px;
-  }
-  .progress-fill {
-    height: 100%;
-    background: var(--moss);
-    border-radius: 2px;
-    transition: width 0.4s ease;
-  }
+/* PROGRESS */
+.prog-bar{height:3px;background:var(--bdrw);border-radius:2px;margin-bottom:36px;overflow:hidden;}
+.prog-fill{height:100%;background:var(--green);border-radius:2px;transition:width .5s cubic-bezier(.4,0,.2,1);}
 
-  /* ── QUESTION ── */
-  .q-text {
-    font-family: var(--font-s);
-    font-size: 20px;
-    color: var(--text);
-    line-height: 1.45;
-    margin-bottom: 1.5rem;
-  }
-  .options { display: flex; flex-direction: column; gap: 10px; }
-  .opt-btn {
-    background: var(--cream);
-    border: 0.5px solid rgba(36,76,65,0.2);
-    border-radius: 8px;
-    padding: 13px 16px;
-    text-align: left;
-    cursor: pointer;
-    font-family: var(--font-b);
-    font-size: 14px;
-    color: var(--text-mid);
-    line-height: 1.55;
-    transition: all 0.18s;
-  }
-  .opt-btn:hover { border-color: var(--moss); background: var(--moss-light); color: var(--moss); }
-  .opt-btn.selected { border-color: var(--moss); background: var(--moss-light); color: var(--moss); font-weight: 500; }
+/* QUESTION CARD */
+.q-card{
+  background:var(--white);border:1.5px solid var(--bdrw);
+  border-radius:var(--r-xl);padding:40px 36px;
+  box-shadow:0 4px 24px rgba(58,88,64,0.07);
+  animation:fadeUp .4s ease-out;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.q-step{font-size:11px;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:var(--t3);margin-bottom:14px;}
+.q-text{font-size:clamp(20px,3.5vw,26px);font-weight:700;color:var(--t1);line-height:1.28;letter-spacing:-0.02em;margin-bottom:6px;}
+.q-sub{font-size:14px;color:var(--t3);line-height:1.6;margin-bottom:26px;}
+.q-opts{display:flex;flex-direction:column;gap:10px;}
 
-  /* ── NAV ── */
-  .nav { display: flex; justify-content: space-between; align-items: center; margin-top: 1.75rem; }
-  .back-btn {
-    background: none;
-    border: none;
-    font-family: var(--font-b);
-    font-size: 13px;
-    color: var(--text-light);
-    cursor: pointer;
-    padding: 6px 0;
-  }
-  .back-btn:hover { color: var(--moss); }
-  .next-btn {
-    background: var(--moss);
-    border: none;
-    border-radius: 6px;
-    padding: 10px 22px;
-    font-family: var(--font-b);
-    font-size: 14px;
-    font-weight: 500;
-    color: white;
-    cursor: pointer;
-    opacity: 0.35;
-    transition: all 0.2s;
-  }
-  .next-btn.active { opacity: 1; }
-  .next-btn.active:hover { background: var(--moss-mid); }
+/* Yes/No options */
+.q-opt{
+  display:flex;align-items:center;gap:14px;
+  background:var(--bg);border:1.5px solid var(--bdrw);
+  border-radius:var(--r-md);padding:16px 20px;
+  cursor:pointer;text-align:left;width:100%;font-family:inherit;
+  transition:border-color .18s,background .18s,transform .12s;
+}
+.q-opt:hover{border-color:var(--green);background:var(--green-ghost);transform:translateX(3px);}
+.q-opt-circle{
+  width:30px;height:30px;border-radius:50%;
+  background:var(--white);border:1.5px solid var(--bdrw);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:var(--t3);
+  transition:background .18s,border-color .18s,color .18s;
+}
+.q-opt:hover .q-opt-circle{background:var(--green);border-color:var(--green);color:#fff;}
+.q-opt-text{flex:1;}
+.q-opt-label{font-size:15px;font-weight:600;color:var(--t1);display:block;}
+.q-opt-sub{font-size:12px;color:var(--t3);display:block;margin-top:2px;}
 
-  /* ── RESULT ── */
-  .result-top {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.25rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 0.5px solid var(--cream-dark);
-  }
-  .result-emoji-wrap {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: var(--moss-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    flex-shrink: 0;
-  }
-  .result-type-label {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-light);
-    margin-bottom: 4px;
-  }
-  .result-title {
-    font-family: var(--font-s);
-    font-size: 24px;
-    color: var(--moss);
-    line-height: 1.25;
-    margin-bottom: 6px;
-  }
-  .result-subtitle {
-    font-size: 13px;
-    color: var(--bark);
-    font-weight: 500;
-  }
-  .result-desc {
-    font-size: 14px;
-    color: var(--text-mid);
-    line-height: 1.75;
-    margin-bottom: 1.5rem;
-  }
+/* Multi-choice options */
+.q-opt-multi{
+  display:flex;align-items:flex-start;gap:14px;
+  background:var(--bg);border:1.5px solid var(--bdrw);
+  border-radius:var(--r-md);padding:16px 20px;
+  cursor:pointer;text-align:left;width:100%;font-family:inherit;
+  transition:border-color .18s,background .18s,transform .12s;
+}
+.q-opt-multi:hover{border-color:var(--green);background:var(--green-ghost);transform:translateX(3px);}
+.q-opt-multi:hover .q-opt-circle{background:var(--green);border-color:var(--green);color:#fff;}
+.q-opt-multi .q-opt-label{font-size:15px;font-weight:600;color:var(--t1);display:block;}
+.q-opt-multi .q-opt-sub{font-size:12px;color:var(--t3);display:block;margin-top:2px;}
 
-  /* ── SCORE BARS ── */
-  .scores-section { margin-bottom: 1.5rem; }
-  .scores-label {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-light);
-    margin-bottom: 0.75rem;
-  }
-  .score-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-  .score-name { font-size: 12px; color: var(--text-mid); width: 72px; flex-shrink: 0; }
-  .score-track { flex: 1; height: 5px; background: var(--cream-dark); border-radius: 3px; overflow: hidden; }
-  .score-fill { height: 100%; border-radius: 3px; transition: width 1s ease 0.4s; background: var(--moss); }
-  .score-val { font-size: 12px; color: var(--text-light); min-width: 28px; text-align: right; }
+/* Back button */
+.q-back{
+  background:none;border:none;color:var(--t3);
+  font-size:13px;cursor:pointer;font-family:inherit;
+  display:flex;align-items:center;gap:5px;margin-top:18px;
+  transition:color .15s;
+}
+.q-back:hover{color:var(--t1);}
 
-  /* ── ADVICE ── */
-  .advice-section { }
-  .advice-label {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-light);
-    margin-bottom: 0.75rem;
-  }
-  .advice-item {
-    display: flex;
-    gap: 10px;
-    padding: 10px 0;
-    border-top: 0.5px solid var(--cream-dark);
-    font-size: 13px;
-    color: var(--text);
-    line-height: 1.55;
-  }
-  .advice-item:last-child { border-bottom: 0.5px solid var(--cream-dark); }
-  .advice-dot {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    font-weight: 700;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-  .dot-pos { background: var(--moss-light); color: var(--moss); }
-  .dot-warn { background: #fdf0e0; color: var(--bark); }
+/* RESULT CARD */
+.result-card{
+  background:var(--white);border:1.5px solid var(--bdrw);
+  border-radius:var(--r-xl);padding:40px 36px;
+  box-shadow:0 4px 24px rgba(58,88,64,0.07);
+  animation:fadeUp .5s ease-out;display:none;
+}
+.result-stage-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--green-ghost);border:1px solid var(--green-pale);
+  border-radius:99px;padding:5px 14px;
+  font-size:11px;font-weight:700;color:var(--green);
+  letter-spacing:0.06em;text-transform:uppercase;margin-bottom:20px;
+}
+.result-h2{
+  font-size:clamp(22px,4.5vw,32px);font-weight:800;
+  color:var(--t1);letter-spacing:-0.03em;line-height:1.2;
+  margin-bottom:6px;white-space:pre-line;
+}
+.result-desc{
+  font-size:15px;color:var(--t2);line-height:1.72;margin-bottom:20px;
+}
+.result-insight{
+  font-size:14px;color:var(--t2);line-height:1.72;
+  padding:16px 20px;background:var(--green-ghost);
+  border-radius:var(--r-md);border-left:3px solid var(--green);
+  margin-bottom:24px;font-style:italic;
+}
+.result-divider{height:1px;background:var(--bdrw);margin:24px 0;}
+.result-next-label{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--t3);margin-bottom:14px;}
+.result-steps{display:flex;flex-direction:column;gap:12px;margin-bottom:24px;}
+.result-step{display:flex;align-items:flex-start;gap:12px;}
+.result-step-num{
+  width:22px;height:22px;border-radius:50%;
+  background:var(--t1);color:#fff;font-size:10px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;
+}
+.result-step-t{font-size:14px;font-weight:600;color:var(--t1);}
+.result-step-d{font-size:12px;color:var(--t3);margin-top:2px;}
 
-  /* ── FOOTER ACTIONS ── */
-  .result-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 1.5rem;
-    flex-wrap: wrap;
-  }
-  .retry-btn {
-    flex: 1;
-    min-width: 120px;
-    background: none;
-    border: 0.5px solid rgba(36,76,65,0.3);
-    border-radius: 6px;
-    padding: 10px 16px;
-    font-family: var(--font-b);
-    font-size: 13px;
-    color: var(--moss);
-    cursor: pointer;
-    transition: all 0.18s;
-  }
-  .retry-btn:hover { background: var(--moss-light); }
-  .root-btn {
-    flex: 2;
-    min-width: 180px;
-    background: var(--bark);
-    border: none;
-    border-radius: 6px;
-    padding: 10px 16px;
-    font-family: var(--font-b);
-    font-size: 13px;
-    font-weight: 500;
-    color: white;
-    cursor: pointer;
-    text-decoration: none;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    transition: background 0.18s;
-  }
-  .root-btn:hover { background: var(--soil); }
+/* Info box (English table, compact info) */
+.info-expand{
+  border:1.5px solid var(--bdrw);border-radius:var(--r-md);
+  overflow:hidden;margin-bottom:14px;
+}
+.info-expand-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;cursor:pointer;background:var(--white);
+  transition:background .15s;
+}
+.info-expand-header:hover{background:var(--green-ghost);}
+.info-expand-title{font-size:13px;font-weight:600;color:var(--t1);}
+.info-expand-arrow{font-size:11px;color:var(--t3);transition:transform .2s;}
+.info-expand-header.open .info-expand-arrow{transform:rotate(180deg);}
+.info-expand-body{display:none;border-top:1px solid var(--bdrw);padding:16px 18px;}
+.info-expand-header.open + .info-expand-body{display:block;}
 
-  /* ── FOOTER ── */
-  .site-footer {
-    margin-top: 3rem;
-    font-size: 12px;
-    color: var(--text-light);
-    text-align: center;
-    line-height: 1.8;
-  }
-  .site-footer a { color: var(--moss); text-decoration: none; }
+/* English score table */
+.eng-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px;}
+.eng-table th{text-align:left;padding:6px 8px;color:var(--t3);font-weight:600;border-bottom:1px solid var(--bdrw);}
+.eng-table td{padding:8px 8px;border-bottom:1px solid rgba(212,206,196,0.5);color:var(--t2);}
+.eng-table tr:last-child td{border-bottom:none;}
+.eng-table td:first-child{font-weight:600;color:var(--t1);}
 
-  .save-btn {
-    flex: 1;
-    min-width: 120px;
-    background: var(--moss);
-    border: none;
-    border-radius: 6px;
-    padding: 10px 16px;
-    font-family: var(--font-b);
-    font-size: 13px;
-    font-weight: 500;
-    color: white;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    transition: background 0.18s;
-  }
-  .save-btn:hover { background: var(--moss-mid); }
-  .save-btn:disabled { opacity: 0.6; cursor: wait; }
-  #capture-card {
-    position: fixed;
-    left: -9999px;
-    top: 0;
-    width: 560px;
-    background: var(--cream);
-    padding: 2.5rem;
-    font-family: var(--font-b);
-    color: var(--text);
-  }
-  .cap-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 0.5px solid rgba(36,76,65,0.2); }
-  .cap-logo { font-family: var(--font-s); font-size: 18px; color: var(--moss); }
-  .cap-logo span { color: var(--bark); font-style: italic; }
-  .cap-tag { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); }
-  .cap-top { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.25rem; }
-  .cap-emoji { width: 52px; height: 52px; border-radius: 50%; background: var(--moss-light); display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
-  .cap-type-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); margin-bottom: 3px; }
-  .cap-title { font-family: var(--font-s); font-size: 20px; color: var(--moss); line-height: 1.25; margin-bottom: 4px; }
-  .cap-subtitle { font-size: 12px; color: var(--bark); font-weight: 500; }
-  .cap-desc { font-size: 13px; color: var(--text-mid); line-height: 1.7; margin-bottom: 1.25rem; padding-bottom: 1.25rem; border-bottom: 0.5px solid var(--cream-dark); }
-  .cap-bars-label { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); margin-bottom: 0.6rem; }
-  .cap-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-  .cap-bar-name { font-size: 12px; color: var(--text-mid); width: 65px; flex-shrink: 0; }
-  .cap-bar-track { flex: 1; height: 5px; background: var(--cream-dark); border-radius: 3px; overflow: hidden; }
-  .cap-bar-fill { height: 100%; border-radius: 3px; }
-  .cap-bar-val { font-size: 12px; color: var(--text-light); min-width: 24px; text-align: right; }
-  .cap-footer-text { margin-top: 1.5rem; padding-top: 1rem; border-top: 0.5px solid rgba(36,76,65,0.15); font-size: 11px; color: var(--text-light); text-align: center; letter-spacing: 0.04em; }
+/* State pills */
+.state-pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;}
+.state-pill{font-size:11px;padding:3px 9px;background:var(--green-ghost);border-radius:99px;color:var(--green);font-weight:500;}
 
-  .fade-in { animation: fadeIn 0.3s ease; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+/* CTAs */
+.result-cta{
+  display:block;width:100%;padding:15px;
+  background:var(--green);color:#fff;border:none;border-radius:var(--r-md);
+  font-size:14px;font-weight:700;text-decoration:none;text-align:center;
+  font-family:inherit;cursor:pointer;
+  transition:background .15s,transform .1s;margin-bottom:10px;
+}
+.result-cta:hover{background:#2a4d38;transform:translateY(-1px);}
+.result-restart{
+  display:block;width:100%;padding:12px;
+  background:transparent;color:var(--t3);
+  border:1.5px solid var(--bdrw);border-radius:var(--r-md);
+  font-size:13px;font-family:inherit;cursor:pointer;
+  text-align:center;transition:border-color .15s,color .15s;
+}
+.result-restart:hover{border-color:var(--green);color:var(--t1);}
 
-  @media (max-width: 480px) {
-    .card { padding: 1.5rem; }
-    .q-text { font-size: 18px; }
-    .result-top { flex-direction: column; gap: 1rem; }
-  }
+/* Jennifer mini */
+.jen-attr{display:flex;align-items:flex-start;gap:10px;margin-top:24px;padding-top:20px;border-top:1px solid var(--bdrw);}
+.jen-av{
+  width:36px;height:36px;border-radius:50%;overflow:hidden;flex-shrink:0;
+  background:var(--green);display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:#fff;
+}
+.jen-av img{width:100%;height:100%;object-fit:cover;object-position:top;}
+.jen-text{font-size:13px;color:var(--t2);line-height:1.6;font-style:italic;}
+.jen-text strong{color:var(--t1);font-weight:600;font-style:normal;}
+
+/* UWORLD BANNER */
+.uw-banner{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 18px;
+  background:linear-gradient(135deg,#1A3A5C 0%,#1E4A7A 100%);
+  border-radius:var(--r-md);margin-bottom:14px;
+}
+.uw-ico{
+  width:38px;height:38px;border-radius:var(--r-sm);
+  background:#fff;color:#1A3A5C;
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:900;letter-spacing:-0.04em;flex-shrink:0;
+}
+.uw-ttl{font-size:13px;font-weight:700;color:#fff;}
+.uw-sub{font-size:11px;color:rgba(255,255,255,0.65);margin-top:2px;}
+.uw-link{
+  flex-shrink:0;padding:8px 14px;
+  background:#fff;color:#1A3A5C;
+  border-radius:var(--r-sm);font-size:12px;font-weight:700;
+  text-decoration:none;white-space:nowrap;
+  transition:opacity .15s;
+}
+.uw-link:hover{opacity:.85;}
+
+/* FOOTER */
+footer{background:var(--bg-deep);padding:32px var(--g);text-align:center;}
+footer p{font-size:12px;color:rgba(255,255,255,0.35);line-height:1.8;}
+footer a{color:rgba(116,196,138,0.7);text-decoration:none;}
+footer a:hover{color:rgba(116,196,138,1);}
+
+@media(max-width:480px){.q-card,.result-card{padding:28px 20px;}.hero{padding:48px var(--g) 40px;}}
 </style>
 </head>
 <body>
 
-<header class="site-header">
-  <div class="logo">the <span>root</span></div>
-  <div class="tag">미국 생존 진단</div>
-</header>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">The <em>Root</em></a>
+    <a href="index.html" class="nav-back">← 홈으로</a>
+  </div>
+</nav>
 
-<div class="hero">
-  <div class="hero-eyebrow">🌿 10문항 자가진단</div>
-  <h1>나는 미국에서<br><em>잘 살 수 있을까?</em></h1>
-  <p>영어 실력이 아닌 마인드셋과 행동 패턴으로 판단합니다.<br>솔직하게 답할수록 정확해져요.</p>
-</div>
+<section class="hero">
+  <div class="hero-kicker">1분 무료 진단</div>
+  <h1 class="hero-h1">미국 간호사,<br><em>나도 가능할까?</em></h1>
+  <p class="hero-sub">5가지 질문으로 지금 내 단계와 다음 스텝을 1분 안에 확인하세요.</p>
+  <div class="hero-trust">
+    <span class="trust-badge"><span class="trust-dot"></span>Korean RN → California RN founder</span>
+    <span class="trust-badge"><span class="trust-dot"></span>NCLEX · VisaScreen · EB-3 흐름 정리</span>
+  </div>
+</section>
 
-<div class="card" id="quiz-card">
-  <div id="quiz-section">
-    <div class="progress-wrap">
-      <div class="progress-meta">
-        <span id="q-num">질문 1 / 10</span>
-        <span id="pct">10%</span>
+<div class="quiz-wrap">
+  <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+  <div id="questionArea"></div>
+  <div class="result-card" id="resultCard">
+    <div class="result-stage-badge" id="rBadge"></div>
+    <h2 class="result-h2" id="rH2"></h2>
+    <p class="result-desc" id="rDesc"></p>
+    <div class="result-insight" id="rJen"></div>
+    <div class="result-divider"></div>
+    <div class="result-next-label">지금 당장 할 수 있는 것</div>
+    <div class="result-steps" id="rSteps"></div>
+    <div id="rExtras"></div>
+    <a href="#" class="result-cta" id="rCta">The Root에서 내 여정 보기 →</a>
+    <button class="result-restart" onclick="restart()">↺ 처음부터 다시 하기</button>
+    <div class="jen-attr">
+      <div class="jen-av">
+        <img src="jennifer-headshot.JPG" alt="Jennifer" onerror="this.parentNode.textContent='J'">
       </div>
-      <div class="progress-bar"><div class="progress-fill" id="progress" style="width:10%"></div></div>
-    </div>
-    <div class="q-text" id="q-text"></div>
-    <div class="options" id="options"></div>
-    <div class="nav">
-      <button class="back-btn" id="back-btn" onclick="goBack()">← 이전</button>
-      <button class="next-btn" id="next-btn" onclick="goNext()">다음 →</button>
+      <div class="jen-text"><strong>Jennifer Minja Lee</strong>가 직접 걸어온 여정을 기반으로 만들었어요. California RN · 지금도 병동에서 일하고 있어요.</div>
     </div>
   </div>
-  <div id="result-section" style="display:none"></div>
 </div>
 
-<div id="capture-card"></div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<footer class="site-footer">
-  © 2026 Jennifer Minja Lee · <a href="/">The Root</a> · All rights reserved<br>
-  Based on personal experience as a 1st generation immigrant RN in California<br>
-  <a href="/" style="color:var(--moss);text-decoration:none;font-weight:500;">← The Root</a>
+<footer>
+  <p><a href="index.html">The Root</a> · Jennifer Minja Lee · California RN<br>정보는 참고용이며 실제 지원 전 해당 주 간호사 면허 위원회에 반드시 확인하세요.</p>
 </footer>
 
 <script>
-const questions = [
+/* ── QUIZ FLOW ──
+   Q1: 학위? yes→Q2 / no→no_degree
+   Q2: 면허? yes→Q3 / no→no_license
+   Q3: 멀티(NCLEX·임상·둘다·없음) → no_clinical / needs_nclex / Q4 / needs_nclex
+   Q4: 영어점수? yes→needs_visascreen / no→needs_english
+   (별도 루트: NCLEX+임상+영어 모두 있으면 Q4에서 needs_visascreen → job_ready는 tracker에서)
+*/
+
+const COMPACT_STATES = ['AL','AZ','AR','CO','CT','DE','FL','GA','ID','IN','IA','KS','KY','LA','ME','MD','MS','MO','MT','NE','NH','NJ','NM','NC','ND','OH','OK','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
+
+const RESULTS = {
+  no_degree: {
+    badge: 'Stage 0 — 시작 전',
+    h2: '간호학 학위부터\n시작해봐요',
+    desc: '미국 간호사가 되려면 인가받은 간호학과 학위가 첫 번째 조건이에요.',
+    jen: '학위 취득부터 미국 취업까지 보통 6~10년이 걸려요. 한 걸음씩 가다 보면 분명히 도착할 수 있어요.',
+    steps: [
+      { t: '인가받은 간호학과 입학', d: '한국, 필리핀, 인도 등 — 나라 상관없이 인가 기관 여부가 중요' },
+      { t: '졸업 후 국내 간호사 면허 취득', d: '국내 면허가 있어야 NCLEX-RN 응시 가능' }
+    ],
+    showEng: false, showCompact: false,
+    ctaText: '미국 간호사 여정 전체 보기 →', ctaHref: 'index.html', stageIdx: 0
+  },
+  no_license: {
+    badge: 'Stage 1 — 면허 취득 필요',
+    h2: '국내 간호사 면허가\n필요해요',
+    desc: '미국 NCLEX-RN 시험에 응시하려면 국내 간호사 면허가 필수예요.',
+    jen: 'NCLEX 시험 신청 요건 중 하나가 해당 국가 면허 보유예요. 국시 내용과 겹치는 부분이 많아서 취득 직후 바로 NCLEX 준비를 시작하면 효율적이에요.',
+    steps: [
+      { t: '간호사 국가고시 응시', d: '간호대 졸업 후 응시 가능' },
+      { t: '면허 취득 후 NCLEX 준비 시작', d: '국시 내용과 겹치는 부분 많아 취득 직후 추천' }
+    ],
+    showEng: false, showCompact: false,
+    ctaText: '단계별 로드맵 보기 →', ctaHref: 'index.html', stageIdx: 0
+  },
+  needs_nclex: {
+    badge: 'Stage 2 — NCLEX 준비',
+    h2: 'NCLEX-RN,\n이게 핵심이에요',
+    desc: '국내 면허가 있다면 NCLEX-RN에 응시할 수 있어요. 대부분 New York 주로 응시해요.',
+    jen: 'NCLEX는 CAT 방식이라 문제 수가 달라져요. 얼마나 많이 푸냐보다 어떤 유형인지 파악하는 게 중요해요.',
+    steps: [
+      { t: '응시할 주(State) 선택', d: '대부분 New York 주로 응시 — 영어시험 없이 지원 가능해서 추천' },
+      { t: 'ATT 신청 및 시험 등록', d: 'Pearson VUE를 통해 시험 일정 예약' },
+      { t: 'NCLEX-RN 합격', d: '85~150문제, CAT 방식 — 유형 파악이 합격의 핵심' }
+    ],
+    showEng: false, showCompact: true, showUworld: true,
+    ctaText: '단계별 로드맵 보기 →', ctaHref: 'index.html', stageIdx: 1
+  },
+  no_clinical: {
+    badge: 'Stage 3 — 임상 경력 쌓는 중',
+    h2: '임상 경력을\n먼저 쌓는 걸 추천해요',
+    desc: '경력 없이도 가능하지만 좋은 조건의 스폰서를 찾기 위해서는 임상 경력이 매우 중요해요.',
+    jen: '미국 임상은 한국이랑 많이 달라요. 경험이 있을수록 현장 적응이 빨라요.',
+    steps: [
+      { t: '국내 병원에서 임상 경력 쌓기', d: '최소 1~2년 권장 — Med-Surg, ICU, ER 선호도 높음' },
+      { t: '희망 부서 중심으로 경험 쌓기', d: '미국에서 일하고 싶은 부서와 동일한 경력이 있으면 훨씬 유리해요' },
+      { t: '경력 조건은 에이전시에 직접 확인', d: '미국 잡마켓마다 조건이 달라요. 에이전시에 직접 문의하는 게 가장 정확해요' }
+    ],
+    showEng: false, showCompact: false, showUworld: true,
+    ctaText: '단계별 로드맵 보기 →', ctaHref: 'index.html', stageIdx: 1
+  },
+  needs_visascreen: {
+    badge: 'Stage 4 — 비자스크린 진행',
+    h2: '비자스크린으로\n넘어가요',
+    desc: '영어 점수가 있다면 비자스크린 단계로 바로 진행할 수 있어요.',
+    jen: '이미 영어 점수가 있다면 비자스크린을 진행하면서 병원이나 에이전시를 같이 보는 전략도 가능해요.',
+    steps: [
+      { t: 'CGFNS 계정 생성 및 서류 준비', d: '졸업증명서, 간호학 성적증명서, 면허 공증, NCLEX 확인서, 여권 사진' },
+      { t: '영어 점수 CGFNS에 제출', d: '비자스크린 기준 점수 충족 여부 확인 (재택 시험 불가)' },
+      { t: '비자스크린 완료 후 병원/에이전시 컨택', d: 'NCLEX 합격 후 먼저 병원을 찾아도 돼요 — 순서는 유연하게' }
+    ],
+    showEng: false, showCompact: false,
+    ctaText: 'Immigration Hub 보기 →', ctaHref: 'immigration.html', stageIdx: 2
+  },
+  needs_english: {
+    badge: 'Stage 4 — 영어 점수 준비',
+    h2: '에이전시를 컨택하면서\n영어 점수를 준비하세요',
+    desc: '영어 점수가 아직 없다면 에이전시를 먼저 컨택하면서 비자스크린용 영어 점수를 준비하세요.',
+    jen: '영어 점수가 아직 없어도 괜찮아요. 에이전시 컨택과 영어 준비를 병행하는 게 현실적인 루트예요.',
+    steps: [
+      { t: '에이전시 먼저 컨택', d: '현재 내 상황에서 가능한 스폰서 루트와 서류 방향을 먼저 확인해요' },
+      { t: '비자스크린용 영어 시험 준비', d: '아래 기준표에서 내가 응시할 시험과 목표 점수를 확인하세요' },
+      { t: '영어 점수 확보 후 비자스크린 진행', d: '점수 제출이 가능해지면 바로 다음 단계로 넘어가요' }
+    ],
+    showEng: true, showCompact: false,
+    ctaText: 'Immigration Hub 보기 →', ctaHref: 'immigration.html', stageIdx: 2
+  },
+  job_ready: {
+    badge: 'Stage 5 — 취업 준비 완료',
+    h2: '준비 완료!\n이제 병원을 찾아요',
+    desc: '학위, 면허, NCLEX, 임상경력, 비자스크린까지 모두 완료! EB-3 영주권을 스폰서해줄 고용주를 찾는 게 마지막 관문이에요.',
+    jen: '여기까지 왔다면 정말 대단한 거예요. 좋은 에이전시 또는 병원 찾는 게 이 단계의 핵심이에요!',
+    steps: [
+      { t: 'EB-3 스폰서 가능한 고용주 찾기', d: 'Staffing Agency, 병원, 너싱홈 등 다양한 옵션' },
+      { t: 'Form I-140 고용주가 청원 제출', d: '고용주가 미국 이민국(USCIS)에 청원서 제출' },
+      { t: '비자스크린 ICHP Certificate 준비', d: '미국 대사관 인터뷰 시 필수 지참' }
+    ],
+    showEng: false, showCompact: false,
+    ctaText: 'Immigration Hub 보기 →', ctaHref: 'immigration.html', stageIdx: 2
+  }
+};
+
+const ENG_TABLE = `
+<table class="eng-table">
+  <thead><tr><th>시험</th><th>기준 점수</th></tr></thead>
+  <tbody>
+    <tr><td>TOEFL iBT</td><td>Overall 4.5 / R+L+W 3.5 / Speaking 4.5</td></tr>
+    <tr><td>IELTS Academic</td><td>Overall 6.5 / Speaking 7.0</td></tr>
+    <tr><td>PTE Academic</td><td>Overall 55 / R·L·W 62 / Speaking 76</td></tr>
+    <tr><td>Cambridge</td><td>Overall 169 / Speaking 194</td></tr>
+    <tr><td>OET</td><td>R 340 / W 350 / L 320 / Speaking 360</td></tr>
+  </tbody>
+</table>
+<p style="font-size:11px;color:var(--t3);margin-top:8px;">재택 시험 불인정 · 영어 성적 유효기간 2년 · 비자스크린 유효기간 5년</p>`;
+
+// ── QUIZ STATE ──
+const QUESTIONS = [
   {
-    q: "미국에서 처음 모르는 사람이 갑자기 말을 걸어왔다. 어떻게 반응할 것 같아?",
-    opts: [
-      { text: "오, 반갑네! 나도 대화 시작하지 뭐 😄", scores: [3,1,0,0,1] },
-      { text: "어색하지만... 일단 웃으면서 대답은 해 🙂", scores: [1,2,1,0,1] },
-      { text: "속으로는 당황, 겉으로는 뻣뻣하게 대응 😅", scores: [0,1,2,1,1] },
-      { text: "왜 말을 거는 거지...? 경계 모드 발동 🤨", scores: [0,0,1,3,1] }
+    id: 'degree', step: 'Q1 / 5', pct: 20,
+    text: '간호학 학위가 있으신가요?',
+    sub: '어느 나라든 인가받은 간호학과라면 가능 — 영어권 대학일 필요 없어요.',
+    type: 'yesno',
+    yes: { next: 'license' },
+    no:  { result: 'no_degree' }
+  },
+  {
+    id: 'license', step: 'Q2 / 5', pct: 40,
+    text: '국내 간호사 면허증이 있으신가요?',
+    sub: '한국 기준: 간호사 국가고시 합격 후 발급된 면허증',
+    type: 'yesno',
+    yes: { next: 'nclex_clinical' },
+    no:  { result: 'no_license' }
+  },
+  {
+    id: 'nclex_clinical', step: 'Q3 / 5', pct: 60,
+    text: '현재 해당하는 것을 선택해주세요.',
+    sub: '지금 상황에 가장 가까운 것을 골라주세요.',
+    type: 'multi',
+    options: [
+      { label: 'NCLEX-RN 합격했어요', desc: '미국 간호사 면허 시험 통과', value: 'nclex' },
+      { label: '임상 경력이 있어요', desc: '국내 또는 해외 임상 경험', value: 'clinical' },
+      { label: '둘 다 있어요', desc: 'NCLEX + 임상 경력 모두 보유', value: 'both' },
+      { label: '아직 없어요', desc: 'NCLEX도 경력도 준비 중', value: 'neither' }
     ]
   },
   {
-    q: "미국 마트에서 계산한 금액이 이상한 것 같아. 어떻게 할 거야?",
-    opts: [
-      { text: "바로 직원 불러서 확인 요청! 내 돈 지켜야지 💪", scores: [3,1,0,0,1] },
-      { text: "영어로 뭐라고 해야 할지 구글링 먼저 하고 말한다 🔍", scores: [1,3,0,0,1] },
-      { text: "금액 차이가 크면 말하고, 조금이면 그냥 넘긴다", scores: [1,2,1,1,0] },
-      { text: "그냥 나온다. 싸우기 귀찮아 😮‍💨", scores: [0,0,1,2,3] }
-    ]
-  },
-  {
-    q: "미국 직장 동료들이 퇴근 후 happy hour 가자고 한다. 근데 넌 피곤한 상태야.",
-    opts: [
-      { text: "당연히 가지! 네트워킹이 곧 커리어야 🍻", scores: [3,1,0,0,0] },
-      { text: "한 시간만 얼굴 비추고 먼저 나온다", scores: [2,2,0,0,1] },
-      { text: "피곤하다고 솔직히 말하고 다음엔 꼭 간다고 한다", scores: [1,2,1,1,0] },
-      { text: "어...오늘 선약이 있다고 둘러댄다 (없음)", scores: [0,0,1,2,3] }
-    ]
-  },
-  {
-    q: "미국에서 의사한테 갔더니 설명이 너무 빠르고 어려워. 어떻게 해?",
-    opts: [
-      { text: "\"Sorry, can you slow down?\" 바로 말한다", scores: [3,1,0,0,0] },
-      { text: "그 자리에서 구글 번역기 꺼낸다 📱", scores: [1,3,0,0,1] },
-      { text: "반쯤 이해한 채로 나와서 나중에 검색한다", scores: [0,1,2,1,2] },
-      { text: "아무 말도 못하고 고개만 끄덕끄덕...", scores: [0,0,1,2,3] }
-    ]
-  },
-  {
-    q: "미국 생활비가 생각보다 2배는 더 비싸. 어떻게 대처할 거야?",
-    opts: [
-      { text: "수입 늘릴 방법 먼저 찾는다 (부업, 이직 등)", scores: [3,1,0,0,0] },
-      { text: "지출 항목 하나하나 다 분석하고 줄인다 📊", scores: [1,3,1,0,0] },
-      { text: "뭔가 해야 하는데... 일단 이번 달은 버티고 생각한다", scores: [0,1,2,1,1] },
-      { text: "스트레스 받아서 쇼핑으로 해소한다 (악순환)", scores: [0,0,0,1,3] }
-    ]
-  },
-  {
-    q: "미국 친구 집에 초대받았는데 음식이 내 취향이 아니야. 친구가 \"맛있어?\" 묻는다면?",
-    opts: [
-      { text: "\"Honestly, it's a bit different but I appreciate it!\" 솔직하게", scores: [3,1,0,0,0] },
-      { text: "\"It's interesting!\" 적당히 긍정적으로 넘어간다", scores: [2,2,0,0,0] },
-      { text: "\"So good!\" 거짓말이지만 분위기상 어쩔 수 없다", scores: [1,1,1,2,1] },
-      { text: "억지로 다 먹고 속으로 후회한다 😭", scores: [0,0,1,1,3] }
-    ]
-  },
-  {
-    q: "비자/영주권 관련 서류 작업이 산더미야. 어떻게 처리해?",
-    opts: [
-      { text: "이민 변호사 고용, 전문가한테 맡기는 게 최고야", scores: [3,1,0,0,0] },
-      { text: "관련 커뮤니티, 포럼 다 뒤져서 혼자 해결한다 🔍", scores: [1,3,1,0,0] },
-      { text: "아는 한국인 선배한테 물어본다", scores: [1,2,1,1,0] },
-      { text: "마감 직전까지 미루다가 허겁지겁 한다", scores: [0,0,0,1,3] }
-    ]
-  },
-  {
-    q: "미국 직장에서 내 아이디어를 동료가 자기 것처럼 발표했어. 어떻게 할 거야?",
-    opts: [
-      { text: "그 자리에서 바로 \"Actually, that was my idea\" 말한다 🗣️", scores: [3,0,0,0,0] },
-      { text: "나중에 1:1로 조용히 이야기한다", scores: [2,2,0,0,0] },
-      { text: "그냥 넘어가지만, 다음엔 email로 기록 남긴다", scores: [1,2,1,1,0] },
-      { text: "억울하지만 참는다... 괜히 분위기 망칠까 봐", scores: [0,0,1,2,3] }
-    ]
-  },
-  {
-    q: "미국에서 처음 운전을 해야 하는 상황이야. 한국이랑 달라서 긴장된다.",
-    opts: [
-      { text: "유튜브 미리 보고, 연습 충분히 하고 도전! 🚗", scores: [3,2,0,0,0] },
-      { text: "미국 운전법 공부하고 처음엔 익숙한 루트만 간다", scores: [1,3,1,0,0] },
-      { text: "Uber/Lyft 쓰다가 어쩔 수 없을 때 운전한다", scores: [1,1,2,1,0] },
-      { text: "두렵다. 최대한 피한다. 차 없이 살 방법을 찾겠다", scores: [0,0,1,2,3] }
-    ]
-  },
-  {
-    q: "미국에서 힘든 날, 외롭고 지칠 때 어떻게 버텨?",
-    opts: [
-      { text: "미국 친구/동료한테 먼저 연락한다. 현지 네트워크 키워야지", scores: [3,1,0,0,0] },
-      { text: "한국 가족/친구랑 통화하면서 충전한다 📞", scores: [2,2,1,0,0] },
-      { text: "혼자 있는 걸 즐기면서 취미로 극복한다", scores: [1,2,2,1,0] },
-      { text: "한인 커뮤니티에서만 위안을 찾는다 (코리아타운...)", scores: [0,1,2,2,1] }
-    ]
+    id: 'english', step: 'Q4 / 5', pct: 80,
+    text: '비자스크린용 영어 점수가 있으신가요?',
+    sub: 'TOEFL / IELTS / PTE / OET 등 CGFNS 인정 시험 기준',
+    type: 'yesno',
+    yes: { result: 'needs_visascreen' },
+    no:  { result: 'needs_english' }
   }
 ];
 
-const results = [
-  {
-    emoji: "🦅",
-    typeLabel: "미국 생존 유형",
-    title: "이미 절반은 미국인이야",
-    subtitle: "TYPE 01 — 미국형 인간",
-    desc: "적극적이고 자기주장 확실하고 변화를 즐긴다. 미국 문화와 궁합이 좋아서 적응 속도가 남다를 거야. 처음 6개월이 지나면 '오히려 한국이 더 불편해'라고 할 타입.",
-    bars: [
-      { name: "적응력", val: 95, color: "#244C41" },
-      { name: "소통력", val: 90, color: "#244C41" },
-      { name: "자기주장", val: 88, color: "#244C41" },
-      { name: "현지화", val: 85, color: "#244C41" }
-    ],
-    advice: [
-      { type: "pos", text: "네트워킹 능력 최고 — 미국에서 이게 곧 커리어야" },
-      { type: "pos", text: "자기주장 확실한 거, 미국 직장에서 진짜 무기야" },
-      { type: "warn", text: "너무 현지화되다 보면 한국 돌아올 때 역문화 충격 주의" },
-      { type: "warn", text: "에너지 관리 필요 — 항상 ON 상태로 살면 번아웃 온다" }
-    ]
-  },
-  {
-    emoji: "🗺️",
-    typeLabel: "미국 생존 유형",
-    title: "준비된 자만이 살아남는다",
-    subtitle: "TYPE 02 — 전략형 생존자",
-    desc: "감정보다 정보로 움직이는 타입. 모르면 찾아보고, 막히면 방법을 연구한다. 적응이 빠르진 않지만 확실하다. 실수를 두 번 반복하지 않는 스타일.",
-    bars: [
-      { name: "적응력", val: 78, color: "#244C41" },
-      { name: "정보력", val: 95, color: "#244C41" },
-      { name: "실행력", val: 65, color: "#244C41" },
-      { name: "유연성", val: 60, color: "#244C41" }
-    ],
-    advice: [
-      { type: "pos", text: "서류 작업, 세금, 비자 — 꼼꼼한 성격이 진짜 빛나는 순간들" },
-      { type: "pos", text: "정보 수집력 뛰어남 — 커뮤니티에서 도움 주는 사람 될 거야" },
-      { type: "warn", text: "완벽하게 준비되길 기다리다 기회 놓치는 경향 있음, 일단 해봐" },
-      { type: "warn", text: "즉흥 상황 대처 연습 필요 — 미국은 예상 밖 상황이 많아" }
-    ]
-  },
-  {
-    emoji: "🌱",
-    typeLabel: "미국 생존 유형",
-    title: "시간이 걸리지만 결국 핀다",
-    subtitle: "TYPE 03 — 느린 개화형",
-    desc: "처음엔 힘들 수 있어. 적응 속도가 느리고 에너지가 많이 든다. 근데 한 번 자리 잡으면 흔들리지 않아. 1~2년 버텨낸다면 그 이후엔 오히려 편하게 살 거야.",
-    bars: [
-      { name: "적응력", val: 50, color: "#244C41" },
-      { name: "안정성", val: 80, color: "#244C41" },
-      { name: "끈기", val: 72, color: "#244C41" },
-      { name: "유연성", val: 45, color: "#244C41" }
-    ],
-    advice: [
-      { type: "pos", text: "한 번 적응한 환경에서는 매우 안정적으로 살 수 있는 타입" },
-      { type: "pos", text: "한인 커뮤니티 잘 활용하면 초반 고통 확 줄일 수 있어" },
-      { type: "warn", text: "처음 6개월~1년이 고비 — 그 시기에 포기하면 아까워" },
-      { type: "warn", text: "영어 소통 불편함을 더 자주 맞닥뜨리는 연습이 필수야" }
-    ]
-  },
-  {
-    emoji: "🏯",
-    typeLabel: "미국 생존 유형",
-    title: "미국에 살지만 한국처럼 산다",
-    subtitle: "TYPE 04 — 한인타운 생존형",
-    desc: "솔직히 말하면, 미국에서 '한국인 커뮤니티 안에서 사는 것'에 더 가까워. 그게 나쁜 건 아니야. 근데 미국 주류 사회와의 연결이 약하면 커리어나 생활 반경이 좁아질 수 있어.",
-    bars: [
-      { name: "적응력", val: 35, color: "#6b4c35" },
-      { name: "공동체력", val: 85, color: "#244C41" },
-      { name: "독립성", val: 30, color: "#6b4c35" },
-      { name: "현지화", val: 20, color: "#6b4c35" }
-    ],
-    advice: [
-      { type: "pos", text: "한인 커뮤니티는 진짜 든든한 자산이야, 잘 활용 중이야" },
-      { type: "pos", text: "정서적 안정감 높음 — 외로움으로 무너지진 않을 타입" },
-      { type: "warn", text: "영어가 약점이라면 무조건 지금 투자해야 해 — 한국어만으론 한계 명확" },
-      { type: "warn", text: "미국인 친구 한 명 사귀는 걸 올해 목표로 삼아봐" }
-    ]
-  },
-  {
-    emoji: "😮‍💨",
-    typeLabel: "미국 생존 유형",
-    title: "미국이 체질에 안 맞을 수도 있어",
-    subtitle: "TYPE 05 — 빠른 귀국 예비군",
-    desc: "회피, 참기, 눈치 보기 — 미국은 이걸 미덕으로 보지 않아. 자기주장 안 하면 그냥 투명인간 되는 곳이야. 지금 스타일대로면 2년 안에 '역시 한국이 최고야'를 외칠 가능성이 높아.",
-    bars: [
-      { name: "적응력", val: 20, color: "#6b4c35" },
-      { name: "자기주장", val: 15, color: "#6b4c35" },
-      { name: "유연성", val: 30, color: "#6b4c35" },
-      { name: "현지화", val: 10, color: "#6b4c35" }
-    ],
-    advice: [
-      { type: "pos", text: "한국 귀국 후 '미국 경험자'로서의 가치는 분명히 있어" },
-      { type: "pos", text: "아직 안 간 거라면 — 이 결과가 준비신호, 잘 준비할 수 있어" },
-      { type: "warn", text: "자기 의사 표현 훈련이 가장 시급해 — 영어보다 더 중요해" },
-      { type: "warn", text: "미국에서 '참는 게 미덕'은 없어. 차근 차근 적응해 나가보자" }
-    ]
-  }
-];
-let current = 0, answers = [], totals = [0,0,0,0,0];
+let history = [];
+let currentId = 'degree';
 
-function render() {
-  const q = questions[current];
-  document.getElementById('q-num').textContent = `질문 ${current+1} / ${questions.length}`;
-  const pct = Math.round((current+1)/questions.length*100);
-  document.getElementById('pct').textContent = pct + '%';
-  document.getElementById('progress').style.width = pct + '%';
-  document.getElementById('back-btn').style.visibility = current > 0 ? 'visible' : 'hidden';
-  document.getElementById('q-text').textContent = q.q;
-  const opts = document.getElementById('options');
-  opts.innerHTML = '';
-  q.opts.forEach((o, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'opt-btn' + (answers[current] === i ? ' selected' : '');
-    btn.textContent = o.text;
-    btn.onclick = () => pick(i);
-    opts.appendChild(btn);
-  });
-  updateNext();
-}
+function getQ(id){ return QUESTIONS.find(q => q.id === id); }
 
-function pick(i) {
-  answers[current] = i;
-  document.querySelectorAll('.opt-btn').forEach((b, idx) => b.classList.toggle('selected', idx === i));
-  updateNext();
-  setTimeout(() => { if (current < questions.length - 1) goNext(); }, 280);
-}
+function render(){
+  const q = getQ(currentId);
+  if(!q) return;
 
-function updateNext() {
-  const btn = document.getElementById('next-btn');
-  btn.textContent = current === questions.length - 1 ? '결과 보기 →' : '다음 →';
-  btn.classList.toggle('active', answers[current] !== undefined);
-}
+  document.getElementById('progFill').style.width = q.pct + '%';
 
-function goNext() {
-  if (answers[current] === undefined) return;
-  if (current === questions.length - 1) { showResult(); return; }
-  current++; render();
-}
+  const area = document.getElementById('questionArea');
+  const letters = ['A','B','C','D'];
 
-function goBack() {
-  if (current > 0) { current--; render(); }
-}
-
-function showResult() {
-  totals = [0,0,0,0,0];
-  answers.forEach((a, qi) => questions[qi].opts[a].scores.forEach((s, i) => totals[i] += s));
-  const r = results[totals.indexOf(Math.max(...totals))];
-  document.getElementById('quiz-section').style.display = 'none';
-  const rs = document.getElementById('result-section');
-  rs.style.display = 'block';
-  rs.innerHTML = `
-    <div class="fade-in">
-      <div class="result-top">
-        <div class="result-emoji-wrap">${r.emoji}</div>
-        <div>
-          <div class="result-type-label">${r.typeLabel}</div>
-          <div class="result-title">${r.title}</div>
-          <div class="result-subtitle">${r.subtitle}</div>
+  let optsHTML = '';
+  if(q.type === 'yesno'){
+    optsHTML = `
+      <button class="q-opt" onclick="answerYesNo('${q.id}', true)">
+        <div class="q-opt-circle">✓</div>
+        <div class="q-opt-text">
+          <span class="q-opt-label">네, 있어요</span>
+          <span class="q-opt-sub">다음 단계로 진행</span>
         </div>
-      </div>
-      <p class="result-desc">${r.desc}</p>
-      <div class="scores-section">
-        <div class="scores-label">항목별 점수</div>
-        ${r.bars.map(b => `
-          <div class="score-row">
-            <div class="score-name">${b.name}</div>
-            <div class="score-track"><div class="score-fill" style="width:0%;background:${b.color}" data-val="${b.val}"></div></div>
-            <div class="score-val">${b.val}</div>
-          </div>`).join('')}
-      </div>
-      <div class="advice-section">
-        <div class="advice-label">솔직한 조언</div>
-        ${r.advice.map(a => `
-          <div class="advice-item">
-            <span class="advice-dot ${a.type === 'pos' ? 'dot-pos' : 'dot-warn'}">${a.type === 'pos' ? '✓' : '!'}</span>
-            <span>${a.text}</span>
-          </div>`).join('')}
-      </div>
-      <div class="result-actions">
-        <button class="retry-btn" onclick="retry()">↺ 다시 하기</button>
-        <button class="save-btn" onclick="shareResult(this)">🔗 친구에게 공유하기</button>
-        <a class="root-btn" href="/">나한테 맞는 미국 간호사 루트 보러가기🌿</a>
-      </div>
-    </div>`;
-  setTimeout(() => {
-    document.querySelectorAll('.score-fill').forEach(el => { el.style.width = el.dataset.val + '%'; });
-  }, 100);
-}
-
-async function shareResult(btn) {
-  const r = results[totals.indexOf(Math.max(...totals))];
-  const shareData = {
-    title: '나의 미국 생존 유형 — The Root',
-    text: `나는 ${r.title} (${r.subtitle}) 🌿\n\n너는 어떤 유형이야? 10문항으로 알아봐!`,
-    url: 'https://theroot-theta.vercel.app/quiz'
-  };
-  if (navigator.share) {
-    try {
-      await navigator.share(shareData);
-    } catch(e) {
-      if (e.name !== 'AbortError') fallbackCopy(btn, shareData);
-    }
+      </button>
+      <button class="q-opt" onclick="answerYesNo('${q.id}', false)">
+        <div class="q-opt-circle">→</div>
+        <div class="q-opt-text">
+          <span class="q-opt-label">아직 없어요</span>
+          <span class="q-opt-sub">현재 단계 확인하기</span>
+        </div>
+      </button>`;
   } else {
-    fallbackCopy(btn, shareData);
+    optsHTML = q.options.map((o, i) => `
+      <button class="q-opt-multi" onclick="answerMulti('${o.value}')">
+        <div class="q-opt-circle">${letters[i]}</div>
+        <div class="q-opt-text">
+          <span class="q-opt-label">${o.label}</span>
+          <span class="q-opt-sub">${o.desc}</span>
+        </div>
+      </button>`).join('');
   }
+
+  area.innerHTML = `
+    <div class="q-card" id="qCard">
+      <div class="q-step">${q.step}</div>
+      <div class="q-text">${q.text}</div>
+      <p class="q-sub">${q.sub}</p>
+      <div class="q-opts">${optsHTML}</div>
+    </div>
+    ${history.length > 0 ? '<button class="q-back" onclick="goBack()">← 이전 질문</button>' : ''}`;
 }
 
-function fallbackCopy(btn, shareData) {
-  const text = `${shareData.text}\n${shareData.url}`;
-  navigator.clipboard.writeText(text).then(() => {
-    const orig = btn.textContent;
-    btn.textContent = '✓ 링크 복사됨!';
-    setTimeout(() => { btn.textContent = orig; }, 2000);
-  });
+function answerYesNo(qId, isYes){
+  const q = getQ(qId);
+  history.push(currentId);
+  const branch = isYes ? q.yes : q.no;
+  if(branch.result){ showResult(branch.result); }
+  else { currentId = branch.next; render(); }
 }
 
-function retry() {
-  current = 0; answers = []; totals = [0,0,0,0,0];
-  document.getElementById('result-section').style.display = 'none';
-  document.getElementById('quiz-section').style.display = 'block';
+function answerMulti(value){
+  history.push(currentId);
+  if(value === 'both')    { currentId = 'english'; render(); }
+  else if(value === 'nclex')    { showResult('no_clinical'); }
+  else if(value === 'clinical') { showResult('needs_nclex'); }
+  else                          { showResult('needs_nclex'); }
+}
+
+function goBack(){
+  if(!history.length) return;
+  currentId = history.pop();
   render();
+}
+
+function showResult(key){
+  const r = RESULTS[key];
+  if(!r) return;
+
+  document.getElementById('progFill').style.width = '100%';
+  document.getElementById('questionArea').style.display = 'none';
+
+  document.getElementById('rBadge').textContent = r.badge;
+  document.getElementById('rH2').textContent = r.h2;
+  document.getElementById('rDesc').textContent = r.desc;
+  document.getElementById('rJen').textContent = '"' + r.jen + '"';
+
+  document.getElementById('rSteps').innerHTML = r.steps.map((s,i) => `
+    <div class="result-step">
+      <div class="result-step-num">${i+1}</div>
+      <div>
+        <div class="result-step-t">${s.t}</div>
+        <div class="result-step-d">${s.d}</div>
+      </div>
+    </div>`).join('');
+
+  // Extras: UWorld, English table, compact info
+  let extras = '';
+  if(r.showUworld){
+    extras += `
+      <div class="uw-banner">
+        <div class="uw-ico">UW</div>
+        <div style="flex:1">
+          <div class="uw-ttl">UWorld NCLEX-RN</div>
+          <div class="uw-sub">Jennifer Affiliate link — NCLEX 준비에 많이 활용되는 대표 문제은행</div>
+        </div>
+        <a href="http://tidd.ly/3OW24vo" class="uw-link" target="_blank">자세히 보기 →</a>
+      </div>`;
+  }
+  if(r.showEng){
+    extras += `
+      <div class="info-expand">
+        <div class="info-expand-header" onclick="toggleExpand(this)">
+          <span class="info-expand-title">비자스크린용 영어 점수 기준표 보기</span>
+          <span class="info-expand-arrow">▼</span>
+        </div>
+        <div class="info-expand-body">${ENG_TABLE}</div>
+      </div>`;
+  }
+  if(r.showCompact){
+    extras += `
+      <div class="info-expand">
+        <div class="info-expand-header" onclick="toggleExpand(this)">
+          <span class="info-expand-title">Compact 주란? (NCLEX 응시 주 선택 시 참고)</span>
+          <span class="info-expand-arrow">▼</span>
+        </div>
+        <div class="info-expand-body">
+          <p style="font-size:13px;color:var(--t2);line-height:1.7;margin-bottom:12px;">Compact 주에서 면허를 취득하면 미국 거주 후 다른 Compact 주에서도 진료할 수 있어요.</p>
+          <p style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--t3);margin-bottom:8px;">현재 Compact 주</p>
+          <div class="state-pills">${COMPACT_STATES.map(s=>`<span class="state-pill">${s}</span>`).join('')}</div>
+          <p style="font-size:12px;color:var(--t3);margin-top:12px;line-height:1.6;">국제 간호사는 처음엔 Single State License만 발급돼요. 미국 거주 후 Compact로 업그레이드 가능.</p>
+        </div>
+      </div>`;
+  }
+  document.getElementById('rExtras').innerHTML = extras;
+
+  const ctaEl = document.getElementById('rCta');
+  ctaEl.textContent = r.ctaText;
+  ctaEl.href = r.ctaHref;
+
+  // Save stage to sessionStorage for index.html
+  try { sessionStorage.setItem('rootStage', String(r.stageIdx)); } catch(e){}
+
+  const rc = document.getElementById('resultCard');
+  rc.style.display = 'block';
+  setTimeout(() => rc.scrollIntoView({behavior:'smooth', block:'start'}), 100);
+}
+
+function toggleExpand(header){
+  header.classList.toggle('open');
+}
+
+function restart(){
+  history = [];
+  currentId = 'degree';
+  document.getElementById('resultCard').style.display = 'none';
+  document.getElementById('questionArea').style.display = 'block';
+  document.getElementById('progFill').style.width = '0%';
+  render();
+  window.scrollTo({top:0, behavior:'smooth'});
 }
 
 render();

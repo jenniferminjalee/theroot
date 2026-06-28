@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>나도 미국에 적응할 수 있을까? — The Root</title>
+<meta name="description" content="10가지 질문으로 알아보는 나의 미국 생존 유형. Jennifer Minja Lee · California RN · The Root">
+<meta property="og:title" content="나도 미국에 적응할 수 있을까? — The Root">
+<meta property="og:description" content="미국 생활, 나는 어떤 타입일까? 10문제로 알아보는 내 적응 유형.">
+<meta property="og:site_name" content="The Root">
+<meta property="og:locale" content="ko_KR">
+<style>
+:root{
+  --bg:#EEEADE;--bg-alt:#E6E1D4;--bg-deep:#2B4530;
+  --t1:#3A5840;--t2:#4E6B52;--t3:#8A9E7A;
+  --green:#3A5840;--green-mid:#4E6B52;--green-lt:#74C48A;
+  --green-pale:#C8E0CC;--green-ghost:#EBF4ED;
+  --gold:#8A8B3C;--white:#FEFCF8;
+  --bdrw:#D4CEC4;
+  --r-sm:8px;--r-md:14px;--r-lg:20px;--r-xl:28px;
+  --max:600px;--g:24px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',system-ui,sans-serif;
+  background:var(--bg);color:var(--t1);
+  line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;
+}
+
+/* NAV */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(238,244,232,0.88);
+  backdrop-filter:blur(16px) saturate(160%);
+  border-bottom:1px solid rgba(58,88,64,0.10);
+  height:56px;display:flex;align-items:center;
+}
+.nav-inner{
+  max-width:var(--max);margin:0 auto;padding:0 var(--g);
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{font-size:17px;font-weight:800;letter-spacing:-0.032em;color:var(--t1);text-decoration:none;}
+.nav-logo em{color:var(--gold);font-style:normal;}
+.nav-back{font-size:13px;color:var(--t3);text-decoration:none;display:flex;align-items:center;gap:5px;transition:color .15s;}
+.nav-back:hover{color:var(--t1);}
+
+/* HERO */
+.hero{
+  background:
+    radial-gradient(ellipse 65% 100% at 0% 50%, rgba(140,178,128,0.42) 0%, transparent 62%),
+    radial-gradient(ellipse 50% 60% at 90% 10%, rgba(158,192,148,0.22) 0%, transparent 55%),
+    #DCE8D4;
+  padding:64px var(--g) 52px;text-align:center;
+}
+.hero-kicker{display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:var(--t3);margin-bottom:18px;}
+.hero-h1{font-size:clamp(32px,6vw,50px);font-weight:800;letter-spacing:-0.04em;line-height:1.1;color:var(--t1);margin-bottom:14px;}
+.hero-h1 em{color:var(--green-mid);font-style:normal;}
+.hero-sub{font-size:15px;color:var(--t2);line-height:1.72;max-width:380px;margin:0 auto 24px;}
+.hero-meta{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--t3);font-weight:500;}
+.hero-dot{width:5px;height:5px;border-radius:50%;background:var(--green-lt);}
+
+/* QUIZ AREA */
+.quiz-wrap{max-width:var(--max);margin:0 auto;padding:48px var(--g) 80px;}
+
+/* Progress */
+.prog-wrap{margin-bottom:36px;}
+.prog-bar{height:3px;background:var(--bdrw);border-radius:2px;overflow:hidden;}
+.prog-fill{height:100%;background:var(--green);border-radius:2px;transition:width .5s cubic-bezier(.4,0,.2,1);}
+.prog-label{display:flex;justify-content:space-between;align-items:center;margin-top:8px;}
+.prog-num{font-size:12px;font-weight:700;color:var(--green);letter-spacing:0.04em;}
+.prog-total{font-size:12px;color:var(--t3);}
+
+/* Question card */
+.q-card{
+  background:var(--white);border:1.5px solid var(--bdrw);
+  border-radius:var(--r-xl);padding:40px 36px;
+  box-shadow:0 4px 24px rgba(58,88,64,0.07);
+  animation:fadeUp .4s ease-out;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.q-sub-tag{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--t3);margin-bottom:14px;}
+.q-text{font-size:clamp(18px,3.2vw,23px);font-weight:700;color:var(--t1);line-height:1.3;letter-spacing:-0.02em;margin-bottom:6px;}
+.q-hint{font-size:13px;color:var(--t3);margin-bottom:26px;font-style:italic;}
+.q-opts{display:flex;flex-direction:column;gap:9px;}
+.q-opt{
+  display:flex;align-items:flex-start;gap:14px;
+  background:var(--bg);border:1.5px solid var(--bdrw);
+  border-radius:var(--r-md);padding:15px 18px;
+  cursor:pointer;text-align:left;width:100%;font-family:inherit;
+  transition:border-color .18s,background .18s,transform .12s;
+}
+.q-opt:hover{border-color:var(--green);background:var(--green-ghost);transform:translateX(3px);}
+.q-num{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--white);border:1.5px solid var(--bdrw);
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:var(--t3);
+  transition:background .18s,border-color .18s,color .18s;margin-top:1px;
+}
+.q-opt:hover .q-num{background:var(--green);border-color:var(--green);color:#fff;}
+.q-opt-text{font-size:14px;font-weight:500;color:var(--t1);line-height:1.45;padding-top:3px;}
+
+/* Back button */
+.q-back{
+  background:none;border:none;color:var(--t3);
+  font-size:13px;cursor:pointer;font-family:inherit;
+  display:flex;align-items:center;gap:5px;margin-top:18px;
+  transition:color .15s;
+}
+.q-back:hover{color:var(--t1);}
+
+/* RESULT CARD */
+.result-card{
+  background:var(--white);border:1.5px solid var(--bdrw);
+  border-radius:var(--r-xl);padding:40px 36px;
+  box-shadow:0 4px 24px rgba(58,88,64,0.07);
+  animation:fadeUp .5s ease-out;display:none;
+}
+.result-type-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--green-ghost);border:1px solid var(--green-pale);
+  border-radius:99px;padding:5px 16px;
+  font-size:11px;font-weight:700;color:var(--green);
+  letter-spacing:0.06em;text-transform:uppercase;margin-bottom:20px;
+}
+.result-emoji{font-size:38px;margin-bottom:14px;}
+.result-title{font-size:clamp(22px,4.5vw,30px);font-weight:800;color:var(--t1);letter-spacing:-0.03em;line-height:1.2;margin-bottom:6px;}
+.result-subtitle{font-size:13px;font-weight:600;color:var(--t3);margin-bottom:16px;letter-spacing:0.03em;}
+.result-desc{
+  font-size:14px;color:var(--t2);line-height:1.72;
+  padding:16px 20px;background:var(--green-ghost);
+  border-radius:var(--r-md);border-left:3px solid var(--green);
+  margin-bottom:24px;
+}
+.result-divider{height:1px;background:var(--bdrw);margin:24px 0;}
+
+/* Score bars */
+.bars-label{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--t3);margin-bottom:14px;}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.bar-name{width:68px;font-size:12px;color:var(--t2);flex-shrink:0;}
+.bar-track{flex:1;height:6px;background:var(--bdrw);border-radius:99px;overflow:hidden;}
+.bar-fill{height:100%;background:var(--green);border-radius:99px;transition:width .8s ease;}
+.bar-pct{font-size:11px;color:var(--t3);width:28px;text-align:right;flex-shrink:0;}
+
+/* Advice steps */
+.advice-label{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--t3);margin-top:24px;margin-bottom:12px;}
+.advice-step{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;}
+.advice-num{
+  width:22px;height:22px;border-radius:50%;
+  background:var(--t1);color:#fff;font-size:10px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+.advice-text{font-size:14px;color:var(--t2);line-height:1.5;}
+
+/* Jennifer note */
+.jen-note{
+  display:flex;align-items:flex-start;gap:12px;
+  margin-top:24px;padding:18px 20px;
+  background:var(--bg-alt,#E6E1D4);border-radius:var(--r-md);
+}
+.jen-av{
+  width:36px;height:36px;border-radius:50%;flex-shrink:0;
+  overflow:hidden;background:var(--green);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:#fff;
+}
+.jen-av img{width:100%;height:100%;object-fit:cover;object-position:top;}
+.jen-msg{font-size:13px;color:var(--t2);line-height:1.6;}
+.jen-msg strong{color:var(--t1);font-weight:600;}
+
+/* CTA buttons */
+.result-actions{display:flex;flex-direction:column;gap:10px;margin-top:24px;}
+.btn-primary{
+  display:block;width:100%;padding:15px;
+  background:var(--green);color:#fff;
+  border:none;border-radius:var(--r-md);
+  font-size:14px;font-weight:700;font-family:inherit;
+  text-decoration:none;text-align:center;cursor:pointer;
+  transition:background .15s,transform .1s;
+}
+.btn-primary:hover{background:#2a4d38;transform:translateY(-1px);}
+.btn-ghost{
+  display:block;width:100%;padding:13px;
+  background:transparent;color:var(--t3);
+  border:1.5px solid var(--bdrw);border-radius:var(--r-md);
+  font-size:13px;font-family:inherit;cursor:pointer;
+  text-align:center;transition:border-color .15s,color .15s;
+}
+.btn-ghost:hover{border-color:var(--green);color:var(--t1);}
+
+/* FOOTER */
+footer{background:var(--bg-deep);padding:32px var(--g);text-align:center;}
+footer p{font-size:12px;color:rgba(255,255,255,0.35);line-height:1.8;}
+footer a{color:rgba(116,196,138,0.7);text-decoration:none;}
+footer a:hover{color:rgba(116,196,138,1);}
+
+@media(max-width:480px){
+  .q-card,.result-card{padding:28px 20px;}
+  .hero{padding:48px var(--g) 40px;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">The <em>Root</em></a>
+    <a href="index.html" class="nav-back">← 홈으로</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-kicker">미국 적응 유형 테스트</div>
+  <h1 class="hero-h1">나도 미국에<br><em>적응할 수 있을까?</em></h1>
+  <p class="hero-sub">10가지 질문으로 알아보는 나의 미국 생존 유형. 솔직하게 답할수록 정확해요.</p>
+  <div class="hero-meta">
+    <span class="hero-dot"></span>
+    10문제 · 약 3분 · Jennifer의 솔직한 조언 포함
+  </div>
+</section>
+
+<div class="quiz-wrap">
+
+  <!-- Progress -->
+  <div class="prog-wrap" id="progWrap">
+    <div class="prog-bar"><div class="prog-fill" id="progFill" style="width:10%"></div></div>
+    <div class="prog-label">
+      <span class="prog-num" id="progNum">Q1 / 10</span>
+      <span class="prog-total" id="progPct">10%</span>
+    </div>
+  </div>
+
+  <!-- Question -->
+  <div id="questionArea">
+    <div class="q-card" id="qCard">
+      <div class="q-sub-tag" id="qTag">상황 01</div>
+      <div class="q-text" id="qText"></div>
+      <div class="q-hint" id="qHint"></div>
+      <div class="q-opts" id="qOpts"></div>
+    </div>
+    <button class="q-back" id="backBtn" onclick="goBack()" style="display:none">← 이전 질문</button>
+  </div>
+
+  <!-- Result -->
+  <div class="result-card" id="resultCard">
+    <div class="result-type-badge" id="rBadge">내 유형</div>
+    <div class="result-emoji" id="rEmoji"></div>
+    <div class="result-title" id="rTitle"></div>
+    <div class="result-subtitle" id="rSubtitle"></div>
+    <div class="result-desc" id="rDesc"></div>
+    <div class="result-divider"></div>
+    <div class="bars-label">항목별 점수</div>
+    <div id="rBars"></div>
+    <div class="advice-label">Jennifer의 솔직한 조언</div>
+    <div id="rAdvice"></div>
+    <div class="jen-note">
+      <div class="jen-av">
+        <img src="jennifer-headshot.JPG" alt="Jennifer" onerror="this.parentNode.textContent='J'">
+      </div>
+      <div class="jen-msg">
+        <strong>Jennifer의 메모 —</strong> 미국 적응은 영어만의 문제가 아니에요. 질문하는 힘, 다시 시작하는 힘, 그리고 나를 돌보는 루틴이 진짜 뿌리가 돼요.
+      </div>
+    </div>
+    <div class="result-actions">
+      <button class="btn-primary" onclick="share()">결과 공유하기 →</button>
+      <a href="https://jenniferminjalee.substack.com" target="_blank" class="btn-primary" style="background:var(--gold)">무료 뉴스레터 받기 →</a>
+      <button class="btn-ghost" onclick="restart()">↺ 다시 테스트하기</button>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>
+    <a href="index.html">The Root</a> · Jennifer Minja Lee · California RN<br>
+    재미로 보는 유형 테스트예요. 어떤 유형이든 준비하면 돼요 🌱
+  </p>
+</footer>
+
+<script>
+const QS = [
+  {
+    q: '미국에서 처음 모르는 사람이 갑자기 말을 걸어왔다. 어떻게 반응할 것 같아?',
+    hint: '미국 생활은 예상 밖의 small talk에서 시작될 때가 많아요.',
+    opts: [
+      { t: '오, 반갑네! 나도 대화 시작하지 뭐', scores:[3,1,0,0,1] },
+      { t: '어색하지만... 일단 웃으면서 대답은 해', scores:[1,2,1,0,1] },
+      { t: '속으로는 당황, 겉으로는 뻣뻣하게 대응', scores:[0,1,2,1,1] },
+      { t: '왜 말을 거는 거지...? 경계 모드 발동', scores:[0,0,1,3,1] }
+    ]
+  },
+  {
+    q: '미국 마트에서 계산한 금액이 이상한 것 같아. 어떻게 할 거야?',
+    hint: '내 권리를 말하는 연습도 미국 생활 적응의 일부예요.',
+    opts: [
+      { t: '바로 직원 불러서 확인 요청! 내 돈 지켜야지', scores:[3,1,0,0,1] },
+      { t: '영어로 뭐라고 해야 할지 구글링 먼저 하고 말한다', scores:[1,3,0,0,1] },
+      { t: '금액 차이가 크면 말하고, 조금이면 그냥 넘긴다', scores:[1,2,1,1,0] },
+      { t: '그냥 나온다. 싸우기 귀찮아', scores:[0,0,1,2,3] }
+    ]
+  },
+  {
+    q: '미국 직장 동료들이 퇴근 후 happy hour 가자고 한다. 근데 넌 피곤한 상태야.',
+    hint: '네트워킹과 에너지 관리 사이의 균형을 보는 질문이에요.',
+    opts: [
+      { t: '당연히 가지! 네트워킹이 곧 커리어야', scores:[3,1,0,0,0] },
+      { t: '한 시간만 얼굴 비추고 먼저 나온다', scores:[2,2,0,0,1] },
+      { t: '피곤하다고 솔직히 말하고 다음엔 꼭 간다고 한다', scores:[1,2,1,1,0] },
+      { t: '오늘 선약이 있다고 둘러댄다 (없음)', scores:[0,0,1,2,3] }
+    ]
+  },
+  {
+    q: '미국에서 의사한테 갔더니 설명이 너무 빠르고 어려워. 어떻게 해?',
+    hint: '의료 상황에서는 모르면 다시 묻는 용기가 특히 중요해요.',
+    opts: [
+      { t: '"Sorry, can you slow down?" 바로 말한다', scores:[3,1,0,0,0] },
+      { t: '그 자리에서 구글 번역기 꺼낸다', scores:[1,3,0,0,1] },
+      { t: '반쯤 이해한 채로 나와서 나중에 검색한다', scores:[0,1,2,1,2] },
+      { t: '아무 말도 못하고 고개만 끄덕끄덕...', scores:[0,0,1,2,3] }
+    ]
+  },
+  {
+    q: '미국 생활비가 생각보다 2배는 더 비싸. 어떻게 대처할 거야?',
+    hint: '미국 생활은 수입보다 고정비와 선택이 더 크게 느껴질 때가 많아요.',
+    opts: [
+      { t: '수입 늘릴 방법 먼저 찾는다 (부업, 이직 등)', scores:[3,1,0,0,0] },
+      { t: '지출 항목 하나하나 다 분석하고 줄인다', scores:[1,3,1,0,0] },
+      { t: '뭔가 해야 하는데... 일단 이번 달은 버티고 생각한다', scores:[0,1,2,1,1] },
+      { t: '스트레스 받아서 쇼핑으로 해소한다 (악순환)', scores:[0,0,0,1,3] }
+    ]
+  },
+  {
+    q: '미국 친구 집에 초대받았는데 음식이 내 취향이 아니야. 친구가 "맛있어?" 묻는다면?',
+    hint: '솔직함과 배려 사이의 밸런스를 보는 질문이에요.',
+    opts: [
+      { t: '"Honestly, it\'s a bit different but I appreciate it!" 솔직하게', scores:[3,1,0,0,0] },
+      { t: '"It\'s interesting!" 적당히 긍정적으로 넘어간다', scores:[2,2,0,0,0] },
+      { t: '"So good!" 거짓말이지만 분위기상 어쩔 수 없다', scores:[1,1,1,2,1] },
+      { t: '억지로 다 먹고 속으로 후회한다', scores:[0,0,1,1,3] }
+    ]
+  },
+  {
+    q: '비자/영주권 관련 서류 작업이 산더미야. 어떻게 처리해?',
+    hint: '미국 생활은 결국 서류와 시스템을 다루는 힘이 필요해요.',
+    opts: [
+      { t: '이민 변호사 고용, 전문가한테 맡기는 게 최고야', scores:[3,1,0,0,0] },
+      { t: '관련 커뮤니티, 포럼 다 뒤져서 혼자 해결한다', scores:[1,3,1,0,0] },
+      { t: '아는 한국인 선배한테 물어본다', scores:[1,2,1,1,0] },
+      { t: '마감 직전까지 미루다가 허겁지겁 한다', scores:[0,0,0,1,3] }
+    ]
+  },
+  {
+    q: '미국 직장에서 내 아이디어를 동료가 자기 것처럼 발표했어. 어떻게 할 거야?',
+    hint: '자기주장과 기록 문화에 얼마나 익숙한지 보는 질문이에요.',
+    opts: [
+      { t: '그 자리에서 바로 "Actually, that was my idea" 말한다', scores:[3,0,0,0,0] },
+      { t: '나중에 1:1로 조용히 이야기한다', scores:[2,2,0,0,0] },
+      { t: '그냥 넘어가지만, 다음엔 email로 기록 남긴다', scores:[1,2,1,1,0] },
+      { t: '억울하지만 참는다... 괜히 분위기 망칠까 봐', scores:[0,0,1,2,3] }
+    ]
+  },
+  {
+    q: '미국에서 처음 운전을 해야 하는 상황이야. 한국이랑 달라서 긴장된다.',
+    hint: '낯선 시스템을 어떻게 익히는지 보는 질문이에요.',
+    opts: [
+      { t: '유튜브 미리 보고, 연습 충분히 하고 도전!', scores:[3,2,0,0,0] },
+      { t: '미국 운전법 공부하고 처음엔 익숙한 루트만 간다', scores:[1,3,1,0,0] },
+      { t: 'Uber/Lyft 쓰다가 어쩔 수 없을 때 운전한다', scores:[1,1,2,1,0] },
+      { t: '두렵다. 최대한 피한다. 차 없이 살 방법을 찾겠다', scores:[0,0,1,2,3] }
+    ]
+  },
+  {
+    q: '미국에서 힘든 날, 외롭고 지칠 때 어떻게 버텨?',
+    hint: '외로움을 다루는 방식은 장기 적응력과 연결돼요.',
+    opts: [
+      { t: '미국 친구/동료한테 먼저 연락한다. 현지 네트워크 키워야지', scores:[3,1,0,0,0] },
+      { t: '한국 가족/친구랑 통화하면서 충전한다', scores:[2,2,1,0,0] },
+      { t: '혼자 있는 걸 즐기면서 취미로 극복한다', scores:[1,2,2,1,0] },
+      { t: '한인 커뮤니티에서만 위안을 찾는다', scores:[0,1,2,2,1] }
+    ]
+  }
+];
+
+const RESULTS = [
+  {
+    badge:'TYPE 01',emoji:'🦅',title:'이미 절반은 미국인이야',
+    subtitle:'미국형 인간',
+    desc:'적극적이고 자기주장 확실하고 변화를 즐기는 타입. 미국 문화와 궁합이 좋아서 적응 속도가 빠를 가능성이 높아요.',
+    bars:[['적응력',95],['소통력',90],['자기주장',88],['현지화',85]],
+    advice:['네트워킹 능력은 미국 커리어에서 큰 무기예요.','자기주장이 분명한 점은 미국 직장에서 장점이 될 수 있어요.','항상 ON 상태로 살면 번아웃이 올 수 있으니 에너지 관리도 필요해요.']
+  },
+  {
+    badge:'TYPE 02',emoji:'🗺️',title:'준비된 자만이 살아남는다',
+    subtitle:'전략형 생존자',
+    desc:'감정보다 정보로 움직이는 타입. 적응이 아주 빠르진 않아도, 한 번 배운 것은 자기 시스템으로 만드는 힘이 있어요.',
+    bars:[['적응력',78],['정보력',95],['실행력',65],['유연성',60]],
+    advice:['서류, 세금, 비자처럼 복잡한 영역에서 꼼꼼함이 빛나요.','완벽하게 준비되길 기다리다 기회를 놓치지 않도록 작게라도 시작해보세요.','예상 밖 상황에 대한 즉흥 대처 연습이 도움이 돼요.']
+  },
+  {
+    badge:'TYPE 03',emoji:'🌱',title:'시간이 걸리지만 결국 핀다',
+    subtitle:'느린 개화형',
+    desc:'처음엔 에너지가 많이 들 수 있지만, 한 번 자리 잡으면 오래 버티는 타입이에요. 초반 6개월~1년을 잘 넘기는 전략이 중요해요.',
+    bars:[['적응력',50],['안정성',80],['끈기',72],['유연성',45]],
+    advice:['안정적인 루틴을 만들면 적응 속도가 빨라질 수 있어요.','한인 커뮤니티와 현지 커뮤니티를 균형 있게 활용해보세요.','영어 소통 불편함을 조금씩 자주 마주치는 연습이 필요해요.']
+  },
+  {
+    badge:'TYPE 04',emoji:'🏯',title:'미국에 살지만 한국처럼 산다',
+    subtitle:'한인타운 생존형',
+    desc:'한인 커뮤니티 안에서 안정감을 얻는 타입. 나쁜 건 아니지만, 미국 주류 시스템과의 연결을 조금씩 넓히면 생활 반경이 훨씬 넓어져요.',
+    bars:[['적응력',35],['공동체력',85],['독립성',30],['현지화',20]],
+    advice:['한인 커뮤니티는 든든한 자산이에요.','다만 영어와 현지 시스템을 피하기만 하면 커리어 선택지가 좁아질 수 있어요.','올해 목표를 "미국인 친구/동료와 편하게 대화하기"로 잡아보세요.']
+  },
+  {
+    badge:'TYPE 05',emoji:'😮‍💨',title:'미국이 체질에 안 맞을 수도 있어',
+    subtitle:'빠른 귀국 예비군',
+    desc:'회피하고 참는 방식이 익숙하다면 미국 생활이 더 버겁게 느껴질 수 있어요. 하지만 이 결과는 포기 신호가 아니라 준비 신호예요.',
+    bars:[['적응력',20],['자기주장',15],['유연성',30],['현지화',10]],
+    advice:['자기 의사 표현 훈련이 가장 시급해요. 영어보다 더 중요할 수 있어요.','작은 상황부터 "Can you explain that again?" 처럼 말하는 연습을 해보세요.','천천히 적응하면 돼요. 준비 없이 혼자 버티는 것만 피하면 됩니다.']
+  }
+];
+
+let idx = 0;
+let history = [];
+let totals = [0,0,0,0,0];
+let lastResult = null;
+
+function render(){
+  const q = QS[idx];
+  const pct = Math.round((idx+1)/QS.length*100);
+  document.getElementById('progFill').style.width = pct+'%';
+  document.getElementById('progNum').textContent = 'Q'+(idx+1)+' / '+QS.length;
+  document.getElementById('progPct').textContent = pct+'%';
+  document.getElementById('qTag').textContent = '상황 '+(idx+1<10?'0':'')+(idx+1);
+
+  const qText = document.getElementById('qText');
+  qText.style.opacity='0';qText.style.transform='translateY(8px)';
+  setTimeout(()=>{
+    qText.textContent=q.q;
+    qText.style.transition='opacity .3s,transform .3s';
+    qText.style.opacity='1';qText.style.transform='none';
+  },40);
+
+  document.getElementById('qHint').textContent = q.hint||'';
+
+  const opts = document.getElementById('qOpts');
+  opts.innerHTML='';
+  const nums=['①','②','③','④'];
+  q.opts.forEach((o,i)=>{
+    const btn=document.createElement('button');
+    btn.className='q-opt';
+    btn.innerHTML=`<div class="q-num">${nums[i]}</div><div class="q-opt-text">${o.t}</div>`;
+    btn.addEventListener('click',()=>answer(i));
+    opts.appendChild(btn);
+  });
+
+  const card=document.getElementById('qCard');
+  card.style.animation='none';void card.offsetWidth;card.style.animation='fadeUp .4s ease-out';
+
+  document.getElementById('backBtn').style.display=history.length>0?'flex':'none';
+}
+
+function answer(optIdx){
+  history.push({idx, totals:[...totals]});
+  QS[idx].opts[optIdx].scores.forEach((s,i)=>totals[i]+=s);
+  if(idx>=QS.length-1){
+    showResult();
+  } else {
+    idx++;
+    render();
+  }
+}
+
+function goBack(){
+  if(!history.length) return;
+  const prev=history.pop();
+  idx=prev.idx;
+  totals=prev.totals;
+  render();
+}
+
+function showResult(){
+  lastResult=RESULTS[totals.indexOf(Math.max(...totals))];
+  document.getElementById('progFill').style.width='100%';
+  document.getElementById('progPct').textContent='완료!';
+  document.getElementById('questionArea').style.display='none';
+
+  document.getElementById('rBadge').textContent=lastResult.badge+' — '+lastResult.subtitle;
+  document.getElementById('rEmoji').textContent=lastResult.emoji;
+  document.getElementById('rTitle').textContent=lastResult.title;
+  document.getElementById('rSubtitle').textContent=lastResult.subtitle;
+  document.getElementById('rDesc').textContent=lastResult.desc;
+
+  document.getElementById('rBars').innerHTML=lastResult.bars.map(b=>`
+    <div class="bar-row">
+      <span class="bar-name">${b[0]}</span>
+      <div class="bar-track"><div class="bar-fill" style="width:0%" data-w="${b[1]}"></div></div>
+      <span class="bar-pct">${b[1]}</span>
+    </div>
+  `).join('');
+
+  document.getElementById('rAdvice').innerHTML=lastResult.advice.map((a,i)=>`
+    <div class="advice-step">
+      <div class="advice-num">${i+1}</div>
+      <div class="advice-text">${a}</div>
+    </div>
+  `).join('');
+
+  const rc=document.getElementById('resultCard');
+  rc.style.display='block';
+  setTimeout(()=>rc.scrollIntoView({behavior:'smooth',block:'start'}),100);
+
+  // Animate bars
+  setTimeout(()=>{
+    document.querySelectorAll('.bar-fill').forEach(b=>{
+      b.style.transition='width .8s ease';
+      b.style.width=b.dataset.w+'%';
+    });
+  },400);
+}
+
+function restart(){
+  idx=0;history=[];totals=[0,0,0,0,0];lastResult=null;
+  document.getElementById('resultCard').style.display='none';
+  document.getElementById('questionArea').style.display='block';
+  render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function share(){
+  if(!lastResult) return;
+  const text=`나는 "${lastResult.title}" (${lastResult.subtitle}) ${lastResult.emoji}\n\nThe Root에서 미국 적응 테스트 해보기 →\nhttps://theroot-theta.vercel.app/adapt-quiz`;
+  if(navigator.share){
+    navigator.share({title:'나의 미국 생존 유형 — The Root',text}).catch(()=>{});
+  } else {
+    navigator.clipboard.writeText(text).then(()=>alert('결과가 복사됐어요! 공유해보세요 🌿'));
+  }
+}
+
+render();
+</script>
+</body>
+</html>
