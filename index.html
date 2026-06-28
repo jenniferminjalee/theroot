@@ -3,1914 +3,1260 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="google-site-verification" content="jQIH5QPtGKGsZNFjgBAppWaAFD-iHKIt4YzkZTMVUTU">  
-<title>The Root — 나는 미국 간호사 여정 어디까지 왔을까?</title>
-<meta name="description" content="미국 간호사 여정, 지금 내가 어느 단계인지 5가지 질문으로 파악해보세요. NCLEX, 비자스크린, 영주권까지 — 1st generation immigrant RN Jennifer가 직접 만든 가이드.">
-<meta name="keywords" content="미국간호사, NCLEX, 비자스크린, EB3, 미국간호사되는법, 영주권, 미국간호사여정, The Root">
-<meta name="author" content="Jennifer Minja Lee">
-<link rel="canonical" href="https://theroot-theta.vercel.app/">
+<title>The Root — 미국 간호사 여정 플랫폼</title>
+<meta name="description" content="미국 간호사 여정, 지금 어디쯤 일까요? The Root가 함께해요.">
 
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-P61XG25XGD"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-P61XG25XGD');
-</script>
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://theroot-theta.vercel.app/">
-<meta property="og:title" content="나는 미국 간호사 여정 어디까지 왔을까? — The Root">
-<meta property="og:description" content="5가지 질문으로 지금 내 단계를 파악하고 다음 스텝을 명확하게. NCLEX부터 영주권까지 — Jennifer Minja Lee가 직접 만든 미국 간호사 여정 가이드.">
-<meta property="og:image" content="https://theroot-theta.vercel.app/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:site_name" content="The Root">
-<meta property="og:locale" content="ko_KR">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://theroot-theta.vercel.app/">
-<meta name="twitter:title" content="나는 미국 간호사 여정 어디까지 왔을까? — The Root">
-<meta name="twitter:description" content="5가지 질문으로 지금 내 단계를 파악하고 다음 스텝을 명확하게. NCLEX부터 영주권까지 Jennifer가 직접 만든 가이드.">
-<meta name="twitter:image" content="https://theroot-theta.vercel.app/og-image.png">
-<meta name="twitter:creator" content="@jenniferminjalee">
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
-:root{--cream:#F7F5F0;--bark:#16342C;--soil:#365046;--moss:#244C41;--moss-light:#E6F0EB;--sage:#7FA89A;--clay:#8F6A52;--clay-light:#F4ECE7;--sand:#DAD7CF;--mist:#EEF3F0;--font-d:'DM Serif Display',serif;--font-b:'DM Sans',sans-serif;}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:var(--font-b);background:var(--cream);color:var(--bark);min-height:100vh;overflow-x:hidden;}
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
 
-/* ── GLOBAL NAV ── */
-.gnav{
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:rgba(246,243,236,0.92);
-  backdrop-filter:blur(14px);
-  border-bottom:0.5px solid rgba(22,52,44,0.10);
+/* ── TOKENS — The Root brand palette (from logo + Clinical Experience Lab card) ── */
+:root{
+  --bg:     #EEEADE;   /* warm cream — exact logo card background */
+  --bg-alt: #E6E1D4;   /* slightly deeper cream */
+  --bg-deep:#2B4530;   /* dark forest for hero/dark sections */
+  --bg-forest:#273F2B; /* VHE dark section */
+
+  --t1:#3A5840;        /* primary text = brand forest green (logo color) */
+  --t2:#4E6B52;        /* mid green */
+  --t3:#8A9E7A;        /* sage — label text, secondary (CLINICAL EXPERIENCE LAB) */
+
+  --green:    #3A5840; /* brand primary green */
+  --green-mid:#4E6B52;
+  --green-lt: #74C48A; /* lighter green for dark bg */
+  --green-pale:#C8E0CC;
+  --green-ghost:#EBF4ED;
+
+  --gold:   #8A8B3C;   /* olive-gold accent — highlights, bold callouts */
+
+  --bdrw:#D4CEC4;      /* warm beige border */
+  --white:#FEFCF8;     /* warm near-white */
+
+  --sh-md:0 4px 16px rgba(0,0,0,0.07),0 2px 6px rgba(0,0,0,0.03);
+  --r-sm:8px; --r-md:14px; --r-lg:20px; --r-xl:28px;
+  --max:1060px; --g:24px;
+}
+body{
+  font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',system-ui,sans-serif;
+  background:var(--bg);color:var(--t1);
+  line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+.fade{opacity:0;transform:translateY(14px);transition:opacity .65s ease-out,transform .65s ease-out;}
+.fade.in{opacity:1;transform:none;}
+
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  height:58px;display:flex;align-items:center;
+  background:rgba(220,232,212,0.72);
+  backdrop-filter:blur(16px) saturate(160%);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);
+  border-bottom:1px solid rgba(58,88,64,0.08);
+  transition:background .3s,border-color .3s;
+}
+.nav.light{
+  background:rgba(238,244,232,0.92);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:1px solid var(--bdrw);
+}
+.nav-inner{
+  max-width:var(--max);margin:0 auto;padding:0 var(--g);
+  width:100%;display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{
+  font-size:17px;font-weight:800;letter-spacing:-0.032em;
+  color:var(--t1);text-decoration:none;transition:color .2s;
+}
+.nav.light .nav-logo{color:var(--t1);}
+.nav-logo em{color:var(--gold);font-style:normal;}
+.nav.light .nav-logo em{color:var(--gold);}
+
+/* Stage pill in nav — appears after selection */
+.nav-stage{
+  display:none;align-items:center;gap:6px;
+  background:var(--green-ghost);border:1px solid var(--green-pale);
+  border-radius:99px;padding:4px 12px 4px 8px;
+  font-size:12px;color:var(--green);font-weight:500;
+  margin-left:16px;
+}
+.nav.light .nav-stage{
+  background:var(--green-ghost);border-color:var(--green-pale);
+  color:var(--green);
+}
+.nav-stage.show{display:flex;}
+.nav-stage-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;}
+.nav.light .nav-stage-dot{background:var(--green);}
+
+.nav-links{display:flex;align-items:center;gap:0;}
+.nav-links a{
+  font-size:13.5px;font-weight:500;color:var(--t3);
+  text-decoration:none;padding:7px 14px;border-radius:var(--r-sm);
+  transition:color .15s,background .15s;
+}
+.nav.light .nav-links a{color:var(--t3);}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,0.08);}
+.nav.light .nav-links a:hover{color:var(--t1);background:var(--bg-alt);}
+.nav-cta{
+  background:var(--green)!important;
+  border:1px solid transparent!important;
+  color:#fff!important;font-weight:600!important;
+  margin-left:8px;border-radius:var(--r-sm);
+}
+.nav-cta:hover{background:#2a4d38!important;}
+.nav-links a:hover{color:var(--t1);background:rgba(58,88,64,0.07);}
+
+/* ═══════════════════════════════════════
+   HERO — stage-aware signature experience
+═══════════════════════════════════════ */
+.hero{
+  min-height:100svh;
+  background:
+    radial-gradient(ellipse 65% 100% at 0% 50%, rgba(140,178,128,0.52) 0%, transparent 62%),
+    radial-gradient(ellipse 50% 60% at 90% 10%, rgba(158,192,148,0.28) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 45% at 60% 95%, rgba(145,180,138,0.18) 0%, transparent 50%),
+    #DCE8D4;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:80px var(--g) 96px;
+  position:relative;overflow:hidden;text-align:center;
 }
 
-.gnav-inner{
-  max-width:1080px;
-  margin:0 auto;
-  padding:0 1.5rem;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  height:52px;
+.hero-kicker{
+  font-size:11.5px;font-weight:600;letter-spacing:0.10em;text-transform:uppercase;
+  color:var(--t3);margin-bottom:20px;position:relative;z-index:1;
 }
 
-.gnav-logo{
-  font-family:var(--font-d);
-  font-size:24px;
-  color:#20342B;
-  letter-spacing:0.02em;
-  cursor:pointer;
-  white-space:nowrap;
+/* ── Dynamic headline (morphs on stage select) ── */
+.hero-h1{
+  font-size:clamp(48px,8.5vw,90px);
+  font-weight:800;letter-spacing:-0.04em;line-height:1.07;
+  color:var(--t1);position:relative;z-index:1;margin-bottom:18px;
+  transition:opacity .25s ease-out,transform .25s ease-out;
+}
+.hero-h1.morphing{opacity:0;transform:translateY(10px);}
+.hero-h1 .line2{color:rgba(58,88,64,0.32);font-weight:300;}
+.hero-h1 .line2.answer{color:var(--t1);font-weight:800;}/* after selection */
+
+/* ── Dynamic sub ── */
+.hero-sub{
+  font-size:16px;color:var(--t3);line-height:1.72;
+  max-width:380px;margin:0 auto 44px;position:relative;z-index:1;
+  min-height:2.4em; /* prevent layout shift */
+  transition:opacity .25s ease-out;
+}
+.hero-sub.morphing{opacity:0;}
+
+/* ── Stage chips ── */
+.hero-chips{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:9px;
+  max-width:660px;position:relative;z-index:1;
+  margin-bottom:28px;
+}
+.h-chip{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(255,255,255,0.55);border:1px solid rgba(58,88,64,0.15);
+  color:var(--t2);text-decoration:none;border-radius:99px;
+  padding:10px 20px;font-size:14px;font-weight:500;cursor:pointer;
+  transition:background .2s,border-color .2s,color .2s,transform .2s,opacity .3s;
+}
+.h-chip:hover{
+  background:rgba(255,255,255,0.80);border-color:rgba(58,88,64,0.35);
+  color:var(--t1);transform:translateY(-1px);
+}
+.h-chip.selected{
+  background:#fff;border-color:var(--green);
+  color:var(--t1);transform:scale(1.04);
+  box-shadow:0 0 0 3px rgba(58,88,64,0.10),0 2px 12px rgba(58,88,64,0.12);
+}
+.h-chip.dimmed{opacity:0.32;transform:scale(0.96);}
+.h-chip.scanning{
+  background:rgba(255,255,255,0.70);border-color:rgba(58,88,64,0.28);
+  color:var(--t1);
 }
 
-.gnav-logo em{
-  font-style:italic;
-  color:#5F7D6B;
+/* ── Stage insight line — "The Root sees me" moment ── */
+.hero-insight{
+  font-size:14px;color:var(--t2);line-height:1.6;
+  max-width:420px;text-align:center;position:relative;z-index:1;
+  margin-bottom:20px;
+  opacity:0;transform:translateY(6px);
+  transition:opacity .45s ease-out,transform .45s ease-out;
+  min-height:1.4em;
+}
+.hero-insight.show{opacity:1;transform:none;}
+.hero-insight strong{color:var(--t1);font-weight:600;}
+
+/* ── Personalized next step (appears after selection) ── */
+.hero-next{
+  opacity:0;transform:translateY(8px);
+  transition:opacity .4s ease-out .1s,transform .4s ease-out .1s;
+  pointer-events:none;position:relative;z-index:1;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.hero-next.show{opacity:1;transform:none;pointer-events:all;}
+.hero-next-link{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--green);color:#fff;
+  padding:13px 28px;border-radius:var(--r-sm);
+  font-size:15px;font-weight:700;text-decoration:none;
+  box-shadow:0 2px 12px rgba(45,106,79,0.3);
+  transition:background .15s,transform .1s;
+}
+.hero-next-link:hover{background:#1f4d35;transform:translateY(-1px);}
+.hero-next-or{font-size:12px;color:rgba(58,88,64,0.30);}
+.hero-next-scroll{
+  font-size:13px;color:var(--t3);cursor:pointer;
+  text-decoration:none;display:inline-flex;align-items:center;gap:5px;
+  transition:color .15s;
+}
+.hero-next-scroll:hover{color:var(--t1);}
+
+/* Jennifer micro credit */
+.hero-attr{
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:9px;
+  color:rgba(58,88,64,0.38);font-size:12px;white-space:nowrap;z-index:1;
+}
+.hero-attr-av{
+  width:24px;height:24px;border-radius:50%;overflow:hidden;
+  background:var(--green);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:700;color:#fff;
+}
+.hero-attr-av img{width:100%;height:100%;object-fit:cover;object-position:top;}
+
+/* ═══════════════════════════════════════
+   STAGE CARDS — punchy mirrors
+═══════════════════════════════════════ */
+.stages{background:var(--bg-alt);border-bottom:1px solid var(--bdrw);padding:80px var(--g);}
+.sec-head{text-align:center;margin-bottom:48px;}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:var(--t3);margin-bottom:10px;}
+.sec-h2{font-size:clamp(24px,3.2vw,36px);font-weight:800;letter-spacing:-0.025em;line-height:1.18;color:var(--t1);}
+
+.stages-grid{
+  max-width:var(--max);margin:0 auto;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+}
+.s-card{
+  background:var(--white);border:1.5px solid var(--bdrw);border-radius:var(--r-lg);
+  padding:26px 22px 22px;text-decoration:none;display:flex;flex-direction:column;
+  color:inherit;opacity:0;transform:translateY(10px);
+  transition:border-color .2s,box-shadow .2s,transform .2s,opacity .5s ease-out;
+}
+.s-card.in{opacity:1;transform:none;}
+.s-card:hover{border-color:var(--green-lt);box-shadow:0 8px 28px rgba(45,106,79,0.09);transform:translateY(-2px);}
+.s-card.highlighted{border-color:var(--green);background:var(--green-ghost);box-shadow:0 8px 28px rgba(45,106,79,0.12);}
+.s-icon{width:22px;height:22px;margin-bottom:14px;color:var(--t3);}
+.s-icon svg{width:100%;height:100%;}
+.s-card.highlighted .s-icon{color:var(--green);}
+.s-stage{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);margin-bottom:7px;}
+.s-feeling{font-size:15px;font-weight:600;color:var(--t1);line-height:1.42;margin-bottom:auto;padding-bottom:16px;letter-spacing:-0.01em;}
+.s-cta{font-size:13px;font-weight:600;color:var(--green);display:inline-flex;align-items:center;gap:4px;transition:gap .15s;}
+.s-card:hover .s-cta{gap:8px;}
+
+/* ═══════════════════════════════════════
+   JOURNEY PATH — "나는 지금 여기에 있어요"
+   The "I'm not lost anymore" moment
+═══════════════════════════════════════ */
+.journey-section{
+  background:var(--white);border-bottom:1px solid var(--bdrw);
+  padding:80px var(--g);
+}
+.journey-intro{max-width:480px;margin:0 auto 56px;text-align:center;}
+.journey-intro-h2{
+  font-size:clamp(22px,2.8vw,30px);font-weight:800;
+  letter-spacing:-0.025em;line-height:1.25;color:var(--t1);margin-bottom:10px;
+}
+.journey-intro-sub{font-size:15px;color:var(--t3);line-height:1.7;}
+
+/* Path container */
+.journey-path-wrap{
+  max-width:var(--max);margin:0 auto;
+  position:relative;padding:20px 0 40px;
+  overflow-x:auto;
+}
+.journey-path{
+  display:flex;align-items:flex-start;
+  min-width:600px;position:relative;padding:16px 0;
 }
 
-.gnav-tabs{
-  display:flex;
-  align-items:center;
-  gap:2px;
+/* Spine line */
+.j-spine{
+  position:absolute;top:36px;left:0;right:0;height:1.5px;
+  background:var(--bdrw);
+}
+/* Progress fill — width set by JS after selection */
+.j-spine-fill{
+  position:absolute;top:0;left:0;height:100%;
+  background:linear-gradient(to right,var(--green),var(--green-mid));
+  width:0%;transition:width 1.1s cubic-bezier(0.4,0,0.2,1);
+  border-radius:99px;
 }
 
-.gnav-tab{
-  appearance:none;
-  -webkit-appearance:none;
-  padding:6px 12px;
-  font-family:var(--font-b);
-  font-size:12px;
-  font-weight:500;
-  color:rgba(32,52,43,0.56);
-  cursor:pointer;
-  border-radius:20px;
-  transition:all 0.15s;
-  border:none;
-  outline:none;
-  box-shadow:none;
-  background:transparent;
-  white-space:nowrap;
+/* Individual nodes */
+.j-node{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;gap:10px;position:relative;z-index:1;
+  cursor:default;
+}
+.j-dot{
+  width:14px;height:14px;border-radius:50%;
+  border:2px solid var(--bdrw);background:var(--white);
+  transition:all .4s ease;flex-shrink:0;
+}
+.j-node.done .j-dot{background:var(--green);border-color:var(--green);}
+.j-node.done .j-dot::after{
+  content:'';position:absolute;inset:3.5px;
+  background:url("data:image/svg+xml,%3Csvg viewBox='0 0 8 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3L3 5L7 1' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.j-dot{position:relative;}/* for ::after positioning */
+.j-node.current .j-dot{
+  width:20px;height:20px;margin:-3px 0;
+  background:var(--green);border-color:var(--green);
+  box-shadow:0 0 0 6px rgba(45,106,79,0.15);
+  animation:currentPulse 2.4s ease-in-out infinite;
+}
+@keyframes currentPulse{
+  0%,100%{box-shadow:0 0 0 6px rgba(45,106,79,0.15);}
+  50%{box-shadow:0 0 0 12px rgba(45,106,79,0.04);}
+}
+.j-node.future .j-dot{opacity:0.35;}
+.j-label{
+  font-size:11px;font-weight:500;color:var(--t3);text-align:center;
+  line-height:1.3;max-width:64px;transition:color .3s,font-weight .3s;
+}
+.j-node.done .j-label{color:var(--green-mid);}
+.j-node.current .j-label{color:var(--t1);font-weight:700;font-size:12px;}
+.j-node.future .j-label{opacity:0.4;}
+
+/* "You are here" label above current node */
+.j-here{
+  position:absolute;top:-32px;
+  background:var(--green);color:#fff;
+  font-size:10px;font-weight:700;letter-spacing:0.04em;
+  padding:3px 9px;border-radius:99px;white-space:nowrap;
+  display:none;
+}
+.j-node.current .j-here{display:block;}
+
+/* Prompt before selection */
+.journey-prompt{
+  text-align:center;margin-top:36px;
+  font-size:14px;color:var(--t3);
+  transition:opacity .4s;
+}
+.journey-prompt.hidden{opacity:0;pointer-events:none;}
+
+/* ═══════════════════════════════════════
+   VHE — The signature experience
+   Apple Vision Pro approach:
+   Experience before explanation.
+═══════════════════════════════════════ */
+.vhe{background:var(--bg-forest);overflow:hidden;position:relative;}
+.vhe::before{
+  content:'';position:absolute;top:-200px;right:-120px;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(61,139,95,0.14) 0%,transparent 65%);
+  pointer-events:none;
 }
 
-.gnav-tab:hover{
-  color:#20342B;
-  background:rgba(95,125,107,0.10);
+/* ── Dramatic intro (before the reveal) ── */
+.vhe-intro{
+  text-align:center;padding:100px var(--g) 64px;
+  position:relative;z-index:1;max-width:640px;margin:0 auto;
+}
+.vhe-intro-label{
+  font-size:11px;font-weight:700;letter-spacing:0.10em;
+  text-transform:uppercase;color:var(--green-lt);margin-bottom:24px;
+}
+.vhe-intro-h2{
+  font-size:clamp(32px,5vw,56px);font-weight:800;
+  color:#fff;letter-spacing:-0.035em;line-height:1.08;
+  margin-bottom:20px;
+}
+.vhe-intro-h2 em{color:var(--green-lt);font-style:normal;}
+.vhe-intro-sub{
+  font-size:17px;color:rgba(255,255,255,0.42);line-height:1.75;
 }
 
-.gnav-tab.on{
-  color:#20342B;
-  background:rgba(95,125,107,0.14);
+/* ── 360° iframe: full-width, cinematic ── */
+.vhe-360-wrap{
+  position:relative;width:100%;
+  height:clamp(280px,42vw,540px);
+  overflow:hidden;
 }
-
-.gnav-tab .dot{
-  width:5px;
-  height:5px;
-  border-radius:50%;
-  background:#4ADE80;
-  display:inline-block;
-  margin-left:4px;
-  vertical-align:middle;
-  box-shadow:0 0 0 3px rgba(74,222,128,.16);
+.vhe-360-iframe{
+  width:100%;height:100%;border:none;display:block;
+  pointer-events:none;
 }
-/* ── PAGES ── */
-.page{display:none;}.page.on{display:block;}
-
-/* ── HERO ── */
-.hero{min-height:calc(100vh - 52px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;position:relative;background:var(--bark);overflow:hidden;}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,#2D5A4D 0%,#16342C 58%,#0D201B 100%);}
-.rings{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
-.ring{position:absolute;border-radius:50%;border:1px solid rgba(210,231,221,0.10);}
-.r1{width:200px;height:200px;}.r2{width:360px;height:360px;}.r3{width:540px;height:540px;border-color:rgba(210,231,221,0.07);}.r4{width:720px;height:720px;border-color:rgba(210,231,221,0.05);}.r5{width:920px;height:920px;border-color:rgba(210,231,221,0.03);}
-.hero-content{position:relative;z-index:2;max-width:600px;}
-.hero-tag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:#CFE2D9;margin-bottom:1.5rem;padding:6px 16px;border:0.5px solid rgba(207,226,217,0.35);border-radius:20px;}
-.hero h1{font-family:var(--font-d);font-size:clamp(2.8rem,8vw,5rem);color:#F8FBF9;line-height:1.08;margin-bottom:0.5rem;}
-.hero h1 em{font-style:italic;color:#B9D1C7;}
-.hero-sub{font-size:15px;color:rgba(248,251,249,0.72);line-height:1.7;margin-bottom:2rem;font-weight:300;}
-.hero-btn{display:inline-block;padding:14px 36px;background:#F1F7F4;color:var(--bark);border:none;border-radius:2px;font-family:var(--font-b);font-size:14px;font-weight:500;cursor:pointer;letter-spacing:0.04em;transition:all 0.2s;}
-.hero-btn:hover{background:#E3EEE8;transform:translateY(-1px);}
-.hero-tools{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:1.25rem;position:relative;z-index:2;}
-.hero-tool-btn{padding:8px 16px;background:rgba(255,255,255,0.08);color:rgba(248,251,249,0.75);border:0.5px solid rgba(207,226,217,0.2);border-radius:20px;font-family:var(--font-b);font-size:12px;cursor:pointer;transition:all 0.2s;}
-.hero-tool-btn:hover{background:rgba(255,255,255,0.14);color:#F8FBF9;}
-.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:rgba(247,243,238,0.35);font-size:11px;letter-spacing:0.1em;display:flex;flex-direction:column;align-items:center;gap:8px;animation:ph 2s ease-in-out infinite;}
-.scroll-arr{width:1px;height:28px;background:linear-gradient(to bottom,transparent,rgba(247,243,238,0.3));}
-@keyframes ph{0%,100%{opacity:0.5}50%{opacity:1}}
-
-/* ── QUIZ ── */
-.quiz-sec{min-height:calc(100vh - 52px);display:flex;align-items:center;justify-content:center;padding:4rem 1.5rem;background:var(--cream);}
-.quiz-wrap{max-width:640px;width:100%;}
-.quiz-hdr{margin-bottom:2.5rem;text-align:center;}
-.quiz-hdr h2{font-family:var(--font-d);font-size:clamp(1.8rem,5vw,2.8rem);color:var(--bark);margin-bottom:0.5rem;}
-.quiz-hdr p{font-size:15px;color:var(--soil);opacity:0.78;}
-.prog-wrap{height:2px;background:var(--sand);border-radius:1px;margin-bottom:2rem;overflow:hidden;}
-.prog-fill{height:100%;background:var(--moss);border-radius:1px;transition:width 0.5s ease;}
-.step-track{display:flex;align-items:center;margin-bottom:2.5rem;}
-.sdot{width:10px;height:10px;border-radius:50%;background:var(--sand);flex-shrink:0;transition:all 0.3s;}
-.sdot.active{background:var(--moss);transform:scale(1.3);}
-.sdot.done{background:var(--moss);opacity:0.5;}
-.sline{flex:1;height:1px;background:var(--sand);transition:background 0.3s;}
-.sline.done{background:var(--moss);opacity:0.5;}
-.q-card{background:white;border:0.5px solid var(--sand);border-radius:4px;padding:2.5rem;margin-bottom:1rem;animation:su 0.4s ease;box-shadow:0 8px 24px rgba(22,52,44,0.05);}
-@keyframes su{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.q-num{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay);margin-bottom:1rem;}
-.q-txt{font-family:var(--font-d);font-size:clamp(1.3rem,3vw,1.75rem);color:var(--bark);line-height:1.3;margin-bottom:0.75rem;}
-.q-sub{font-size:13px;color:var(--soil);opacity:0.72;line-height:1.6;margin-bottom:2rem;}
-.q-opts{display:flex;flex-direction:column;gap:10px;}
-.qbtn{display:flex;align-items:center;gap:14px;padding:14px 18px;border:0.5px solid var(--sand);border-radius:3px;background:#FBFCFB;cursor:pointer;font-family:var(--font-b);font-size:14px;color:var(--bark);transition:all 0.2s;text-align:left;}
-.qbtn.yes:hover{border-color:var(--moss);background:var(--moss-light);transform:translateX(4px);}
-.qbtn.no:hover{border-color:var(--clay);background:var(--clay-light);transform:translateX(4px);}
-.qbtn-icon{width:32px;height:32px;border-radius:50%;border:0.5px solid var(--sand);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;background:white;}
-.qbtn-lbl{font-weight:500;color:var(--bark);}
-.qbtn-desc{font-size:12px;color:var(--soil);opacity:0.62;margin-top:1px;}
-.q-nav{display:flex;gap:8px;margin-top:0;}
-.q-nav-btn{flex:1;padding:10px;background:transparent;color:var(--soil);border:0.5px solid var(--sand);border-radius:3px;font-family:var(--font-b);font-size:12px;cursor:pointer;transition:all 0.15s;}
-.q-nav-btn:hover{background:var(--mist);}
-.res-card{background:white;border:0.5px solid var(--sand);border-radius:4px;padding:2.5rem;animation:su 0.4s ease;box-shadow:0 8px 24px rgba(22,52,44,0.05);}
-.res-badge{display:inline-flex;align-items:center;padding:5px 12px;border-radius:2px;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:1.25rem;}
-.bs{background:var(--moss-light);color:var(--moss);}
-.bm{background:#F3EFE6;color:#6E5441;}
-.bf{background:#E5F0EA;color:var(--moss);}
-.res-stage{font-family:var(--font-d);font-size:clamp(1.4rem,4vw,2rem);color:var(--bark);margin-bottom:0.75rem;line-height:1.2;white-space:pre-line;}
-.res-desc{font-size:14px;color:var(--soil);line-height:1.7;margin-bottom:1.5rem;opacity:0.88;}
-.nxt-steps{border-top:0.5px solid var(--sand);padding-top:1.5rem;margin-bottom:1.5rem;}
-.nxt-lbl{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--soil);opacity:0.5;margin-bottom:1rem;}
-.nxt-item{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px;}
-.nxt-num{width:22px;height:22px;border-radius:50%;background:var(--bark);color:#F7FBF9;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-weight:500;}
-.nxt-t{font-size:14px;font-weight:500;color:var(--bark);}
-.nxt-d{font-size:12px;color:var(--soil);opacity:0.7;margin-top:2px;line-height:1.5;}
-.uw-banner{display:flex;align-items:center;gap:12px;padding:14px 16px;background:#F8F4ED;border:0.5px solid #E1C9AA;border-radius:3px;margin-bottom:1.5rem;}
-.uw-ico{width:36px;height:36px;background:var(--clay);border-radius:4px;display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:500;flex-shrink:0;}
-.uw-ttl{font-size:13px;font-weight:500;color:var(--bark);}
-.uw-sub{font-size:11px;color:var(--soil);opacity:0.6;}
-.uw-link{font-size:12px;color:var(--clay);text-decoration:none;font-weight:500;white-space:nowrap;}
-.jen-note{display:flex;gap:12px;padding:16px;background:var(--mist);border-radius:3px;margin-bottom:1.5rem;}
-.jen-av{width:36px;height:36px;border-radius:50%;background:var(--moss);display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:500;flex-shrink:0;}
-.jen-msg{font-size:13px;color:var(--soil);line-height:1.6;}
-.jen-msg strong{color:var(--bark);}
-.res-acts{display:flex;flex-direction:column;gap:8px;}
-.btn-main{width:100%;padding:14px;background:var(--bark);color:#F7FBF9;border:none;border-radius:3px;font-family:var(--font-b);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;}
-.btn-main:hover{background:#102720;}
-.btn-ghost{width:100%;padding:12px;background:transparent;color:var(--soil);border:0.5px solid var(--sand);border-radius:3px;font-family:var(--font-b);font-size:13px;cursor:pointer;transition:all 0.2s;}
-.btn-ghost:hover{background:var(--mist);}
-.btn-teal{width:100%;padding:13px;background:var(--moss-light);color:var(--moss);border:0.5px solid rgba(36,76,65,0.2);border-radius:3px;font-family:var(--font-b);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s;}
-.btn-teal:hover{background:#C8E4D5;}
-.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.ssel-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:1rem;}
-.ssel-btn{padding:12px;border:0.5px solid var(--sand);border-radius:3px;background:#FBFCFB;cursor:pointer;font-family:var(--font-b);font-size:13px;font-weight:500;color:var(--bark);transition:all 0.2s;text-align:center;}
-.ssel-btn:hover{border-color:var(--moss);background:var(--moss-light);}
-.ssel-btn small{display:block;font-size:11px;font-weight:400;color:var(--soil);opacity:0.6;margin-top:2px;}
-.sc-tbl{border:0.5px solid var(--sand);border-radius:3px;overflow:hidden;margin-bottom:8px;}
-.sc-hdr{display:grid;grid-template-columns:120px 1fr;background:var(--mist);padding:7px 12px;font-size:11px;font-weight:500;color:var(--soil);letter-spacing:0.04em;}
-.sc-row{display:grid;grid-template-columns:120px 1fr;padding:8px 12px;font-size:12px;border-top:0.5px solid var(--sand);}
-.sc-row:nth-child(odd){background:#FBFCFB;}
-.sc-en{font-weight:500;color:var(--bark);}
-.sc-sc{color:var(--soil);}
-.info-box{background:var(--moss-light);border:0.5px solid rgba(36,76,65,0.18);border-radius:3px;padding:12px 14px;margin-bottom:1.5rem;font-size:13px;color:#1E3D34;line-height:1.6;}
-.warn-box{background:#FEF7ED;border:0.5px solid #E8C98A;border-radius:3px;padding:12px 14px;margin-bottom:1rem;font-size:13px;color:#6B4C1E;line-height:1.6;}
-.warn-box strong{color:#4A3010;}
-.compact-toggle{border:0.5px solid var(--sand);border-radius:3px;margin-bottom:1.5rem;overflow:hidden;}
-.compact-header{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:#FBFCFB;cursor:pointer;user-select:none;transition:background 0.15s;}
-.compact-header:hover{background:var(--mist);}
-.compact-header-left{display:flex;align-items:center;gap:8px;}
-.compact-pill{font-size:10px;font-weight:500;padding:2px 8px;border-radius:10px;background:#E8F0FB;color:#185FA5;}
-.compact-title{font-size:13px;font-weight:500;color:var(--bark);}
-.compact-sub{font-size:11px;color:var(--soil);opacity:0.6;margin-top:1px;}
-.compact-arrow{font-size:12px;color:var(--soil);opacity:0.5;transition:transform 0.2s;flex-shrink:0;}
-.compact-body{display:none;padding:14px;border-top:0.5px solid var(--sand);background:white;}
-.compact-body.open{display:block;}
-.compact-states{font-size:11px;color:var(--soil);line-height:2;display:flex;flex-wrap:wrap;gap:4px;margin:10px 0;}
-.cs-pill{padding:2px 8px;background:var(--mist);border-radius:10px;font-size:11px;color:var(--soil);}
-
-/* ── STATE SECTION ── */
-.state-sec{background:white;padding:5rem 1.5rem;border-top:0.5px solid var(--sand);}
-.state-inner{max-width:900px;margin:0 auto;}
-.eyebrow{font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--clay);margin-bottom:1rem;}
-.sec-title{font-family:var(--font-d);font-size:clamp(1.8rem,4vw,2.5rem);color:var(--bark);margin-bottom:0.5rem;line-height:1.15;}
-.sec-sub{font-size:15px;color:var(--soil);opacity:0.72;margin-bottom:2.5rem;}
-.flt-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.5rem;}
-.flt-btn{padding:6px 16px;border:0.5px solid var(--sand);border-radius:20px;background:transparent;font-family:var(--font-b);font-size:12px;color:var(--soil);cursor:pointer;transition:all 0.15s;}
-.flt-btn:hover{background:var(--mist);}
-.flt-btn.on{background:var(--bark);color:#F7FBF9;border-color:var(--bark);}
-.leg-row{display:flex;gap:16px;margin-bottom:1.25rem;flex-wrap:wrap;}
-.leg{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--soil);opacity:0.7;}
-.leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.cnt-lbl{font-size:12px;color:var(--soil);opacity:0.55;margin-bottom:1rem;}
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;}
-.sc{background:#FBFCFB;border:0.5px solid var(--sand);border-radius:4px;padding:1rem 1.1rem;cursor:pointer;transition:border-color 0.15s;}
-.sc:hover{border-color:#AEBDB5;}
-.sc.open{border-color:var(--soil);}
-.sc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
-.sc-name{font-size:15px;font-weight:500;color:var(--bark);}
-.sc-sub2{font-size:11px;color:var(--soil);opacity:0.6;margin-top:2px;}
-.sc-bgs{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px;}
-.bg{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;}
-.bg-e{background:#E7F0EB;color:#1F6351;}
-.bg-m{background:#F4EEE4;color:#785A43;}
-.bg-h{background:#F4E7E1;color:#8B4030;}
-.bg-c{background:#E8F0FB;color:#185FA5;}
-.bg-g{background:var(--mist);color:var(--soil);}
-.stars{display:flex;gap:2px;margin-top:8px;}
-.star{width:9px;height:9px;border-radius:1px;}
-.star.on{background:var(--moss);}
-.star.off{background:var(--sand);}
-.sc-meta{font-size:11px;color:var(--soil);opacity:0.6;margin-top:8px;}
-.arr{font-size:13px;color:var(--soil);opacity:0.5;transition:transform 0.2s;flex-shrink:0;margin-top:2px;}
-.sc.open .arr{transform:rotate(180deg);}
-.sc-detail{display:none;border-top:0.5px solid var(--sand);padding-top:10px;margin-top:10px;}
-.sc.open .sc-detail{display:block;}
-.dr{display:flex;gap:8px;margin-bottom:8px;align-items:flex-start;}
-.dl{font-size:11px;font-weight:500;color:var(--soil);opacity:0.55;width:76px;flex-shrink:0;padding-top:1px;}
-.dv{font-size:12px;color:var(--bark);line-height:1.5;flex:1;}
-.dv.ok{color:#1F6351;}.dv.warn{color:#7D5A3F;}.dv.bad{color:#8B4030;}
-.tip-b{background:var(--mist);border-radius:3px;padding:8px 10px;margin-top:8px;font-size:12px;color:var(--soil);line-height:1.5;}
-.tip-b strong{color:var(--bark);}
-
-/* ── DASHBOARD PAGES ── */
-.dash-page{padding:3rem 1.5rem;max-width:680px;margin:0 auto;}
-.dash-eyebrow{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay);margin-bottom:6px;}
-.dash-title{font-family:var(--font-d);font-size:clamp(1.6rem,4vw,2.2rem);color:var(--bark);margin-bottom:0.5rem;line-height:1.2;}
-.dash-sub{font-size:14px;color:var(--soil);opacity:0.7;margin-bottom:2rem;line-height:1.6;}
-.dash-card{background:white;border:0.5px solid var(--sand);border-radius:4px;padding:1.25rem;margin-bottom:12px;box-shadow:0 2px 12px rgba(22,52,44,0.04);}
-.dash-section{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--soil);opacity:0.5;margin:1.5rem 0 10px;}
-
-/* Phase/checklist items */
-.phase-blk{margin-bottom:10px;}
-.phase-hdr{display:flex;align-items:center;gap:10px;padding:10px 14px;border:0.5px solid var(--sand);border-radius:3px;background:#FBFCFB;cursor:pointer;transition:border-color 0.15s;}
-.phase-hdr:hover{border-color:#AEBDB5;}
-.phase-hdr.open-ph{border-color:var(--soil);}
-.phase-dot{width:10px;height:10px;border-radius:50%;background:var(--sand);flex-shrink:0;}
-.phase-dot.done{background:var(--moss);}
-.phase-dot.active{background:var(--moss);box-shadow:0 0 0 3px var(--moss-light);}
-.phase-nm{font-size:13px;font-weight:500;color:var(--bark);flex:1;}
-.phase-nm-sub{font-size:11px;color:var(--soil);opacity:0.55;margin-top:1px;}
-.ph-badge{font-size:10px;padding:2px 8px;border-radius:8px;font-weight:500;}
-.ph-done{background:var(--moss-light);color:var(--moss);}
-.ph-wait{background:#F3EFE6;color:#6E5441;}
-.ph-pend{background:var(--mist);color:var(--soil);}
-.ph-arrow{font-size:12px;color:var(--soil);opacity:0.5;transition:transform 0.2s;flex-shrink:0;}
-.phase-hdr.open-ph .ph-arrow{transform:rotate(180deg);}
-.cl-body{display:none;border:0.5px solid var(--sand);border-top:none;border-radius:0 0 3px 3px;padding:4px 0;}
-.phase-hdr.open-ph+.cl-body{display:block;}
-.cl-item{display:flex;align-items:flex-start;gap:10px;padding:9px 14px;cursor:pointer;transition:background 0.1s;border-bottom:0.5px solid var(--sand);}
-.cl-item:last-child{border-bottom:none;}
-.cl-item:hover{background:var(--mist);}
-.cl-item.checked-item{background:#FBFCFB;}
-.cl-box{width:18px;height:18px;border-radius:4px;border:1.5px solid var(--sand);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all 0.15s;background:white;}
-.cl-item.checked-item .cl-box{background:var(--moss);border-color:var(--moss);}
-.cl-tick{width:8px;height:6px;border-left:1.5px solid white;border-bottom:1.5px solid white;transform:rotate(-45deg) translate(1px,-1px);display:none;}
-.cl-item.checked-item .cl-tick{display:block;}
-.cl-item.checked-item .cl-text{text-decoration:line-through;color:var(--soil);opacity:0.6;}
-.cl-text{font-size:13px;color:var(--bark);flex:1;}
-.cl-note{font-size:11px;color:var(--soil);opacity:0.6;margin-top:2px;line-height:1.4;}
-.stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:1.25rem;}
-.stat-b{background:var(--mist);border-radius:3px;padding:12px;text-align:center;}
-.stat-n{font-size:22px;font-weight:500;color:var(--bark);}
-.stat-l{font-size:11px;color:var(--soil);opacity:0.6;margin-top:2px;}
-.prog-bar-wrap{height:3px;background:var(--sand);border-radius:2px;margin-bottom:4px;overflow:hidden;}
-.prog-bar-fill{height:100%;background:var(--moss);border-radius:2px;transition:width 0.4s;}
-
-/* Visa bulletin */
-.month-tag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:3px 10px;border-radius:10px;background:#E8F0FB;color:#185FA5;margin-bottom:6px;}
-.c-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:0.5px solid var(--sand);}
-.c-row:last-child{border-bottom:none;}
-.c-name{font-size:13px;font-weight:500;color:var(--bark);flex:1;}
-.c-date{font-size:12px;font-weight:500;}
-.date-frozen{color:#7D5A3F;}
-.date-ok{color:#1F6351;}
-.c-pill{font-size:10px;padding:1px 6px;border-radius:6px;}
-.pill-frozen{background:#F3EFE6;color:#6E5441;}
-.pill-same{background:var(--mist);color:var(--soil);}
-.pd-result{margin-top:10px;padding:10px 12px;border-radius:3px;font-size:13px;line-height:1.6;display:none;}
-.r-ok{background:var(--moss-light);color:#1E3D34;}
-.r-wait{background:#FEF7ED;color:#6B4C1E;}
-
-/* Landing checklist */
-.l-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:white;border:0.5px solid var(--sand);border-radius:3px;margin-bottom:6px;cursor:pointer;transition:all 0.15s;}
-.l-item:hover{border-color:#AEBDB5;}
-.l-item.l-done{background:var(--moss-light);border-color:rgba(36,76,65,0.2);}
-.l-cb{width:18px;height:18px;border-radius:4px;border:1.5px solid var(--sand);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all 0.15s;background:white;}
-.l-item.l-done .l-cb{background:var(--moss);border-color:var(--moss);}
-.l-tick{width:8px;height:6px;border-left:1.5px solid white;border-bottom:1.5px solid white;transform:rotate(-45deg) translate(1px,-1px);display:none;}
-.l-item.l-done .l-tick{display:block;}
-.l-item.l-done .l-title{text-decoration:line-through;color:var(--soil);opacity:0.7;}
-.l-title{font-size:13px;font-weight:500;color:var(--bark);}
-.l-desc{font-size:11px;color:var(--soil);opacity:0.6;margin-top:2px;line-height:1.4;}
-
-footer{background:var(--bark);color:rgba(247,243,238,0.45);text-align:center;padding:2rem;font-size:12px;}
-footer a{color:#C6DDD3;text-decoration:none;}
-
-/* ── SHARE BAR ── */
-.share-bar{display:flex;align-items:center;gap:8px;padding:12px 14px;background:var(--moss-light);border:0.5px solid rgba(36,76,65,0.15);border-radius:3px;margin-bottom:1.5rem;flex-wrap:wrap;}
-.share-label{font-size:12px;color:#1E3D34;font-weight:500;flex-shrink:0;}
-.share-btn{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:20px;font-size:11px;font-weight:500;cursor:pointer;border:none;font-family:var(--font-b);transition:all 0.15s;}
-.sb-kakao{background:#FAE100;color:#3A1D1D;}
-.sb-kakao:hover{background:#F0D700;}
-.sb-link{background:var(--bark);color:#F8FBF9;}
-.sb-link:hover{background:#102720;}
-.sb-email{background:white;color:var(--bark);border:0.5px solid var(--sand)!important;}
-.sb-email:hover{background:var(--mist);}
-
-/* ── SAVE TOAST ── */
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--bark);color:#F8FBF9;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;transition:transform 0.3s ease;z-index:999;white-space:nowrap;}
-.toast.show{transform:translateX(-50%) translateY(0);}
-
-/* ── SAVE BUTTON ── */
-.save-progress-btn{width:100%;padding:12px;background:white;color:var(--moss);border:0.5px solid rgba(36,76,65,0.3);border-radius:3px;font-family:var(--font-b);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s;margin-top:8px;}
-.save-progress-btn:hover{background:var(--moss-light);}
-
-/* ── CAPTURE BUTTON ── */
-.capture-btn{width:100%;padding:13px;background:var(--bark);color:var(--cream);border:none;border-radius:3px;font-family:var(--font-b);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:8px;}
-.capture-btn:hover{background:var(--soil);}
-.capture-btn:disabled{opacity:0.6;cursor:not-allowed;}
-
-/* ── CAPTURE CARD (hidden, used for screenshot) ── */
-.capture-card{
-  position:fixed;left:-9999px;top:0;
-  width:800px;background:var(--bark);
-  padding:48px;font-family:var(--font-b);
-  border-radius:0;
+.vhe-360-overlay{
+  position:absolute;inset:0;z-index:10;
+  background:linear-gradient(
+    to bottom,
+    rgba(27,47,20,0.25) 0%,
+    rgba(27,47,20,0.65) 85%,
+    var(--bg-forest) 100%
+  );
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:16px;
+  cursor:pointer;transition:opacity .5s ease-out;
 }
-.capture-card .cc-header{margin-bottom:32px;}
-.capture-card .cc-tag{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--sage);margin-bottom:8px;}
-.capture-card .cc-title{font-family:var(--font-d);font-size:36px;color:var(--cream);line-height:1.2;margin-bottom:4px;}
-.capture-card .cc-sub{font-size:13px;color:rgba(247,243,238,0.45);}
-.capture-card .cc-prog{height:3px;background:rgba(255,255,255,0.1);border-radius:2px;margin:24px 0;overflow:hidden;}
-.capture-card .cc-prog-fill{height:100%;background:var(--moss);border-radius:2px;}
-.capture-card .cc-section{font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(247,243,238,0.3);margin:20px 0 10px;}
-.capture-card .cc-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:0.5px solid rgba(255,255,255,0.06);}
-.capture-card .cc-item:last-child{border-bottom:none;}
-.capture-card .cc-check{width:18px;height:18px;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;}
-.capture-card .cc-check.done{background:var(--moss);}
-.capture-card .cc-check.pending{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);}
-.capture-card .cc-item-text{font-size:14px;color:rgba(247,243,238,0.85);}
-.capture-card .cc-item-text.done-text{color:rgba(247,243,238,0.4);text-decoration:line-through;}
-.capture-card .cc-footer{margin-top:32px;padding-top:20px;border-top:0.5px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between;}
-.capture-card .cc-brand{font-size:12px;color:rgba(247,243,238,0.3);}
-.capture-card .cc-url{font-size:12px;color:var(--sage);}
-
-/* ── CLINICAL ENGLISH QUIZ ── */
-.cq-hero{background:#F3F1EA;padding:2.4rem 1.5rem;text-align:center;position:relative;overflow:hidden;border-bottom:0.5px solid rgba(22,52,44,0.08);}
-.cq-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 12%,rgba(143,169,155,0.32),transparent 46%),linear-gradient(180deg,#E6EEE7 0%,#F3F1EA 52%,#FAF8F4 100%);}
-.cq-hero-content{position:relative;z-index:2;}
-.cq-hero-tag{display:inline-block;font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:#4F6B59;background:rgba(255,255,255,0.50);padding:5px 14px;border:0.5px solid rgba(95,125,107,0.20);border-radius:20px;margin-bottom:12px;}
-.cq-hero-title{font-family:var(--font-d);font-size:clamp(1.8rem,5vw,2.8rem);color:#223127;line-height:1.1;margin-bottom:8px;letter-spacing:-0.025em;}
-.cq-hero-title em{font-style:italic;color:#5F7D6B;}
-.cq-hero-sub{font-size:14px;color:#56655A;margin-bottom:1.5rem;}
-.cq-streak{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(255,255,255,0.58);border:0.5px solid rgba(95,125,107,0.14);border-radius:20px;font-size:12px;color:#56655A;}
-.cq-streak-num{font-weight:700;color:#4F6B59;}
-
-.cq-body{max-width:640px;margin:0 auto;padding:2rem 1.5rem;}
-
-/* 카테고리 필터 */
-.cq-cats{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem;}
-.cq-cat{padding:6px 14px;border:0.5px solid var(--sand);border-radius:20px;font-size:12px;font-weight:500;color:var(--soil);background:#FBFCFB;cursor:pointer;transition:all 0.15s;font-family:var(--font-b);}
-.cq-cat:hover{background:var(--mist);}
-.cq-cat.on{background:var(--bark);color:#F8FBF9;border-color:var(--bark);}
-
-/* 퀴즈 카드 */
-.cq-card{background:white;border:0.5px solid var(--sand);border-radius:4px;padding:2rem;box-shadow:0 4px 20px rgba(22,52,44,0.06);animation:fadeUp 0.4s ease;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.cq-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
-.cq-cat-pill{font-size:10px;font-weight:500;padding:3px 10px;border-radius:10px;letter-spacing:0.06em;text-transform:uppercase;}
-.cq-num{font-size:12px;color:var(--soil);opacity:0.5;}
-.cq-q{font-family:var(--font-d);font-size:clamp(1.1rem,3vw,1.4rem);color:var(--bark);line-height:1.4;margin-bottom:0.5rem;}
-.cq-context{font-size:13px;color:var(--soil);opacity:0.7;line-height:1.6;margin-bottom:1.5rem;padding:10px 14px;background:var(--mist);border-radius:3px;border-left:2px solid var(--moss);}
-.cq-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:1rem;}
-.cq-opt{display:flex;align-items:flex-start;gap:12px;padding:13px 16px;border:0.5px solid var(--sand);border-radius:3px;cursor:pointer;transition:all 0.15s;background:#FBFCFB;text-align:left;font-family:var(--font-b);}
-.cq-opt:hover:not(.disabled){border-color:var(--moss);background:var(--moss-light);transform:translateX(3px);}
-.cq-opt.disabled{cursor:default;}
-.cq-opt.correct{border-color:#1F6351;background:#E8F4ED;}
-.cq-opt.wrong{border-color:#8B4030;background:#F4E7E1;}
-.cq-opt-key{width:26px;height:26px;border-radius:50%;border:0.5px solid var(--sand);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0;background:white;}
-.cq-opt.correct .cq-opt-key{background:#1F6351;color:white;border-color:#1F6351;}
-.cq-opt.wrong .cq-opt-key{background:#8B4030;color:white;border-color:#8B4030;}
-.cq-opt-text{font-size:14px;color:var(--bark);line-height:1.5;flex:1;}
-.cq-opt.correct .cq-opt-text{color:#1F6351;}
-.cq-opt.wrong .cq-opt-text{opacity:0.6;}
-
-/* 정답 해설 */
-.cq-explain{display:none;margin-top:12px;padding:14px 16px;background:#F3EFE6;border-radius:3px;animation:fadeUp 0.3s ease;}
-.cq-explain.show{display:block;}
-.cq-explain-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;}
-.cq-jen-av{width:28px;height:28px;border-radius:50%;background:var(--moss);display:flex;align-items:center;justify-content:center;font-size:10px;color:white;font-weight:700;flex-shrink:0;}
-.cq-explain-text{font-size:13px;color:#4A3A2A;line-height:1.6;flex:1;}
-.cq-tip{font-size:12px;color:var(--clay);margin-top:6px;font-style:italic;}
-
-/* 결과 */
-.cq-result-card{background:white;border:0.5px solid var(--sand);border-radius:4px;padding:2rem;text-align:center;box-shadow:0 4px 20px rgba(22,52,44,0.06);}
-.cq-score-ring{width:90px;height:90px;border-radius:50%;background:var(--bark);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 1rem;}
-.cq-score-num{font-size:28px;font-weight:500;color:#F8FBF9;line-height:1;}
-.cq-score-total{font-size:12px;color:var(--sage);}
-.cq-result-msg{font-family:var(--font-d);font-size:1.4rem;color:var(--bark);margin-bottom:0.5rem;}
-.cq-result-sub{font-size:13px;color:var(--soil);opacity:0.7;margin-bottom:1.5rem;line-height:1.6;}
-.cq-share-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:1rem;}
-.cq-share-btn{padding:8px 18px;border-radius:20px;font-size:12px;font-weight:500;cursor:pointer;border:none;font-family:var(--font-b);transition:all 0.15s;}
-.cq-share-kakao{background:#FAE100;color:#3A1D1D;}
-.cq-share-link{background:var(--bark);color:white;}
-.cq-retry-btn{width:100%;padding:13px;background:var(--moss-light);color:var(--moss);border:0.5px solid rgba(36,76,65,0.2);border-radius:3px;font-family:var(--font-b);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.15s;}
-.cq-retry-btn:hover{background:#C8E4D5;}
-
-/* 진행 바 */
-.cq-prog{height:3px;background:var(--sand);border-radius:2px;margin-bottom:1.5rem;overflow:hidden;}
-.cq-prog-fill{height:100%;background:var(--moss);border-radius:2px;transition:width 0.4s ease;}
-
-/* 다음 버튼 */
-.cq-next-btn{width:100%;padding:13px;background:var(--bark);color:#F7FBF9;border:none;border-radius:3px;font-family:var(--font-b);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;display:none;margin-top:8px;}
-.cq-next-btn.show{display:block;}
-.cq-next-btn:hover{background:var(--moss);}
-
-
-/* ── HERO V2 ── */
-.hero-v2{background:var(--bark);position:relative;overflow:hidden;}
-.hero-v2::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 100% 80% at 30% 50%,#2D5A4D 0%,#16342C 55%,#0D201B 100%);}
-.hero-v2-inner{position:relative;z-index:2;max-width:1000px;margin:0 auto;padding:4rem 2rem;display:grid;grid-template-columns:1fr 420px;gap:3rem;align-items:center;}
-@media(max-width:768px){.hero-v2-inner{grid-template-columns:1fr;gap:2rem;padding:2.5rem 1.5rem;}}
-
-.hero-tag-v2{display:inline-block;font-size:11px;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:#7FA89A;padding:5px 14px;border:0.5px solid rgba(127,168,154,0.3);border-radius:20px;margin-bottom:1.25rem;}
-.hero-title-v2{font-family:var(--font-d);font-size:clamp(2.2rem,5vw,3.8rem);color:#F8FBF9;line-height:1.08;margin-bottom:0.75rem;}
-.hero-title-v2 em{font-style:italic;color:#B9D1C7;}
-.hero-sub-v2{font-size:15px;color:rgba(248,251,249,0.65);line-height:1.7;margin-bottom:2rem;font-weight:300;}
-.hero-cta-v2{display:inline-block;padding:14px 32px;background:#F1F7F4;color:var(--bark);border:none;border-radius:3px;font-family:var(--font-b);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;}
-.hero-cta-v2:hover{background:#E3EEE8;transform:translateY(-1px);}
-.hero-social-proof{display:flex;align-items:center;gap:10px;margin-top:1.25rem;}
-.hero-dots{display:flex;gap:4px;}
-.hero-dot{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.2);}
-.hero-social-proof span{font-size:12px;color:rgba(248,251,249,0.55);line-height:1.5;}
-.hero-mini-story{margin-top:1rem;padding-left:14px;border-left:2px solid rgba(185,209,199,0.35);font-size:13px;color:rgba(248,251,249,0.58);line-height:1.65;max-width:460px;}
-.hero-cta-note{font-size:12px;color:rgba(248,251,249,0.42);margin-top:10px;}
-.mission-card{background:rgba(248,251,249,0.96);border:0.5px solid rgba(255,255,255,0.25);border-radius:14px;padding:1.6rem;box-shadow:0 24px 70px rgba(0,0,0,0.28);}
-.mission-kicker{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay);margin-bottom:10px;}
-.mission-title{font-family:var(--font-d);font-size:1.55rem;color:var(--bark);line-height:1.22;margin-bottom:10px;}
-.mission-desc{font-size:13px;color:var(--soil);opacity:0.76;line-height:1.7;margin-bottom:1rem;}
-.mission-steps{display:grid;gap:8px;margin-top:12px;}
-.mission-step{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;background:var(--mist);border-radius:6px;}
-.mission-num{width:22px;height:22px;border-radius:50%;background:var(--bark);color:#F8FBF9;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.mission-step strong{display:block;font-size:13px;color:var(--bark);margin-bottom:2px;}
-.mission-step span{font-size:11px;color:var(--soil);opacity:0.65;line-height:1.4;}
-
-/* 임상영어 카드 */
-.hero-quiz-card{background:white;border-radius:12px;padding:1.5rem;box-shadow:0 20px 60px rgba(0,0,0,0.3);}
-.hero-quiz-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
-.hero-quiz-label{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--soil);opacity:0.6;}
-.hero-quiz-new{font-size:10px;font-weight:700;padding:2px 8px;background:#E8F4ED;color:#1F6351;border-radius:10px;}
-.hero-quiz-expr{font-family:var(--font-d);font-size:1.5rem;color:var(--bark);margin-bottom:8px;line-height:1.3;}
-.hero-quiz-q{font-size:13px;color:var(--soil);opacity:0.7;margin-bottom:14px;}
-.hero-quiz-opts{display:flex;flex-direction:column;gap:7px;margin-bottom:12px;}
-.hero-quiz-opt{padding:9px 14px;border:0.5px solid var(--sand);border-radius:3px;background:#FBFCFB;font-family:var(--font-b);font-size:13px;color:var(--bark);cursor:pointer;text-align:left;transition:all 0.15s;}
-.hero-quiz-opt:hover{border-color:var(--moss);background:var(--moss-light);}
-.hero-quiz-opt.correct{border-color:#1F6351;background:#E8F4ED;color:#1F6351;}
-.hero-quiz-opt.wrong{border-color:#8B4030;background:#F4E7E1;color:#8B4030;}
-.hero-quiz-result{padding:10px 12px;border-radius:3px;font-size:12px;line-height:1.6;margin-bottom:10px;}
-.hero-quiz-more{width:100%;padding:10px;background:var(--bark);color:#F8FBF9;border:none;border-radius:3px;font-family:var(--font-b);font-size:13px;font-weight:500;cursor:pointer;transition:background 0.15s;}
-.hero-quiz-more:hover{background:var(--moss);}
-
-/* ── EXPLORE ── */
-.explore-sec{background:var(--cream);padding:3.5rem 1.5rem;}
-.explore-inner{max-width:1000px;margin:0 auto;}
-.explore-hdr{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;}
-.explore-title{font-family:var(--font-d);font-size:1.5rem;color:var(--bark);}
-.explore-sub{font-size:13px;color:var(--soil);opacity:0.65;margin-top:2px;}
-.explore-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
-@media(max-width:640px){.explore-grid{grid-template-columns:1fr;}}
-.explore-card{background:white;border:0.5px solid var(--sand);border-radius:4px;padding:1.35rem;cursor:pointer;transition:all 0.2s;min-height:168px;}
-.explore-card.featured{background:var(--bark);border-color:var(--bark);grid-column:1 / -1;min-height:auto;display:grid;grid-template-columns:auto 1fr auto;gap:1rem;align-items:center;}
-.explore-card.featured .explore-icon{margin-bottom:0;font-size:26px;}
-.explore-card.featured .explore-card-desc{margin-bottom:0;}
-.explore-card.featured .explore-card-title,.explore-card.featured .explore-card-desc,.explore-card.featured .explore-card-btn{color:#F8FBF9;}
-.explore-card.featured .explore-card-en{color:rgba(248,251,249,0.5);}
-.explore-card.featured:hover{background:#102720;}
-@media(max-width:640px){.explore-card.featured{grid-template-columns:1fr;gap:0;}.explore-card.featured .explore-icon{margin-bottom:10px;}}
-.explore-card:hover{border-color:var(--moss);transform:translateY(-3px);box-shadow:0 10px 26px rgba(22,52,44,0.10);}
-.explore-icon{font-size:22px;margin-bottom:10px;}
-.explore-card-title{font-size:14px;font-weight:500;color:var(--bark);margin-bottom:2px;}
-.explore-card-en{font-size:11px;color:var(--soil);opacity:0.5;margin-bottom:8px;}
-.explore-card-desc{font-size:12px;color:var(--soil);opacity:0.7;line-height:1.5;margin-bottom:12px;}
-.explore-card-btn{font-size:12px;color:var(--moss);font-weight:500;}
-
-/* ── BOTTOM ── */
-.home-bottom-sec{background:white;border-top:0.5px solid var(--sand);padding:3rem 1.5rem;}
-.home-bottom-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-@media(max-width:640px){.home-bottom-inner{grid-template-columns:1fr;}}
-.home-newsletter-card{background:var(--bark);border-radius:4px;padding:1.75rem;}
-.home-nl-icon{font-size:24px;margin-bottom:10px;}
-.home-nl-title{font-family:var(--font-d);font-size:1.25rem;color:#F8FBF9;margin-bottom:8px;}
-.home-nl-sub{font-size:13px;color:rgba(248,251,249,0.6);line-height:1.6;margin-bottom:1.25rem;}
-.home-nl-btn{display:inline-block;padding:10px 20px;background:#F1F7F4;color:var(--bark);border-radius:3px;text-decoration:none;font-size:13px;font-weight:500;transition:all 0.15s;}
-.home-nl-btn:hover{background:white;}
-.home-jennifer-card{background:var(--mist);border:0.5px solid var(--sand);border-radius:4px;padding:1.75rem;display:flex;flex-direction:column;justify-content:center;}
-.home-jl-quote{font-family:var(--font-d);font-size:1.3rem;color:var(--bark);font-style:italic;line-height:1.4;margin-bottom:8px;}
-.home-jl-name{font-size:13px;font-weight:500;color:var(--moss);margin-bottom:8px;}
-.home-jl-desc{font-size:12px;color:var(--soil);opacity:0.65;line-height:1.5;margin-bottom:1rem;}
-.home-jl-btn{display:inline-block;padding:9px 18px;background:var(--bark);color:#F8FBF9;border-radius:3px;text-decoration:none;font-size:12px;font-weight:500;transition:all 0.15s;width:fit-content;}
-.home-jl-btn:hover{background:var(--moss);}
-
-
-/* ── SAGE LATTE HERO OVERRIDE ── */
-.gnav{background:rgba(246,243,236,0.92);backdrop-filter:blur(14px);border-bottom:0.5px solid rgba(22,52,44,0.10);}
-.gnav-logo{color:#20342B;}
-.gnav-logo em{color:#5F7D6B;}
-.gnav-tab{color:rgba(32,52,43,0.56);}
-.gnav-tab:hover{color:#20342B;background:rgba(95,125,107,0.10);}
-.gnav-tab.on{color:#20342B;background:rgba(95,125,107,0.14);}
-
-.hero-v2{background:#F3F1EA;position:relative;overflow:hidden;border-bottom:0.5px solid rgba(22,52,44,0.08);}
-.hero-v2::before{content:'';position:absolute;inset:0;background:
-  radial-gradient(circle at 18% 18%, rgba(143,169,155,0.38) 0%, rgba(143,169,155,0.18) 28%, transparent 56%),
-  radial-gradient(circle at 88% 8%, rgba(143,106,82,0.12) 0%, rgba(143,106,82,0.06) 30%, transparent 58%),
-  linear-gradient(180deg,#E6EEE7 0%,#F3F1EA 48%,#FAF8F4 100%);
+.vhe-360-overlay.gone{opacity:0;pointer-events:none;}
+.vhe-360-rooms{
+  display:flex;gap:7px;flex-wrap:wrap;justify-content:center;
 }
-.hero-v2::after{content:'';position:absolute;left:8%;right:8%;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,rgba(22,52,44,0.10),transparent);}
-.hero-v2-inner{max-width:1080px;padding:4.4rem 2rem 4rem;grid-template-columns:minmax(0,1.05fr) minmax(320px,0.82fr);gap:3rem;align-items:center;}
-.hero-tag-v2{color:#4F6B59;background:rgba(255,255,255,0.52);border:0.5px solid rgba(95,125,107,0.20);box-shadow:0 8px 20px rgba(22,52,44,0.03);}
-.hero-title-v2{color:#223127;letter-spacing:-0.035em;text-wrap:balance;}
-.hero-title-v2 em{color:#5F7D6B;}
-.hero-sub-v2{color:#56655A;font-weight:400;max-width:500px;}
-.hero-cta-v2{background:#4F6B59;color:#FBFCFB;border-radius:999px;padding:14px 30px;box-shadow:0 14px 30px rgba(79,107,89,0.18);}
-.hero-cta-v2:hover{background:#3F5848;transform:translateY(-2px);box-shadow:0 18px 38px rgba(79,107,89,0.22);}
-.hero-cta-note{color:rgba(34,49,39,0.46);}
-.hero-mini-story{border-left:2px solid rgba(95,125,107,0.30);color:#647167;background:rgba(255,255,255,0.42);padding:12px 14px;border-radius:0 12px 12px 0;margin-top:1.35rem;max-width:520px;}
-.hero-social-proof{display:none!important;}
-.hero-dot{background:linear-gradient(135deg,#E6EEE7,#FFFFFF);border:1px solid rgba(95,125,107,0.14);box-shadow:0 4px 12px rgba(22,52,44,0.05);}
-.hero-social-proof span{color:#6A756D!important;}
-.hero-quiz-card-soft{background:linear-gradient(135deg,rgba(255,255,255,0.74),rgba(243,241,234,0.86));backdrop-filter:blur(16px);border:0.5px solid rgba(95,125,107,0.12);border-radius:22px;box-shadow:0 22px 58px rgba(22,52,44,0.09);} 
-.hero-quiz-card-soft .hero-quiz-expr{color:#223127;}
-.hero-quiz-card-soft .hero-quiz-more{background:#4F6B59;border-radius:999px;}
-.hero-quiz-card-soft .hero-quiz-more:hover{background:#3F5848;}
-.hero-quiz-card-soft .hero-quiz-opt{border-radius:12px;background:rgba(250,248,244,0.82);border-color:rgba(95,125,107,0.15);}
-.hero-quiz-card-soft .hero-quiz-opt:hover{background:#E6EEE7;border-color:#8FA99B;transform:translateX(2px);}
-.explore-sec{background:#FAF8F4;padding-top:3.2rem;}
-.explore-card{border-radius:16px;border-color:rgba(22,52,44,0.10);box-shadow:0 6px 20px rgba(22,52,44,0.035);}
-.explore-card:hover{box-shadow:0 14px 34px rgba(22,52,44,0.09);}
-.explore-card.featured{background:#4F6B59;border-color:#4F6B59;border-radius:18px;box-shadow:0 18px 38px rgba(79,107,89,0.16);}
-.home-newsletter-card{border-radius:18px;background:linear-gradient(135deg,#4F6B59 0%,#365046 100%);}
-.home-jennifer-card{border-radius:18px;background:#F4F0E8;}
-@media(max-width:768px){.hero-v2-inner{grid-template-columns:1fr;padding:3rem 1.35rem 2.8rem;gap:1.7rem;}.hero-quiz-card-soft{border-radius:18px}.gnav-inner{padding:0 1rem}.gnav-tabs{overflow-x:auto;max-width:72vw;}.hero-title-v2{font-size:clamp(2rem,10vw,3rem);}.hero-mini-story{font-size:12.5px;}}
+.vhe-360-room{
+  background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.15);
+  color:rgba(255,255,255,0.55);font-size:11px;font-weight:500;
+  padding:4px 12px;border-radius:99px;
+}
+.vhe-360-room.on{background:rgba(116,198,157,0.18);border-color:rgba(116,198,157,0.38);color:var(--green-lt);}
+.vhe-360-enter{
+  background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.28);
+  color:#fff;font-size:15px;font-weight:600;
+  padding:13px 28px;border-radius:var(--r-sm);
+  cursor:pointer;font-family:inherit;
+  display:flex;align-items:center;gap:10px;
+  transition:background .2s,border-color .2s;
+  margin-top:4px;
+}
+.vhe-360-enter:hover{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.45);}
+.enter-pulse{
+  width:9px;height:9px;border-radius:50%;background:#4ade80;
+  animation:epulse 1.8s ease-in-out infinite;
+}
+@keyframes epulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.35;transform:scale(0.65);}}
 
+/* ── VHE details below the frame ── */
+.vhe-details{
+  max-width:var(--max);margin:0 auto;
+  padding:64px var(--g) 96px;
+  display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;
+  position:relative;z-index:1;
+}
+.vhe-feats{display:flex;flex-direction:column;gap:14px;margin-bottom:32px;}
+.vfe{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:rgba(255,255,255,0.55);line-height:1.6;}
+.vfe-num{font-size:11px;font-weight:700;color:var(--green-lt);flex-shrink:0;margin-top:2px;}
+.vhe-btns{display:flex;gap:10px;flex-wrap:wrap;}
+.btn-ig{
+  display:inline-flex;align-items:center;gap:9px;
+  background:var(--white);color:var(--bg-forest);
+  padding:13px 22px;border-radius:var(--r-sm);
+  font-size:14px;font-weight:700;text-decoration:none;
+  transition:background .15s,transform .1s;
+}
+.btn-ig:hover{background:var(--green-pale);transform:translateY(-1px);}
+.btn-ig svg{width:17px;height:17px;flex-shrink:0;}
+.btn-tour{
+  border:1px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.52);
+  padding:12px 20px;border-radius:var(--r-sm);
+  font-size:14px;font-weight:500;text-decoration:none;
+  display:inline-flex;align-items:center;gap:7px;
+  transition:border-color .15s,color .15s;
+}
+.btn-tour:hover{border-color:rgba(255,255,255,0.42);color:#fff;}
+.vhe-what{padding-top:8px;}
+.vhe-what-title{font-size:13px;font-weight:600;color:rgba(255,255,255,0.35);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:16px;}
+.vhe-what-item{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);
+  font-size:14px;color:rgba(255,255,255,0.5);line-height:1.55;
+}
+.vhe-what-item:last-child{border-bottom:none;}
+.vhe-what-n{color:var(--green-lt);font-weight:700;flex-shrink:0;}
 
+/* ═══════════════════════════════════════
+   JENNIFER — trust through humanity
+═══════════════════════════════════════ */
+.jennifer{
+  background:var(--bg);
+  border-top:1px solid var(--bdrw);border-bottom:1px solid var(--bdrw);
+  padding:96px var(--g);
+}
+.jennifer-inner{
+  max-width:var(--max);margin:0 auto;
+  display:grid;grid-template-columns:220px 1fr;gap:64px;align-items:start;
+}
+.jennifer-photo{
+  width:100%;border-radius:var(--r-xl);aspect-ratio:3/4;
+  object-fit:cover;object-position:top;filter:grayscale(8%) contrast(104%);
+}
+.jennifer-ph{
+  width:100%;border-radius:var(--r-xl);aspect-ratio:3/4;
+  background:linear-gradient(145deg,#1a4a2e,#2d6a4f);
+  display:none;align-items:center;justify-content:center;font-size:56px;
+}
+.jennifer-tag{font-size:11px;font-weight:700;letter-spacing:0.09em;text-transform:uppercase;color:var(--green);margin-bottom:16px;}
+.jennifer-quote{
+  font-size:clamp(17px,2.3vw,21px);font-weight:600;color:var(--t1);
+  line-height:1.55;letter-spacing:-0.01em;
+  border-left:3px solid var(--green);padding-left:20px;margin-bottom:28px;
+  transition:opacity .3s ease;
+}
+.jennifer-body{font-size:16px;color:var(--t2);line-height:1.9;margin-bottom:28px;transition:opacity .3s ease;}
+.jennifer-body strong{color:var(--t1);font-weight:600;}
+.jennifer-links{display:flex;gap:10px;flex-wrap:wrap;}
+.jlink{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:13px;font-weight:600;color:var(--t2);
+  border:1.5px solid var(--bdrw);padding:9px 16px;
+  border-radius:var(--r-sm);text-decoration:none;
+  transition:color .15s,border-color .15s;
+}
+.jlink:hover{color:var(--t1);border-color:var(--t3);}
 
+/* ═══════════════════════════════════════
+   FINAL CTA — one moment, one action
+═══════════════════════════════════════ */
+.final-cta{background:var(--bg-alt);border-bottom:1px solid var(--bdrw);padding:100px var(--g);text-align:center;}
+.cta-wrap{max-width:480px;margin:0 auto;}
+.cta-label{font-size:11px;font-weight:700;color:var(--t3);letter-spacing:0.10em;text-transform:uppercase;margin-bottom:16px;}
+.cta-h2{font-size:clamp(28px,4.5vw,46px);font-weight:800;color:var(--t1);letter-spacing:-0.03em;line-height:1.12;margin-bottom:12px;transition:opacity .3s ease;}
+.cta-sub{font-size:15px;color:var(--t3);line-height:1.72;margin-bottom:12px;transition:opacity .3s ease;}
+.cta-proof{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--green-ghost);border:1px solid var(--green-pale);
+  color:var(--green);font-size:12.5px;font-weight:500;
+  padding:6px 14px;border-radius:99px;margin-bottom:28px;
+}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:9px;
+  background:var(--green);color:#fff;
+  padding:15px 32px;border-radius:var(--r-sm);
+  font-size:15px;font-weight:700;text-decoration:none;
+  box-shadow:0 2px 10px rgba(45,106,79,0.28);
+  transition:background .2s,transform .1s;
+}
+.btn-primary:hover{background:#1f4d35;transform:translateY(-1px);}
 
-/* ── THE ROOT V2 FUNNEL LANDING OVERRIDE ── */
-.v2-hero{background:#F8F6F0;position:relative;overflow:hidden;border-bottom:1px solid rgba(22,52,44,.08)}
-.v2-hero:before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 12% 10%,rgba(127,168,154,.32),transparent 42%),radial-gradient(circle at 88% 18%,rgba(143,106,82,.13),transparent 42%),linear-gradient(180deg,#EEF4EF 0%,#F8F6F0 64%,#FBFAF6 100%)}
-.v2-hero-inner{position:relative;z-index:2;max-width:1080px;margin:0 auto;padding:5.2rem 1.5rem;display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:3rem;align-items:center}
-.v2-kicker,.v2-section-label{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#5F7D6B;margin-bottom:12px}
-.v2-hero-title{font-family:var(--font-d);font-size:clamp(3rem,7vw,5.7rem);letter-spacing:-.055em;line-height:.95;color:#172D25;margin-bottom:1.1rem;text-wrap:balance}
-.v2-hero-title em{font-style:italic;color:#4F6B59}
-.v2-hero-sub{font-size:clamp(1.02rem,2vw,1.28rem);line-height:1.7;color:#43574D;margin-bottom:1.8rem;font-weight:500}
-.v2-primary-btn{border:none;background:#17362D;color:#fff;padding:17px 32px;border-radius:14px;font-size:16px;font-weight:800;font-family:var(--font-b);cursor:pointer;box-shadow:0 18px 40px rgba(23,54,45,.22);transition:all .18s}
-.v2-primary-btn:hover{transform:translateY(-2px);background:#0F261F;box-shadow:0 24px 50px rgba(23,54,45,.28)}
-.v2-trust-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;max-width:620px}
-.v2-trust-row span{font-size:12px;font-weight:700;color:#43574D;background:rgba(255,255,255,.74);border:1px solid rgba(95,125,107,.13);border-radius:999px;padding:7px 12px}
-.v2-preview-card{background:rgba(255,255,255,.86);backdrop-filter:blur(16px);border:1px solid rgba(95,125,107,.16);border-radius:26px;padding:1.6rem;box-shadow:0 28px 70px rgba(22,52,44,.12)}
-.v2-preview-top{display:flex;justify-content:space-between;align-items:center;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#6B7B72;font-weight:800;margin-bottom:20px}
-.v2-live-dot{background:#E6F0EB;color:#244C41;border-radius:999px;padding:4px 9px;letter-spacing:.04em}
-.v2-stage-pill{display:inline-flex;background:#17362D;color:#fff;border-radius:999px;padding:6px 12px;font-size:12px;font-weight:800;margin-bottom:12px}
-.v2-preview-card h2{font-family:var(--font-d);font-size:2rem;color:#172D25;line-height:1.1;margin-bottom:8px}
-.v2-preview-card p{font-size:13px;color:#53665D;line-height:1.65;margin-bottom:16px}
-.v2-next-list{display:grid;gap:8px;margin:18px 0}
-.v2-next-list div{display:flex;align-items:center;gap:10px;background:#F2F5F1;border-radius:12px;padding:11px 12px}
-.v2-next-list b{font-size:12px;color:#8F6A52}.v2-next-list span{font-size:13px;font-weight:700;color:#20342B}
-.v2-preview-foot{font-size:12px;color:#718078;border-top:1px solid rgba(22,52,44,.08);padding-top:14px}
-.v2-trust-section,.v2-paths-section,.v2-daily-section,.v2-newsletter-section{padding:3rem 1.5rem;background:#FBFAF6}
-.v2-trust-card{max-width:960px;margin:0 auto;background:#fff;border:1px solid rgba(22,52,44,.08);border-radius:28px;padding:1.55rem;display:grid;grid-template-columns:112px 1fr;gap:1.45rem;align-items:center;box-shadow:0 16px 42px rgba(22,52,44,.07)}
-.v2-avatar{width:96px;height:96px;border-radius:50%;overflow:hidden;background:#F3F1EA;border:3px solid #fff;box-shadow:0 12px 30px rgba(22,52,44,.14);display:block}
-.v2-avatar img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block}
-.v2-trust-card h2,.v2-section-head h2,.v2-daily-card h2,.v2-newsletter-card h2{font-family:var(--font-d);font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.05;color:#172D25;margin-bottom:10px;letter-spacing:-.02em}
-.v2-trust-card p{font-size:14px;line-height:1.75;color:#485E53;max-width:680px}.v2-trust-card a{display:inline-block;margin-top:10px;color:#4F6B59;font-weight:800;text-decoration:none;font-size:13px}
-.v2-section-head{max-width:960px;margin:0 auto 1.4rem}.v2-section-head p{color:#596B62;font-size:14px;line-height:1.7}
-.v2-path-grid{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:14px;align-items:stretch}
-.v2-path-card{background:#fff;border:1px solid rgba(22,52,44,.10);border-radius:22px;padding:1.35rem;cursor:pointer;box-shadow:0 10px 28px rgba(22,52,44,.045);transition:all .18s;display:flex;flex-direction:column;min-height:260px}
-.v2-path-card:hover{transform:translateY(-4px);box-shadow:0 18px 42px rgba(22,52,44,.11);border-color:rgba(79,107,89,.35)}
-.v2-path-main{background:#17362D;color:#fff;min-height:310px;box-shadow:0 22px 52px rgba(23,54,45,.22)}
-.v2-badge{display:inline-flex;align-self:flex-start;background:#F3E6D8;color:#17362D;border-radius:999px;padding:7px 12px;font-size:11px;font-weight:900;letter-spacing:.1em;margin-bottom:18px}.v2-badge.muted{background:#E6F0EB;color:#244C41}
-.v2-path-card h3{font-size:22px;line-height:1.18;color:#172D25;margin-bottom:10px;letter-spacing:-.03em}.v2-path-main h3{font-size:30px;color:#fff}.v2-path-card p{font-size:13px;line-height:1.7;color:#5A6D63;margin-bottom:18px}.v2-path-main p{color:rgba(255,255,255,.72)}
-.v2-path-card button{margin-top:auto;border:none;background:#E6F0EB;color:#244C41;border-radius:12px;padding:12px 14px;font-family:var(--font-b);font-size:13px;font-weight:900;cursor:pointer}.v2-path-main button{background:#fff;color:#17362D;font-size:15px;padding:14px 16px}
-.v2-daily-section{background:#F3F1EA}.v2-daily-card{max-width:960px;margin:0 auto;background:#fff;border-radius:24px;padding:1.7rem;display:flex;align-items:center;justify-content:space-between;gap:1.4rem;border:1px solid rgba(22,52,44,.08);box-shadow:0 12px 34px rgba(22,52,44,.055)}
-.v2-daily-card p{font-size:14px;color:#596B62;line-height:1.7}.v2-daily-quote{font-family:var(--font-d);font-size:2rem!important;color:#17362D!important;margin:.4rem 0!important;line-height:1.1!important}
-.v2-secondary-btn{border:none;background:#17362D;color:#fff;border-radius:14px;padding:14px 18px;font-size:14px;font-weight:900;font-family:var(--font-b);white-space:nowrap;cursor:pointer}
-.v2-newsletter-card{max-width:960px;margin:0 auto;background:linear-gradient(135deg,#17362D,#365046);border-radius:26px;padding:2.2rem;color:#fff}.v2-newsletter-card .v2-section-label{color:#B9D1C7}.v2-newsletter-card h2{color:#fff}.v2-newsletter-card p{max-width:620px;color:rgba(255,255,255,.7);line-height:1.75;font-size:14px;margin-bottom:18px}.v2-newsletter-card a{display:inline-block;background:#fff;color:#17362D;border-radius:14px;padding:13px 18px;text-decoration:none;font-size:14px;font-weight:900}
-@media(max-width:840px){.v2-hero-inner{grid-template-columns:1fr;padding:3.5rem 1.25rem}.v2-path-grid{grid-template-columns:1fr}.v2-path-card,.v2-path-main{min-height:auto}.v2-trust-card{grid-template-columns:1fr;text-align:left}.v2-avatar{width:88px;height:88px}.v2-daily-card{align-items:flex-start;flex-direction:column}.v2-secondary-btn{width:100%}.v2-hero-title{font-size:clamp(3rem,16vw,4.6rem)}.v2-preview-card{border-radius:22px}.v2-trust-row span{width:100%}}
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer{padding:32px var(--g);border-top:1px solid var(--bdrw);}
+.footer-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.footer-logo{font-size:15px;font-weight:800;letter-spacing:-0.03em;color:var(--t1);}
+.footer-logo em{color:var(--gold);font-style:normal;}
+.footer-tag{font-size:11.5px;color:var(--t3);margin-top:2px;font-style:italic;}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{font-size:13px;color:var(--t3);text-decoration:none;transition:color .15s;}
+.footer-links a:hover{color:var(--t1);}
+.footer-legal{width:100%;font-size:11px;color:#c0c0bb;margin-top:8px;line-height:1.65;}
 
-/* ── NEWSLETTER POPUP ── */
-.nl-overlay{position:fixed;inset:0;background:rgba(13,32,27,0.48);display:none;align-items:center;justify-content:center;padding:1.25rem;z-index:1000;backdrop-filter:blur(4px);}
-.nl-overlay.show{display:flex;}
-.nl-modal{width:100%;max-width:430px;background:#FBFCFB;border:0.5px solid rgba(255,255,255,0.5);border-radius:10px;box-shadow:0 24px 80px rgba(0,0,0,0.25);padding:1.6rem;position:relative;animation:su 0.25s ease;}
-.nl-close{position:absolute;top:12px;right:12px;width:28px;height:28px;border:none;border-radius:50%;background:var(--mist);color:var(--soil);cursor:pointer;font-size:16px;}
-.nl-kicker{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--clay);margin-bottom:8px;}
-.nl-title{font-family:var(--font-d);font-size:1.7rem;line-height:1.15;color:var(--bark);margin-bottom:8px;}
-.nl-desc{font-size:13px;color:var(--soil);opacity:0.75;line-height:1.65;margin-bottom:16px;}
-.nl-list{display:grid;gap:7px;margin-bottom:18px;}
-.nl-list div{font-size:12px;color:var(--soil);background:var(--mist);border-radius:4px;padding:8px 10px;}
-.nl-primary{display:block;width:100%;text-align:center;padding:13px 16px;background:var(--bark);color:#F8FBF9;border-radius:4px;text-decoration:none;font-size:14px;font-weight:500;margin-bottom:8px;}
-.nl-secondary{width:100%;padding:10px;border:none;background:transparent;color:var(--soil);font-size:12px;cursor:pointer;font-family:var(--font-b);}
-
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media(max-width:880px){
+  .stages-grid{grid-template-columns:repeat(2,1fr);}
+  .vhe-details{grid-template-columns:1fr;gap:40px;}
+  .jennifer-inner{grid-template-columns:1fr;gap:36px;}
+  .jennifer-photo,.jennifer-ph{max-width:160px;}
+  .nav-links a:not(.nav-cta){display:none;}
+}
+@media(max-width:560px){
+  .hero-h1{font-size:clamp(40px,12vw,56px);}
+  .stages-grid{grid-template-columns:1fr;}
+  .vhe-intro-h2{font-size:clamp(28px,9vw,40px);}
+}
 </style>
 </head>
 <body>
 
-<!-- GLOBAL NAV -->
-<nav class="gnav">
-  <div class="gnav-inner">
-    <div class="gnav-logo" onclick="showPage('home')">The <em>Root</em></div>
-    <div class="gnav-tabs">
-      <button class="gnav-tab on" id="tab-home" onclick="showPage('home')">Home</button>
-      <button class="gnav-tab" id="tab-quiz" onclick="window.location.href='clinical-quiz.html'">임상영어</button>
-      <button class="gnav-tab" id="tab-tracker" onclick="window.location.href='immigration.html'">Immigration Hub</button>
-      <button class="gnav-tab" id="tab-bulletin" onclick="showPage('bulletin')">문호 체크 <span class="dot"></span></button>
+<!-- ═══ NAV ════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <div style="display:flex;align-items:center;">
+      <a href="/" class="nav-logo">
+        <!-- <img src="logo.png" alt="The Root" style="height:24px"> -->
+        The <em>Root</em>
+      </a>
+      <!-- Stage context pill — appears after chip selection -->
+      <div class="nav-stage" id="navStage">
+        <span class="nav-stage-dot"></span>
+        <span id="navStageLabel"></span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="quiz.html" class="nav-cta">내 단계 찾기 →</a>
     </div>
   </div>
 </nav>
 
-<!-- PAGE: HOME (v2 Funnel Landing) -->
-<div class="page on" id="page-home">
-  <section class="v2-hero" id="hero">
-    <div class="v2-hero-inner">
-      <div class="v2-hero-copy">
-        <div class="v2-kicker">The Root · U.S. RN Journey Guide</div>
-        <h1 class="v2-hero-title">미국 간호사,<br><em>나도 가능할까?</em></h1>
-        <p class="v2-hero-sub">5가지 질문으로 지금 내 단계와<br>다음 스텝을 1분 안에 확인하세요.</p>
-        <button class="v2-primary-btn" onclick="startJourneyQuiz()">1분 무료 진단 시작하기 →</button>
-        <div class="v2-trust-row">
-          <span>✓ Korean RN → California RN founder</span>
-          <span>✓ NCLEX · VisaScreen · EB-3 흐름 정리</span>
-        </div>
-      </div>
 
-      <div class="v2-preview-card" aria-label="Quiz result preview">
-        <div class="v2-preview-top">
-          <span>Your result preview</span>
-          <span class="v2-live-dot">1 min</span>
-        </div>
-        <div class="v2-stage-pill">Stage 2</div>
-        <h2>NCLEX 준비 단계</h2>
-        <p>국내 면허가 있다면 이제 응시 주 선택과 NCLEX 준비가 핵심이에요.</p>
-        <div class="v2-next-list">
-          <div><b>01</b><span>응시할 주 선택</span></div>
-          <div><b>02</b><span>ATT 신청 및 시험 등록</span></div>
-          <div><b>03</b><span>NCLEX 준비 시작</span></div>
-        </div>
-        <div class="v2-preview-foot">결과는 내 상황에 맞춰 다르게 나와요.</div>
-      </div>
-    </div>
-  </section>
+<!-- ═══ HERO ════════════════════════════════════
+  The Signature Moment:
+  Select your stage → the platform responds to YOU.
+  "비자 대기 중인 당신에게," — you are seen.
+══════════════════════════════════════════════ -->
+<section class="hero" id="top">
 
-  <section class="v2-trust-section">
-    <div class="v2-trust-card">
-      <div class="v2-avatar"><img src="jennifer-headshot.JPG" alt="Jennifer Minja Lee, founder of The Root"></div>
-      <div>
-        <div class="v2-section-label">Founder-led guide</div>
-        <h2>Hi, I’m Jennifer.</h2>
-        <p>한국에서 간호사로 시작해 NCLEX를 보고 California RN으로 일하고 있어요. 처음 준비할 때 가장 힘들었던 건 정보가 없는 것보다 <strong>“뭐부터 해야 하는지 모르는 것”</strong>이었어요. 그래서 제가 직접 이 가이드를 만들었습니다.</p>
-        <a href="https://www.youtube.com/@JenniferMinjaLee" target="_blank" onclick="trackEvent('youtube_trust_click')">Jennifer 이야기 보기 →</a>
-      </div>
-    </div>
-  </section>
+  <div class="hero-kicker" id="hKicker">미국 간호사를 위한 커리어 여정 플랫폼</div>
 
-  <section class="v2-paths-section">
-    <div class="v2-section-head">
-      <div class="v2-section-label">Start with one clear step</div>
-      <h2>처음이라면 여기서 시작하세요.</h2>
-      <p>홈페이지에서는 딱 세 가지 길만 보여드릴게요. 먼저 진단하고, 필요한 도구로 이어가세요.</p>
-    </div>
+  <!-- Dynamic headline: morphs when stage is selected -->
+  <h1 class="hero-h1" id="heroH1">
+    미국 간호사 여정,<br>
+    <span class="line2" id="heroLine2">지금 어디쯤 일까요?</span>
+  </h1>
 
-    <div class="v2-path-grid">
-      <article class="v2-path-card v2-path-main" onclick="startJourneyQuiz()">
-        <span class="v2-badge">START HERE</span>
-        <h3>미국 간호사 여정 진단</h3>
-        <p>내가 지금 NCLEX 전인지, 영어 점수 단계인지, 비자스크린/영주권 단계인지 확인해요.</p>
-        <button>Start Quiz →</button>
-      </article>
+  <!-- Dynamic sub: responds to stage selection -->
+  <p class="hero-sub" id="heroSub">
+    지금 내 단계를 선택하면 The Root가 함께해요.
+  </p>
 
-      <article class="v2-path-card" onclick="window.location.href='clinical-quiz.html'">
-        <span class="v2-badge muted">CLINICAL ENGLISH</span>
-        <h3>미국 병원 영어 감각 익히기</h3>
-        <p>SBAR, patient teaching, charting, 실제 환자 표현을 퀴즈로 연습해요.</p>
-        <button>Practice →</button>
-      </article>
-
-      <article class="v2-path-card" onclick="window.location.href='immigration.html'">
-        <span class="v2-badge muted">IMMIGRATION</span>
-        <h3>영주권 · 비자 · 랜딩 허브</h3>
-        <p>복잡한 EB-3 흐름, Priority Date, 입국 후 체크리스트를 한 곳에서 정리해요.</p>
-        <button>Open Hub →</button>
-      </article>
-    </div>
-  </section>
-
-  <section class="v2-daily-section">
-    <div class="v2-daily-card">
-      <div>
-        <div class="v2-section-label">Daily retention</div>
-        <h2>오늘의 Clinical English</h2>
-        <p class="v2-daily-quote">“He’s been out of it.”</p>
-        <p>뜻이 바로 떠오르지 않았다면, 오늘의 5문제로 감각을 익혀보세요.</p>
-      </div>
-      <button class="v2-secondary-btn" onclick="window.location.href='clinical-quiz.html'">오늘의 5문제 풀기 →</button>
-    </div>
-  </section>
-
-  <section class="v2-daily-section" style="padding-top:0;">
-    <div class="v2-daily-card" style="background:var(--mist);border:0.5px solid var(--sand);">
-      <div>
-        <div class="v2-section-label" style="color:var(--clay);">For fun</div>
-        <h2 style="color:var(--bark);">나는 미국에서 잘 살 수 있을까?</h2>
-        <p style="color:var(--soil);opacity:0.75;">영어 실력보다 마인드셋으로 보는 미국 생존 유형 테스트. 10문항, 3분이면 충분해요.</p>
-      </div>
-      <button class="v2-secondary-btn" style="background:var(--bark);color:#F8FBF9;white-space:nowrap;" onclick="showPage('adapt');initAdaptQuiz();trackEvent('adapt_home_click')">테스트 해보기 →</button>
-    </div>
-  </section>
-
-  <section class="v2-newsletter-section">
-    <div class="v2-newsletter-card">
-      <div class="v2-section-label">Newsletter</div>
-      <h2>미국에서 온 편지</h2>
-      <p>매주 무료로 받아보세요. 임상 영어, 미국 병원 이야기, 비자 문호, 그리고 현실적인 미국 간호사 여정.</p>
-      <a href="https://jenniferminjalee.substack.com/" target="_blank" onclick="trackEvent('newsletter_home_v2_click')">무료 구독하기 →</a>
-    </div>
-  </section>
-
-  <footer>
-    <p>The Root · Jennifer Minja Lee · 1st generation immigrant RN</p>
-    <p style="margin-top:6px;font-size:13px;"><a href="https://www.youtube.com/@JenniferMinjaLee" target="_blank">YouTube</a> · <a href="https://jenniferminjalee.substack.com" target="_blank">Substack 구독하러 가기</a></p>
-    <p style="margin-top:10px;font-size:13px;"><a href="mailto:jenniferminjalee@gmail.com?subject=The%20Root%20Feedback">제니퍼에게 피드백 보내기 🤍</a></p>
-    <p style="margin-top:10px;font-size:11px;opacity:0.6;">정보는 참고용이며 실제 지원 전 해당 주 간호사 면허 위원회에 반드시 확인하세요. 최종 업데이트: 2026년 5월</p>
-  </footer>
-</div>
-
-<!-- PAGE: JOURNEY QUIZ (여정 진단) -->
-<div class="page" id="page-journey">
-<section class="quiz-sec" id="quiz-sec">
-    <div class="quiz-wrap">
-      <div class="quiz-hdr">
-        <h2>나의 여정 찾기</h2>
-        <p>솔직하게 답하면 정확한 단계가 나와요</p>
-      </div>
-      <div class="prog-wrap"><div class="prog-fill" id="prog" style="width:0%"></div></div>
-      <div class="step-track" id="track">
-        <div class="sdot active" id="d0"></div><div class="sline" id="l0"></div>
-        <div class="sdot" id="d1"></div><div class="sline" id="l1"></div>
-        <div class="sdot" id="d2"></div><div class="sline" id="l2"></div>
-        <div class="sdot" id="d3"></div><div class="sline" id="l3"></div>
-        <div class="sdot" id="d4"></div><div class="sline" id="l4"></div>
-        <div class="sdot" id="d5"></div>
-      </div>
-      <div id="qc"></div>
-    </div>
-  </section>
-</div>
-
-<!-- PAGE: TRACKER (영주권) -->
-<div class="page" id="page-tracker">
-  <div class="dash-page">
-    <div class="dash-eyebrow">Green Card Tracker</div>
-    <h2 class="dash-title">영주권 진행 확인하기</h2>
-    <p class="dash-sub">I-140부터 입국까지 — 단계별 체크리스트로 내 케이스 진행 상황을 정리하세요.</p>
-    <div class="stat-row">
-      <div class="stat-b"><div class="stat-n" id="gr-done">0</div><div class="stat-l">완료 항목</div></div>
-      <div class="stat-b"><div class="stat-n" id="gr-total">0</div><div class="stat-l">전체 항목</div></div>
-      <div class="stat-b"><div class="stat-n" id="gr-pct">0%</div><div class="stat-l">진행률</div></div>
-    </div>
-    <div class="prog-bar-wrap"><div class="prog-bar-fill" id="gr-bar" style="width:0%"></div></div>
-    <div style="font-size:12px;color:var(--soil);opacity:0.55;margin-bottom:1.5rem;" id="gr-label">단계를 클릭해서 열어보세요</div>
-    <div id="phases-container"></div>
-    <button class="save-progress-btn" onclick="saveProgress('gr')">진행 상황 저장하기 💾</button>
-    <button class="capture-btn" onclick="captureProgress('gr')" id="capture-gr-btn">📸 내 진행상황 이미지로 저장하기</button>
-    <button class="btn-teal" style="margin-top:8px;" onclick="showPage('bulletin')">이민문호 확인하기 →</button>
+  <!-- Stage chips — identity selection, not filter buttons -->
+  <div class="hero-chips" id="hChips">
+    <a class="h-chip" data-stage="0">학생</a>
+    <a class="h-chip" data-stage="1">한국 간호사</a>
+    <a class="h-chip" data-stage="2">비자 대기</a>
+    <a class="h-chip" data-stage="3">랜딩 완료</a>
+    <a class="h-chip" data-stage="4">첫 출근</a>
+    <a class="h-chip" data-stage="5">성장 중</a>
   </div>
-</div>
 
-<!-- PAGE: LANDING (랜딩 체크리스트) -->
-<div class="page" id="page-landing">
-  <div class="dash-page">
-    <div class="dash-eyebrow">Landing Checklist</div>
-    <h2 class="dash-title">미국 랜딩 준비<br>체크리스트</h2>
-    <p class="dash-sub">입국 첫 주부터 3개월까지 — 미국 생활 기반을 하나씩 차분하게 세팅해요.</p>
-    <div class="stat-row">
-      <div class="stat-b"><div class="stat-n" id="l-done">0</div><div class="stat-l">완료</div></div>
-      <div class="stat-b"><div class="stat-n" id="l-total">0</div><div class="stat-l">전체</div></div>
-      <div class="stat-b"><div class="stat-n" id="l-pct">0%</div><div class="stat-l">진행률</div></div>
-    </div>
-    <div class="prog-bar-wrap"><div class="prog-bar-fill" id="l-bar" style="width:0%"></div></div>
-    <div style="margin-bottom:1.5rem;"></div>
-    <div class="dash-section">입국 첫 주</div>
-    <div id="land-w1"></div>
-    <div class="dash-section">첫 달 안에</div>
-    <div id="land-m1"></div>
-    <div class="dash-section">3개월 안에</div>
-    <div id="land-m3"></div>
-    <button class="save-progress-btn" onclick="saveProgress('land')" style="margin-top:1rem;">진행 상황 저장하기 💾</button>
-    <button class="capture-btn" onclick="captureProgress('land')" id="capture-land-btn">📸 내 진행상황 이미지로 저장하기</button>
+  <!-- Stage insight — the "The Root sees me" moment -->
+  <p class="hero-insight" id="heroInsight"></p>
+
+  <!-- Personalized next step — appears after stage selection -->
+  <div class="hero-next" id="heroNext">
+    <a href="#" class="hero-next-link" id="heroNextLink">지금 바로 시작하기 →</a>
+    <span class="hero-next-or">또는</span>
+    <a href="#journey-section" class="hero-next-scroll" onclick="smoothTo('journey-section')">
+      내 여정 전체 보기 ↓
+    </a>
   </div>
-</div>
+
+  <!-- Jennifer attribution -->
+  <div class="hero-attr">
+    <div class="hero-attr-av">
+      <img src="jennifer-headshot.JPG" alt="J"
+           onerror="this.parentNode.textContent='J'">
+    </div>
+    <span>Jennifer Minja Lee · California RN · 직접 걸어온 여정</span>
+  </div>
+
+</section>
 
 
-<!-- PAGE: QUIZ -->
-<div class="page" id="page-quiz">
+<!-- ═══ STAGE CARDS ════════════════════════════ -->
+<section class="stages" id="stages">
+  <div class="sec-head fade">
+    <div class="eyebrow">지금 어디에 있나요?</div>
+    <h2 class="sec-h2">여기를 클릭하면, 페이지가 당신에게 맞춰져요</h2>
+  </div>
+  <div class="stages-grid" id="stagesGrid">
+    <a href="quiz.html" class="s-card" data-card="0">
+      <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3.3 1.3 8.7 1.3 12 0v-5"/></svg></div>
+      <div class="s-stage">학생</div>
+      <div class="s-feeling">"어디서 시작해야 할지 모르겠어요."</div>
+      <div class="s-cta">여정 시작하기 →</div>
+    </a>
+    <a href="quiz.html" class="s-card" data-card="1">
+      <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1 3-2.6 3-4.5C22 7.1 20.4 5 18 5c-1.1 0-2.1.4-2.8 1.2"/><circle cx="12" cy="11" r="4"/><path d="M7 9a5 5 0 0 0 5 8 5 5 0 0 0 5-8"/><path d="M12 15v7"/><path d="M9 19h6"/></svg></div>
+      <div class="s-stage">한국 간호사</div>
+      <div class="s-feeling">"이 길이 맞는지 자꾸 흔들려요."</div>
+      <div class="s-cta">단계 확인 →</div>
+    </a>
+    <a href="immigration.html" class="s-card" data-card="2">
+      <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <div class="s-stage">비자 대기</div>
+      <div class="s-feeling">"언제 끝날지 알 수가 없어요."</div>
+      <div class="s-cta">트래커 보기 →</div>
+    </a>
+    <a href="immigration.html" class="s-card" data-card="3">
+      <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+      <div class="s-stage">랜딩 완료</div>
+      <div class="s-feeling">"막상 뭐부터 해야 할지 막막해요."</div>
+      <div class="s-cta">정착 가이드 →</div>
+    </a>
+    <a href="#vhe" class="s-card" data-card="4">
+      <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
+      <div class="s-stage">첫 출근</div>
+      <div class="s-feeling">"모든 게 낯설고 두려워요."</div>
+      <div class="s-cta">병동 미리 경험 →</div>
+    </a>
+    <a href="https://jenniferminjalee.substack.com" class="s-card" data-card="5" target="_blank">
+      <div class="s-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+      <div class="s-stage">성장 중</div>
+      <div class="s-feeling">"다음 단계가 뭔지 모르겠어요."</div>
+      <div class="s-cta">커뮤니티 →</div>
+    </a>
+  </div>
+</section>
 
-  <!-- 히어로 -->
-  <div class="cq-hero">
-    <div class="cq-hero-content">
-      <div class="cq-hero-tag">Clinical English Quiz</div>
-      <h2 class="cq-hero-title">임상 영어<br><em>실전 퀴즈</em></h2>
-      <p class="cq-hero-sub">미국 병원에서 실제로 쓰는 영어 — Jennifer가 직접 만들었어요</p>
-      <div class="cq-streak">🔥 연속 <span class="cq-streak-num" id="cq-streak-num">0</span>일 도전 중</div>
-      <div style="margin-top:12px;">
-        <a href="https://jenniferminjalee.substack.com/" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:7px 16px;background:rgba(255,255,255,0.62);border:0.5px solid rgba(95,125,107,0.16);border-radius:20px;text-decoration:none;font-size:12px;color:#4F6B59;transition:all 0.15s;">
-          💌 매주 새 문제 · 뉴스레터 구독하기 →
+
+<!-- ═══ JOURNEY PATH ════════════════════════════
+  "나는 지금 여기에 있어요."
+  The visual proof of "I'm not lost anymore."
+  Activates after stage selection in hero.
+══════════════════════════════════════════════ -->
+<section class="journey-section" id="journey-section">
+  <div class="journey-intro fade">
+    <div class="eyebrow" style="text-align:center">여정 전체 보기</div>
+    <h2 class="journey-intro-h2">
+      눈앞에 보이지 않아서<br>막막한 거예요.
+    </h2>
+    <p class="journey-intro-sub">
+      내 여정을 지도로 보면, 달라져요.
+    </p>
+  </div>
+
+  <div class="journey-path-wrap">
+    <div class="journey-path" id="journeyPath">
+      <!-- Spine -->
+      <div class="j-spine">
+        <div class="j-spine-fill" id="jSpineFill"></div>
+      </div>
+      <!-- Nodes injected by JS -->
+    </div>
+  </div>
+
+  <div class="journey-prompt" id="journeyPrompt">
+    위에서 내 단계를 선택하면 여정이 보여요 →
+  </div>
+</section>
+
+
+<!-- ═══ VHE ════════════════════════════════════
+  The signature experience.
+  Experience before explanation.
+  The moment that makes people remember The Root.
+══════════════════════════════════════════════ -->
+<section class="vhe" id="vhe">
+
+  <!-- Dramatic intro — builds anticipation -->
+  <div class="vhe-intro fade">
+    <div class="vhe-intro-label">Virtual Hospital Experience</div>
+    <h2 class="vhe-intro-h2" id="vheH2">
+      처음으로,<br>
+      미국 병동을 <em>직접</em> 걸어볼 수 있어요.
+    </h2>
+    <p class="vhe-intro-sub" id="vheSub">
+      첫날이 두렵지 않으려면, 먼저 익숙해져야 해요.
+    </p>
+  </div>
+
+  <!-- The 360° reveal — full cinematic width -->
+  <div class="vhe-360-wrap">
+    <iframe
+      src="hospital_360_v3.html"
+      class="vhe-360-iframe"
+      id="vhe360frame"
+      allow="fullscreen"
+      loading="lazy"
+      title="360° US Hospital Ward Tour">
+    </iframe>
+    <div class="vhe-360-overlay" id="vhe360overlay" onclick="enterVHE()">
+      <div class="vhe-360-rooms">
+        <span class="vhe-360-room on">간호사 스테이션</span>
+        <span class="vhe-360-room">Patient Room</span>
+        <span class="vhe-360-room on">TELEMETRY</span>
+        <span class="vhe-360-room">Med Room</span>
+        <span class="vhe-360-room">차팅 룸</span>
+      </div>
+      <button class="vhe-360-enter">
+        <span class="enter-pulse"></span>
+        병동 안으로 들어가기 →
+      </button>
+    </div>
+  </div>
+
+  <!-- Details below the experience -->
+  <div class="vhe-details">
+    <div>
+      <div class="vhe-feats">
+        <div class="vfe"><span class="vfe-num">01</span>360° 미국 병동 투어 — 간호사 스테이션, TELEMETRY, Med Room</div>
+        <div class="vfe"><span class="vfe-num">02</span>임상 케이스 시뮬레이션 — 코호트 참가자 전용 세션</div>
+        <div class="vfe"><span class="vfe-num">03</span>Jennifer와 함께하는 라이브 Q&A</div>
+      </div>
+      <div class="vhe-btns">
+        <a href="https://www.instagram.com/theroot.rn" target="_blank" class="btn-ig">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+          </svg>
+          @theroot.rn 소식 받기
         </a>
+        <a href="hospital_360_v3.html" class="btn-tour">360° 투어 바로보기 →</a>
       </div>
+    </div>
+    <div class="vhe-what">
+      <div class="vhe-what-title">세션 구성</div>
+      <div class="vhe-what-item"><span class="vhe-what-n">01</span>입장하면 바로 탐색 — 360° 가상 투어</div>
+      <div class="vhe-what-item"><span class="vhe-what-n">02</span>🔒 임상 시뮬레이션 — 참가자 전용 세션</div>
+      <div class="vhe-what-item"><span class="vhe-what-n">03</span>라이브 Q&A — Jennifer Minja Lee</div>
     </div>
   </div>
 
-  <div class="cq-body">
+</section>
 
-    <!-- 카테고리 -->
-    <div class="cq-cats" id="cq-cats"></div>
 
-    <!-- 진행 바 -->
-    <div class="cq-prog"><div class="cq-prog-fill" id="cq-prog-fill" style="width:0%"></div></div>
-
-    <!-- 퀴즈 -->
-    <div id="cq-quiz-wrap">
-      <div class="cq-card">
-        <div class="cq-meta">
-          <span class="cq-cat-pill" id="cq-cat-pill"></span>
-          <span class="cq-num" id="cq-qnum"></span>
-        </div>
-        <div class="cq-q" id="cq-question"></div>
-        <div class="cq-context" id="cq-context"></div>
-        <div class="cq-opts" id="cq-opts"></div>
-        <div class="cq-explain" id="cq-explain">
-          <div class="cq-explain-top">
-            <div class="cq-jen-av">JL</div>
-            <div class="cq-explain-text" id="cq-explain-text"></div>
-          </div>
-          <div class="cq-tip" id="cq-tip"></div>
-        </div>
-        <button class="cq-next-btn" id="cq-next-btn" onclick="nextQ()">다음 문제 →</button>
-      </div>
+<!-- ═══ JENNIFER ════════════════════════════════ -->
+<section class="jennifer" id="jennifer">
+  <div class="jennifer-inner">
+    <div>
+      <img src="jennifer-headshot.JPG" alt="Jennifer Minja Lee"
+           class="jennifer-photo"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="jennifer-ph">👩‍⚕️</div>
     </div>
-
-    <!-- 결과 -->
-    <div id="cq-result" style="display:none;">
-      <div class="cq-result-card">
-        <div class="cq-score-ring">
-          <div class="cq-score-num" id="cq-score-num"></div>
-          <div class="cq-score-total" id="cq-score-total"></div>
-        </div>
-        <div class="cq-result-msg" id="cq-result-msg"></div>
-        <div class="cq-result-sub" id="cq-result-sub"></div>
-        <div class="cq-share-row">
-          <button class="cq-share-btn cq-share-link" onclick="shareQuizResult()">결과 공유하기 🌿</button>
-        </div>
-        <button class="cq-retry-btn" onclick="retryQuiz()">다시 풀기 →</button>
+    <div class="fade">
+      <div class="jennifer-tag">California RN · 지금도 병동에서 일하고 있어요</div>
+      <blockquote class="jennifer-quote" id="jenniferQuote">
+        준비하던 시절, 가장 힘들었던 건 정보가 없는 게 아니라 전체 그림이 보이지 않는 것이었어요.
+      </blockquote>
+      <p class="jennifer-body" id="jenniferBody">
+        각 단계는 알겠는데 연결이 안 됐고, 혼자서 길을 만들어가야 했어요.<br><br>
+        <strong>The Root는 그 연결을 만드는 곳이에요.</strong>
+        제가 직접 걸어온 여정을 기반으로, 여러분은 조금 덜 헤매도 되도록요.
+      </p>
+      <div class="jennifer-links">
+        <a href="https://www.youtube.com/@JenniferMinjaLee" class="jlink" target="_blank">YouTube</a>
+        <a href="https://jenniferminjalee.substack.com"      class="jlink" target="_blank">Substack</a>
+        <a href="https://www.instagram.com/theroot.rn"       class="jlink" target="_blank">Instagram</a>
       </div>
-
-      <!-- Jennifer 노트 -->
-      <div style="display:flex;gap:10px;padding:14px 16px;background:#F3EFE6;border-radius:3px;margin-top:10px;">
-        <div style="width:28px;height:28px;border-radius:50%;background:var(--moss);display:flex;align-items:center;justify-content:center;font-size:10px;color:white;font-weight:700;flex-shrink:0;">JL</div>
-        <div style="font-size:12px;color:#4A3A2A;line-height:1.6;">임상 영어는 단어 암기보다 <strong>상황 맥락</strong>이 중요해요. 매주 뉴스레터에서 실제 병원 표현을 더 같이 익혀봐요. 🌿</div>
-      </div>
-      <a href="https://jenniferminjalee.substack.com/" target="_blank" style="display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:var(--bark);border-radius:3px;text-decoration:none;margin-top:8px;">
-        <div>
-          <div style="font-size:13px;font-weight:500;color:#F8FBF9;">💌 뉴스레터 구독하고 표현 더 알아보기</div>
-          <div style="font-size:11px;color:rgba(248,251,249,0.5);margin-top:2px;">임상 영어 · 미국 병원 이야기 · 이민문호 업데이트</div>
-        </div>
-        <span style="color:#7FA89A;font-size:13px;">→</span>
-      </a>
-    </div>
-
-  </div>
-</div>
-
-
-
-<!-- PAGE: ADAPT -->
-<div class="page" id="page-adapt">
-  <div class="dash-page">
-    <div class="dash-eyebrow">Adjustment Test</div>
-    <h2 class="dash-title">나는 미국에서<br>잘 살 수 있을까?</h2>
-    <p class="dash-sub">영어 실력보다 마인드셋과 행동 패턴으로 보는 10문항 미국 생존 유형 테스트예요.<br>솔직하게 답할수록 정확해져요.</p>
-    <div class="dash-card" id="adapt-card">
-      <div class="cq-prog"><div class="cq-prog-fill" id="adapt-prog" style="width:0%"></div></div>
-      <div class="q-num" id="adapt-num"></div>
-      <div class="q-txt" id="adapt-question"></div>
-      <div class="q-sub" id="adapt-sub"></div>
-      <div class="q-opts" id="adapt-opts"></div>
-    </div>
-    <div id="adapt-result" style="display:none;"></div>
-    <div class="dash-card" style="background:var(--bark);margin-top:12px;">
-      <div style="font-size:13px;font-weight:500;color:#F8FBF9;margin-bottom:6px;">✉️ The Root 업데이트 받아가기</div>
-      <div style="font-size:12px;color:rgba(248,251,249,0.6);line-height:1.6;margin-bottom:14px;">임상 영어, 미국 병원 이야기, 이민문호 업데이트, 그리고 Jennifer의 현실적인 여정을 받아보세요.</div>
-      <a href="https://jenniferminjalee.substack.com/" target="_blank" style="display:inline-block;padding:10px 18px;background:#F1F7F4;color:var(--bark);border-radius:3px;text-decoration:none;font-size:13px;font-weight:500;">무료 뉴스레터 받아보기 →</a>
     </div>
   </div>
-</div>
+</section>
 
-</div>
 
-<!-- PAGE: BULLETIN (문호 체크) -->
-<div class="page" id="page-bulletin">
-  <div class="dash-page">
-    <div class="dash-eyebrow">Visa Bulletin</div>
-    <h2 class="dash-title">EB-3 이민문호 트래커</h2>
-    <p class="dash-sub">매달 Visa Bulletin 반영 · 한국 간호사 기준 · 2026년 6월 문호 반영</p>
-
-    <div class="warn-box" style="margin-bottom:2.25rem;">
-      <strong>2026년 6월 문호 현황</strong><br>
-      한국 포함 "All Other Countries" EB-3 Final Action Date는 <strong>2024년 6월 1일에 동결</strong>되어 있어요. Priority Date가 2024년 6월 1일 이전이어야 현재 진행 가능해요.<br>
-      2026년 5월 14일에 발표된 6월 문호에서도 한국은 <strong>변동 없이 동결</strong>이에요.
+<!-- ═══ FINAL CTA ═══════════════════════════════
+  One moment. One action.
+  "이제 혼자가 아니에요."
+══════════════════════════════════════════════ -->
+<section class="final-cta">
+  <div class="cta-wrap">
+    <div class="cta-label" id="ctaLabel">다음 단계로 함께해요</div>
+    <h2 class="cta-h2" id="ctaH2">이제 혼자가<br>아니에요.</h2>
+    <p class="cta-sub" id="ctaSub">다음 코호트 소식을 가장 먼저 받으세요.</p>
+    <div class="cta-proof">
+      지난 코호트 — 선착순, 미리 등록한 68명 중에서
     </div>
-
-    <div class="dash-card" style="margin-bottom:1.25rem;">
-      <div style="font-size:12px;font-weight:500;color:var(--soil);margin-bottom:8px;">내 Priority Date 확인</div>
-      <div style="display:flex;gap:8px;">
-        <input type="date" id="my-pd" style="flex:1;padding:9px 12px;border:0.5px solid var(--sand);border-radius:3px;font-size:13px;font-family:var(--font-b);color:var(--bark);background:white;">
-        <button onclick="checkPD()" style="padding:9px 16px;background:var(--bark);color:white;border:none;border-radius:3px;font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;">확인</button>
-      </div>
-      <div class="pd-result" id="pd-result"></div>
-    </div>
-
-    <div class="dash-card" style="margin-bottom:1.25rem;">
-      <div style="font-size:13px;font-weight:500;color:var(--bark);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;">
-        EB-3 Final Action Date · 2026년 5월
-        <span style="font-size:10px;padding:2px 8px;border-radius:8px;background:#FEF7ED;color:#6B4C1E;font-weight:500;">한국 동결 중</span>
-      </div>
-      <div class="c-row"><span style="font-size:15px;">🇰🇷</span><span class="c-name">한국 (All Other Countries 포함)</span><span class="c-date date-frozen">2024년 6월 1일</span><span class="c-pill pill-frozen">동결</span></div>
-      <div class="c-row"><span style="font-size:15px;">🇵🇭</span><span class="c-name">필리핀 (Philippines)</span><span class="c-date date-frozen">2023년 8월 1일</span><span class="c-pill pill-same">변동 없음</span></div>
-      <div class="c-row"><span style="font-size:15px;">🇮🇳</span><span class="c-name">인도 (India)</span><span class="c-date date-frozen">2013년 12월 15일</span><span class="c-pill pill-same">변동 없음</span></div>
-    </div>
-
-    <div class="dash-card" style="margin-bottom:1.25rem;">
-      <div style="font-size:13px;font-weight:500;color:var(--bark);margin-bottom:10px;">주요 변동 히스토리</div>
-      <div style="padding:10px 0;border-bottom:0.5px solid var(--sand);font-size:13px;color:var(--soil);">
-        <div style="font-size:11px;color:var(--soil);opacity:0.5;margin-bottom:2px;">~2024년 6월</div>
-        <div style="font-weight:500;color:var(--bark);">Current 유지</div>
-        <div style="font-size:12px;margin-top:2px;">Priority Date 관계없이 진행 가능했던 시기</div>
-      </div>
-      <div style="padding:10px 0;border-bottom:0.5px solid var(--sand);font-size:13px;color:var(--soil);">
-        <div style="font-size:11px;color:#8B4030;margin-bottom:2px;">2024년 7월 — 주의</div>
-        <div style="font-weight:500;color:var(--bark);">대규모 후퇴(Retrogression)</div>
-        <div style="font-size:12px;margin-top:2px;">11개월 이상 갑자기 후퇴 — 2021년 12월로 급락. 수요 급증이 원인.</div>
-      </div>
-      <div style="padding:10px 0;font-size:13px;color:var(--soil);">
-        <div style="font-size:11px;color:var(--soil);opacity:0.5;margin-bottom:2px;">2024년 8월 ~ 현재</div>
-        <div style="font-weight:500;color:var(--bark);">점진적 회복 후 동결</div>
-        <div style="font-size:12px;margin-top:2px;">2024년 6월 1일 수준에서 멈춰 있어요. 추가 후퇴 가능성 경고 중.</div>
-      </div>
-    </div>
-    <a href="https://travel.state.gov/content/travel/en/legal/visa-law0/visa-bulletin.html" target="_blank" style="display:block;text-align:center;padding:10px;font-size:12px;color:var(--moss);border:0.5px solid rgba(36,76,65,0.2);border-radius:3px;text-decoration:none;background:var(--moss-light);">공식 Visa Bulletin 원문 보기 →</a>
+    <a href="https://jenniferminjalee.substack.com" target="_blank" class="btn-primary" id="ctaBtn">
+      다음 코호트 소식 받기 →
+    </a>
   </div>
-</div>
+</section>
 
 
-<!-- NEWSLETTER POPUP -->
-<div class="nl-overlay" id="newsletter-popup" onclick="if(event.target===this) closeNewsletterPopup()">
-  <div class="nl-modal">
-    <button class="nl-close" onclick="closeNewsletterPopup()" aria-label="Close">×</button>
-    <div class="nl-kicker">Jennifer Minja Lee SUBSTACK</div>
-    <div class="nl-title">미국 병원 영어와<br>간호사 여정 업데이트.</div>
-    <div class="nl-desc">뉴스레터에서는 임상 영어, 이민문호, NCLEX/비자스크린 팁, 그리고 Jennifer의 현실적인 미국 병원 이야기를 매주 정리해드려요.</div>
-    <div class="nl-list">
-      <div>🗣️ 실제 병원에서 쓰는 임상 영어 표현</div>
-      <div>📌 NCLEX · VisaScreen · 영주권 여정 팁</div>
-      <div>🌿 1st generation immigrant nurse의 솔직한 이야기</div>
+<!-- ═══ FOOTER ══════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">The <em>Root</em></div>
+      <div class="footer-tag">미국 간호사 여정을 함께, 더 멀리</div>
     </div>
-    <a class="nl-primary" href="https://jenniferminjalee.substack.com/" target="_blank" onclick="trackEvent('newsletter_popup_click'); closeNewsletterPopup();">무료 뉴스레터 받아보기 →</a>
-    <button class="nl-secondary" onclick="closeNewsletterPopup(true)">오늘은 괜찮아요</button>
+    <div class="footer-links">
+      <a href="https://www.youtube.com/@JenniferMinjaLee" target="_blank">YouTube</a>
+      <a href="https://jenniferminjalee.substack.com"      target="_blank">Substack</a>
+      <a href="https://www.instagram.com/theroot.rn"       target="_blank">Instagram</a>
+      <a href="mailto:jenniferminjalee@gmail.com?subject=The Root">Contact</a>
+    </div>
+    <p class="footer-legal">
+      정보는 참고용이며 실제 지원 전 해당 주 간호사 면허 위원회에 반드시 확인하세요. ·
+      © 2026 The Root · Jennifer Minja Lee · California RN
+    </p>
   </div>
-</div>
+</footer>
 
-<!-- CAPTURE CARD (hidden, rendered to image) -->
-<div class="capture-card" id="capture-card"></div>
 
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
-
+<!-- ═══ JAVASCRIPT ═══════════════════════════════ -->
 <script>
-/* ── PAGE ROUTING ── */
-const pageAliases={
-  'clinical-quiz':'quiz',
-  'clinical':'quiz',
-  'green-card':'tracker',
-  'immigration':'bulletin',
-  'visa-bulletin':'bulletin',
-  'journey-quiz':'journey'
-};
-function normalizePageId(id){return pageAliases[id] || id || 'home';}
-function pageHash(id){
-  const map={quiz:'clinical-quiz',tracker:'green-card',bulletin:'visa-bulletin'};
-  return map[id] || id;
-}
-function showPage(id, pushHistory=true){
-  id=normalizePageId(id);
-  const target=document.getElementById('page-'+id);
-  if(!target) id='home';
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
-  document.querySelectorAll('.gnav-tab').forEach(t=>t.classList.remove('on'));
-  document.getElementById('page-'+id).classList.add('on');
-  const tabs={home:'tab-home',journey:'tab-home',tracker:'tab-tracker',quiz:'tab-quiz',adapt:'tab-home',landing:'tab-tracker',bulletin:'tab-bulletin'};
-  document.getElementById(tabs[id])?.classList.add('on');
-  window.scrollTo({top:0,behavior:'smooth'});
-  if(pushHistory) history.pushState({page:id}, '', '#'+pageHash(id));
-}
-window.addEventListener('popstate', function(e){
-  const id = normalizePageId(e.state?.page || location.hash.replace('#','') || 'home');
-  showPage(id, false);
-});
-
-/* ── QUIZ DATA ── */
-const Qs=[
-  {id:'degree',n:'Q1 of 5',t:'간호학 학위가 있으신가요?',s:'어느 나라든 인가받은 간호학과라면 가능 — 영어권 대학일 필요 없어요.',yes:{next:'license'},no:{r:'no_degree'}},
-  {id:'license',n:'Q2 of 5',t:'국내 간호사 면허증이 있으신가요?',s:'한국 기준: 간호사 국가고시 합격 후 발급된 면허증',yes:{next:'nclex_clinical'},no:{r:'no_license'}},
-  {id:'nclex_clinical',n:'Q3 of 5',t:'현재 해당하는 것을 선택해주세요',s:'지금 상황에 가장 가까운 것을 골라주세요.',multi:true,options:[
-    {label:'NCLEX-RN 합격했어요',desc:'미국 간호사 면허 시험 통과',value:'nclex'},
-    {label:'임상 경력이 있어요',desc:'국내 또는 해외 임상 경험',value:'clinical'},
-    {label:'둘 다 있어요',desc:'NCLEX + 임상 경력 모두 보유',value:'both'},
-    {label:'아직 없어요',desc:'NCLEX도 경력도 준비 중',value:'neither'}
-  ]},
-  {id:'english',n:'Q4 of 5',t:'비자스크린용 영어 점수가 있으신가요?',s:'TOEFL / IELTS / PTE 등',yes:{r:'needs_visascreen'},no:{r:'needs_english'}}
-];
-const compactStates=['AL','AZ','AR','CO','CT','DE','FL','GA','GU','ID','IN','IA','KS','KY','LA','ME','MD','MS','MO','MT','NE','NH','NJ','NM','NC','ND','OH','OK','PA','RI','SC','SD','TN','TX','UT','VT','VA','VI','WA','WV','WI','WY'];
-function compactToggleHTML(){
-  return `<div class="compact-toggle"><div class="compact-header" onclick="toggleCompact(this)"><div class="compact-header-left"><span class="compact-pill">Compact NLC</span><div><div class="compact-title">Compact States란? (클릭해서 보기)</div><div class="compact-sub">42개 주 참여 — 면허 상호인정 협약</div></div></div><span class="compact-arrow">▾</span></div><div class="compact-body"><p style="font-size:13px;color:var(--soil);line-height:1.7;margin-bottom:10px;">Compact 주에서 면허를 취득하면 미국 거주 후 다른 Compact 주에서도 진료할 수 있어요.</p><strong style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--soil);opacity:0.6;">현재 Compact 주 (42개)</strong><div class="compact-states">${compactStates.map(s=>`<span class="cs-pill">${s}</span>`).join('')}</div><div class="warn-box"><strong>국제 간호사 주의</strong><br>해외에서 지원 시 처음엔 Single State License만 발급돼요. 미국 거주 후 Compact로 업그레이드 가능. 나중에 면허 이전(Endorsement)도 가능해요.</div></div></div>`;
-}
-function toggleCompact(h){const b=h.nextElementSibling,a=h.querySelector('.compact-arrow');b.classList.toggle('open');a.style.transform=b.classList.contains('open')?'rotate(180deg)':'rotate(0deg)';}
-const engTableHTML=`<div style="margin-bottom:1.5rem;"><div style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--soil);opacity:0.5;margin-bottom:10px;">비자스크린용 영어 점수 기준 (2026년 5월)</div><div class="sc-tbl"><div class="sc-hdr"><span>시험</span><span>최저 점수</span></div><div class="sc-row"><span class="sc-en">TOEFL iBT</span><span class="sc-sc">Overall 4.5 / R+L+W 3.5 / Speaking 4.5(개정)</span></div><div class="sc-row"><span class="sc-en">IELTS(ACADEMIC)</span><span class="sc-sc">Overall 6.5 / Speaking 7.0</span></div><div class="sc-row"><span class="sc-en">PTE Academic</span><span class="sc-sc">Overall 55 / R·L·W 62 S 76</span></div><div class="sc-row"><span class="sc-en">Cambridge</span><span class="sc-sc">Overall 169 / Speaking 194</span></div><div class="sc-row"><span class="sc-en">MET</span><span class="sc-sc">Overall 58 / Speaking 59</span></div><div class="sc-row"><span class="sc-en">OET</span><span class="sc-sc">Reading 340/Writing 350/Listening 320/Speaking 360</span></div></div><div style="font-size:11px;color:var(--soil);opacity:0.55;margin-bottom:12px;">재택(at-home) 시험 불인정 · 영어 성적 유효기간 2년 · 비자스크린 유효기간 5년</div><div class="info-box">NCLEX 합격 후 병원을 먼저 찾아도 되고, 비자스크린 완료 후 찾아도 돼요. 순서는 유연하게!</div></div>`;
-const Rs={
-  no_degree:{badge:'bs',bl:'Stage 0 — 시작 전',stage:'간호학 학위부터\n시작해봐요',desc:'미국 간호사가 되려면 인가받은 간호학과 학위가 첫 번째 조건이에요.',steps:[{t:'인가받은 간호학과 입학',d:'한국, 필리핀, 인도 등 — 나라 상관없이 인가 기관 여부가 중요'},{t:'졸업 후 국내 간호사 면허 취득',d:'국내 면허가 있어야 NCLEX-RN 응시 가능'}],uworld:false,eng:false,statesel:false,compact:false,j:'학위 취득부터 미국 취업까지 보통 6-10년이 걸려요. 한 걸음씩 가다 보면 분명히 도착할 수 있어요.',nextPage:null},
-  no_license:{badge:'bs',bl:'Stage 1 — 면허 취득 필요',stage:'국내 간호사 면허가\n필요해요',desc:'미국 NCLEX-RN 시험에 응시하려면 국내 간호사 면허가 필수예요.',steps:[{t:'간호사 국가고시 응시',d:'간호대 졸업 후 응시 가능'},{t:'면허 취득 후 NCLEX 준비 시작',d:'국시 내용과 겹치는 부분 많아 국시 취득 직후 추천'}],uworld:false,eng:false,statesel:false,compact:false,j:'NCLEX 시험 신청 요건 중 하나가 해외 대학을 졸업한 경우 해당 국가 면허 보유인 경우 가능해요.',nextPage:null},
-  needs_nclex:{badge:'bm',bl:'Stage 2 — NCLEX 준비',stage:'NCLEX-RN,\n이게 핵심이에요',desc:'국내 면허가 있다면 NCLEX-RN에 응시할 수 있어요. 대부분 New York 주로 응시해요.',steps:[{t:'응시할 주(State) 선택',d:'대부분 New York 주로 응시 — 영어시험 없이 지원 가능해서 추천'},{t:'ATT 신청 및 시험 등록',d:'Pearson VUE를 통해 시험 일정 예약'},{t:'NCLEX-RN 합격',d:'85-150문제, CAT 방식 — 유형 파악이 합격의 핵심'}],uworld:true,eng:false,statesel:true,compact:true,j:'NCLEX는 CAT 방식이라 문제 수가 달라져요. 얼마나 많이 푸냐보다 어떤 유형인지 파악하는 게 중요해요.',nextPage:null},
-  no_clinical:{badge:'bm',bl:'Stage 3 — 임상 경력 쌓는 중',stage:'임상 경력을\n먼저 쌓는 걸 추천해요',desc:'경력 없이도 가능하지만 좋은 조건의 스폰서를 찾기 위해서는 임상 경력이 매우 중요해요.',steps:[{t:'국내 병원에서 임상 경력 쌓기',d:'최소 1-2년 권장 — Med-Surg, ICU, ER 선호도 높음'},{t:'희망 부서 중심으로 경험 쌓기',d:'미국에서 일하고 싶은 부서와 동일한 경력이 있으면 훨씬 유리해요'},{t:'경력 조건은 에이전시에 직접 확인',d:'미국 잡마켓마다 조건이 달라요. 에이전시에 직접 문의하는 게 가장 정확해요'}],uworld:false,eng:false,statesel:false,compact:false,j:'미국 임상은 한국이랑 많이 달라요. 경험이 있을수록 현장 적응이 빨라요.',nextPage:null},
-  needs_visascreen:{badge:'bm',bl:'Stage 4 — 비자스크린 진행',stage:'비자스크린으로\n넘어가요',desc:'영어 점수가 있다면 비자스크린 단계로 바로 진행할 수 있어요.',steps:[{t:'CGFNS 계정 생성 및 서류 준비',d:'고졸 졸업증명서, 간호학 성적증명서, 면허 공증, NCLEX 확인서, 여권 사진'},{t:'영어 점수 제출',d:'비자스크린 기준 점수를 CGFNS에 직접 제출 (재택 시험 불가)'},{t:'비자스크린 완료 후 병원 컨택',d:'NCLEX 합격 후 먼저 병원을 찾아도 돼요 — 순서는 유연하게'}],uworld:false,eng:true,statesel:false,compact:false,j:'이미 영어 점수가 있다면 비자스크린을 진행하면서 병원이나 에이전시를 같이 보는 전략도 가능해요.',nextPage:'immigration.html'},
-  needs_english:{badge:'bm',bl:'Stage 4 — 영어 점수 준비',stage:'에이전시를 컨택하면서\n영어 점수를 준비하세요',desc:'영어 점수가 아직 없다면 에이전시를 먼저 컨택하면서 비자스크린용 영어 점수를 준비하세요.',steps:[{t:'에이전시 먼저 컨택',d:'현재 내 상황에서 가능한 스폰서 루트와 서류 방향을 먼저 확인해요'},{t:'비자스크린용 영어 시험 준비',d:'아래 기준표에서 내가 응시할 시험과 목표 점수를 확인하세요'},{t:'영어 점수 확보 후 비자스크린 진행',d:'점수 제출이 가능해지면 바로 다음 단계로 넘어가요'}],uworld:false,eng:true,statesel:false,compact:false,j:'영어 점수가 아직 없어도 괜찮아요. 에이전시 컨택과 영어 준비를 병행하는 게 현실적인 루트예요.',nextPage:'bulletin'},
-  job_ready:{badge:'bf',bl:'Stage 5 — 취업 준비 완료',stage:'준비 완료!\n이제 병원을 찾아요',desc:'학위, 면허, NCLEX, 임상경력, 비자스크린까지 모두 완료! EB-3 영주권을 스폰서해줄 고용주를 찾는 게 마지막 관문이에요.',steps:[{t:'EB-3 스폰서 가능한 고용주 찾기',d:'Staffing Agency, 병원, 너싱홈 등 다양한 옵션'},{t:'Form I-140 고용주가 청원 제출',d:'고용주가 미국 이민국(USCIS)에 청원서 제출'},{t:'미국 대사관 인터뷰',d:'비자스크린 ICHP Certificate 지참 필수'}],uworld:false,eng:false,statesel:false,compact:false,j:'여기까지 왔다면 정말 대단한 거예요. 좋은 에이전시 또는 병원 찾는 게 이 단계의 핵심이에요!',nextPage:'tracker'}
-};
-const stSel={'California':{note:'교육과정 까다로움 — 모성/노인 필수'},'Texas':{note:'빠른 처리, Compact 주'},'New York':{note:'영어시험 없이 지원 가능 — 가장 추천'},'Florida':{note:'Compact, 처리 빠름'},'Washington':{note:'Compact, Seattle 수요'},'Illinois':{note:'CGFNS 전용, SSN 불필요'}};
-
-let cur=0,quizHistory=[];
-function startJourneyQuiz(){showPage('journey');quizHistory=[];rQ(0);trackEvent('journey_quiz_start');}
-function rQ(idx){
-  cur=idx;updP(idx);
-  const q=Qs[idx];
-  const backBtn=quizHistory.length>0?`<button class="q-nav-btn" onclick="goBack()">← 이전으로 돌아가기</button>`:'';
-
-  if(q.multi){
-    document.getElementById('qc').innerHTML=`<div class="q-card">
-      <div class="q-num">${q.n}</div>
-      <div class="q-txt">${q.t}</div>
-      <div class="q-sub">${q.s}</div>
-      <div class="q-opts">
-        ${q.options.map(opt=>`
-          <button class="qbtn yes" onclick="ansMulti('${opt.value}')">
-            <div class="qbtn-icon">→</div>
-            <div>
-              <div class="qbtn-lbl">${opt.label}</div>
-              <div class="qbtn-desc">${opt.desc}</div>
-            </div>
-          </button>`).join('')}
-      </div>
-    </div>
-    <div class="q-nav">
-      ${backBtn}
-      <button class="q-nav-btn" onclick="resetQ()">처음부터 다시 하기</button>
-    </div>`;
-  } else {
-    document.getElementById('qc').innerHTML=`<div class="q-card">
-      <div class="q-num">${q.n}</div>
-      <div class="q-txt">${q.t}</div>
-      <div class="q-sub">${q.s}</div>
-      <div class="q-opts">
-        <button class="qbtn yes" onclick="ans('${q.id}',true)">
-          <div class="qbtn-icon">✓</div>
-          <div><div class="qbtn-lbl">네, 있어요</div><div class="qbtn-desc">다음 단계로 진행</div></div>
-        </button>
-        <button class="qbtn no" onclick="ans('${q.id}',false)">
-          <div class="qbtn-icon">→</div>
-          <div><div class="qbtn-lbl">아직 없어요</div><div class="qbtn-desc">현재 단계 확인하기</div></div>
-        </button>
-      </div>
-    </div>
-    <div class="q-nav">
-      ${backBtn}
-      <button class="q-nav-btn" onclick="resetQ()">처음부터 다시 하기</button>
-    </div>`;
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   STAGE DATA
+   Each stage knows: what to say to YOU,
+   what to do next, where you are on the path.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+const STAGES = [
+  {
+    label:'학생',
+    h1a:'학생인',
+    h1b:'당신에게,',
+    sub:'미국 간호사로 가는 길, 지금부터 시작해도 충분해요.',
+    insight:'한국어로 된 전체 로드맵이 없어서 막막한 거예요. 여기 있어요.',
+    ctaText:'전체 여정 보기 →',
+    ctaHref:'quiz.html',
+    ctaLabel:'첫 걸음부터 시작해요',
+    ctaH2:'어디서 시작할지,<br>알려드릴게요.',
+    ctaSub:'학생 때부터 미국 RN까지 — 전체 여정을 한눈에 볼 수 있어요.',
+    ctaBtn:'여정 로드맵 받아보기 →',
+    pathNode:0,
+    jenniferVariant:'default'
+  },
+  {
+    label:'한국 간호사',
+    h1a:'준비 중인',
+    h1b:'당신에게,',
+    sub:'NCLEX, 임상영어, VisaScreen — 이 길이 맞아요. 흔들리지 않아도 돼요.',
+    insight:'NCLEX가 첫 관문이지만, 비자 루트 선택이 더 오래 영향을 줘요.',
+    ctaText:'단계별 로드맵 →',
+    ctaHref:'quiz.html',
+    ctaLabel:'다음 단계가 보여요',
+    ctaH2:'이 길이 맞아요.<br>흔들리지 않아도 돼요.',
+    ctaSub:'NCLEX부터 비자까지 — 단계별로 정리해드릴게요.',
+    ctaBtn:'단계별 가이드 받아보기 →',
+    pathNode:1,
+    jenniferVariant:'default'
+  },
+  {
+    label:'비자 대기 중',
+    h1a:'기다리는',
+    h1b:'당신에게,',
+    sub:'언제 끝날지 모르는 그 기다림. 지금 할 수 있는 게 있어요.',
+    insight:'평균 2~3년. 그 시간, 그냥 보내지 않아도 돼요.',
+    ctaText:'이민 트래커 보기 →',
+    ctaHref:'immigration.html',
+    ctaLabel:'기다리는 동안 할 수 있어요',
+    ctaH2:'기다리는 시간도<br>여정의 일부예요.',
+    ctaSub:'대기 중에도 준비할 수 있는 것들, 정리해드릴게요.',
+    ctaBtn:'대기 중 가이드 받아보기 →',
+    pathNode:4,
+    jenniferVariant:'waiting'
+  },
+  {
+    label:'랜딩 완료',
+    h1a:'드디어 도착한',
+    h1b:'당신에게,',
+    sub:'막막한 첫 주. 하나씩 체크하면 돼요.',
+    insight:'처음 72시간 안에 해야 할 것들이 있어요. 순서가 중요해요.',
+    ctaText:'정착 체크리스트 →',
+    ctaHref:'immigration.html',
+    ctaLabel:'첫 주를 도와드릴게요',
+    ctaH2:'도착했어요.<br>이제 하나씩이에요.',
+    ctaSub:'정착 첫 주 체크리스트 — 순서대로 따라오면 돼요.',
+    ctaBtn:'정착 가이드 받아보기 →',
+    pathNode:5,
+    jenniferVariant:'waiting'
+  },
+  {
+    label:'첫 출근',
+    h1a:'첫날이 두려운',
+    h1b:'당신에게,',
+    sub:'미국 병동은 처음엔 모두에게 낯설어요. 미리 걸어보면 달라져요.',
+    insight:'차팅 시스템, 간호사 스테이션, 코드 — 미리 보면 첫날이 달라요.',
+    ctaText:'병동 미리 걸어보기 →',
+    ctaHref:'#vhe',
+    ctaLabel:'첫 출근 전에 꼭 보세요',
+    ctaH2:'두렵지 않으려면<br>먼저 익숙해져야 해요.',
+    ctaSub:'미국 병동을 가상으로 먼저 걸어보세요. 차이가 느껴질 거예요.',
+    ctaBtn:'병동 미리 경험하기 →',
+    pathNode:6,
+    jenniferVariant:'firstshift'
+  },
+  {
+    label:'성장 중',
+    h1a:'다음을 찾는',
+    h1b:'당신에게,',
+    sub:'NP, Leadership, 커리어 전환 — 혼자 고민하지 않아도 돼요.',
+    insight:'혼자 찾으면 3년, 같이 가면 훨씬 빨라요.',
+    ctaText:'커뮤니티 →',
+    ctaHref:'https://jenniferminjalee.substack.com',
+    ctaLabel:'다음 단계로 함께해요',
+    ctaH2:'다음 챕터,<br>혼자 고민하지 않아도 돼요.',
+    ctaSub:'같은 여정을 걷는 사람들이 여기 있어요.',
+    ctaBtn:'커뮤니티 소식 받기 →',
+    pathNode:8,
+    jenniferVariant:'default'
   }
-}
-function ans(qId,isYes){
-  const q=Qs.find(x=>x.id===qId);
-  quizHistory.push(cur);setD(cur,'done');
-  if(isYes){if(q.yes.r)showR(q.yes.r);else rQ(Qs.findIndex(x=>x.id===q.yes.next));}
-  else{if(q.no.r)showR(q.no.r);else rQ(Qs.findIndex(x=>x.id===q.no.next));}
-}
-
-function ansMulti(value){
-  quizHistory.push(cur);setD(cur,'done');
-  if(value==='both'){rQ(Qs.findIndex(x=>x.id==='english'));}
-  else if(value==='nclex'){showR('no_clinical');}
-  else if(value==='clinical'){showR('needs_nclex');}
-  else{showR('needs_nclex');}
-}
-function goBack(){
-  if(!quizHistory.length)return;
-  const p=quizHistory.pop();
-  cur=p;updP(p);
-  const q=Qs[p];
-  const backBtn=quizHistory.length>0?`<button class="q-nav-btn" onclick="goBack()">← 이전으로 돌아가기</button>`:'';
-  if(q.multi){
-    document.getElementById('qc').innerHTML=`<div class="q-card"><div class="q-num">${q.n}</div><div class="q-txt">${q.t}</div><div class="q-sub">${q.s}</div><div class="q-opts">${q.options.map(opt=>`<button class="qbtn yes" onclick="ansMulti('${opt.value}')"><div class="qbtn-icon">→</div><div><div class="qbtn-lbl">${opt.label}</div><div class="qbtn-desc">${opt.desc}</div></div></button>`).join('')}</div></div><div class="q-nav">${backBtn}<button class="q-nav-btn" onclick="resetQ()">처음부터 다시 하기</button></div>`;
-  } else {
-    document.getElementById('qc').innerHTML=`<div class="q-card"><div class="q-num">${q.n}</div><div class="q-txt">${q.t}</div><div class="q-sub">${q.s}</div><div class="q-opts"><button class="qbtn yes" onclick="ans('${q.id}',true)"><div class="qbtn-icon">✓</div><div><div class="qbtn-lbl">네, 있어요</div><div class="qbtn-desc">다음 단계로 진행</div></div></button><button class="qbtn no" onclick="ans('${q.id}',false)"><div class="qbtn-icon">→</div><div><div class="qbtn-lbl">아직 없어요</div><div class="qbtn-desc">현재 단계 확인하기</div></div></button></div></div><div class="q-nav">${backBtn}<button class="q-nav-btn" onclick="resetQ()">처음부터 다시 하기</button></div>`;
-  }
-  setTimeout(scrollToQuizTop, 50);
-}
-function scrollToQuizTop(){
-  document.getElementById('quiz-sec').scrollIntoView({
-    behavior:'smooth',
-    block:'start'
-  });
-}
-function navBtns(){
-  return `<div class="btn-row"><button class="btn-ghost" onclick="goBack()">← 이전으로 돌아가기</button><button class="btn-ghost" onclick="resetQ()">처음부터 다시 하기</button></div>`;
-}
-function showR(key){
-  const r=Rs[key];if(!r)return;
-  trackEvent('journey_quiz_complete',{result:key});
-  updP(Qs.length);
-  const stepsH=r.steps.map((s,i)=>`<div class="nxt-item"><div class="nxt-num">${i+1}</div><div><div class="nxt-t">${s.t}</div><div class="nxt-d">${s.d}</div></div></div>`).join('');
-  const uwH=r.uworld?`<div class="uw-banner"><div class="uw-ico">UW</div><div style="flex:1"><div class="uw-ttl">UWorld NCLEX-RN</div><div class="uw-sub">Jennifer Affiliate link — NCLEX 준비에 많이 활용되는 대표 문제은행</div></div><a href="http://tidd.ly/3OW24vo" class="uw-link" target="_blank">자세히 보기 →</a></div>`:'';
-  const agencyH=(key==='needs_english'||key==='needs_visascreen')?`<div style="display:flex;align-items:flex-start;gap:12px;padding:16px;background:#F3EFE6;border-radius:3px;margin-bottom:8px;">
-  <div style="font-size:14px;flex-shrink:0;">📋</div>
-  <div style="flex:1;">
-    <div style="font-size:14px;font-weight:500;color:var(--bark);margin-bottom:8px;">에이전시 리스트가 필요하신가요?</div>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc8yHmiTCbCp7oFTKG-EU7FSi_EXrh99Q39tiZ8OOLhk64BKg/viewform" target="_blank" style="display:inline-block;font-size:13px;color:var(--clay);font-weight:500;text-decoration:none;border-bottom:1px solid var(--clay);margin-bottom:8px;">낫이팅게일샘의 정리 자료 보기 →</a>
-    <div style="font-size:13px;color:var(--soil);opacity:0.5;"><a href="https://www.instagram.com/noteatingale" target="_blank" style="color:var(--soil);text-decoration:none;"> 자료제공 @noteatingale</a>· 유료 자료 · 신청 페이지 </div>
-  </div>
-</div>`:'';
-  const selH=r.statesel?`<div style="margin-bottom:1rem;"><div style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--soil);opacity:0.5;margin-bottom:10px;">어느 주로 가고 싶으세요?</div><div class="ssel-grid">${Object.entries(stSel).map(([s,v])=>`<button class="ssel-btn" onclick="this.closest('.ssel-grid').querySelectorAll('.ssel-btn').forEach(b=>{b.style.borderColor='';b.style.background=''});this.style.borderColor='var(--moss)';this.style.background='var(--moss-light)'">${s}<small>${v.note}</small></button>`).join('')}</div><div style="font-size:12px;color:var(--soil);opacity:0.55;margin-top:6px;">상세 요구사항은 아래 State Guide에서 확인하세요 ↓</div></div>`:'';
-  const compactH=r.compact?compactToggleHTML():'';
-  const engH=r.eng?engTableHTML:'';
-  const nextBtn = r.nextPage
-  ? (r.nextPage.endsWith('.html')
-      ? `<button class="btn-teal" onclick="window.location.href='${r.nextPage}'">Immigration Hub로 가기 →</button>`
-      : `<button class="btn-teal" onclick="showPage('${r.nextPage}')">${r.nextPage==='bulletin'?'이민문호 확인하기 →':'다음 단계로 →'}</button>`)
-  : '';
-  const resultNlH=`<div style="display:flex;align-items:center;gap:14px;padding:16px;background:var(--bark);border-radius:10px;margin:0 0 12px;"><div style="font-size:20px;">✉️</div><div style="flex:1;"><div style="font-size:13px;font-weight:700;color:#F8FBF9;">이 결과를 계속 받고 싶다면</div><div style="font-size:12px;color:rgba(248,251,249,.6);margin-top:2px;">매주 임상 영어, 비자문호, 미국 간호사 여정을 보내드려요.</div></div><a href="https://jenniferminjalee.substack.com/" target="_blank" onclick="trackEvent('newsletter_journey_result_click')" style="padding:9px 13px;background:#F0F6F3;color:var(--bark);border-radius:8px;text-decoration:none;font-size:12px;font-weight:800;white-space:nowrap;">무료 구독 →</a></div>`;
-  document.getElementById('qc').innerHTML=`<div class="res-card"><span class="res-badge ${r.badge}">${r.bl}</span><div class="res-stage">${r.stage}</div><div class="res-desc">${r.desc}</div>${selH}${compactH}${engH}<div class="nxt-steps"><div class="nxt-lbl">다음 단계</div>${stepsH}</div>${uwH}${agencyH}<div class="jen-note"><div class="jen-av">JL</div><div class="jen-msg"><strong>Jennifer의 메모 —</strong> ${r.j}</div></div>${resultNlH}<div class="res-acts">${nextBtn}<button class="btn-main" onclick="location.href='https://www.youtube.com/@JenniferMinjaLee'">Jennifer YouTube에서 자세히 보기 →</button>${navBtns()}</div></div>`;
-
-  setTimeout(scrollToQuizTop, 50);
-}
-function updP(step){
-  document.getElementById('prog').style.width=Math.round(step/Qs.length*100)+'%';
-  for(let i=0;i<=Qs.length;i++){const d=document.getElementById('d'+i);if(!d)continue;d.className='sdot'+(i<step?' done':i===step?' active':'');const l=document.getElementById('l'+i);if(l)l.className='sline'+(i<step?' done':'');}
-}
-function setD(i,c){const d=document.getElementById('d'+i);if(d)d.className='sdot '+c;}
-function resetQ(){quizHistory=[];cur=0;updP(0);rQ(0);window.scrollTo({top:0,behavior:'smooth'});}
-const params = new URLSearchParams(window.location.search);if(params.get('action') === 'journey'){startJourneyQuiz();}
-function showBulletin() {document.querySelectorAll('.page').forEach(page => {page.style.display = 'none';});document.getElementById('page-bulletin').style.display = 'block';
-window.scrollTo({top: 0,behavior: 'smooth'});
-}
-
-/* ── STATE DATA ── */
-const SD=[
-  {n:'California',a:'CA',sub:'West Coast 대표 주',diff:'hard',dl:'까다로움',compact:false,fr:2,cp:false,ssn:true,eng:true,time:'4-6개월',tags:['높은 급여','한인 커뮤니티'],ces:'CES Professional Report (CGFNS)',engD:'TOEFL iBT — Overall 81 / Speaking 24 엄격 적용',att:'제한 없음',sp:'교육과정 심사 까다로움 — 노인간호학/모성간호학 이수 필수. concurrent clinicals 요건 별도 확인.',tip:'CA는 요구조건 가장 까다롭지만 급여 높고 한인 커뮤니티 큰 것이 장점.'},
-  {n:'Texas',a:'TX',sub:'국제 간호사 최다 선택 주',diff:'easy',dl:'입문 추천',compact:true,fr:5,cp:false,ssn:false,eng:true,time:'2-3개월',tags:['Compact','처리 빠름','한인 커뮤니티'],ces:'CES Professional Report (CGFNS 또는 타 기관)',engD:'TOEFL / IELTS / 기준 유연',att:'제한 없음',sp:'CGFNS CP 불필요. SSN 없이 지원 가능. Compact 주 — 미국 거주 후 다중 면허 업그레이드 가능.',tip:'국제 간호사에게 가장 인기. 처리 속도 빠르고 요구사항 합리적.'},
-  {n:'New York',a:'NY',sub:'국제 간호사 NCLEX 응시 1순위',diff:'easy',dl:'입문 추천',compact:false,fr:5,cp:false,ssn:false,eng:false,time:'3-6개월',tags:['영어시험 면제','SSN 불필요','무제한 재응시'],ces:'CVS (CGFNS의 NY 전용 서비스) 또는 NYSED 직접 신청',engD:'NCLEX 합격으로 영어 능력 인정 — 별도 영어시험 없이 면허 신청 가능',att:'무제한',sp:'NCLEX 합격이 영어 증명. SSN 없이 신청 가능(임시 ID 부여). Non-compact 주. 처리 3-6개월.',tip:'영어시험 없이 NCLEX 먼저 보고 싶은 사람에게 최적. 대부분의 국제 간호사가 NY주로 응시해요.'},
-  {n:'Florida',a:'FL',sub:'Southeast 친화적 주',diff:'easy',dl:'입문 추천',compact:true,fr:4,cp:false,ssn:false,eng:true,time:'2-3개월',tags:['Compact','처리 빠름'],ces:'CES Professional Report (CGFNS 또는 타 기관)',engD:'TOEFL / IELTS 표준 기준',att:'제한 없음',sp:'CGFNS CP 불필요. Compact 주. SSN 없이 신청 가능한 경우 있음.',tip:'처리 속도 빠르고 국제 간호사 수요 많음. TX와 함께 가장 추천.'},
-  {n:'Illinois',a:'IL',sub:'Chicago 대형 병원 허브',diff:'mid',dl:'중간',compact:false,fr:3,cp:false,ssn:false,eng:true,time:'3-4개월',tags:['SSN 불필요','CGFNS 전용'],ces:'CGFNS CES만 인정 — 타 기관 불가',engD:'TOEFL / IELTS 필요 — 영어로 교육받은 증명 시 면제 가능',att:'제한 없음',sp:'CGFNS CES만 인정. SSN 없이 신청 가능. Non-compact 주.',tip:'Chicago 대형 병원 다수. CES 기관이 CGFNS로 제한되어 있으니 다른 기관 쓰지 말 것.'},
-  {n:'Washington',a:'WA',sub:'Pacific Northwest, Compact',diff:'mid',dl:'중간',compact:true,fr:3,cp:false,ssn:true,eng:true,time:'3-4개월',tags:['Compact','Seattle 수요'],ces:'CES Professional Report (CGFNS)',engD:'TOEFL / IELTS 표준 기준',att:'제한 없음',sp:'Compact 주. CGFNS CP 불필요. Seattle 지역 간호사 수요 높음.',tip:'Compact라 거주 후 면허 활용도 높음. SSN 필요한 점 미리 준비.'},
-  {n:'Michigan',a:'MI',sub:'Midwest, CGFNS 전용',diff:'mid',dl:'중간',compact:false,fr:3,cp:false,ssn:true,eng:true,time:'3-5개월',tags:['CGFNS 전용'],ces:'CGFNS CES만 인정 — 타 기관 불가',engD:'TOEFL / IELTS 표준 기준',att:'제한 없음',sp:'CGFNS CES만 인정. SSN 필요. Non-compact 주.',tip:'IL과 마찬가지로 CGFNS만 인정. 처리 기간 다소 길 수 있으니 여유 있게 준비.'},
-  {n:'Connecticut',a:'CT',sub:'CP 필수 대표 주',diff:'hard',dl:'까다로움',compact:false,fr:1,cp:true,ssn:true,eng:true,time:'6-10개월',tags:['CP 필수','처리 느림'],ces:'CGFNS Certification Program (CP) 필수 — CES 불가',engD:'TOEFL / IELTS + CGFNS Qualifying Exam 반드시 통과 필요',att:'제한 있음',sp:'NCLEX 응시 전 CGFNS CP(Qualifying Exam 포함) 필수.',tip:'CP 때문에 전체 프로세스 6-12개월 더 걸릴 수 있음. 처음 주 선택 시 비추천.'}
 ];
-function mkStars(n){return Array.from({length:5},(_,i)=>`<div class="star ${i<n?'on':'off'}"></div>`).join('');}
-function renderSD(f){
-  const fil=SD.filter(s=>{if(f==='all')return true;if(f==='easy')return s.diff==='easy';if(f==='compact')return s.compact;if(f==='no_cp')return !s.cp;if(f==='no_ssn')return !s.ssn;});
-  document.getElementById('cnt').textContent=fil.length+'개 주 표시 중';
-  document.getElementById('sgrid').innerHTML=fil.map(s=>`<div class="sc" onclick="this.classList.toggle('open')"><div class="sc-top"><div style="flex:1"><div class="sc-name">${s.n} <span style="font-size:12px;font-weight:400;opacity:0.5">(${s.a})</span></div><div class="sc-sub2">${s.sub}</div><div class="sc-bgs"><span class="bg ${s.diff==='easy'?'bg-e':s.diff==='hard'?'bg-h':'bg-m'}">${s.dl}</span>${s.compact?'<span class="bg bg-c">Compact</span>':''}${s.cp?'<span class="bg bg-h">CP 필수</span>':'<span class="bg bg-e">CP 불필요</span>'}${!s.ssn?'<span class="bg bg-g">SSN 불필요</span>':''}${!s.eng?'<span class="bg bg-e">영어시험 면제</span>':''}</div><div class="stars">${mkStars(s.fr)}</div></div><div class="arr">▾</div></div><div class="sc-meta">처리 ${s.time} · ${s.tags.slice(0,2).join(' · ')}</div><div class="sc-detail"><div class="dr"><span class="dl">학력 평가</span><span class="dv">${s.ces}</span></div><div class="dr"><span class="dl">영어 시험</span><span class="dv ${s.eng?'warn':'ok'}">${s.engD}</span></div><div class="dr"><span class="dl">SSN</span><span class="dv ${s.ssn?'warn':'ok'}">${s.ssn?'신청 전 필요':'없이 지원 가능'}</span></div><div class="dr"><span class="dl">재응시</span><span class="dv">${s.att}</span></div><div class="dr"><span class="dl">특이사항</span><span class="dv">${s.sp}</span></div><div class="tip-b"><strong>Jennifer's tip —</strong> ${s.tip}</div></div></div>`).join('');
-}
-function setF(f,btn){document.querySelectorAll('.flt-btn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderSD(f);}
 
-/* ── GREEN CARD TRACKER ── */
-const phases=[
-  {id:'i140',name:'I-140 접수',badge:'I-140 Immigrant Petition',items:[{t:'에이전시/병원 스폰서 확정',n:'EB-3 스폰서를 해줄 고용주 확정'},{t:'노동허가(PERM) 승인 확인',n:'스폰서가 DOL에 PERM 제출 — 승인까지 수개월 소요'},{t:'I-140 서류 준비',n:'여권, 간호사 면허, 학위, 성적증명서, 경력증명서 등'},{t:'I-140 접수 및 승인',n:'USCIS에 접수 — 승인 후 Priority Date 기록'},{t:'Priority Date 기록',n:'이 날짜가 비자 순서를 결정해요'}]},
-  {id:'ds260',name:'DS-260 작성',badge:'Online Immigrant Visa Application',items:[{t:'NVC 케이스 번호 수령',n:'I-140 승인 후 NVC에서 이메일 발송'},{t:'CEAC 포털 계정 생성',n:'travel.state.gov — DS-260 온라인 작성'},{t:'DS-260 양식 작성 및 제출',n:'본인 + 동반 가족 모두 작성 필요'},{t:'공증 서류 NVC 제출',n:'여권, 출생증명서, 결혼증명서, 범죄회보기록서 등'},{t:'NVC 서류 검토 완료',n:'Documentarily Complete 이메일 수령'}]},
-  {id:'p3',name:'P3 — 인터뷰 준비',badge:'Interview Preparation Packet',items:[{t:'P3 패킷 수령',n:'NVC에서 발송 — 인터뷰 준비 시작 신호'},{t:'의료검진 예약 및 완료',n:'지정 의료기관에서만 가능 — 봉투 절대 열지 말 것'},{t:'범죄회보기록서 발급',n:'경찰청 또는 온라인 신청 — 유효기간 확인'},{t:'인터뷰 서류 최종 점검',n:'여권, 사진, 의료봉투, 범죄회보기록서 등'}]},
-  {id:'p4',name:'P4 — 인터뷰 날짜',badge:'Interview Appointment',items:[{t:'P4 인터뷰 날짜 수령',n:'주한 미국 대사관(서울) 날짜 확인'},{t:'인터뷰 당일 서류 최종 준비',n:'비자스크린 포함 체크리스트 두 번 확인 — 누락 시 인터뷰 불가'},{t:'인터뷰 완료',n:''},{t:'비자 스티커 여권 수령',n:'인터뷰 후 며칠 내 EMS 또는 직접 수령'},{t:'입국 유효기간 확인',n:'비자 만료 전 반드시 입국'}]},
-  {id:'entry',name:'입국 & 영주권 수령',badge:'Entry & Green Card',items:[{t:'미국 입국 (POE 통과)',n:'입국 심사관에게 이민 서류 제시 — I-551 도장'},{t:'Green Card(I-551) 우편 수령',n:'입국 후 2-4주 내 등록 주소로 발송'},{t:'Green Card 정보 확인',n:'이름, 생년월일, 만료일 오류 즉시 확인'},{t:'랜딩 체크리스트 시작',n:'SSN, 은행, 면허 등 미국 생활 기반 만들기'}]}
+/* Journey node definitions */
+const JOURNEY_NODES = [
+  '학생','한국 RN','NCLEX','임상 영어',
+  '비자스크린·비자','랜딩','첫 출근','US RN','성장'
 ];
-let grState={};
-function initGR(){
-  let total=0;
-  phases.forEach(ph=>{
-    ph.items.forEach((_,i)=>{grState[ph.id+'_'+i]=false;total++;});
-    const blk=document.createElement('div');
-    blk.className='phase-blk';
-    blk.id='pb-'+ph.id;
-    blk.innerHTML=`<div class="phase-hdr" id="ph-${ph.id}" onclick="togglePhase('${ph.id}')"><div class="phase-dot pending" id="pd-${ph.id}"></div><div style="flex:1"><div class="phase-nm">${ph.name}</div><div class="phase-nm-sub">${ph.badge}</div></div><span class="ph-badge ph-pend" id="phb-${ph.id}">대기</span><span class="ph-arrow" id="pha-${ph.id}">▾</span></div><div class="cl-body" id="cl-${ph.id}">${ph.items.map((item,i)=>`<div class="cl-item" id="ci-${ph.id}-${i}" onclick="toggleCL('${ph.id}',${i})"><div class="cl-box"><div class="cl-tick"></div></div><div><div class="cl-text">${item.t}</div>${item.n?`<div class="cl-note">${item.n}</div>`:''}</div></div>`).join('')}</div>`;
-    document.getElementById('phases-container').appendChild(blk);
-  });
-  document.getElementById('gr-total').textContent=total;
-  updateGR();
-}
-function togglePhase(id){
-  const h=document.getElementById('ph-'+id);
-  const cl=document.getElementById('cl-'+id);
-  const arr=document.getElementById('pha-'+id);
-  const isOpen=h.classList.contains('open-ph');
-  document.querySelectorAll('.phase-hdr').forEach(x=>x.classList.remove('open-ph'));
-  document.querySelectorAll('.cl-body').forEach(x=>x.style.display='none');
-  document.querySelectorAll('[id^="pha-"]').forEach(x=>x.style.transform='');
-  if(!isOpen){h.classList.add('open-ph');cl.style.display='block';arr.style.transform='rotate(180deg)';}
-}
-function toggleCL(phId,idx){
-  const key=phId+'_'+idx;
-  grState[key]=!grState[key];
-  document.getElementById('ci-'+phId+'-'+idx).classList.toggle('checked-item',grState[key]);
-  updateGR();updatePhaseBadge(phId);
-  if(phId==='entry'&&idx===3&&grState[key])setTimeout(()=>showPage('landing'),400);
-}
-function updateGR(){
-  const done=Object.values(grState).filter(Boolean).length;
-  const total=Object.values(grState).length;
-  const pct=total>0?Math.round(done/total*100):0;
-  document.getElementById('gr-done').textContent=done;
-  document.getElementById('gr-pct').textContent=pct+'%';
-  document.getElementById('gr-bar').style.width=pct+'%';
-  document.getElementById('gr-label').textContent=pct===100?'모든 단계 완료! 🎉':done+'/'+total+' 항목 완료 · '+pct+'%';
-}
-function updatePhaseBadge(phId){
-  const ph=phases.find(p=>p.id===phId);
-  const done=ph.items.filter((_,i)=>grState[phId+'_'+i]).length;
-  const total=ph.items.length;
-  const b=document.getElementById('phb-'+phId);
-  const d=document.getElementById('pd-'+phId);
-  if(done===total){b.className='ph-badge ph-done';b.textContent='완료';d.className='phase-dot done';}
-  else if(done>0){b.className='ph-badge ph-wait';b.textContent=done+'/'+total;d.className='phase-dot active';}
-  else{b.className='ph-badge ph-pend';b.textContent='대기';d.className='phase-dot';}
-}
 
-/* ── LANDING CHECKLIST ── */
-const landData={
-  w1:[{t:'공항 픽업 및 임시 숙소 확인',d:'에이전시 또는 병원에서 지원하는 경우 사전 확인'},{t:'SSN(Social Security Number) 신청',d:'가까운 SSA 오피스 방문 — 첫 번째 우선순위'},{t:'은행 계좌 개설',d:'Chase, Bank of America, Wells Fargo — SSN 없이도 가능'},{t:'핸드폰 개통',d:'T-Mobile, AT&T, Mint Mobile — 신분증+주소 필요'}],
-  m1:[{t:'운전면허증(Driver\'s License) 신청',d:'DMV 방문 — 주마다 필요 서류 다름. 필기+실기 시험'},{t:'영구 주거지 계약',d:'임시 숙소에서 장기 거주지로 이사'},{t:'병원 오리엔테이션 및 온보딩',d:'주(state) RN 면허 확인 후 업무 시작'},{t:'주 RN 면허 취득 또는 이전',d:'타 주 면허가 있다면 Endorsement 신청'},{t:'건강보험(Health Insurance) 등록',d:'고용주 플랜 — 입사 후 30일 이내 등록 필수'},{t:'W-4 제출',d:'원천징수 방식 선택 — 세금보고 준비 시작'},{t:'Green Card 수령 확인',d:'입국 후 2-4주 내 미수령 시 USCIS에 문의'}],
-  m3:[{t:'자동차 구입 또는 리스',d:'운전면허 + 신용점수 필요 — Secured Card 먼저 추천'},{t:'신용카드 만들기 (Credit 쌓기)',d:'Secured Credit Card — 신용 이력 0에서 시작'},{t:'401(k) 은퇴 계좌 등록',d:'고용주 매칭 있는 경우 반드시 등록 — 무료 돈'},{t:'BLS/ACLS 인증 확인',d:'병원 요구사항 확인 — 만료 전 갱신'},{t:'주변 한인 커뮤니티 파악',d:'한인 커뮤니티, 교회, 마트 위치 등 생활 기반'}]
-};
-let landState={};
-function initLanding(){
-  let total=0;
-  function render(containerId,items,prefix){
-    const c=document.getElementById(containerId);
-    items.forEach((item,i)=>{
-      landState[prefix+'_'+i]=false;total++;
-      const div=document.createElement('div');
-      div.className='l-item';
-      div.id='li-'+prefix+'-'+i;
-      div.onclick=()=>toggleLand(prefix,i);
-      div.innerHTML=`<div class="l-cb"><div class="l-tick"></div></div><div><div class="l-title">${item.t}</div><div class="l-desc">${item.d}</div></div>`;
-      c.appendChild(div);
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   NAV: dark → light on scroll
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+(function(){
+  const nav = document.getElementById('nav');
+  /* hero is light — nav is always in light mode; deeper blur kicks in on scroll */
+  function tick(){ nav.classList.toggle('light', window.scrollY > 40); }
+  window.addEventListener('scroll', tick, {passive:true});
+  tick();
+})();
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HERO ENTRANCE: staggered
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+(function(){
+  const items = [
+    {id:'hKicker', d:180},
+    {id:'heroH1',  d:340},
+    {id:'heroSub', d:490},
+    {id:'hChips',  d:620},
+  ];
+  items.forEach(({id,d}) => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.style.cssText += ';opacity:0;transform:translateY(16px);transition:opacity .65s ease-out,transform .65s ease-out';
+    setTimeout(() => { el.style.opacity='1'; el.style.transform='none'; }, d);
+  });
+})();
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CHIP SCANNER — "the platform sees you"
+   Runs once on load. Each chip briefly
+   highlights in sequence, like a scan.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+(function(){
+  const chips = document.querySelectorAll('.h-chip');
+  function scan(){
+    chips.forEach((c,i) => {
+      setTimeout(() => {
+        c.classList.add('scanning');
+        setTimeout(() => c.classList.remove('scanning'), 210);
+      }, i * 120);
     });
   }
-  render('land-w1',landData.w1,'w1');
-  render('land-m1',landData.m1,'m1');
-  render('land-m3',landData.m3,'m3');
-  document.getElementById('l-total').textContent=total;
-  updateLanding();
-}
-function toggleLand(prefix,idx){
-  const key=prefix+'_'+idx;
-  landState[key]=!landState[key];
-  document.getElementById('li-'+prefix+'-'+idx).classList.toggle('l-done',landState[key]);
-  updateLanding();
-}
-function updateLanding(){
-  const done=Object.values(landState).filter(Boolean).length;
-  const total=Object.values(landState).length;
-  const pct=total>0?Math.round(done/total*100):0;
-  document.getElementById('l-done').textContent=done;
-  document.getElementById('l-pct').textContent=pct+'%';
-  document.getElementById('l-bar').style.width=pct+'%';
-}
+  setTimeout(scan, 900);
+})();
 
-/* ── VISA BULLETIN ── */
-function checkPD(){
-  const val=document.getElementById('my-pd').value;
-  const box=document.getElementById('pd-result');
-  if(!val){box.style.display='none';return;}
-  const pd=new Date(val);
-  const cutoff=new Date('2024-06-01');
-  box.style.display='block';
-  if(pd<cutoff){box.className='pd-result r-ok';box.innerHTML=`<strong>진행 가능 상태예요</strong><br>내 Priority Date(${pd.toLocaleDateString('ko-KR')})는 현재 Final Action Date(2024.6.1) 이전이에요. 에이전시/변호사와 실제 처리 일정 확인하세요.`;}
-  else{box.className='pd-result r-wait';box.innerHTML=`<strong>현재 대기 중이에요</strong><br>내 Priority Date(${pd.toLocaleDateString('ko-KR')})는 2024년 6월 1일 이후예요. 문호가 전진해야 진행할 수 있어요. 매달 Visa Bulletin을 확인하세요.`;}
-}
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   STAGE SELECTION — THE SIGNATURE MOMENT
+   Click chip → platform responds to you.
+   "기다리는 당신에게," — you are seen.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+let selectedStage = null;
 
-/* ── SHARE & SAVE ── */
-const SITE_URL='https://theroot-theta.vercel.app/';
-const SITE_MSG='미국 간호사 여정, 지금 내 단계를 확인해봐요! 🌿 The Root by Jennifer Minja Lee';
+function selectStage(idx){
+  const stage = STAGES[idx];
+  selectedStage = idx;
+  sessionStorage.setItem('rootStage', idx);
 
-function trackEvent(name,params={}){
-  if(typeof gtag==='function'){gtag('event',name,params);}
-}
-
-function openNewsletterPopup(){
-  const pop=document.getElementById('newsletter-popup');
-  if(pop)pop.classList.add('show');
-}
-function showNewsletterPopup(){
-  openNewsletterPopup();
-}
-function closeNewsletterPopup(skipToday=false){
-  const pop=document.getElementById('newsletter-popup');
-  if(pop)pop.classList.remove('show');
-  sessionStorage.setItem('theroot_popup_seen_v2','1');
-  if(skipToday){localStorage.setItem('theroot_popup_skip_date_v2',new Date().toDateString());}
-}
-function scheduleNewsletterPopup(){
-  const skipped=localStorage.getItem('theroot_popup_skip_date_v2')===new Date().toDateString();
-  const seen=sessionStorage.getItem('theroot_popup_seen_v2')==='1';
-  if(skipped||seen)return;
-  setTimeout(()=>{
-    const hasAnswered=document.getElementById('cq-result')?.style.display==='block';
-    if(!hasAnswered)openNewsletterPopup();
-  },30000);
-}
-
-
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2500);
-}
-
-function copyLink(){
-  navigator.clipboard.writeText(SITE_URL).then(()=>{
-    showToast('링크가 복사됐어요! 🌿');
-  }).catch(()=>{
-    prompt('아래 링크를 복사하세요:', SITE_URL);
+  /* ── 1. Chips: selected vs dimmed ── */
+  document.querySelectorAll('.h-chip').forEach((c,i) => {
+    c.classList.toggle('selected', i === idx);
+    c.classList.toggle('dimmed', i !== idx);
   });
-}
 
-function sendFeedback(){
-  const subject=encodeURIComponent('The Root Feedback');
-  const body=encodeURIComponent('안녕하세요 Jennifer,\n\nThe Root를 사용해보고 남기는 피드백입니다.\n\n- 좋았던 점:\n- 불편했던 점:\n- 추가되면 좋은 기능:\n\n감사합니다.\n');
-  window.location.href='mailto:jenniferminjalee@gmail.com?subject='+subject+'&body='+body;
-}
+  /* ── 2. Headline morph ── */
+  const h1 = document.getElementById('heroH1');
+  const line2 = document.getElementById('heroLine2');
+  h1.classList.add('morphing');
+  setTimeout(() => {
+    h1.firstChild.textContent = stage.h1a + ' ';
+    line2.textContent = stage.h1b;
+    line2.className = 'line2 answer';
+    h1.classList.remove('morphing');
+  }, 270);
 
-function shareEmail(){
-  const subject=encodeURIComponent('미국 간호사 여정 가이드 — The Root');
-  const body=encodeURIComponent(SITE_MSG+'\n\n'+SITE_URL+'\n\nby Jennifer Minja Lee');
-  window.location.href='mailto:?subject='+subject+'&body='+body;
-}
+  /* ── 3. Sub-copy morph ── */
+  const sub = document.getElementById('heroSub');
+  sub.classList.add('morphing');
+  setTimeout(() => {
+    sub.textContent = stage.sub;
+    sub.classList.remove('morphing');
+  }, 250);
 
-function saveProgress(type){
-  try{
-    if(type==='gr'){
-      localStorage.setItem('theroot_gr',JSON.stringify(grState));
+  /* ── 4. Insight line — "The Root sees me" ── */
+  const insightEl = document.getElementById('heroInsight');
+  insightEl.innerHTML = stage.insight;
+  insightEl.classList.remove('show');
+  void insightEl.offsetWidth; // reflow
+  setTimeout(() => insightEl.classList.add('show'), 200);
+
+  /* ── 5. Personalized CTA appears ── */
+  const nextEl  = document.getElementById('heroNext');
+  const nextLink = document.getElementById('heroNextLink');
+  nextLink.textContent = stage.ctaText;
+  nextLink.href = stage.ctaHref;
+  nextEl.classList.add('show');
+
+  /* ── 6. Nav stage pill ── */
+  document.getElementById('navStageLabel').textContent = stage.label;
+  document.getElementById('navStage').classList.add('show');
+
+  /* ── 7. Stage card highlight ── */
+  document.querySelectorAll('.s-card').forEach((c,i) => {
+    c.classList.toggle('highlighted', i === idx);
+  });
+
+  /* ── 8. Journey path activates ── */
+  updateJourneyPath(stage.pathNode);
+
+  /* ── 9. Final CTA personalizes ── */
+  const ctaLabelEl = document.getElementById('ctaLabel');
+  const ctaH2El    = document.getElementById('ctaH2');
+  const ctaSubEl   = document.getElementById('ctaSub');
+  const ctaBtnEl   = document.getElementById('ctaBtn');
+  if(ctaLabelEl) ctaLabelEl.textContent = stage.ctaLabel;
+  if(ctaH2El)   ctaH2El.innerHTML = stage.ctaH2;
+  if(ctaSubEl)  ctaSubEl.textContent = stage.ctaSub;
+  if(ctaBtnEl){ ctaBtnEl.textContent = stage.ctaBtn; ctaBtnEl.href = stage.ctaHref; }
+
+  /* ── 10. VHE copy for 첫 출근 ── */
+  const vheH2  = document.getElementById('vheH2');
+  const vheSub = document.getElementById('vheSub');
+  if(vheH2 && vheSub){
+    if(idx === 4){ // 첫 출근
+      vheH2.innerHTML  = '출근 전에<br><em>꼭</em> 한번 걸어보세요.';
+      vheSub.textContent = '미국 병동 첫날, 낯설지 않으려면 먼저 봐야 해요. 여기서 미리 경험할 수 있어요.';
     } else {
-      localStorage.setItem('theroot_land',JSON.stringify(landState));
+      vheH2.innerHTML  = '처음으로,<br>미국 병동을 <em>직접</em> 걸어볼 수 있어요.';
+      vheSub.textContent = '첫날이 두렵지 않으려면, 먼저 익숙해져야 해요.';
     }
-    showToast('저장됐어요! 다음에 와도 이어서 할 수 있어요 💾');
-  } catch(e){
-    showToast('저장에 실패했어요. 다시 시도해주세요.');
   }
+
+  /* ── 11. Jennifer quote variant ── */
+  updateJenniferVariant(stage.jenniferVariant);
 }
 
-function loadSavedProgress(){
-  try{
-    const savedGR=localStorage.getItem('theroot_gr');
-    if(savedGR){
-      const parsed=JSON.parse(savedGR);
-      Object.keys(parsed).forEach(k=>{
-        if(parsed[k]){
-          grState[k]=true;
-          const parts=k.split('_');
-          const phId=parts.slice(0,-1).join('_');
-          const idx=parseInt(parts[parts.length-1]);
-          const el=document.getElementById('ci-'+phId+'-'+idx);
-          if(el)el.classList.add('checked-item');
-        }
-      });
-      updateGR();
-      phases.forEach(ph=>updatePhaseBadge(ph.id));
-    }
-    const savedLand=localStorage.getItem('theroot_land');
-    if(savedLand){
-      const parsed=JSON.parse(savedLand);
-      Object.keys(parsed).forEach(k=>{
-        if(parsed[k]){
-          landState[k]=true;
-          const parts=k.split('_');
-          const prefix=parts[0];
-          const idx=parseInt(parts[1]);
-          const el=document.getElementById('li-'+prefix+'-'+idx);
-          if(el)el.classList.add('l-done');
-        }
-      });
-      updateLanding();
-    }
-  } catch(e){ console.log('load error',e); }
-}
+/* Chip click handler */
+document.querySelectorAll('.h-chip').forEach((chip, idx) => {
+  chip.addEventListener('click', (e) => {
+    e.preventDefault();
+    selectStage(idx);
+  });
+});
 
-function captureProgress(type){
-  const btn=document.getElementById('capture-'+type+'-btn');
-  const defaultText='📸 내 진행상황 이미지로 저장하기';
-  let card=null;
+/* Restore from session */
+(function(){
+  const saved = sessionStorage.getItem('rootStage');
+  if(saved !== null) setTimeout(() => selectStage(parseInt(saved)), 800);
+})();
 
-  try{
-    btn.disabled=true;
-    btn.textContent='이미지 만드는 중... ⏳';
-
-    card=document.getElementById('capture-card');
-    const isGR=type==='gr';
-    const done=isGR?Object.values(grState).filter(Boolean).length:Object.values(landState).filter(Boolean).length;
-    const total=isGR?Object.values(grState).length:Object.values(landState).length;
-    const pct=Math.round(done/total*100);
-
-    let itemsHTML='';
-    if(isGR){
-      phases.forEach(ph=>{
-        itemsHTML+=`<div class="cc-section">${ph.name}</div>`;
-        ph.items.forEach((item,i)=>{
-          const checked=grState[ph.id+'_'+i];
-          itemsHTML+=`<div class="cc-item"><div class="cc-check ${checked?'done':'pending'}">${checked?'✓':''}</div><div class="cc-item-text ${checked?'done-text':''}">${item.t}</div></div>`;
-        });
-      });
-    } else {
-      const sections=[
-        {label:'입국 첫 주',prefix:'w1',items:landData.w1},
-        {label:'첫 달 안에',prefix:'m1',items:landData.m1},
-        {label:'3개월 안에',prefix:'m3',items:landData.m3}
-      ];
-      sections.forEach(sec=>{
-        itemsHTML+=`<div class="cc-section">${sec.label}</div>`;
-        sec.items.forEach((item,i)=>{
-          const checked=landState[sec.prefix+'_'+i];
-          itemsHTML+=`<div class="cc-item"><div class="cc-check ${checked?'done':'pending'}">${checked?'✓':''}</div><div class="cc-item-text ${checked?'done-text':''}">${item.t}</div></div>`;
-        });
-      });
-    }
-
-    card.innerHTML=`
-      <div class="cc-header">
-        <div class="cc-tag">The Root · Jennifer Minja Lee</div>
-        <div class="cc-title">${isGR?'영주권 진행 트래킹':'미국 랜딩 체크리스트'}</div>
-        <div class="cc-sub">${done}/${total} 완료 · ${pct}% 진행</div>
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   JOURNEY PATH — build & activate
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+(function buildPath(){
+  const path = document.getElementById('journeyPath');
+  JOURNEY_NODES.forEach((label, i) => {
+    const node = document.createElement('div');
+    node.className = 'j-node future';
+    node.dataset.node = i;
+    node.innerHTML = `
+      <div class="j-dot">
+        <div class="j-here">지금 여기</div>
       </div>
-      <div class="cc-prog"><div class="cc-prog-fill" style="width:${pct}%"></div></div>
-      ${itemsHTML}
-      <div class="cc-footer">
-        <div class="cc-brand">The Root · Jennifer Minja Lee</div>
-        <div class="cc-url">theroot-theta.vercel.app</div>
-      </div>`;
+      <div class="j-label">${label}</div>
+    `;
+    path.appendChild(node);
+  });
+})();
 
-    card.style.left='-9999px';
-    card.style.display='block';
+function updateJourneyPath(currentNode){
+  const nodes  = document.querySelectorAll('.j-node');
+  const fill   = document.getElementById('jSpineFill');
+  const prompt = document.getElementById('journeyPrompt');
 
-    setTimeout(()=>{
-      if(typeof html2canvas==='undefined'){
-        if(card) card.style.display='none';
-        btn.disabled=false;
-        btn.textContent=defaultText;
-        showToast('라이브러리 로딩 중이에요. 잠시 후 다시 눌러주세요.');
-        return;
+  /* Reset all to future first */
+  nodes.forEach(n => {
+    n.classList.remove('done','current','future','entering');
+    n.classList.add('future');
+  });
+
+  /* Hide prompt */
+  prompt.classList.add('hidden');
+
+  /* Animate progress fill */
+  const pct = currentNode / (JOURNEY_NODES.length - 1) * 100;
+  fill.style.transition = 'none';
+  fill.style.width = '0%';
+
+  /* Stagger: fill nodes one by one, then current node ripple */
+  nodes.forEach((n, i) => {
+    const delay = i * 55;
+    setTimeout(() => {
+      n.classList.remove('future');
+      if(i < currentNode){
+        n.classList.add('done');
+        /* grow the fill incrementally */
+        const pctNow = i / (JOURNEY_NODES.length - 1) * 100;
+        fill.style.transition = 'width .12s ease';
+        fill.style.width = pctNow + '%';
+      } else if(i === currentNode){
+        n.classList.add('current');
+        fill.style.transition = 'width .18s ease';
+        fill.style.width = pct + '%';
+      } else {
+        n.classList.add('future');
       }
-
-      html2canvas(card,{backgroundColor:'#16342C',scale:2,useCORS:true,logging:false})
-        .then(canvas=>{
-          const link=document.createElement('a');
-          const today=new Date().toLocaleDateString('ko-KR').replace(/\. /g,'-').replace('.','');
-          link.download=`theroot-${type}-${today}.png`;
-          link.href=canvas.toDataURL('image/png');
-          link.click();
-          if(card) card.style.display='none';
-          btn.disabled=false;
-          btn.textContent=defaultText;
-          showToast('이미지 저장됐어요! 인스타 스토리에 올려봐요 📸');
-        })
-        .catch(err=>{
-          console.error(err);
-          if(card) card.style.display='none';
-          btn.disabled=false;
-          btn.textContent=defaultText;
-          showToast('저장에 실패했어요. 다시 시도해주세요.');
-        });
-    },300);
-  } catch(err){
-    console.error(err);
-    if(card) card.style.display='none';
-    btn.disabled=false;
-    btn.textContent=defaultText;
-    showToast('저장에 실패했어요. 다시 시도해주세요.');
-  }
-}
-
-
-/* ── CLINICAL ENGLISH QUIZ DATA ── */
-const quizDB=[
-  // ── 기본 임상 용어 ──
-  {
-    cat:'임상 용어',color:'#E8F4ED',txtColor:'#1F6351',
-    q:'"The patient appears diaphoretic." 에서 diaphoretic 의 뜻은?',
-    context:'나이트 쉬프트 중 환자 상태를 동료에게 전달하는 상황입니다.',
-    opts:['호흡이 가쁜','땀이 많이 나는','얼굴이 창백한','의식이 혼미한'],
-    ans:1,
-    explain:'Diaphoretic = 발한(發汗), 즉 땀이 많이 나는 상태예요. 심근경색, 저혈당, 패혈증 등에서 자주 나타나요. 차트에 자주 등장하는 단어니까 꼭 기억해요!',
-    tip:'diaphoretic = sweating profusely / pallor = 창백함 / cyanotic = 청색증'
-  },
-  {
-    cat:'임상 용어',color:'#E8F4ED',txtColor:'#1F6351',
-    q:'"Patient is lethargic but arousable." 에서 lethargic 의 의미는?',
-    context:'아침 라운딩 중 담당 의사에게 환자 상태를 보고하는 상황입니다.',
-    opts:['통증을 심하게 호소하는','기운 없고 졸린 상태','혼란스러워하는','불안해하는'],
-    ans:1,
-    explain:'Lethargic = 무기력하고 졸린 상태예요. Arousable = 자극에 반응해서 깨울 수 있는. 즉 "졸려 보이지만 깨울 수 있다"는 뜻이에요. Mental status 표현은 차트에 매우 자주 나와요.',
-    tip:'Alert → Lethargic → Obtunded → Stuporous → Comatose 순으로 의식 수준이 낮아져요'
-  },
-  {
-    cat:'임상 용어',color:'#E8F4ED',txtColor:'#1F6351',
-    q:'"The wound has serosanguineous drainage." 에서 serosanguineous 는?',
-    context:'수술 후 상처 드레싱 교환 중 차트에 기록해야 합니다.',
-    opts:['고름이 섞인 황색 분비물','연한 분홍빛의 맑은 분비물','짙은 적색의 혈성 분비물','냄새 나는 갈색 분비물'],
-    ans:1,
-    explain:'Sero(장액성) + sanguineous(혈성) = 맑고 연한 분홍빛 분비물이에요. 수술 후 초기에 정상적으로 나올 수 있어요. 색깔 변화가 있으면 감염 신호일 수 있어요.',
-    tip:'serous=맑은 / sanguineous=혈성 / serosanguineous=연분홍 / purulent=화농성(고름)'
-  },
-  // ── 환자 소통 영어 ──
-  {
-    cat:'환자 소통',color:'#EEEDFE',txtColor:'#3C3489',
-    q:'환자에게 "You need to be NPO" 라고 했을 때 더 자연스러운 표현은?',
-    context:'내일 수술 예정인 환자에게 금식을 설명해야 합니다.',
-    opts:['"You cannot eat or drink anything after midnight, including water."','"NPO means nil per os in Latin."','"The doctor ordered NPO for you."','"Please fast from tonight."'],
-    ans:0,
-    explain:'의료 전문 용어(NPO, nil per os)보다 환자가 이해할 수 있는 일상 언어로 설명해야 해요. "including water"를 꼭 강조해야 환자 오해를 막을 수 있어요.',
-    tip:'Plain language 원칙: 환자 교육은 항상 쉬운 영어로! 6학년 수준 언어 권장'
-  },
-  {
-    cat:'환자 소통',color:'#EEEDFE',txtColor:'#3C3489',
-    q:'환자가 통증을 호소할 때 "Where does it hurt?" 보다 더 정확한 표현은?',
-    context:'환자 사정(assessment) 중 통증 위치를 확인해야 합니다.',
-    opts:['"Can you point to where the pain is?"','"Is it your stomach?"','"Does your chest hurt?"','"Tell me about the pain."'],
-    ans:0,
-    explain:'"Point to where" 는 언어 장벽이 있는 환자에게도 효과적이에요. 환자가 직접 가리키게 하면 오해가 줄어요. 특히 한국 환자들에게 영어로 설명하기 어려울 때 유용해요.',
-    tip:'"Can you point to..." = 위치 확인 / "On a scale of 0-10..." = 강도 확인'
-  },
-  {
-    cat:'환자 소통',color:'#EEEDFE',txtColor:'#3C3489',
-    q:'"I need to take your vitals." 를 환자에게 설명할 때 vitals 를 어떻게 풀어 말할까요?',
-    context:'새벽 4시에 환자에게 활력징후 측정을 알려야 합니다.',
-    opts:['"I need to check your blood pressure, heart rate, temperature, and oxygen level."','"I need to do your vitals now."','"It is time for your vital signs check."','"I need to take some readings."'],
-    ans:0,
-    explain:'"Vitals"는 의료인들끼리 쓰는 약어예요. 환자에게는 구체적으로 뭘 측정하는지 알려주면 불안감이 줄어요. 특히 새벽에 갑자기 깨울 때 미리 설명하면 더 좋아요.',
-    tip:'BP = blood pressure / HR = heart rate / O2 sat = oxygen saturation / Temp = temperature'
-  },
-  // ── 인수인계 표현 ──
-  {
-    cat:'인수인계',color:'#E8F0FB',txtColor:'#185FA5',
-    q:'"The patient is A&Ox3" 에서 x3 이 의미하는 것은?',
-    context:'데이 쉬프트에서 나이트 쉬프트로 인수인계 중입니다.',
-    opts:['3번 낙상한 적이 있다','사람·장소·시간을 모두 인식하고 있다','3가지 약물을 투여 중이다','3번 수혈을 받았다'],
-    ans:1,
-    explain:'A&O = Alert and Oriented. x3 = person(자신이 누구인지) + place(지금 어디 있는지) + time(날짜·시간)을 모두 알고 있다는 뜻이에요. x4는 여기에 event(왜 입원했는지)가 추가돼요.',
-    tip:'A&Ox1=person only / x2=+place / x3=+time / x4=+event (why here)'
-  },
-  {
-    cat:'인수인계',color:'#E8F0FB',txtColor:'#185FA5',
-    q:'"The patient has been febrile since 2am." 에서 febrile 의 뜻은?',
-    context:'아침 인수인계에서 야간 동료가 전달하는 내용입니다.',
-    opts:['구토를 하는','열이 있는','통증을 호소하는','잠을 못 자는'],
-    ans:1,
-    explain:'Febrile = 발열이 있는 (fever). 반대말은 afebrile(열이 없는)이에요. "Has been febrile since 2am"은 새벽 2시부터 열이 지속되고 있다는 뜻이에요.',
-    tip:'febrile = 열 있는 / afebrile = 열 없는 / low-grade fever = 37.5~38.3°C'
-  },
-  // ── 약물·처치 영어 ──
-  {
-    cat:'약물·처치',color:'#FEF7ED',txtColor:'#854F0B',
-    q:'"Administer 2L O2 via nasal cannula PRN" 에서 PRN 의 뜻은?',
-    context:'처방전을 보고 산소를 투여해야 하는 상황입니다.',
-    opts:['즉시 투여','필요할 때 투여','매시간 투여','의사 확인 후 투여'],
-    ans:1,
-    explain:'PRN = Pro Re Nata (라틴어) = "필요할 때". 즉 SpO2가 떨어지거나 환자가 호흡곤란을 호소할 때 투여해요. 이 경우 산소포화도 기준을 확인하고 투여 판단을 해요.',
-    tip:'PRN vs Scheduled: PRN=필요시 / q4h=4시간마다 / BID=하루 2번 / TID=하루 3번'
-  },
-  {
-    cat:'약물·처치',color:'#FEF7ED',txtColor:'#854F0B',
-    q:'"Hold metoprolol if HR is below 60." 에서 Hold 의 의미는?',
-    context:'차트 처방 확인 중 hold parameter를 읽고 있습니다.',
-    opts:['약을 천천히 투여하라','해당 조건이면 투여하지 말라','약을 따뜻하게 보관하라','의사에게 먼저 확인하라'],
-    ans:1,
-    explain:'"Hold" = 투여하지 말라(withhold). Hold parameter는 약을 투여하기 전 확인해야 할 조건이에요. HR이 60 미만이면 메토프롤롤을 투여하지 않고 의사에게 notify해요.',
-    tip:'Hold = 투여 보류 / Discontinue = 처방 중단 / Restart = 재개'
-  },
-  // ── Telemetry 영어 ──
-  {
-    cat:'Telemetry',color:'#F4E7E1',txtColor:'#8B4030',
-    q:'"The patient is in NSR with occasional PACs." 에서 NSR 의 뜻은?',
-    context:'Telemetry 유닛 인수인계 중 리듬 설명을 듣고 있습니다.',
-    opts:['비정상 동방 리듬','정상 동방 리듬','빠른 심실 리듬','불규칙한 심방 리듬'],
-    ans:1,
-    explain:'NSR = Normal Sinus Rhythm (정상 동방 리듬). PAC = Premature Atrial Contraction (조기 심방 수축). "NSR with occasional PACs"는 기본적으로 정상 리듬이지만 가끔 조기 심방 수축이 있다는 뜻이에요.',
-    tip:'NSR=정상 / A-fib=심방세동 / SVT=발작성 상실성 빈맥 / VT=심실빈맥'
-  },
-];
-
-let cqFiltered=[...quizDB];
-let cqIdx=0;
-let cqScore=0;
-let cqAnswered=false;
-let cqStreak=parseInt(localStorage.getItem('cq_streak')||'0');
-let cqLastDate=localStorage.getItem('cq_last_date')||'';
-let cqSelectedCat='전체';
-
-function initClinicalQuiz(){
-  // streak 계산
-  const today=new Date().toDateString();
-  if(cqLastDate===today){
-    // 오늘 이미 풀었어도 streak 유지
-  } else if(cqLastDate===new Date(Date.now()-86400000).toDateString()){
-    // 어제 풀었으면 streak 유지
-  } else if(cqLastDate!==''){
-    cqStreak=0;
-    localStorage.setItem('cq_streak','0');
-  }
-  document.getElementById('cq-streak-num').textContent=cqStreak;
-  renderCats();
-  startClinicalQuiz();
-}
-
-function renderCats(){
-  const cats=['전체',...new Set(quizDB.map(q=>q.cat))];
-  const el=document.getElementById('cq-cats');
-  el.innerHTML=cats.map(c=>`<button class="cq-cat ${c===cqSelectedCat?'on':''}" onclick="setCat('${c}')">${c}</button>`).join('');
-}
-
-function setCat(cat){
-  cqSelectedCat=cat;
-  cqFiltered=cat==='전체'?[...quizDB]:quizDB.filter(q=>q.cat===cat);
-  cqIdx=0;cqScore=0;
-  renderCats();
-  startClinicalQuiz();
-  document.getElementById('cq-result').style.display='none';
-  document.getElementById('cq-quiz-wrap').style.display='block';
-}
-
-function startClinicalQuiz(){
-  // shuffle
-  cqFiltered=cqFiltered.sort(()=>Math.random()-0.5);
-  cqIdx=0;cqScore=0;cqAnswered=false;
-  showQ();
-}
-
-function showQ(){
-  if(cqIdx>=cqFiltered.length){showResult();return;}
-  const q=cqFiltered[cqIdx];
-  cqAnswered=false;
-  document.getElementById('cq-prog-fill').style.width=Math.round(cqIdx/cqFiltered.length*100)+'%';
-  document.getElementById('cq-cat-pill').textContent=q.cat;
-  document.getElementById('cq-cat-pill').style.background=q.color;
-  document.getElementById('cq-cat-pill').style.color=q.txtColor;
-  document.getElementById('cq-qnum').textContent=(cqIdx+1)+' / '+cqFiltered.length;
-  document.getElementById('cq-question').textContent=q.q;
-  document.getElementById('cq-context').textContent=q.context;
-  document.getElementById('cq-opts').innerHTML=q.opts.map((o,i)=>
-    `<button class="cq-opt" onclick="answerQ(${i})" id="opt-${i}">
-      <div class="cq-opt-key">${String.fromCharCode(65+i)}</div>
-      <div class="cq-opt-text">${o}</div>
-    </button>`).join('');
-  document.getElementById('cq-explain').className='cq-explain';
-  document.getElementById('cq-next-btn').className='cq-next-btn';
-}
-
-function answerQ(sel){
-  if(cqAnswered)return;
-  cqAnswered=true;
-  const q=cqFiltered[cqIdx];
-  const isCorrect=sel===q.ans;
-  if(isCorrect)cqScore++;
-
-  document.querySelectorAll('.cq-opt').forEach((el,i)=>{
-    el.classList.add('disabled');
-    if(i===q.ans)el.classList.add('correct');
-    else if(i===sel&&!isCorrect)el.classList.add('wrong');
+    }, delay + 80);
   });
-
-  const expEl=document.getElementById('cq-explain');
-  expEl.className='cq-explain show';
-  document.getElementById('cq-explain-text').innerHTML=q.explain;
-  document.getElementById('cq-tip').textContent='💡 '+q.tip;
-  document.getElementById('cq-next-btn').className='cq-next-btn show';
-  document.getElementById('cq-next-btn').textContent=cqIdx+1<cqFiltered.length?'다음 문제 →':'결과 보기 →';
 }
 
-function nextQ(){
-  cqIdx++;
-  showQ();
-}
+/* Smooth scroll helper */
+function smoothTo(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
 
-function showResult(){
-  document.getElementById('cq-quiz-wrap').style.display='none';
-  const res=document.getElementById('cq-result');
-  res.style.display='block';
-  const pct=Math.round(cqScore/cqFiltered.length*100);
-  document.getElementById('cq-score-num').textContent=cqScore;
-  document.getElementById('cq-score-total').textContent='/'+cqFiltered.length;
-
-  let msg,sub;
-  if(pct>=80){msg='훌륭해요! 🌿';sub='미국 임상 영어 실력이 탄탄해요. 계속 유지하세요!';}
-  else if(pct>=60){msg='잘하고 있어요!';sub='조금 더 연습하면 완벽해질 거예요.';}
-  else{msg='같이 공부해봐요 💪';sub='틀린 문제 해설을 다시 읽어보고 도전해요!';}
-  document.getElementById('cq-result-msg').textContent=msg;
-  document.getElementById('cq-result-sub').textContent=sub;
-
-  trackEvent('clinical_quiz_complete',{score:cqScore,total:cqFiltered.length});
-  setTimeout(()=>openNewsletterPopup(),900);
-
-  // streak update
-  const today=new Date().toDateString();
-  if(cqLastDate!==today){
-    cqStreak++;
-    localStorage.setItem('cq_streak',cqStreak);
-    localStorage.setItem('cq_last_date',today);
-    document.getElementById('cq-streak-num').textContent=cqStreak;
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   JENNIFER QUOTE VARIANTS
+   Stage-aware: she speaks to where you are.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+const JENNIFER_VARIANTS = {
+  default: {
+    quote: '준비하던 시절, 가장 힘들었던 건 정보가 없는 게 아니라 전체 그림이 보이지 않는 것이었어요.',
+    body:  '각 단계는 알겠는데 연결이 안 됐고, 혼자서 길을 만들어가야 했어요.<br><br><strong>The Root는 그 연결을 만드는 곳이에요.</strong> 제가 직접 걸어온 여정을 기반으로, 여러분은 조금 덜 헤매도 되도록요.'
+  },
+  waiting: {
+    quote: '비자 기다리던 그 시간이 제일 길었어요. 아무것도 못 하는 것 같은 그 느낌.',
+    body:  '근데 돌아보면 그 시간에 할 수 있는 게 생각보다 많았어요.<br><br><strong>기다리는 동안 준비하는 사람과 그냥 기다리는 사람, 병동에 오면 확실히 달라요.</strong>'
+  },
+  firstshift: {
+    quote: '첫 출근 전날 밤, 잠을 못 잤어요. 병동이 어떻게 생겼는지조차 몰랐거든요.',
+    body:  '지금 생각하면, 미리 한 번이라도 걸어봤다면 달랐을 것 같아요.<br><br><strong>그래서 만들었어요. 먼저 가본 사람이 보여줄 수 있는 것들.</strong>'
   }
+};
+
+function updateJenniferVariant(variant){
+  const v = JENNIFER_VARIANTS[variant] || JENNIFER_VARIANTS.default;
+  const q = document.getElementById('jenniferQuote');
+  const b = document.getElementById('jenniferBody');
+  if(q){ q.style.opacity='0'; setTimeout(()=>{ q.textContent=v.quote; q.style.opacity='1'; },220); }
+  if(b){ b.style.opacity='0'; setTimeout(()=>{ b.innerHTML=v.body; b.style.opacity='1'; },280); }
 }
 
-function retryQuiz(){
-  document.getElementById('cq-result').style.display='none';
-  document.getElementById('cq-quiz-wrap').style.display='block';
-  startClinicalQuiz();
-}
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SCROLL FADE-UP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+(function(){
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold:0.1});
+  document.querySelectorAll('.fade').forEach(el => io.observe(el));
+})();
 
-function shareQuizResult(){
-  const score=document.getElementById('cq-score-num').textContent;
-  const total=cqFiltered.length;
-  const text='오늘 The Root 임상 영어 퀴즈 '+score+'/'+total+' 맞혔어요! 🌿\nhttps://theroot-theta.vercel.app/';
-  navigator.clipboard.writeText(text).then(()=>showToast('결과가 복사됐어요! 공유해봐요 🌿'));
-}
+/* Stage cards: staggered */
+(function(){
+  const cards = document.querySelectorAll('.s-card');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(!e.isIntersecting) return;
+      const i = Array.from(cards).indexOf(e.target);
+      setTimeout(() => e.target.classList.add('in'), i * 60);
+      io.unobserve(e.target);
+    });
+  }, {threshold:0.06});
+  cards.forEach(c => io.observe(c));
+})();
 
+/* Journey path: animate on scroll */
+(function(){
+  const section = document.getElementById('journey-section');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting && selectedStage !== null){
+        updateJourneyPath(STAGES[selectedStage].pathNode);
+        io.unobserve(section);
+      }
+    });
+  }, {threshold:0.3});
+  if(section) io.observe(section);
+})();
 
-/* ── HERO QUIZ ── */
-const heroQuizData=[
-  {expr:'"He\'s been out of it."',opts:['퇴근했다','의식이 혼미하다','화가 났다','졸려한다'],ans:1,explain:'out of it = 의식이 혼미한, 정신이 없는 상태. 약 부작용이나 컨디션 저하 시 자주 써요.'},
-  {expr:'"The patient is diaphoretic."',opts:['호흡이 가쁜','창백한','땀이 많이 나는','어지러운'],ans:2,explain:'diaphoretic = 발한, 땀을 많이 흘리는 상태. 심근경색, 저혈당 등에서 나타나요.'},
-  {expr:'"She\'s febrile."',opts:['열이 있는','기침하는','통증 있는','졸린'],ans:0,explain:'febrile = 발열이 있는. afebrile = 열이 없는. 차트에 자주 등장해요.'},
-  {expr:'"The patient appears lethargic."',opts:['불안해하는','기운 없고 졸린','통증 심한','혼란스러운'],ans:1,explain:'lethargic = 무기력하고 졸린 상태. 의식 수준 표현 중 하나예요.'},
-];
-let heroQuizIdx=Math.floor(Math.random()*heroQuizData.length);
-let heroAnswered=false;
-
-function initHeroQuiz(){
-  const exprEl=document.getElementById('hero-expr');
-  if(!exprEl)return;
-  const q=heroQuizData[heroQuizIdx];
-  exprEl.textContent=q.expr;
-  const opts=document.getElementById('hero-opts');
-  if(opts) opts.innerHTML=q.opts.map((o,i)=>`<button class="hero-quiz-opt" onclick="heroQuizAns(${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join('');
-  heroAnswered=false;
-  const res=document.getElementById('hero-result');
-  if(res) res.style.display='none';
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   VHE: enter the ward
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function enterVHE(){
+  document.getElementById('vhe360overlay').classList.add('gone');
+  document.getElementById('vhe360frame').style.pointerEvents = 'all';
 }
-
-function heroQuizAns(sel){
-  if(heroAnswered)return;
-  heroAnswered=true;
-  const q=heroQuizData[heroQuizIdx];
-  document.querySelectorAll('.hero-quiz-opt').forEach((el,i)=>{
-    if(i===q.ans)el.classList.add('correct');
-    else if(i===sel&&sel!==q.ans)el.classList.add('wrong');
-    el.disabled=true;
-  });
-  const res=document.getElementById('hero-result');
-  if(res){
-    res.style.display='block';
-    res.style.background=sel===q.ans?'#E8F4ED':'#FEF7ED';
-    res.style.color=sel===q.ans?'#1F6351':'#854F0B';
-    res.textContent=(sel===q.ans?'✓ 정답! ':'✗ 오답. ')+q.explain;
-  }
-}
-
-
-
-/* ── ADAPT QUIZ (merged 10Q) ── */
-const adaptQs=[
-  {q:"미국에서 처음 모르는 사람이 갑자기 말을 걸어왔다. 어떻게 반응할 것 같아?",s:"미국 생활은 예상 밖의 small talk에서 시작될 때가 많아요.",opts:[{t:"오, 반갑네! 나도 대화 시작하지 뭐 😄",scores:[3,1,0,0,1]},{t:"어색하지만... 일단 웃으면서 대답은 해 🙂",scores:[1,2,1,0,1]},{t:"속으로는 당황, 겉으로는 뻣뻣하게 대응 😅",scores:[0,1,2,1,1]},{t:"왜 말을 거는 거지...? 경계 모드 발동 🤨",scores:[0,0,1,3,1]}]},
-  {q:"미국 마트에서 계산한 금액이 이상한 것 같아. 어떻게 할 거야?",s:"내 권리를 말하는 연습도 미국 생활 적응의 일부예요.",opts:[{t:"바로 직원 불러서 확인 요청! 내 돈 지켜야지 💪",scores:[3,1,0,0,1]},{t:"영어로 뭐라고 해야 할지 구글링 먼저 하고 말한다 🔍",scores:[1,3,0,0,1]},{t:"금액 차이가 크면 말하고, 조금이면 그냥 넘긴다",scores:[1,2,1,1,0]},{t:"그냥 나온다. 싸우기 귀찮아 😮‍💨",scores:[0,0,1,2,3]}]},
-  {q:"미국 직장 동료들이 퇴근 후 happy hour 가자고 한다. 근데 넌 피곤한 상태야.",s:"네트워킹과 에너지 관리 사이의 균형을 보는 질문이에요.",opts:[{t:"당연히 가지! 네트워킹이 곧 커리어야 🍻",scores:[3,1,0,0,0]},{t:"한 시간만 얼굴 비추고 먼저 나온다",scores:[2,2,0,0,1]},{t:"피곤하다고 솔직히 말하고 다음엔 꼭 간다고 한다",scores:[1,2,1,1,0]},{t:"어...오늘 선약이 있다고 둘러댄다 (없음)",scores:[0,0,1,2,3]}]},
-  {q:"미국에서 의사한테 갔더니 설명이 너무 빠르고 어려워. 어떻게 해?",s:"의료 상황에서는 모르면 다시 묻는 용기가 특히 중요해요.",opts:[{t:'"Sorry, can you slow down?" 바로 말한다',scores:[3,1,0,0,0]},{t:"그 자리에서 구글 번역기 꺼낸다 📱",scores:[1,3,0,0,1]},{t:"반쯤 이해한 채로 나와서 나중에 검색한다",scores:[0,1,2,1,2]},{t:"아무 말도 못하고 고개만 끄덕끄덕...",scores:[0,0,1,2,3]}]},
-  {q:"미국 생활비가 생각보다 2배는 더 비싸. 어떻게 대처할 거야?",s:"미국 생활은 수입보다 고정비와 선택이 더 크게 느껴질 때가 많아요.",opts:[{t:"수입 늘릴 방법 먼저 찾는다 (부업, 이직 등)",scores:[3,1,0,0,0]},{t:"지출 항목 하나하나 다 분석하고 줄인다 📊",scores:[1,3,1,0,0]},{t:"뭔가 해야 하는데... 일단 이번 달은 버티고 생각한다",scores:[0,1,2,1,1]},{t:"스트레스 받아서 쇼핑으로 해소한다 (악순환)",scores:[0,0,0,1,3]}]},
-  {q:'미국 친구 집에 초대받았는데 음식이 내 취향이 아니야. 친구가 "맛있어?" 묻는다면?',s:"솔직함과 배려 사이의 밸런스를 보는 질문이에요.",opts:[{t:'"Honestly, it\'s a bit different but I appreciate it!" 솔직하게',scores:[3,1,0,0,0]},{t:'"It\'s interesting!" 적당히 긍정적으로 넘어간다',scores:[2,2,0,0,0]},{t:'"So good!" 거짓말이지만 분위기상 어쩔 수 없다',scores:[1,1,1,2,1]},{t:"억지로 다 먹고 속으로 후회한다 😭",scores:[0,0,1,1,3]}]},
-  {q:"비자/영주권 관련 서류 작업이 산더미야. 어떻게 처리해?",s:"미국 생활은 결국 서류와 시스템을 다루는 힘이 필요해요.",opts:[{t:"이민 변호사 고용, 전문가한테 맡기는 게 최고야",scores:[3,1,0,0,0]},{t:"관련 커뮤니티, 포럼 다 뒤져서 혼자 해결한다 🔍",scores:[1,3,1,0,0]},{t:"아는 한국인 선배한테 물어본다",scores:[1,2,1,1,0]},{t:"마감 직전까지 미루다가 허겁지겁 한다",scores:[0,0,0,1,3]}]},
-  {q:"미국 직장에서 내 아이디어를 동료가 자기 것처럼 발표했어. 어떻게 할 거야?",s:"자기주장과 기록 문화에 얼마나 익숙한지 보는 질문이에요.",opts:[{t:'그 자리에서 바로 "Actually, that was my idea" 말한다 🗣️',scores:[3,0,0,0,0]},{t:"나중에 1:1로 조용히 이야기한다",scores:[2,2,0,0,0]},{t:"그냥 넘어가지만, 다음엔 email로 기록 남긴다",scores:[1,2,1,1,0]},{t:"억울하지만 참는다... 괜히 분위기 망칠까 봐",scores:[0,0,1,2,3]}]},
-  {q:"미국에서 처음 운전을 해야 하는 상황이야. 한국이랑 달라서 긴장된다.",s:"낯선 시스템을 어떻게 익히는지 보는 질문이에요.",opts:[{t:"유튜브 미리 보고, 연습 충분히 하고 도전! 🚗",scores:[3,2,0,0,0]},{t:"미국 운전법 공부하고 처음엔 익숙한 루트만 간다",scores:[1,3,1,0,0]},{t:"Uber/Lyft 쓰다가 어쩔 수 없을 때 운전한다",scores:[1,1,2,1,0]},{t:"두렵다. 최대한 피한다. 차 없이 살 방법을 찾겠다",scores:[0,0,1,2,3]}]},
-  {q:"미국에서 힘든 날, 외롭고 지칠 때 어떻게 버텨?",s:"외로움을 다루는 방식은 장기 적응력과 연결돼요.",opts:[{t:"미국 친구/동료한테 먼저 연락한다. 현지 네트워크 키워야지",scores:[3,1,0,0,0]},{t:"한국 가족/친구랑 통화하면서 충전한다 📞",scores:[2,2,1,0,0]},{t:"혼자 있는 걸 즐기면서 취미로 극복한다",scores:[1,2,2,1,0]},{t:"한인 커뮤니티에서만 위안을 찾는다 (코리아타운...)",scores:[0,1,2,2,1]}]}
-];
-const adaptResults=[
-  {emoji:"🦅",title:"이미 절반은 미국인이야",subtitle:"TYPE 01 — 미국형 인간",desc:"적극적이고 자기주장 확실하고 변화를 즐기는 타입. 미국 문화와 궁합이 좋아서 적응 속도가 빠를 가능성이 높아요.",bars:[['적응력',95],['소통력',90],['자기주장',88],['현지화',85]],advice:["네트워킹 능력은 미국 커리어에서 큰 무기예요.","자기주장이 분명한 점은 미국 직장에서 장점이 될 수 있어요.","항상 ON 상태로 살면 번아웃이 올 수 있으니 에너지 관리도 필요해요."]},
-  {emoji:"🗺️",title:"준비된 자만이 살아남는다",subtitle:"TYPE 02 — 전략형 생존자",desc:"감정보다 정보로 움직이는 타입. 적응이 아주 빠르진 않아도, 한 번 배운 것은 자기 시스템으로 만드는 힘이 있어요.",bars:[['적응력',78],['정보력',95],['실행력',65],['유연성',60]],advice:["서류, 세금, 비자처럼 복잡한 영역에서 꼼꼼함이 빛나요.","완벽하게 준비되길 기다리다 기회를 놓치지 않도록 작게라도 시작해보세요.","예상 밖 상황에 대한 즉흥 대처 연습이 도움이 돼요."]},
-  {emoji:"🌱",title:"시간이 걸리지만 결국 핀다",subtitle:"TYPE 03 — 느린 개화형",desc:"처음엔 에너지가 많이 들 수 있지만, 한 번 자리 잡으면 오래 버티는 타입이에요. 초반 6개월~1년을 잘 넘기는 전략이 중요해요.",bars:[['적응력',50],['안정성',80],['끈기',72],['유연성',45]],advice:["안정적인 루틴을 만들면 적응 속도가 빨라질 수 있어요.","한인 커뮤니티와 현지 커뮤니티를 균형 있게 활용해보세요.","영어 소통 불편함을 조금씩 자주 마주치는 연습이 필요해요."]},
-  {emoji:"🏯",title:"미국에 살지만 한국처럼 산다",subtitle:"TYPE 04 — 한인타운 생존형",desc:"한인 커뮤니티 안에서 안정감을 얻는 타입. 나쁜 건 아니지만, 미국 주류 시스템과의 연결을 조금씩 넓히면 생활 반경이 훨씬 넓어져요.",bars:[['적응력',35],['공동체력',85],['독립성',30],['현지화',20]],advice:["한인 커뮤니티는 든든한 자산이에요.","다만 영어와 현지 시스템을 피하기만 하면 커리어 선택지가 좁아질 수 있어요.","올해 목표를 ‘미국인 친구/동료와 편하게 대화하기’로 잡아보세요."]},
-  {emoji:"😮‍💨",title:"미국이 체질에 안 맞을 수도 있어",subtitle:"TYPE 05 — 빠른 귀국 예비군",desc:"회피하고 참는 방식이 익숙하다면 미국 생활이 더 버겁게 느껴질 수 있어요. 하지만 이 결과는 포기 신호가 아니라 준비 신호예요.",bars:[['적응력',20],['자기주장',15],['유연성',30],['현지화',10]],advice:["자기 의사 표현 훈련이 가장 시급해요. 영어보다 더 중요할 수 있어요.","작은 상황부터 ‘Can you explain that again?’처럼 말하는 연습을 해보세요.","천천히 적응하면 돼요. 준비 없이 혼자 버티는 것만 피하면 됩니다."]}
-];
-let adaptIdx=0,adaptAnswers=[],adaptTotals=[0,0,0,0,0],lastAdaptResult=null;
-function initAdaptQuiz(){
-  adaptIdx=0;adaptAnswers=[];adaptTotals=[0,0,0,0,0];lastAdaptResult=null;
-  const card=document.getElementById('adapt-card');
-  const result=document.getElementById('adapt-result');
-  if(!card||!result)return;
-  card.style.display='block';result.style.display='none';
-  renderAdaptQ();trackEvent('adapt_quiz_start');
-}
-function renderAdaptQ(){
-  const q=adaptQs[adaptIdx];
-  document.getElementById('adapt-prog').style.width=Math.round((adaptIdx+1)/adaptQs.length*100)+'%';
-  document.getElementById('adapt-num').textContent='Q'+(adaptIdx+1)+' of '+adaptQs.length;
-  document.getElementById('adapt-question').textContent=q.q;
-  document.getElementById('adapt-sub').textContent=q.s;
-  document.getElementById('adapt-opts').innerHTML=q.opts.map((o,i)=>`<button class="qbtn yes" onclick="answerAdapt(${i})"><div class="qbtn-icon">${i+1}</div><div><div class="qbtn-lbl">${o.t}</div></div></button>`).join('');
-}
-function answerAdapt(optIdx){
-  adaptAnswers[adaptIdx]=optIdx;
-  if(adaptIdx>=adaptQs.length-1){showAdaptResult();return;}
-  adaptIdx++;renderAdaptQ();
-}
-function pickAdaptResult(){
-  adaptTotals=[0,0,0,0,0];
-  adaptAnswers.forEach((a,qi)=>{adaptQs[qi].opts[a].scores.forEach((s,i)=>adaptTotals[i]+=s);});
-  return adaptResults[adaptTotals.indexOf(Math.max(...adaptTotals))];
-}
-function showAdaptResult(){
-  lastAdaptResult=pickAdaptResult();
-  document.getElementById('adapt-card').style.display='none';
-  const box=document.getElementById('adapt-result');
-  box.style.display='block';
-  const bars=lastAdaptResult.bars.map(b=>`<div style="display:flex;align-items:center;gap:10px;margin-bottom:9px;"><div style="width:72px;font-size:12px;color:var(--soil);opacity:.75;">${b[0]}</div><div style="flex:1;height:6px;background:var(--sand);border-radius:4px;overflow:hidden;"><div style="height:100%;width:${b[1]}%;background:var(--moss);border-radius:4px;"></div></div><div style="font-size:12px;color:var(--soil);opacity:.55;width:30px;text-align:right;">${b[1]}</div></div>`).join('');
-  const advice=lastAdaptResult.advice.map((t,i)=>`<div class="nxt-item"><div class="nxt-num">${i+1}</div><div><div class="nxt-t">${t}</div></div></div>`).join('');
-  box.innerHTML=`<div class="res-card"><span class="res-badge bf">Adjustment Result</span><div style="font-size:34px;margin-bottom:8px;">${lastAdaptResult.emoji}</div><div class="res-stage">${lastAdaptResult.title}</div><div style="font-size:13px;font-weight:500;color:var(--clay);margin-bottom:12px;">${lastAdaptResult.subtitle}</div><div class="res-desc">${lastAdaptResult.desc}</div><div style="border-top:0.5px solid var(--sand);padding-top:1.3rem;margin-bottom:1.3rem;"><div class="nxt-lbl">항목별 점수</div>${bars}</div><div class="nxt-steps"><div class="nxt-lbl">Jennifer의 솔직한 조언</div>${advice}</div><div class="jen-note"><div class="jen-av">JL</div><div class="jen-msg"><strong>Jennifer의 메모 —</strong> 미국 적응은 영어만의 문제가 아니에요. 질문하는 힘, 다시 시작하는 힘, 그리고 나를 돌보는 루틴이 진짜 뿌리가 돼요.</div></div><div class="res-acts"><button class="btn-main" onclick="shareAdaptResult()">결과 공유하기 🌿</button><button class="btn-teal" onclick="showNewsletterPopup();trackEvent('newsletter_adapt_result_click')">무료 뉴스레터 받아보기 →</button><button class="btn-ghost" onclick="initAdaptQuiz()">다시 테스트하기 →</button></div></div>`;
-  trackEvent('adapt_quiz_complete');
-}
-function shareAdaptResult(){
-  if(!lastAdaptResult)return;
-  const text=`나는 ${lastAdaptResult.title} (${lastAdaptResult.subtitle}) 🌿\n\nThe Root에서 미국 적응 테스트 해보기\n${SITE_URL}`;
-  if(navigator.share){navigator.share({title:'나의 미국 생존 유형 — The Root',text,url:SITE_URL}).catch(()=>{});}
-  else{navigator.clipboard.writeText(text).then(()=>showToast('결과가 복사됐어요! 공유해봐요 🌿'));}
-}
-
-/* ── INIT ── */
-initGR();
-initLanding();
-loadSavedProgress();
-initHeroQuiz();
-const initialPage=normalizePageId(location.hash.replace('#','') || 'home');
-if(initialPage!=='home'){
-  showPage(initialPage,false);
-  if(initialPage==='quiz') initClinicalQuiz();
-  if(initialPage==='adapt') initAdaptQuiz();
-}
-scheduleNewsletterPopup();
 </script>
 
 </body>
