@@ -453,7 +453,7 @@ footer a:hover{color:rgba(116,196,138,1);}
     <p class="sec-sub">처음 온 분은 여정 진단을 먼저, 이미 진행 중인 분은 아래 체크리스트에서 바로 시작하면 돼요.</p>
 
     <div class="tools-grid">
-      <a href="#greencard" class="tool-card">
+      <div class="tool-card" onclick="goToChecklist('greencard')" style="cursor:pointer">
         <span class="tool-badge badge-popular">Most Popular</span>
         <div class="tool-icon">📋</div>
         <div class="tool-title">Green Card Checklist</div>
@@ -463,8 +463,8 @@ footer a:hover{color:rgba(116,196,138,1);}
           <li>입국 후 Green Card 수령</li>
         </ul>
         <div class="tool-cta">체크리스트 열기 →</div>
-      </a>
-      <a href="#landing" class="tool-card">
+      </div>
+      <div class="tool-card" onclick="goToChecklist('landing')" style="cursor:pointer">
         <span class="tool-badge badge-landing">Landing</span>
         <div class="tool-icon">🏠</div>
         <div class="tool-title">U.S. Landing Checklist</div>
@@ -474,7 +474,7 @@ footer a:hover{color:rgba(116,196,138,1);}
           <li>401(k) · 신용카드</li>
         </ul>
         <div class="tool-cta">체크리스트 열기 →</div>
-      </a>
+      </div>
       <a href="#visa" class="tool-card">
         <span class="tool-badge badge-monthly">Monthly Update</span>
         <div class="tool-icon">📅</div>
@@ -491,7 +491,7 @@ footer a:hover{color:rgba(116,196,138,1);}
 </section>
 
 <!-- CHECKLISTS -->
-<section class="checklist-section">
+<section class="checklist-section" id="greencard">
   <div class="checklist-inner">
     <span class="eyebrow">체크리스트</span>
     <h2 class="sec-h2">오늘 확인해야 할 것들</h2>
@@ -821,6 +821,15 @@ function switchTab(panelId, btn){
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('panel-' + panelId).classList.add('active');
   btn.classList.add('active');
+}
+
+/* Go to checklist and switch tab */
+function goToChecklist(tab){
+  const section = document.getElementById('greencard');
+  if(section) section.scrollIntoView({behavior:'smooth'});
+  const tabIndex = tab === 'landing' ? 1 : 0;
+  const btn = document.querySelectorAll('.tab-btn')[tabIndex];
+  if(btn) setTimeout(() => switchTab(tab, btn), 300);
 }
 
 /* Smooth scroll for anchor links */
