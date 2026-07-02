@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career Stories — The Root</title>
+<meta name="description" content="미국 간호사 선배들의 커리어 이야기. The Root가 연결하는 실제 여정.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#EEEADE;--bg-alt:#E6E1D4;--white:#FEFCF8;
+  --t1:#3A5840;--t2:#4E6B52;--t3:#8A9E7A;
+  --green:#3A5840;--green-ghost:#EBF4ED;--green-lt:#74C48A;
+  --gold:#8A8B3C;--bdrw:#D4CEC4;
+  --forest:#2B4530;
+  --r-sm:8px;--r-md:14px;--r-lg:20px;--r-xl:28px;
+  --max:1000px;--g:24px;
+}
+body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',system-ui,sans-serif;background:var(--bg);color:var(--t1);line-height:1.6;-webkit-font-smoothing:antialiased;}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;height:56px;display:flex;align-items:center;background:rgba(238,234,222,0.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--bdrw);}
+.nav-inner{max-width:var(--max);margin:0 auto;padding:0 var(--g);width:100%;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-size:17px;font-weight:800;letter-spacing:-0.03em;color:var(--t1);text-decoration:none;}
+.nav-logo em{color:var(--gold);font-style:normal;}
+.nav-back{font-size:13px;color:var(--t3);text-decoration:none;transition:color .2s;}
+.nav-back:hover{color:var(--t1);}
+
+/* HERO */
+.hero{background:var(--forest);padding:80px var(--g) 72px;text-align:center;}
+.hero-inner{max-width:var(--max);margin:0 auto;}
+.hero-kicker{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:18px;}
+.hero-h1{font-size:clamp(36px,5vw,56px);font-weight:800;letter-spacing:-0.04em;line-height:1.08;color:#fff;margin-bottom:16px;}
+.hero-h1 em{color:#A8D5B8;font-style:italic;}
+.hero-sub{font-size:16px;color:rgba(255,255,255,0.62);line-height:1.65;max-width:520px;margin:0 auto;}
+
+/* MAIN */
+main{max-width:var(--max);margin:0 auto;padding:72px var(--g) 96px;}
+
+/* SECTION LABEL */
+.sec-label{display:flex;align-items:center;gap:12px;margin-bottom:28px;}
+.sec-label-text{font-size:11px;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:var(--t3);}
+.sec-label-line{flex:1;height:1px;background:var(--bdrw);}
+
+/* UPCOMING EVENT CARD */
+.upcoming-card{
+  background:var(--white);border:1px solid var(--bdrw);border-radius:var(--r-xl);
+  overflow:hidden;display:grid;grid-template-columns:1fr 300px;
+  margin-bottom:72px;
+}
+.uc-left{padding:44px 48px;}
+.uc-vol{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--t3);margin-bottom:14px;}
+.uc-title{font-size:clamp(28px,3.5vw,40px);font-weight:800;color:var(--t1);letter-spacing:-0.04em;line-height:1.1;margin-bottom:6px;}
+.uc-title em{color:var(--gold);font-style:italic;}
+.uc-title-sub{font-size:clamp(18px,2.5vw,26px);font-weight:700;color:var(--t2);letter-spacing:-0.03em;opacity:0.8;margin-bottom:28px;}
+.uc-speaker{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+.uc-av{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--forest),#4E6B52);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;overflow:hidden;}
+.uc-av img{width:100%;height:100%;object-fit:cover;object-position:top;}
+.uc-name{font-size:15px;font-weight:700;color:var(--t1);}
+.uc-role{font-size:12px;color:var(--t3);line-height:1.5;margin-top:2px;}
+.uc-creds{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:32px;}
+.uc-cred{font-size:11px;font-weight:600;background:var(--green-ghost);color:var(--t1);padding:4px 10px;border-radius:6px;}
+.uc-btn{display:inline-flex;align-items:center;gap:8px;background:var(--green);color:#fff;padding:13px 26px;border-radius:var(--r-sm);font-size:14px;font-weight:700;text-decoration:none;transition:background .15s,transform .1s;}
+.uc-btn:hover{background:#2a4d38;transform:translateY(-1px);}
+.uc-btn::after{content:'→';}
+.uc-right{background:var(--forest);padding:44px 36px;display:flex;flex-direction:column;gap:24px;justify-content:center;}
+.uc-info-lbl{font-size:10px;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:rgba(255,255,255,0.38);margin-bottom:6px;}
+.uc-info-val{font-size:19px;font-weight:700;color:#fff;line-height:1.2;}
+.uc-info-val em{font-style:italic;font-weight:400;color:rgba(255,255,255,0.62);font-size:13px;display:block;margin-top:3px;}
+.uc-divider{width:100%;height:1px;background:rgba(255,255,255,0.1);}
+.uc-seats{font-size:12px;color:rgba(255,255,255,0.42);padding-top:4px;line-height:1.6;}
+
+/* PAST SESSIONS */
+.past-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
+.past-card{background:var(--white);border:1px solid var(--bdrw);border-radius:var(--r-lg);padding:28px 28px 24px;display:flex;flex-direction:column;gap:14px;}
+.past-card-vol{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--t3);}
+.past-card-title{font-size:20px;font-weight:800;color:var(--t1);letter-spacing:-0.03em;line-height:1.2;}
+.past-card-title em{color:var(--gold);font-style:italic;}
+.past-card-speaker{display:flex;align-items:center;gap:10px;}
+.past-card-av{width:36px;height:36px;border-radius:50%;background:var(--green-ghost);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;overflow:hidden;}
+.past-card-av img{width:100%;height:100%;object-fit:cover;object-position:top;}
+.past-card-name{font-size:13px;font-weight:600;color:var(--t1);}
+.past-card-role{font-size:11px;color:var(--t3);}
+.past-card-date{font-size:12px;color:var(--t3);padding-top:6px;border-top:1px solid var(--bdrw);}
+.past-card-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;background:var(--green-ghost);color:var(--t2);padding:3px 9px;border-radius:99px;}
+
+/* EMPTY STATE */
+.empty-state{
+  background:var(--white);border:1.5px dashed var(--bdrw);border-radius:var(--r-xl);
+  padding:56px 40px;text-align:center;
+}
+.empty-icon{font-size:2rem;margin-bottom:14px;opacity:0.4;}
+.empty-txt{font-size:15px;color:var(--t3);line-height:1.7;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--bdrw);padding:40px var(--g);text-align:center;}
+.footer-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-logo{font-size:15px;font-weight:800;letter-spacing:-0.02em;color:var(--t1);}
+.footer-logo em{color:var(--gold);font-style:normal;}
+.footer-copy{font-size:12px;color:var(--t3);}
+
+@media(max-width:700px){
+  .upcoming-card{grid-template-columns:1fr;}
+  .uc-right{padding:32px 36px;}
+  .uc-left{padding:32px 28px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="/">the root<em>.</em></a>
+    <a class="nav-back" href="/">← 홈으로</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-kicker">The Root · Career Stories</div>
+    <h1 class="hero-h1">선배들의 여정을<br><em>직접</em> 들어요.</h1>
+    <p class="hero-sub">미국에서 먼저 걸어온 간호사들의 실제 커리어 이야기.<br>이론이 아닌 현장의 목소리를 담아요.</p>
+  </div>
+</section>
+
+<main>
+
+  <!-- UPCOMING -->
+  <div class="sec-label">
+    <span class="sec-label-text">🌱 다가오는 세션</span>
+    <span class="sec-label-line"></span>
+  </div>
+
+  <div class="upcoming-card">
+    <div class="uc-left">
+      <div class="uc-vol">Career Stories Vol. 1</div>
+      <div class="uc-title"><em>Dream</em> BIG</div>
+      <div class="uc-title-sub">Practice Bigger</div>
+      <div class="uc-speaker">
+        <div class="uc-av">👩‍⚕️</div>
+        <div>
+          <div class="uc-name">Jooha Park</div>
+          <div class="uc-role">Electrophysiology Nurse Practitioner<br>UCLA Health</div>
+        </div>
+      </div>
+      <div class="uc-creds">
+        <span class="uc-cred">MSN</span>
+        <span class="uc-cred">APRN</span>
+        <span class="uc-cred">FNP-BC</span>
+        <span class="uc-cred">CCRN-CMC</span>
+        <span class="uc-cred">CSC</span>
+      </div>
+      <a href="https://forms.gle/t8VV3WGMnoypFwcg8" target="_blank" class="uc-btn">지금 신청하기</a>
+    </div>
+    <div class="uc-right">
+      <div>
+        <div class="uc-info-lbl">🇺🇸 미국 시간</div>
+        <div class="uc-info-val">July 18 (Sat)<em>4:00 PM PDT</em></div>
+      </div>
+      <div>
+        <div class="uc-info-lbl">🇰🇷 한국 시간</div>
+        <div class="uc-info-val">July 19 (Sun)<em>8:00 AM KST</em></div>
+      </div>
+      <div class="uc-divider"></div>
+      <div>
+        <div class="uc-info-lbl">FORMAT</div>
+        <div class="uc-info-val">Live Webinar<em>Zoom · 60분</em></div>
+      </div>
+      <div>
+        <div class="uc-info-lbl">SEATS</div>
+        <div class="uc-info-val">20명 선정<em>모집 마감 7월 10일</em></div>
+      </div>
+      <div class="uc-seats">신청서 검토 후 선정된 분께<br>개별 안내 드려요.</div>
+    </div>
+  </div>
+
+  <!-- PAST SESSIONS -->
+  <div class="sec-label">
+    <span class="sec-label-text">📂 지난 세션</span>
+    <span class="sec-label-line"></span>
+  </div>
+
+  <div class="empty-state">
+    <div class="empty-icon">🌱</div>
+    <p class="empty-txt">아직 지난 세션이 없어요.<br>첫 번째 Career Stories가 끝나면 여기에 기록될 거예요.</p>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">the root<em>.</em></div>
+    <div class="footer-copy">© 2026 Jennifer Minja Lee · All rights reserved</div>
+  </div>
+</footer>
+
+</body>
+</html>
