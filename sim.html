@@ -209,7 +209,7 @@ canvas{display:block;position:absolute;inset:0;}
   padding:0 8px;
   background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 100%);
   display:grid;
-  grid-template-columns:repeat(7,1fr);
+  grid-template-columns:repeat(8,1fr);
   align-items:center;
   gap:3px;
   z-index:10;pointer-events:none;
@@ -308,7 +308,7 @@ canvas{display:block;position:absolute;inset:0;}
   <div id="loading">
     <div class="spin"></div>
     <div id="lbar"><div id="lfill"></div></div>
-    <p id="ltxt">이미지 로딩 중... (0 / 7)</p>
+    <p id="ltxt">이미지 로딩 중... (0 / 8)</p>
   </div>
 </div>
 
@@ -366,6 +366,7 @@ function resize(){
   renderer.setSize(W,H);
   camera.aspect=W/H;
   camera.updateProjectionMatrix();
+  updateHS();
 }
 resize();
 window.addEventListener('resize',resize);
@@ -389,10 +390,11 @@ function proj(lonD,latD){
 function updateHS(){
   const layer=document.getElementById('hsl');
   layer.innerHTML='';
+  return; // 방향 화살표 비활성화 — 하단 메뉴로만 이동
   const r=ROOMS[cur];
   if(!r.nav)return;
   r.nav.forEach(hs=>{
-    const pos=proj(lon+hs.lon,hs.lat||0);
+    const pos=proj(hs.lon,hs.lat||0);
     if(!pos)return;
     const W=window.innerWidth,H=window.innerHeight;
     if(pos.x<-60||pos.x>W+60||pos.y<-60||pos.y>H+60)return;
@@ -448,15 +450,15 @@ ROOMS.forEach((r,i)=>{
 const app=document.getElementById('app');
 function ds(x,y){drag=true;sx=x;sy=y;sl=lon;sb=lat;autoSpin=false;clearTimeout(spinT);}
 function dm(x,y){if(!drag)return;lon=sl-(x-sx)*0.17;lat=sb+(y-sy)*0.17;updateCam();updateHS();}
-function de(){drag=false;spinT=setTimeout(()=>{autoSpin=true;},5000);}
+function de(){if(!drag)return;drag=false;clearTimeout(spinT);spinT=setTimeout(()=>{autoSpin=true;},5000);}
 
-app.addEventListener('mousedown',e=>ds(e.clientX,e.clientY));
+app.addEventListener('mousedown',e=>{if(e.target.closest&&e.target.closest('#simOverlay'))return;ds(e.clientX,e.clientY);});
 window.addEventListener('mouseup',de);
 window.addEventListener('mousemove',e=>dm(e.clientX,e.clientY));
-app.addEventListener('touchstart',e=>{if(e.touches.length===1)ds(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});
+app.addEventListener('touchstart',e=>{if(e.target.closest&&e.target.closest('#simOverlay'))return;if(e.touches.length===1)ds(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});
 window.addEventListener('touchend',de);
-window.addEventListener('touchmove',e=>{if(e.touches.length===1){dm(e.touches[0].clientX,e.touches[0].clientY);e.preventDefault();}},{passive:false});
-app.addEventListener('wheel',e=>{camera.fov=Math.max(40,Math.min(100,camera.fov+e.deltaY*0.035));camera.updateProjectionMatrix();e.preventDefault();},{passive:false});
+window.addEventListener('touchmove',e=>{if(drag&&e.touches.length===1){dm(e.touches[0].clientX,e.touches[0].clientY);e.preventDefault();}},{passive:false});
+app.addEventListener('wheel',e=>{if(e.target.closest&&e.target.closest('#simOverlay'))return;camera.fov=Math.max(40,Math.min(100,camera.fov+e.deltaY*0.035));camera.updateProjectionMatrix();updateHS();e.preventDefault();},{passive:false});
 
 // Preload all then show first
 let firstDone=false;
@@ -1367,8 +1369,8 @@ const MISSIONS=[
   {id:'assess', time:'0730', title:'환자 첫 라운딩 — Assessment', room:'ptroom', type:'action',
    btn:'🩺 환자 Assessment 시작',
    checks:[
-     {n:'🆔 Two Patient Identifiers',
-      detail:'"Can you tell me your full name and date of birth?" — 팔찌와 대조. 미국 표준은 이름 + DOB.'},
+     {n:'🆔 Two Patient Identifiers + Neuro Check',
+      detail:'"Can you tell me your full name and date of birth?" — 팔찌와 대조. 미국 표준은 이름 + DOB. 이 대화가 곧 neuro check이기도 해요 — 또렷하게 답하고 사람·장소·시간·상황을 인지하면 A/Ox4 (alert & oriented x4).'},
      {n:'💧 IV Site Check',
       detail:'IV site 확인(발적·부종·통증). Pump rate = 오더 일치 확인. "I\'m going to check your IV real quick."'},
      {n:'❤️ Telemetry Check',
@@ -1386,10 +1388,10 @@ const MISSIONS=[
   {id:'assess_chart', time:'0800', title:'Assessment 차팅', room:'ptroom', type:'action',
    btn:'✍️ Assessment 차팅하기',
    checks:[
-     {n:'🆔 환자 확인',
-      detail:'Identified using two identifiers (name & DOB) ✓ — 클릭으로 정상 소견 기록. 실제 EMR(Epic 등)에서도 정상 항목은 클릭 한 번으로 끝나요.'},
+     {n:'🆔 환자 확인 & Neuro',
+      detail:'Identified using two identifiers (name & DOB) ✓ · Neuro: Alert & oriented x4 ✓ — 2 ID 확인 대화로 neuro status까지 같이 확인·기록해요. 실제 EMR(Epic 등)에서도 정상 항목은 클릭 한 번으로 끝나요.'},
      {n:'💉 활력징후 (Vital Signs)',
-      detail:'BP 128/76, HR 80, RR 16, SpO₂ 99% 2L NC, Temp 98.4F, Pain 0/10 — within normal limits ✓'},
+      detail:'BP 128/76, HR 80, RR 16, SpO₂ 98% RA, Temp 98.4F, Pain 0/10 — within normal limits ✓'},
      {n:'💧 IV / Drip',
       detail:'20G L forearm intact, no s/s infiltration. Heparin gtt infusing at ordered rate ✓'},
      {n:'❤️ Cardiac / Tele',
@@ -1467,7 +1469,7 @@ const MISSIONS=[
      <b>R</b>: "Could you please come evaluate him? I'd like to get a 12-lead EKG and stat troponin first, then give NTG 0.4mg SL — would you like me to go ahead?"<br><br>
      <div style="background:rgba(255,200,90,0.15);padding:10px;border-radius:8px;font-size:12px;margin-bottom:8px">
      <b style="color:#ffd278">⚡ 1330 — Troponin 결과</b><br>
-     0.12 → <b style="color:#ff6b6b">0.58 ng/mL</b> (uptrend). Dr. Kim 도착해서 확인 후:
+     0.12 → <b style="color:#ff6b6b">0.58 ng/mL</b> (uptrend). Cardiology Dr. Kim 도착해서 확인 후:
      "<b>Let's send him for an emergent cath.</b> I'll call interventional cardiology."<br><br>
      → Mr. Davis는 <b>14:30경 cath lab으로 이동</b>합니다. (AM cath는 응급 케이스로 인해 오후로 밀린 상태였고, 1300 RRT 이후 긴급 진행됨) 더 이상 412호에 있지 않아요.
      </div>
@@ -1732,6 +1734,9 @@ function onRoomChange(){
     else if(m.type==='priority_choice'){
       hideActBtn();
       if(!m._rang){ m._rang=true; playCallBell(); setTimeout(()=>openPriorityChoice(m),600); }
+      else if(!document.getElementById('mModal').classList.contains('show')){
+        showActBtn('🔔 콜벨 응답하기',()=>openPriorityChoice(m));
+      }
     }
   }else{
     hideActBtn();stopHunt();
@@ -1841,6 +1846,7 @@ function closeMissionModal(){
   document.getElementById('fbSubmitBtn').style.display='none';
   document.getElementById('mpDone').onclick=finishMissionModal;
   autoSpin=true;
+  if(shiftOn)setTimeout(onRoomChange,80);
 }
 function finishMissionModal(){
   closeMissionModal();
@@ -2004,13 +2010,15 @@ function submitInlineFillBlank(){
     const inp=document.getElementById('ifb'+i);
     const val=inp.value.trim().toLowerCase();
     const answer=inp.dataset.answer.toLowerCase();
-    const ok=val===answer || val.includes(answer) || answer.includes(val);
+    const ok=val===answer || val.includes(answer) || (val.length>=answer.length*0.7 && answer.includes(val));
     inp.classList.remove('fb-correct','fb-wrong');
     inp.classList.add(ok?'fb-correct':'fb-wrong');
     inp.disabled=true;
     if(ok)correctCount++;
   }
   document.getElementById('fbSubmitBtn').style.display='none';
+  pushScore(correctCount, n);
+  showLeaderboard();
   const area=document.getElementById('fillBlankArea');
   area.innerHTML+=`<div id="chartSample" class="show" style="position:static;margin-top:12px">
     <div id="chartSampleLabel">📋 ${correctCount}/${n} 맞췄어요 — 전체 샘플 차팅</div>
@@ -2204,11 +2212,13 @@ const FB_DB_URL = 'https://the-root-v-hospital-default-rtdb.firebaseio.com';
 // 예: 'https://theroot-abc123-default-rtdb.firebaseio.com'
 // ▲▲▲ 여기까지 ─────────────────────────────────────────────────
 
-const CLASS_ID = (new URLSearchParams(location.search).get('class') || 'theroot').replace(/[^a-zA-Z0-9\-_]/g, '_');
+const _urlClass = new URLSearchParams(location.search).get('class') || '';
+const CLASS_ID = (_urlClass || 'theroot').replace(/[^a-zA-Z0-9\-_]/g, '_');
 
-// ── 세션 코드 (수업 시작 시 줌에서 구두로 알려주세요) ──────────────
-// 숫자 또는 영문, 매 세션마다 바꾸는 것을 권장
-const SESSION_CODE = '1234';  // ← 매 수업 전에 바꾸세요
+// ── 세션 코드: URL ?class= 파라미터와 자동 연동 ──────────────────
+// 링크에 ?class=0722 → 코드도 자동으로 0722, Firebase도 /classes/0722/ 에 저장
+// 파라미터 없을 때만 아래 기본값 사용
+const SESSION_CODE = _urlClass || '1234';
 const classMode = Boolean(FB_DB_URL);
 
 // ── Student identity (persisted in localStorage) ──────────────
@@ -2218,6 +2228,7 @@ const myId = (() => {
   return id;
 })();
 let myName = localStorage.getItem('tr_name') || '';
+let myScore = null, myScoreTotal = null, myChartTime = null;
 
 // ── Audio player injection ────────────────────────────────────
 function injectHandoffAudio() {
@@ -2251,6 +2262,14 @@ function showNameModal() {
     return;
   }
   document.getElementById('cm-name-modal').style.display = 'flex';
+  // URL에 ?class= 있으면 코드 자동완성
+  if (_urlClass) {
+    const inp = document.getElementById('cm-code-input');
+    inp.value = _urlClass;
+    inp.readOnly = true;
+    inp.style.color = '#7a9b72';
+    inp.style.letterSpacing = '0.2em';
+  }
   setTimeout(() => document.getElementById('cm-code-input').focus(), 100);
 }
 
@@ -2292,10 +2311,31 @@ async function fbPut(path, data) {
 
 function fbListen(path, cb) {
   if (!FB_DB_URL) return null;
-  // Firebase Realtime DB supports Server-Sent Events (SSE) natively
+  // Firebase Realtime DB supports Server-Sent Events (SSE) natively.
+  // Events carry {path, data} relative to the listened path — apply as deltas.
   const es = new EventSource(`${FB_DB_URL}/${path}.json`);
+  let tree = null;
+  const apply = (p, data) => {
+    const keys = (p || '/').split('/').filter(Boolean);
+    if (!keys.length) { tree = data; return; }
+    if (!tree || typeof tree !== 'object') tree = {};
+    let node = tree;
+    for (let i = 0; i < keys.length - 1; i++) {
+      if (!node[keys[i]] || typeof node[keys[i]] !== 'object') node[keys[i]] = {};
+      node = node[keys[i]];
+    }
+    if (data === null) delete node[keys[keys.length - 1]];
+    else node[keys[keys.length - 1]] = data;
+  };
   es.addEventListener('put', e => {
-    try { const d = JSON.parse(e.data); cb(d.data); } catch(_) {}
+    try { const d = JSON.parse(e.data); apply(d.path, d.data); cb(tree); } catch(_) {}
+  });
+  es.addEventListener('patch', e => {
+    try {
+      const d = JSON.parse(e.data);
+      Object.entries(d.data || {}).forEach(([k, v]) => apply((d.path === '/' ? '' : d.path) + '/' + k, v));
+      cb(tree);
+    } catch(_) {}
   });
   es.onerror = () => {};
   return es;
@@ -2319,12 +2359,13 @@ function pushProgress(extra) {
     stepTime: cur.time || '',
     done: Array.isArray(mDone) ? mDone.filter(Boolean).length : 0,
     total: MISSIONS ? MISSIONS.length : 0,
-    score: null, scoreTotal: null, chartTime: null,
+    score: myScore, scoreTotal: myScoreTotal, chartTime: myChartTime,
     ts: Date.now()
   }, extra || {}));
 }
 
 function pushScore(correct, total) {
+  myScore = correct; myScoreTotal = total; myChartTime = Date.now();
   if (!classMode || !myName) return;
   const cur = MISSIONS ? (MISSIONS[mIdx] || {}) : {};
   fbPut(`classes/${CLASS_ID}/students/${myId}`, {
@@ -2342,9 +2383,10 @@ function pushScore(correct, total) {
 }
 
 // ── Participants panel renderer ───────────────────────────────
+function escHtml(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function renderParticipants(data) {
   if (!data) { data = {}; }
-  const students = Object.values(data).sort((a, b) => a.name.localeCompare(b.name, 'ko'));
+  const students = Object.values(data).filter(s => s && typeof s.name === 'string').sort((a, b) => a.name.localeCompare(b.name, 'ko'));
 
   const badge = document.getElementById('cm-count');
   if (badge) badge.textContent = students.length;
@@ -2361,11 +2403,11 @@ function renderParticipants(data) {
     const pct = s.total ? Math.round((s.done / s.total) * 100) : 0;
     const isMe = (s.name === myName);
     const scoreHtml = (s.score !== null && s.score !== undefined)
-      ? `<div class="cm-score">✍️ 차팅 ${s.score}/${s.scoreTotal} 정답</div>` : '';
+      ? `<div class="cm-score">✍️ 차팅 ${escHtml(s.score)}/${escHtml(s.scoreTotal)} 정답</div>` : '';
     return `<div class="cm-student${isMe ? ' cm-me' : ''}">
       <div class="cm-student-top">
-        <span class="cm-student-name">${isMe ? '★ ' : ''}${s.name}</span>
-        <span class="cm-step-label">${s.stepTime ? s.stepTime + ' ' : ''}${s.stepName || '시작 전'}</span>
+        <span class="cm-student-name">${isMe ? '★ ' : ''}${escHtml(s.name)}</span>
+        <span class="cm-step-label">${s.stepTime ? escHtml(s.stepTime) + ' ' : ''}${escHtml(s.stepName || '시작 전')}</span>
       </div>
       <div class="cm-prog-bar"><div class="cm-prog-fill" style="width:${pct}%"></div></div>
       ${scoreHtml}
@@ -2382,7 +2424,7 @@ function renderLeaderboard(data) {
   if (!data) { lb.innerHTML = '<div class="cm-lb-empty">데이터 없음</div>'; return; }
 
   const scored = Object.values(data)
-    .filter(s => s.score !== null && s.score !== undefined)
+    .filter(s => s && typeof s.name === 'string' && s.score !== null && s.score !== undefined)
     .sort((a, b) => {
       if (b.score !== a.score) return b.score - a.score;
       return ((a.chartTime || Infinity) - (b.chartTime || Infinity));
@@ -2400,8 +2442,8 @@ function renderLeaderboard(data) {
     const barColor = pct >= 80 ? '#4ade80' : pct >= 50 ? '#fbbf24' : '#f87171';
     return `<div class="cm-lb-row${isMe ? ' cm-me' : ''}">
       <span class="cm-lb-rank">${medals[i] || (i + 1)}</span>
-      <span class="cm-lb-name">${s.name}${isMe ? ' (나)' : ''}</span>
-      <span class="cm-lb-score">${s.score}/${s.scoreTotal}</span>
+      <span class="cm-lb-name">${escHtml(s.name)}${isMe ? ' (나)' : ''}</span>
+      <span class="cm-lb-score">${escHtml(s.score)}/${escHtml(s.scoreTotal)}</span>
       <div class="cm-lb-bar"><div style="width:${pct}%;background:${barColor}"></div></div>
     </div>`;
   }).join('');
