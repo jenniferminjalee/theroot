@@ -538,52 +538,6 @@ body{
   .cen-inner{grid-template-columns:1fr;gap:28px;}
 }
 
-/* ── EVENT POPUP ── */
-.ev-overlay{
-  position:fixed;inset:0;z-index:9000;
-  background:rgba(30,40,30,0.72);
-  display:flex;align-items:center;justify-content:center;
-  padding:20px;
-  opacity:0;pointer-events:none;
-  transition:opacity .3s ease;
-}
-.ev-overlay.open{opacity:1;pointer-events:all;}
-.ev-wrap{
-  position:relative;
-  max-width:400px;width:100%;
-}
-.ev-poster{
-  width:100%;border-radius:20px;
-  display:block;box-shadow:0 24px 64px rgba(0,0,0,0.45);
-}
-.ev-close{
-  position:absolute;top:-14px;right:-14px;
-  width:36px;height:36px;border-radius:50%;
-  background:#fff;border:none;cursor:pointer;
-  font-size:18px;color:#333;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 2px 12px rgba(0,0,0,0.2);
-  transition:transform .15s,background .15s;
-  line-height:1;
-}
-.ev-close:hover{transform:scale(1.1);background:#f5f5f5;}
-.ev-cta{
-  display:block;
-  margin-top:14px;
-  background:var(--green);color:#fff;
-  text-align:center;
-  padding:14px 24px;border-radius:var(--r-sm);
-  font-size:15px;font-weight:700;text-decoration:none;
-  transition:background .15s;
-}
-.ev-cta:hover{background:#2a4d38;}
-.ev-skip{
-  display:block;text-align:center;
-  margin-top:10px;font-size:12px;color:rgba(255,255,255,0.55);
-  cursor:pointer;
-}
-.ev-skip:hover{color:rgba(255,255,255,0.8);}
-
 .jennifer{
   background:var(--bg);
   border-top:1px solid var(--bdrw);border-bottom:1px solid var(--bdrw);
@@ -676,18 +630,6 @@ footer{padding:32px var(--g);border-top:1px solid var(--bdrw);}
 </style>
 </head>
 <body>
-
-<!-- ═══ EVENT POPUP ════════════════════════════ -->
-<div class="ev-overlay" id="evOverlay">
-  <div class="ev-wrap">
-    <button class="ev-close" onclick="closePopup()" aria-label="닫기">✕</button>
-    <img src="poster-event.jpg" alt="Dream BIG Practice Bigger — The Root Career Stories" class="ev-poster">
-    <a href="https://forms.gle/t8VV3WGMnoypFwcg8" target="_blank" class="ev-cta" onclick="closePopup()">
-      지금 신청하기 →
-    </a>
-    <span class="ev-skip" onclick="closePopup(true)">오늘 하루 보지 않기</span>
-  </div>
-</div>
 
 <!-- ═══ NAV ════════════════════════════════════ -->
 <nav class="nav" id="nav">
@@ -1276,24 +1218,6 @@ function checkCen(btn, result){
   btn.classList.remove('wrong');
   btn.classList.add('correct');
   document.getElementById('cenAnswer').style.display = 'block';
-}
-
-/* Event Popup */
-(function(){
-  const KEY='rootEventPopup_20250718';
-  const hidden=localStorage.getItem(KEY);
-  if(!hidden){
-    setTimeout(()=>{
-      document.getElementById('evOverlay').classList.add('open');
-    }, 1200);
-  }
-  document.getElementById('evOverlay').addEventListener('click', function(e){
-    if(e.target===this) closePopup();
-  });
-})();
-function closePopup(skipDay){
-  document.getElementById('evOverlay').classList.remove('open');
-  if(skipDay) localStorage.setItem('rootEventPopup_20250718','1');
 }
 
 /* Restore from session */
