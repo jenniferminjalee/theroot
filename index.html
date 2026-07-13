@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Root — 미국 간호사 여정 플랫폼</title>
+<title>THE ROOT RN — 미국 간호사 여정 플랫폼</title>
 <meta name="description" content="미국 간호사 여정, 지금 어디쯤 일까요? The Root가 함께해요.">
 
 <style>
 /* ── RESET ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
+section[id]{scroll-margin-top:58px;}
 
 /* ── TOKENS — The Root brand palette (from logo + Clinical Experience Lab card) ── */
 :root{
@@ -113,6 +114,7 @@ body{
    HERO — stage-aware signature experience
 ═══════════════════════════════════════ */
 .hero{
+  min-height:100vh;
   min-height:100svh;
   background:
     radial-gradient(ellipse 65% 100% at 0% 50%, rgba(140,178,128,0.52) 0%, transparent 62%),
@@ -161,6 +163,7 @@ body{
   background:rgba(255,255,255,0.55);border:1px solid rgba(58,88,64,0.15);
   color:var(--t2);text-decoration:none;border-radius:99px;
   padding:10px 20px;font-size:14px;font-weight:500;cursor:pointer;
+  font-family:inherit;
   transition:background .2s,border-color .2s,color .2s,transform .2s,opacity .3s;
 }
 .h-chip:hover{
@@ -425,6 +428,14 @@ body{
   margin-top:4px;
 }
 .vhe-360-enter:hover{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.45);}
+.vhe-360-exit{
+  position:absolute;top:12px;right:12px;z-index:11;
+  display:none;
+  background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.3);
+  color:#fff;font-size:12px;font-weight:600;
+  padding:7px 14px;border-radius:99px;cursor:pointer;font-family:inherit;
+}
+.vhe-360-exit:hover{background:rgba(0,0,0,0.78);}
 .enter-pulse{
   width:9px;height:9px;border-radius:50%;background:#4ade80;
   animation:epulse 1.8s ease-in-out infinite;
@@ -636,8 +647,8 @@ footer{padding:32px var(--g);border-top:1px solid var(--bdrw);}
   <div class="nav-inner">
     <div style="display:flex;align-items:center;">
       <a href="/" class="nav-logo">
-        <!-- <img src="logo.png" alt="The Root" style="height:24px"> -->
-        The <em>Root</em>
+        <!-- <img src="logo.png" alt="THE ROOT RN" style="height:24px"> -->
+        THE <em>ROOT</em> RN
       </a>
       <!-- Stage context pill — appears after chip selection -->
       <div class="nav-stage" id="navStage">
@@ -675,12 +686,12 @@ footer{padding:32px var(--g);border-top:1px solid var(--bdrw);}
 
   <!-- Stage chips — identity selection, not filter buttons -->
   <div class="hero-chips" id="hChips">
-    <a class="h-chip" data-stage="0">학생</a>
-    <a class="h-chip" data-stage="1">한국 간호사</a>
-    <a class="h-chip" data-stage="2">비자 대기</a>
-    <a class="h-chip" data-stage="3">랜딩 완료</a>
-    <a class="h-chip" data-stage="4">첫 출근</a>
-    <a class="h-chip" data-stage="5">성장 중</a>
+    <button type="button" class="h-chip" data-stage="0">학생</button>
+    <button type="button" class="h-chip" data-stage="1">한국 간호사</button>
+    <button type="button" class="h-chip" data-stage="2">비자 대기</button>
+    <button type="button" class="h-chip" data-stage="3">랜딩 완료</button>
+    <button type="button" class="h-chip" data-stage="4">첫 출근</button>
+    <button type="button" class="h-chip" data-stage="5">성장 중</button>
   </div>
 
   <!-- Stage insight — the "The Root sees me" moment -->
@@ -815,6 +826,7 @@ footer{padding:32px var(--g);border-top:1px solid var(--bdrw);}
       loading="lazy"
       title="360° US Hospital Ward Tour">
     </iframe>
+    <button type="button" class="vhe-360-exit" id="vhe360exit" onclick="exitVHE()" aria-label="투어 닫기">✕ 닫기</button>
     <div class="vhe-360-overlay" id="vhe360overlay" onclick="enterVHE()">
       <div class="vhe-360-rooms">
         <span class="vhe-360-room on">간호사 스테이션</span>
@@ -941,18 +953,18 @@ footer{padding:32px var(--g);border-top:1px solid var(--bdrw);}
 <footer>
   <div class="footer-inner">
     <div>
-      <div class="footer-logo">The <em>Root</em></div>
+      <div class="footer-logo">THE <em>ROOT</em> RN</div>
       <div class="footer-tag">미국 간호사 여정을 함께, 더 멀리</div>
     </div>
     <div class="footer-links">
       <a href="https://www.youtube.com/@JenniferMinjaLee" target="_blank">YouTube</a>
       <a href="https://jenniferminjalee.substack.com"      target="_blank">Substack</a>
       <a href="https://www.instagram.com/theroot.rn"       target="_blank">Instagram</a>
-      <a href="mailto:jenniferminjalee@gmail.com?subject=The Root">Contact</a>
+      <a href="mailto:jenniferminjalee@gmail.com?subject=THE%20ROOT%20RN">Contact</a>
     </div>
     <p class="footer-legal">
       정보는 참고용이며 실제 지원 전 해당 주 간호사 면허 위원회에 반드시 확인하세요. ·
-      © 2026 The Root · Jennifer Minja Lee · California RN
+      © 2026 THE ROOT RN · Jennifer Minja Lee · California RN
     </p>
   </div>
 </footer>
@@ -1120,8 +1132,9 @@ let selectedStage = null;
 
 function selectStage(idx){
   const stage = STAGES[idx];
+  if(!stage) return;
   selectedStage = idx;
-  sessionStorage.setItem('rootStage', idx);
+  try{ sessionStorage.setItem('rootStage', idx); }catch(e){}
 
   /* ── 1. Chips: selected vs dimmed ── */
   document.querySelectorAll('.h-chip').forEach((c,i) => {
@@ -1211,19 +1224,26 @@ document.querySelectorAll('.h-chip').forEach((chip, idx) => {
 
 /* Clinical English sample */
 function checkCen(btn, result){
-  document.querySelectorAll('.cen-opt').forEach(b => {
-    b.setAttribute('disabled','true');
-    b.classList.add('wrong');
-  });
-  btn.classList.remove('wrong');
-  btn.classList.add('correct');
+  document.querySelectorAll('.cen-opt').forEach(b => b.setAttribute('disabled',''));
+  if(result === 'correct'){
+    btn.classList.add('correct');
+  } else {
+    btn.classList.add('wrong');
+    const right = document.querySelector(".cen-opt[onclick*='correct']");
+    if(right) right.classList.add('correct');
+  }
   document.getElementById('cenAnswer').style.display = 'block';
 }
 
 /* Restore from session */
 (function(){
-  const saved = sessionStorage.getItem('rootStage');
-  if(saved !== null) setTimeout(() => selectStage(parseInt(saved)), 800);
+  let saved = null;
+  try{ saved = sessionStorage.getItem('rootStage'); }catch(e){}
+  if(saved === null) return;
+  const i = parseInt(saved, 10);
+  if(!Number.isInteger(i) || !STAGES[i]) return;
+  /* don't override a choice the user makes before the restore fires */
+  setTimeout(() => { if(selectedStage === null) selectStage(i); }, 800);
 })();
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1245,7 +1265,11 @@ function checkCen(btn, result){
   });
 })();
 
+let jpTimers = [];
 function updateJourneyPath(currentNode){
+  /* cancel pending animation from a previous selection */
+  jpTimers.forEach(clearTimeout);
+  jpTimers = [];
   const nodes  = document.querySelectorAll('.j-node');
   const fill   = document.getElementById('jSpineFill');
   const prompt = document.getElementById('journeyPrompt');
@@ -1267,7 +1291,7 @@ function updateJourneyPath(currentNode){
   /* Stagger: fill nodes one by one, then current node ripple */
   nodes.forEach((n, i) => {
     const delay = i * 55;
-    setTimeout(() => {
+    jpTimers.push(setTimeout(() => {
       n.classList.remove('future');
       if(i < currentNode){
         n.classList.add('done');
@@ -1282,7 +1306,7 @@ function updateJourneyPath(currentNode){
       } else {
         n.classList.add('future');
       }
-    }, delay + 80);
+    }, delay + 80));
   });
 }
 
@@ -1362,6 +1386,12 @@ function updateJenniferVariant(variant){
 function enterVHE(){
   document.getElementById('vhe360overlay').classList.add('gone');
   document.getElementById('vhe360frame').style.pointerEvents = 'all';
+  document.getElementById('vhe360exit').style.display = 'block';
+}
+function exitVHE(){
+  document.getElementById('vhe360overlay').classList.remove('gone');
+  document.getElementById('vhe360frame').style.pointerEvents = 'none';
+  document.getElementById('vhe360exit').style.display = 'none';
 }
 </script>
 
