@@ -1012,6 +1012,7 @@ maybeShowPyxisBtn();
 }
 .mar-flag-alert{background:rgba(255,107,107,0.18);color:#ff8585;}
 .mar-flag-prn{background:rgba(255,210,120,0.18);color:#ffd278;}
+.mar-flag-low{background:rgba(96,165,250,0.18);color:#93c5fd;}
 .mar-tips{margin-top:8px;}
 .mar-tip{
   font-size:11.5px;line-height:1.6;color:rgba(255,255,255,0.65);
@@ -1336,8 +1337,8 @@ const MISSIONS=[
      오늘 두 명을 배정받았습니다. 나이트 간호사 Sarah의 리포트를 받았습니다.
      실전에서는 이 내용을 들으며 <b>brain sheet</b>에 메모하게 됩니다.
      <div class="m-future">💡 <b>다음 단계:</b> 인수인계 후 → 환자 첫 라운딩(assessment). 직접 환자를 보고 IV 라인, 모니터, 드립 속도를 확인하세요.</div>`},
-  {id:'mar_review', time:'0710', title:'MAR 확인 — 투약 리스트', room:'station', type:'mar',
-   btn:'💊 MAR 확인하기',
+  {id:'mar_review', time:'0710', title:'MAR & LAB 확인', room:'station', type:'mar',
+   btn:'💊 MAR · LAB 확인하기',
    patients:[
      {room:'412', name:'Davis, Robert', meds:[
        {name:'Heparin', dose:'12 u/kg/hr', route:'IV gtt', schedule:'Continuous', last:'0600', flag:'high-alert'},
@@ -1345,7 +1346,20 @@ const MISSIONS=[
        {name:'Atorvastatin', dose:'80mg', route:'PO', schedule:'Daily 2100 (HS)', last:'어제 2100', flag:''},
        {name:'Metoprolol', dose:'25mg', route:'PO', schedule:'BID 0900/2100', last:'어제 2100', flag:''},
        {name:'Nitroglycerin (NTG)', dose:'0.4mg SL', route:'Sublingual', schedule:'PRN q5min x3 (chest pain)', last:'-', flag:'prn'}
-     ]},
+     ],
+      labs:[
+       {name:'Troponin I', val:'0.12', unit:'ng/mL', time:'0100', ref:'< 0.04', flag:'H', note:'입원 시 0.04 → 0.12 상승 추세'},
+       {name:'Troponin 재검', val:'pending', time:'0700', ref:'< 0.04', flag:'P', note:'채혈 나감 — 결과 F/U 필수!'},
+       {name:'aPTT', val:'65', unit:'sec', time:'0100', ref:'기저 25–35', flag:'', note:'Heparin gtt 치료 목표 60–80 → in range, rate 유지 (q6h 재검)'},
+       {name:'K (Potassium)', val:'4.1', unit:'mEq/L', time:'0100', ref:'3.5–5.0', flag:'', note:''},
+       {name:'Creatinine', val:'1.0', unit:'mg/dL', time:'0100', ref:'0.6–1.2', flag:'', note:''},
+       {name:'Hgb', val:'14.2', unit:'g/dL', time:'0100', ref:'13–17', flag:'', note:''},
+       {name:'CBC · CMP (정기)', val:'pending', ref:'—', flag:'P', note:''}
+      ],
+      labTips:[
+       '흉통 환자의 troponin은 "한 번 정상"으로 안심하면 안 돼요 — 3–6시간 간격의 trend가 진짜 답이에요.',
+       'Heparin gtt 중 aPTT가 60–80을 벗어나면 병원 프로토콜(nomogram)대로 rate 조정 후 6시간 뒤 재검해요.'
+      ]},
      {room:'414', name:'Lee, David', meds:[
        {name:'Albuterol Neb', dose:'2.5mg/3mL', route:'Inhalation', schedule:'PRN q4h (wheezing/SOB)', last:'-', flag:'prn'},
        {name:'Aspirin', dose:'81mg', route:'PO', schedule:'Daily 0900', last:'어제 0900', flag:''},
@@ -1354,13 +1368,26 @@ const MISSIONS=[
        {name:'Insulin Sliding Scale', dose:'Accucheck 기반', route:'SubQ', schedule:'AC + HS (식전·취침전)', last:'어제 2100', flag:'high-alert'},
        {name:'Heparin', dose:'5000u', route:'SubQ', schedule:'Q8H (VTE prophylaxis)', last:'0200', flag:''},
        {name:'HD Today', dose:'—', route:'Dialysis', schedule:'금일 예정', last:'—', flag:'prn'}
-     ]}
+     ],
+      labs:[
+       {name:'K (Potassium)', val:'4.9', unit:'mEq/L', time:'0600', ref:'3.5–5.0', flag:'', note:'경계 상단 — 금일 HD 예정, HD 후 재검 F/U'},
+       {name:'BNP', val:'1,850', unit:'pg/mL', time:'입원 시', ref:'< 100', flag:'H', note:'CHF exacerbation 반영 — 호흡음·체중과 함께 트렌드로 판단'},
+       {name:'Creatinine', val:'6.9', unit:'mg/dL', time:'0600', ref:'0.6–1.2', flag:'H', note:'ESRD baseline — 절대값보다 트렌드'},
+       {name:'BUN', val:'74', unit:'mg/dL', time:'0600', ref:'7–20', flag:'H', note:''},
+       {name:'Hgb', val:'10.1', unit:'g/dL', time:'0600', ref:'13–17', flag:'L', note:'renal anemia — ESRD에서 흔해요'},
+       {name:'Glucose (Accucheck)', val:'148', unit:'mg/dL', time:'0600', ref:'70–140', flag:'H', note:'AC/HS sliding scale로 커버'}
+      ],
+      labTips:[
+       'ESRD 환자의 K·Cr·BUN은 "정상범위"가 아니라 환자 본인의 baseline 대비 트렌드로 판단해요.',
+       'HD 예정 환자는 채혈 시점이 중요해요 — HD 전후로 K가 크게 달라지니 언제 뽑은 값인지 같이 보세요.'
+      ]}
    ],
    intro:`<div class="em-banner"><b>💊 MAR (Medication Administration Record)</b></div>
      인수인계 받은 직후, 본인이 담당할 환자들의 MAR을 직접 확인하는 게 미국 간호사의 첫 루틴이에요.
      Epic 같은 EMR에서는 이 화면을 띄워서 오늘 투약 스케줄을 한눈에 봐요.<br><br>
      <span style="color:#ff6b6b">🔺 high-alert</span> = 이중 확인이 필요한 고위험 약물 ·
-     <span style="color:#ffd278">⏰ prn</span> = 환자가 필요할 때만 투여`,
+     <span style="color:#ffd278">⏰ prn</span> = 환자가 필요할 때만 투여<br><br>
+     🧪 <b>LAB 탭</b>도 꼭 확인하세요 — "Check your morning labs"는 인수인계 직후 필수 루틴이에요.`,
    tips:[
      '⏰ 0900에 투약이 몰려요 — 미리 순서를 계획하세요.',
      'Heparin과 Insulin은 high-alert 약물이에요. 투여 전 동료에게 "Can you double-check this with me?" 요청하는 게 표준 절차예요.',
@@ -1478,7 +1505,7 @@ const MISSIONS=[
    btn:'🏥 Post-PCI Assessment 시작',
    checks:[
      {n:'📋 Procedure 확인',
-      detail:'1-vessel PCI with drug-eluting stent placement, right radial access. 시술 자체는 30-40분 정도 걸려요. 차트에서 시술 내용과 access site를 먼저 확인하는 습관!'},
+      detail:'PCI with drug-eluting stent (DES) to mid-LAD, right radial access. 시술 자체는 30-40분 정도 걸려요. 차트에서 시술 내용과 access site를 먼저 확인하는 습관!'},
      {n:'🩹 Radial Access Site',
       detail:'Radial band(압박 밴드) 착용 확인. 출혈, 부종, 혈종 없는지 확인. Femoral access와 달리 radial은 침상안정 시간이 짧고(보통 2-4시간), 환자가 더 빨리 움직일 수 있어요.'},
      {n:'✋ Distal Pulse Check (Radial/Ulnar)',
@@ -1508,14 +1535,14 @@ const MISSIONS=[
      {time:'1600', segments:[
        {text:'Pt '},{blank:true,answer:'returned',placeholder:'복귀',hint:'cath lab에서 "돌아왔다"'},
        {text:' from cath lab '},{blank:true,answer:'s/p',placeholder:'약어',hint:'"status post"의 의료 약어 (시술 후라는 뜻)'},
-       {text:' 1-vessel PCI with stent, right radial access. Radial band intact, no '},{blank:true,answer:'bleeding',placeholder:'증상없음',hint:'출혈이 없다는 뜻의 단어'},
+       {text:' PCI with DES to mid-LAD, right radial access. Radial band intact, no '},{blank:true,answer:'bleeding',placeholder:'증상없음',hint:'출혈이 없다는 뜻의 단어'},
        {text:'. CMS '},{blank:true,answer:'wnl',placeholder:'약어',hint:'Within Normal Limits의 약어'},
        {text:'. DAPT started. NPO '},{blank:true,answer:'discontinued',placeholder:'중단',hint:'NPO가 "해제/중단되었다"는 뜻의 단어'},
        {text:'. Denies chest pain.'}
      ]}
    ],
    sample:`<b>1300</b> — Pt c/o chest pain 8/10. RRT called, Dr. Kim notified. Troponin uptrend (0.12→0.58). Pt transferred to cath lab for emergent PCI.
-<b>1600</b> — Pt returned from cath lab s/p 1-vessel PCI with stent, right radial access. Radial band intact, no bleeding. CMS WNL. DAPT started. NPO discontinued. Denies chest pain.
+<b>1600</b> — Pt returned from cath lab s/p PCI with DES to mid-LAD, right radial access. Radial band intact, no bleeding. CMS WNL. DAPT started. NPO discontinued. Denies chest pain.
 
 <span style="color:#ffd278">💡 참고: "Will continue to monitor" 대신 구체적인 재평가 시각을 적는 게 더 명확해요. (예: "Pain reassessed at 1330" 처럼) — 법적으로 금지된 건 아니지만, 더 좋은 차팅 습관이에요.</span>`},
   {id:'handoff', time:'1900', title:'인수인계 주기', room:'station', type:'action',
@@ -1593,7 +1620,7 @@ function reviewMission(i){
     document.getElementById('chartSample').classList.remove('show');
     document.getElementById('fillBlankArea').innerHTML='';
     document.getElementById('fbSubmitBtn').style.display='none';
-    marMission=m;marTab=0;
+    marMission=m;marTab=0;marSub=0;marGate=false;
     renderMar();
     const reviewBanner=`<div style="background:rgba(100,220,160,0.1);border:1px solid rgba(100,220,160,0.3);border-radius:8px;padding:8px 10px;font-size:11px;color:#64dc96;margin-bottom:10px">✓ 완료한 미션을 다시 보고 있어요</div>`;
     document.getElementById('mpBody').innerHTML=reviewBanner+document.getElementById('mpBody').innerHTML;
@@ -2028,9 +2055,9 @@ function submitInlineFillBlank(){
 }
 
 /* ═══════════ MAR ENGINE (투약 리스트 — Medication Administration Record) ═══════════ */
-let marMission=null, marTab=0;
+let marMission=null, marTab=0, marSub=0, marGate=false, marSeenLab=false;
 function openMarModal(m){
-  marMission=m;marTab=0;autoSpin=false;
+  marMission=m;marTab=0;marSub=0;marGate=true;marSeenLab=false;autoSpin=false;
   document.getElementById('mpTime').textContent=m.time+' · MAR';
   document.getElementById('mpTitle').textContent=m.title;
   document.getElementById('chartInput').style.display='none';
@@ -2040,7 +2067,7 @@ function openMarModal(m){
   document.getElementById('fbSubmitBtn').style.display='none';
   renderMar();
   const done=document.getElementById('mpDone');
-  done.disabled=false;done.textContent='확인했어요 ✓';
+  done.disabled=true;done.textContent='🧪 LAB 탭도 확인하세요';
   document.getElementById('mModal').classList.add('show');
 }
 function renderMar(){
@@ -2050,22 +2077,52 @@ function renderMar(){
     `<button class="mar-tab ${i===marTab?'active':''}" onclick="switchMarTab(${i})">${p.room} · ${p.name}</button>`).join('');
   html+='</div>';
   const p=m.patients[marTab];
-  html+=`<table class="mar-table"><thead><tr>
-    <th>약물</th><th>용량</th><th>경로</th><th>스케줄</th><th>마지막 투여</th>
-  </tr></thead><tbody>`;
-  html+=p.meds.map(med=>{
-    const flagBadge=med.flag==='high-alert'?'<span class="mar-flag mar-flag-alert">🔺 high-alert</span>':
-                     med.flag==='prn'?'<span class="mar-flag mar-flag-prn">⏰ PRN</span>':'';
-    return `<tr><td>${med.name}${flagBadge}</td><td>${med.dose}</td><td>${med.route}</td><td>${med.schedule}</td><td>${med.last}</td></tr>`;
-  }).join('');
-  html+='</tbody></table>';
-  if(m.tips){
-    html+='<div class="mar-tips">'+m.tips.map(t=>`<div class="mar-tip">💡 ${t}</div>`).join('')+'</div>';
+  html+='<div class="mar-tabs" style="margin-top:0">'
+    +`<button class="mar-tab ${marSub===0?'active':''}" onclick="switchMarSub(0)">💊 MAR</button>`
+    +`<button class="mar-tab ${marSub===1?'active':''}" onclick="switchMarSub(1)">🧪 LAB</button>`
+    +'</div>';
+  if(marSub===0){
+    html+=`<table class="mar-table"><thead><tr>
+      <th>약물</th><th>용량</th><th>경로</th><th>스케줄</th><th>마지막 투여</th>
+    </tr></thead><tbody>`;
+    html+=p.meds.map(med=>{
+      const flagBadge=med.flag==='high-alert'?'<span class="mar-flag mar-flag-alert">🔺 high-alert</span>':
+                       med.flag==='prn'?'<span class="mar-flag mar-flag-prn">⏰ PRN</span>':'';
+      return `<tr><td>${med.name}${flagBadge}</td><td>${med.dose}</td><td>${med.route}</td><td>${med.schedule}</td><td>${med.last}</td></tr>`;
+    }).join('');
+    html+='</tbody></table>';
+    if(m.tips){
+      html+='<div class="mar-tips">'+m.tips.map(t=>`<div class="mar-tip">💡 ${t}</div>`).join('')+'</div>';
+    }
+  }else{
+    html+=`<table class="mar-table"><thead><tr>
+      <th>검사</th><th>결과</th><th>참고치</th><th>비고</th>
+    </tr></thead><tbody>`;
+    html+=(p.labs||[]).map(lab=>{
+      const flagBadge=lab.flag==='H'?'<span class="mar-flag mar-flag-alert">🔺 H</span>':
+                       lab.flag==='L'?'<span class="mar-flag mar-flag-low">🔻 L</span>':
+                       lab.flag==='P'?'<span class="mar-flag mar-flag-prn">⏳ pending</span>':'';
+      const t=lab.time?` <span style="color:rgba(255,255,255,0.35);font-size:10px">(${lab.time})</span>`:'';
+      return `<tr><td>${lab.name}${flagBadge}</td><td>${lab.val}${lab.unit?' '+lab.unit:''}${t}</td><td>${lab.ref||'—'}</td><td style="color:rgba(255,255,255,0.55)">${lab.note||''}</td></tr>`;
+    }).join('');
+    html+='</tbody></table>';
+    if(p.labTips){
+      html+='<div class="mar-tips">'+p.labTips.map(t=>`<div class="mar-tip">🧪 ${t}</div>`).join('')+'</div>';
+    }
   }
   document.getElementById('mpBody').innerHTML=html;
 }
 function switchMarTab(i){
   marTab=i;
+  renderMar();
+}
+function switchMarSub(i){
+  marSub=i;
+  if(i===1&&marGate&&!marSeenLab){
+    marSeenLab=true;
+    const d=document.getElementById('mpDone');
+    d.disabled=false;d.textContent='확인했어요 ✓';
+  }
   renderMar();
 }
 
@@ -2215,10 +2272,74 @@ const FB_DB_URL = 'https://the-root-v-hospital-default-rtdb.firebaseio.com';
 const _urlClass = new URLSearchParams(location.search).get('class') || '';
 const CLASS_ID = (_urlClass || 'theroot').replace(/[^a-zA-Z0-9\-_]/g, '_');
 
-// ── 세션 코드: URL ?class= 파라미터와 자동 연동 ──────────────────
-// 링크에 ?class=0722 → 코드도 자동으로 0722, Firebase도 /classes/0722/ 에 저장
-// 파라미터 없을 때만 아래 기본값 사용
-const SESSION_CODE = _urlClass || '1234';
+// ── 세션 코드 (비공개) ──────────────────────────────────────────
+// ?class= 는 기수 이름(저장 경로)일 뿐, 코드가 아니에요.
+// 코드는 SHA-256 해시로만 저장 — 소스를 봐도 원문을 알 수 없어요.
+// 새 기수 추가: 배포된 페이지에서 F12 콘솔 → hashCode('원하는코드') 실행
+// → 나온 해시를 아래에  '기수이름': '해시',  형태로 추가
+const SESSION_CODE_HASHES = {
+  'theroot': '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', // 코드: 1234 (테스트용)
+  '0722': '9d2668f3dfc3060ce16e2cb5ac53388237ced9b9d42d2a30c7e767127cf69741', // 코드: 0722 (기존 안내대로)
+};
+
+function sha256(ascii){
+  function rightRotate(value, amount){ return (value>>>amount) | (value<<(32-amount)); }
+  ascii = unescape(encodeURIComponent(ascii));
+  var mathPow = Math.pow, maxWord = mathPow(2, 32), i, j, result = '';
+  var words = [], asciiBitLength = ascii.length*8;
+  var hash = sha256.h = sha256.h || [], k = sha256.k = sha256.k || [];
+  var primeCounter = k.length;
+  var isComposite = {};
+  for (var candidate = 2; primeCounter < 64; candidate++) {
+    if (!isComposite[candidate]) {
+      for (i = 0; i < 313; i += candidate) isComposite[i] = candidate;
+      hash[primeCounter] = (mathPow(candidate, .5)*maxWord)|0;
+      k[primeCounter++] = (mathPow(candidate, 1/3)*maxWord)|0;
+    }
+  }
+  ascii += '\x80';
+  while (ascii.length%64 - 56) ascii += '\x00';
+  for (i = 0; i < ascii.length; i++) {
+    j = ascii.charCodeAt(i);
+    if (j>>8) return;
+    words[i>>2] |= j << ((3-i)%4)*8;
+  }
+  words[words.length] = ((asciiBitLength/maxWord)|0);
+  words[words.length] = (asciiBitLength);
+  for (j = 0; j < words.length;) {
+    var w = words.slice(j, j += 16);
+    var oldHash = hash;
+    hash = hash.slice(0, 8);
+    for (i = 0; i < 64; i++) {
+      var w15 = w[i - 15], w2 = w[i - 2];
+      var a = hash[0], e = hash[4];
+      var temp1 = hash[7]
+        + (rightRotate(e, 6) ^ rightRotate(e, 11) ^ rightRotate(e, 25))
+        + ((e&hash[5])^((~e)&hash[6]))
+        + k[i]
+        + (w[i] = (i < 16) ? w[i] : (
+            w[i - 16]
+            + (rightRotate(w15, 7) ^ rightRotate(w15, 18) ^ (w15>>>3))
+            + w[i - 7]
+            + (rightRotate(w2, 17) ^ rightRotate(w2, 19) ^ (w2>>>10))
+          )|0
+        );
+      var temp2 = (rightRotate(a, 2) ^ rightRotate(a, 13) ^ rightRotate(a, 22))
+        + ((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+      hash = [(temp1 + temp2)|0].concat(hash);
+      hash[4] = (hash[4] + temp1)|0;
+    }
+    for (i = 0; i < 8; i++) hash[i] = (hash[i] + oldHash[i])|0;
+  }
+  for (i = 0; i < 8; i++) {
+    for (j = 3; j + 1; j--) {
+      var b = (hash[i]>>(j*8))&255;
+      result += ((b < 16) ? 0 : '') + b.toString(16);
+    }
+  }
+  return result;
+}
+function hashCode(code){ return sha256(String(code).trim().toLowerCase()); }
 const classMode = Boolean(FB_DB_URL);
 
 // ── Student identity (persisted in localStorage) ──────────────
@@ -2252,9 +2373,10 @@ _audioObserver.observe(document.body, { childList: true, subtree: true });
 // ── Name modal ───────────────────────────────────────────────
 function showNameModal() {
   if (!classMode) return;
-  document.getElementById('cm-session-label').textContent = '';
-  if (sessionStorage.getItem('tr_code_ok') && myName) { joinClass(); return; }
-  if (sessionStorage.getItem('tr_code_ok') && !myName) {
+  document.getElementById('cm-session-label').textContent = _urlClass ? '세션: ' + CLASS_ID : '';
+  const codeOk = sessionStorage.getItem('tr_code_ok_' + CLASS_ID);
+  if (codeOk && myName) { joinClass(); return; }
+  if (codeOk && !myName) {
     document.getElementById('cm-step-code').style.display = 'none';
     document.getElementById('cm-step-name').style.display = 'block';
     document.getElementById('cm-name-modal').style.display = 'flex';
@@ -2262,27 +2384,20 @@ function showNameModal() {
     return;
   }
   document.getElementById('cm-name-modal').style.display = 'flex';
-  // URL에 ?class= 있으면 코드 자동완성
-  if (_urlClass) {
-    const inp = document.getElementById('cm-code-input');
-    inp.value = _urlClass;
-    inp.readOnly = true;
-    inp.style.color = '#7a9b72';
-    inp.style.letterSpacing = '0.2em';
-  }
   setTimeout(() => document.getElementById('cm-code-input').focus(), 100);
 }
 
 function submitCode() {
-  const val = (document.getElementById('cm-code-input').value || '').trim();
-  if (val.toLowerCase() === String(SESSION_CODE).toLowerCase()) {
-    sessionStorage.setItem('tr_code_ok', '1');
+  const val = (document.getElementById('cm-code-input').value || '').trim().toLowerCase();
+  const expected = SESSION_CODE_HASHES[CLASS_ID];
+  if (expected && val && sha256(val) === expected) {
+    sessionStorage.setItem('tr_code_ok_' + CLASS_ID, '1');
     document.getElementById('cm-step-code').style.display = 'none';
     document.getElementById('cm-step-name').style.display = 'block';
     setTimeout(() => document.getElementById('cm-name-input').focus(), 100);
   } else {
     const err = document.getElementById('cm-code-error');
-    err.textContent = '코드가 맞지 않아요. 강사에게 다시 확인하세요.';
+    err.textContent = expected ? '코드가 맞지 않아요. 강사에게 다시 확인하세요.' : '등록되지 않은 세션 링크예요. 강사에게 링크를 다시 확인하세요.';
     document.getElementById('cm-code-input').value = '';
     document.getElementById('cm-code-input').focus();
     setTimeout(() => { err.textContent = ''; }, 3000);
@@ -2471,10 +2586,10 @@ function toggleParticipants() {
 window.addEventListener('DOMContentLoaded', () => {
   if (classMode) {
     showNameModal();
-  } else if (SESSION_CODE) {
+  } else if (SESSION_CODE_HASHES[CLASS_ID]) {
     // Solo mode but still gate-protected
     const code = prompt('세션 코드를 입력하세요:');
-    if (!code || code.trim().toLowerCase() !== String(SESSION_CODE).toLowerCase()) {
+    if (!code || sha256(code.trim().toLowerCase()) !== SESSION_CODE_HASHES[CLASS_ID]) {
       document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#080c18;color:rgba(255,255,255,0.4);font-family:system-ui;font-size:14px">세션 코드가 맞지 않습니다</div>';
     }
   }
