@@ -1341,7 +1341,7 @@ const MISSIONS=[
    btn:'💊 MAR · LAB 확인하기',
    patients:[
      {room:'412', name:'Davis, Robert', meds:[
-       {name:'Heparin', dose:'12 u/kg/hr', route:'IV gtt', schedule:'Continuous', last:'0600', flag:'high-alert'},
+       {name:'Heparin', dose:'1200 u/hr', route:'IV gtt', schedule:'Continuous · aPTT nomogram대로 titrate', last:'0600', flag:'high-alert'},
        {name:'Losartan', dose:'50mg', route:'PO', schedule:'Daily 0900', last:'어제 0900', flag:''},
        {name:'Atorvastatin', dose:'80mg', route:'PO', schedule:'Daily 2100 (HS)', last:'어제 2100', flag:''},
        {name:'Metoprolol', dose:'25mg', route:'PO', schedule:'BID 0900/2100', last:'어제 2100', flag:''},
@@ -1361,7 +1361,7 @@ const MISSIONS=[
        'Heparin gtt 중 aPTT가 60–80을 벗어나면 병원 프로토콜(nomogram)대로 rate 조정 후 6시간 뒤 재검해요.'
       ]},
      {room:'414', name:'Lee, David', meds:[
-       {name:'Albuterol Neb', dose:'2.5mg/3mL', route:'Inhalation', schedule:'PRN q4h (wheezing/SOB)', last:'-', flag:'prn'},
+       {name:'Albuterol Neb', dose:'2.5mg/3mL', route:'Inhalation', schedule:'PRN q4h (wheezing 동반 시 — CHF엔 산소·이뇨가 먼저)', last:'-', flag:'prn'},
        {name:'Aspirin', dose:'81mg', route:'PO', schedule:'Daily 0900', last:'어제 0900', flag:''},
        {name:'Metoprolol', dose:'25mg', route:'PO', schedule:'BID 0900/2100', last:'어제 2100', flag:''},
        {name:'Amlodipine', dose:'5mg', route:'PO', schedule:'Daily 0900', last:'어제 0900', flag:''},
@@ -1435,19 +1435,21 @@ const MISSIONS=[
    hint:'약품실의 💊 Omnicell 시뮬레이션을 80% 이상으로 통과하세요'},
   {id:'priority_check', time:'0905', title:'Call Light — 우선순위 판단', room:'medroom', type:'priority_choice',
    prompt:`<div class="em-banner" style="border-color:rgba(255,107,107,0.4)"><b>🔔 ROOM 414 콜벨 — "I'm having trouble breathing"</b></div>
-     Omnicell에서 Jane(420호) PRN 진통제를 막 꺼낸 직후, Lee 할아버지(414호)의 콜벨이 울립니다.
+     Omnicell에서 Jane(420호) PRN 진통제를 <b>주사기에 뽑아 든 직후</b>, Lee 할아버지(414호)의 콜벨이 울립니다.
      "숨쉬기가 힘들어요"라고 합니다.<br><br>
-     지금 손에는 Jane에게 줄 PRN 진통제가 있습니다. 어떻게 하시겠어요?`,
+     손에는 이미 준비된 <b>마약성 진통제(주사기)</b>가 들려 있습니다. 어떻게 하시겠어요?`,
    options:[
-     {label:'Jane 투약을 먼저 마치고 414호로 간다', correct:false,
+     {label:'약을 메드룸에 잠깐 두고 414호로 뛰어간다', correct:false,
       feedback:`<b style="color:#ff6b6b">⚠️ 우선순위를 다시 생각해보세요</b><br><br>
         PRN은 as-needed — 지금 당장 안 줘도 즉각적 위험 없어요.
         반면 "숨쉬기 힘들다"는 호소는 <b>ABC(Airway-Breathing-Circulation)</b> 우선순위에서 매우 높은 신호예요.
-        CHF 호흡곤란은 빠르게 진행될 수 있어요. <b>먼저 확인</b>이 맞아요.<br>Jane의 약은 Omnicell에 두고 414호 먼저!`},
-     {label:'PRN 약은 잠시 두고 즉시 414호로 간다', correct:true,
+        CHF 호흡곤란은 빠르게 진행될 수 있어요. <b>먼저 확인</b>이 맞아요.<br><br>
+        단, 이미 뽑은 <b>마약은 절대 아무 데나 두고 가면 안 돼요</b> — controlled substance를 방치하는 건 diversion 위험이라 규정 위반이에요. <b>몸에 지닌 채로</b> 414호 먼저 확인하는 게 맞습니다.`},
+     {label:'뽑은 약은 몸에 지닌 채 즉시 414호로 간다', correct:true,
       feedback:`<b style="color:#64dc96">✅ 좋은 판단이에요!</b><br><br>
         PRN 진통제는 <b>필수가 아닌(as-needed)</b> 투약이라 몇 분 늦어도 안전해요.
         "숨쉬기 힘들다"는 신호는 CHF 환자에게 <b>악화의 초기 징후</b>일 수 있어서, 먼저 직접 확인하는 게 맞습니다.<br><br>
+        💊 <b>단, 이미 뽑은 마약은 손에서 놓지 마세요</b> — 몸에 지니거나 잠긴 곳에 보관해요. 414호 정리 후 Jane에게 투여하고, 상황상 못 주게 되면 그때 witness 두고 waste 처리하면 돼요.<br><br>
         💡 <b>미국 간호 우선순위의 기본:</b> ABC(Airway-Breathing-Circulation)가 흔들리는 신호는
         예정된 투약보다 항상 우선이에요. 안정된 일(scheduled task) vs 불안정 신호(unstable sign) — 이 둘을 구분하는 게 prioritization의 핵심입니다.`}
    ]},
@@ -1459,11 +1461,11 @@ const MISSIONS=[
      {n:'💉 Vital Signs & SpO₂ 확인',
       detail:'SpO₂ 88% (낮음!), RR 26 (빠름), HR 102. 산소 연결이 안 되어 있는 상태를 발견 — 비치는 되어 있지만 실제 연결 안 된 경우가 흔해요.'},
      {n:'🫁 산소 적용 (Oxygen Therapy)',
-      detail:'2L nasal cannula 즉시 적용. 저산소증은 응급 상황이라 <b>의사 오더 없이도 ABC 대응으로 먼저 적용 가능</b>한 게 미국 병원 표준 프로토콜이에요 — 한국과 다른 점! 오더는 나중에 받으면 됩니다.'},
+      detail:'2L nasal cannula 즉시 적용. 저산소증은 응급이라 <b>산소부터 적용하고 오더는 나중에</b> — 이건 한국·미국 어디서나 하는 대응이에요. 다만 미국은 이런 간호사 독자 판단이 protocol/standing order로 더 명문화돼 있어서, 오더 없이 먼저 했다는 부담이 상대적으로 덜한 편이에요.'},
      {n:'😮‍💨 재평가 (Reassessment)',
-      detail:'산소 적용 후 몇 분 뒤 SpO₂ 재확인 → 94%로 호전. 환자도 "좀 편해졌어요"라고 함. 호전 여부를 반드시 재확인하고 차팅하는 습관이 중요해요.'},
+      detail:'산소 적용 후 몇 분 뒤 SpO₂ 재확인 → 94%로 호전. 환자도 "좀 편해졌어요"라고 함. 단, 청진하면 <b>bilateral bases에 crackles + mild wheezing이 남아있음</b> — 산소로 숫자는 잡혔지만 폐 상태는 아직이라는 뜻이에요. 호전 여부와 남은 소견을 함께 재확인·차팅하는 습관이 중요해요.'},
      {n:'📞 Respiratory Therapy(RT) 호출',
-      detail:'미국 병원에는 RT(Respiratory Therapist)라는 별도 직군이 있어요. Nebulizer/albuterol 같은 breathing treatment는 RT가 직접 와서 시행하는 경우가 많습니다. "Can you do a breathing treatment for the patient in 414? SpO2 was 88%, now 94% on 2L."'},
+      detail:'미국 병원에는 RT(Respiratory Therapist)라는 별도 직군이 있어서 산소요법·호흡 평가·breathing treatment를 담당해요. CHF 호흡곤란의 근본 치료는 산소·이뇨지만, 지금처럼 <b>wheezing이 남아있으면</b> PRN albuterol neb으로 기관지연축 요소를 커버하는 게 타당해요(cardiac wheeze나 COPD 동반 감별). RT를 불러 breathing treatment + 호흡 상태 재평가를 맡겨요. "Can you come do a breathing treatment for 414? CHF exacerbation, SpO2 88→94% on 2L, still wheezing on exam."'},
      {n:'👨‍⚕️ Doctor Notification',
       detail:'O2 적용과 RT 콜 후, 담당 의사에게도 알리는 게 좋아요. 산소 적용은 간호사 독자 판단으로 가능했지만, 새로운 산소 오더와 향후 모니터링 계획은 의사 확인이 필요합니다.'}
    ],
