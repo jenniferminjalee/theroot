@@ -1,1 +1,371 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nursing Report Sheet | The Root RN</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  background:#e5e5e5;font-family:'Arial',sans-serif;
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;padding:26px 16px 60px;
+}
 
+/* ---------- 상단 오디오 카드 ---------- */
+.audio-card{
+  width:100%;max-width:680px;background:#1B3D31;color:#F4F2EC;
+  border-radius:14px;padding:22px 26px 24px;margin-bottom:22px;
+  box-shadow:0 2px 20px rgba(0,0,0,0.15);
+}
+.audio-card .brand{
+  font-size:11px;letter-spacing:3px;color:#8FB3A4;font-weight:700;margin-bottom:10px;
+}
+.audio-card h2{
+  font-size:19px;font-weight:700;margin-bottom:6px;letter-spacing:-0.3px;
+}
+.audio-card p{
+  font-size:13px;line-height:1.65;color:#C2D6CC;margin-bottom:14px;
+}
+.audio-card audio{width:100%;height:40px;}
+.tip{
+  margin-top:14px;padding-top:13px;border-top:1px solid #35594B;
+  font-size:12px;line-height:1.7;color:#9FC0B2;
+}
+.tip b{color:#F4F2EC;}
+
+/* ---------- 시트 ---------- */
+.page{
+  background:#fff;width:100%;max-width:680px;
+  box-shadow:0 2px 20px rgba(0,0,0,0.15);
+  padding:24px 28px 20px;
+}
+.sheet+.sheet{margin-top:26px;}
+.sheet-head{
+  display:flex;align-items:center;justify-content:center;
+  position:relative;margin-bottom:16px;
+}
+h1{
+  text-align:center;font-size:22px;font-weight:900;
+  letter-spacing:0.06em;color:#111;text-transform:uppercase;
+}
+.pt-tag{
+  position:absolute;right:0;top:50%;transform:translateY(-50%);
+  background:#1B3D31;color:#fff;font-size:11px;font-weight:700;
+  letter-spacing:1px;padding:4px 11px;border-radius:20px;
+}
+table{width:100%;border-collapse:collapse;table-layout:fixed;}
+table+table{margin-top:-1.5px;}
+td{border:1.5px solid #555;vertical-align:middle;}
+.lbl{
+  background:#e8e8e8;font-weight:700;font-size:12px;
+  color:#111;text-align:center;padding:5px 6px;
+  overflow-wrap:break-word;
+}
+.inp{background:#fff;padding:0;}
+.inp input,.inp textarea{
+  width:100%;border:none;outline:none;
+  font-family:'Arial',sans-serif;font-size:12.5px;
+  color:#111;background:transparent;
+  padding:5px 7px;resize:none;overflow:hidden;line-height:1.5;
+}
+.inp input{height:28px;}
+.inp textarea{min-height:28px;}
+.inp input::placeholder,.inp textarea::placeholder{color:#bbb;font-size:11px;}
+.tall textarea{min-height:64px;}
+.vtall textarea{min-height:90px;}
+
+/* ---------- 버튼 ---------- */
+.actions{
+  width:100%;max-width:680px;
+  margin-top:20px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+}
+.btn{
+  padding:9px 22px;border-radius:5px;font-size:13px;
+  font-weight:700;cursor:pointer;border:none;font-family:'Arial',sans-serif;
+}
+.btn-print{background:#1B3D31;color:#fff;}
+.btn-print:hover{background:#24503F;}
+.btn-clear{background:#fff;color:#555;border:1.5px solid #ccc;}
+.btn-clear:hover{background:#f5f5f5;}
+
+/* ---------- Disclaimer ---------- */
+.disclaimer{
+  width:100%;max-width:680px;margin-top:16px;
+  font-size:11.5px;line-height:1.75;color:#7a7a7a;
+  text-align:center;font-style:italic;
+}
+
+@media print{
+  body{background:#fff;padding:0;}
+  .page{box-shadow:none;max-width:100%;padding:10px;}
+  .actions,.audio-card{display:none;}
+  .sheet+.sheet{margin-top:0;page-break-before:always;}
+  .lbl,.pt-tag{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .disclaimer{
+    font-size:9px;color:#999;margin-top:6px;
+    page-break-before:avoid;break-inside:avoid;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="audio-card">
+  <div class="brand">THE ROOT RN</div>
+  <h2>🎧 인수인계 음성</h2>
+  <p>오늘 담당하실 환자 두 분의 인계입니다.<br>
+     들으면서 아래 시트를 채워보세요. 처음엔 잘 안 들려도 괜찮아요 — 그게 정상입니다.</p>
+  <audio controls preload="metadata">
+    <source src="handoff.mp3" type="audio/mpeg">
+    이 브라우저는 오디오 재생을 지원하지 않습니다.
+  </audio>
+  <div class="tip">
+    <b>이렇게 들어보세요</b><br>
+    1회차 — 전체를 끊지 말고 들으며 분위기 익히기<br>
+    2회차 — 멈춰가며 Room · Name · Dx 부터 채우기<br>
+    3회차 — 나머지 칸 채우고, 안 들린 부분만 다시 듣기
+  </div>
+</div>
+
+  <section class="page sheet">
+    <div class="sheet-head">
+      <h1>Nursing Report Sheet</h1>
+      <span class="pt-tag">Patient 1</span>
+    </div>
+  <!-- 상단 정보 영역: 왼쪽(라벨+입력)은 좁게, 오른쪽 Lab/Test는 넓게 -->
+  <table>
+    <tr>
+      <td class="lbl" style="width:21%">Room</td>
+      <td class="inp" style="width:29%"><input placeholder=""></td>
+      <td class="lbl" style="width:25%">Doctor</td>
+      <td class="inp" style="width:25%"><input placeholder=""></td>
+    </tr>
+    <tr>
+      <td class="lbl">Name</td>
+      <td class="inp"><input placeholder=""></td>
+      <td class="lbl" rowspan="2">Consulting</td>
+      <td class="inp" rowspan="2"><textarea placeholder=""></textarea></td>
+    </tr>
+    <tr>
+      <td class="lbl">Age/Gender</td>
+      <td class="inp"><input placeholder=""></td>
+    </tr>
+    <tr>
+      <td class="lbl">CC</td>
+      <td class="inp"><input placeholder=""></td>
+      <td class="lbl">Lab</td>
+      <td class="lbl">Test</td>
+    </tr>
+    <tr>
+      <td class="lbl">Dx</td>
+      <td class="inp"><input placeholder=""></td>
+      <td class="inp tall" rowspan="4"><textarea placeholder=""></textarea></td>
+      <td class="inp tall" rowspan="4"><textarea placeholder=""></textarea></td>
+    </tr>
+    <tr>
+      <td class="lbl">PMHx</td>
+      <td class="inp"><input placeholder=""></td>
+    </tr>
+    <tr>
+      <td class="lbl">Allergy</td>
+      <td class="inp"><input placeholder=""></td>
+    </tr>
+    <tr>
+      <td class="lbl">Code</td>
+      <td class="inp"><input placeholder=""></td>
+    </tr>
+    <tr>
+      <td class="lbl">Accommodation</td>
+      <td class="inp"><input placeholder=""></td>
+      <td class="lbl">Vital sign</td>
+      <td class="lbl">GI/Diet</td>
+    </tr>
+    <tr>
+      <td class="lbl">Transfer from</td>
+      <td class="inp"><input placeholder=""></td>
+      <td class="inp vtall" rowspan="2"><textarea placeholder=""></textarea></td>
+      <td class="inp vtall" rowspan="2"><textarea placeholder=""></textarea></td>
+    </tr>
+    <tr>
+      <td class="lbl">Admission Date</td>
+      <td class="inp"><input placeholder=""></td>
+    </tr>
+  </table>
+
+  <!-- 하단 시스템별 영역: 4칸 균등 -->
+  <table>
+    <tr>
+      <td class="lbl" style="width:25%">Neuro</td>
+      <td class="lbl" style="width:25%">Respiratory</td>
+      <td class="lbl" style="width:25%">Cardiac</td>
+      <td class="lbl" style="width:25%">GU</td>
+    </tr>
+    <tr>
+      <td class="inp tall"><textarea placeholder=""></textarea></td>
+      <td class="inp tall"><textarea placeholder=""></textarea></td>
+      <td class="inp tall"><textarea placeholder=""></textarea></td>
+      <td class="inp tall"><textarea placeholder=""></textarea></td>
+    </tr>
+    <tr>
+      <td class="lbl">Muscular</td>
+      <td class="lbl">VTE</td>
+      <td class="lbl">IV</td>
+      <td class="lbl">Skin/Wound</td>
+    </tr>
+    <tr>
+      <td class="inp tall"><textarea placeholder=""></textarea></td>
+      <td class="inp tall"><textarea placeholder=""></textarea></td>
+      <td class="inp tall"><textarea placeholder=""></textarea></td>
+      <td class="inp tall"><textarea placeholder=""></textarea></td>
+    </tr>
+    <tr>
+      <td class="lbl" colspan="2">Note</td>
+      <td class="lbl">Plan</td>
+      <td class="lbl">Discharge to</td>
+    </tr>
+    <tr>
+      <td class="inp" colspan="2"><textarea style="min-height:110px"></textarea></td>
+      <td class="inp"><textarea style="min-height:110px"></textarea></td>
+      <td class="inp"><textarea style="min-height:110px"></textarea></td>
+    </tr>
+  </table>
+
+  <div style="text-align:right;margin-top:8px;font-size:11px;color:#888;font-style:italic;">
+    by Jennifer Minja Lee
+  </div>
+
+  </section>
+  <section class="page sheet">
+    <div class="sheet-head">
+      <h1>Nursing Report Sheet</h1>
+      <span class="pt-tag">Patient 2</span>
+    </div>
+  <!-- 상단 정보 영역: 왼쪽(라벨+입력)은 좁게, 오른쪽 Lab/Test는 넓게 -->
+  <table>
+    <tr>
+      <td class="lbl" style="width:21%">Room</td>
+      <td class="inp" style="width:29%"><input placeholder=""></td>
+      <td class="lbl" style="width:25%">Doctor</td>
+      <td class="inp" style="width:25%"><input placeholder=""></td>
+    </tr>
+    <tr>
+      <td class="lbl">Name</td>
+      <td class="inp"><input placeholder=""></td>
+      <td class="lbl" rowspan="2">Consulting</td>
+      <td class="inp" rowspan="2"><textarea placeholder=""></textarea></td>
+    </tr>
+    <tr>
+      <td class="lbl">Age/Gender</td>
+      <td class="inp"><input placeholder=""></td>
+    </tr>
+    <tr>
+      <td class="lbl">CC</td>
+      <td class="inp"><input placeholder=""></td>
+      <td class="lbl">Lab</td>
+      <td class="lbl">Test</td>
+    </tr>
+    <tr>
+      <td class="lbl">Dx</td>
+      <td class="inp"><input placeholder=""></td>
+      <td class="inp tall" rowspan="4"><textarea placeholder=""></textarea></td>
+      <td class="inp tall" rowspan="4"><textarea placeholder=""></textarea></td>
+    </tr>
+    <tr>
+      <td class="lbl">PMHx</td>
+      <td class="inp"><input placeholder=""></td>
+    </tr>
+    <tr>
+      <td class="lbl">Allergy</td>
+      <td class="inp"><input placeholder=""></td>
+    </tr>
+    <tr>
+      <td class="lbl">Code</td>
+      <td class="inp"><input placeholder=""></td>
+    </tr>
+    <tr>
+      <td class="lbl">Accommodation</td>
+      <td class="inp"><input placeholder=""></td>
+      <td class="lbl">Vital sign</td>
+      <td class="lbl">GI/Diet</td>
+    </tr>
+    <tr>
+      <td class="lbl">Transfer from</td>
+      <td class="inp"><input placeholder=""></td>
+      <td class="inp vtall" rowspan="2"><textarea placeholder=""></textarea></td>
+      <td class="inp vtall" rowspan="2"><textarea placeholder=""></textarea></td>
+    </tr>
+    <tr>
+      <td class="lbl">Admission Date</td>
+      <td class="inp"><input placeholder=""></td>
+    </tr>
+  </table>
+
+  <!-- 하단 시스템별 영역: 4칸 균등 -->
+  <table>
+    <tr>
+      <td class="lbl" style="width:25%">Neuro</td>
+      <td class="lbl" style="width:25%">Respiratory</td>
+      <td class="lbl" style="width:25%">Cardiac</td>
+      <td class="lbl" style="width:25%">GU</td>
+    </tr>
+    <tr>
+      <td class="inp tall"><textarea placeholder=""></textarea></td>
+      <td class="inp tall"><textarea placeholder=""></textarea></td>
+      <td class="inp tall"><textarea placeholder=""></textarea></td>
+      <td class="inp tall"><textarea placeholder=""></textarea></td>
+    </tr>
+    <tr>
+      <td class="lbl">Muscular</td>
+      <td class="lbl">VTE</td>
+      <td class="lbl">IV</td>
+      <td class="lbl">Skin/Wound</td>
+    </tr>
+    <tr>
+      <td class="inp tall"><textarea placeholder=""></textarea></td>
+      <td class="inp tall"><textarea placeholder=""></textarea></td>
+      <td class="inp tall"><textarea placeholder=""></textarea></td>
+      <td class="inp tall"><textarea placeholder=""></textarea></td>
+    </tr>
+    <tr>
+      <td class="lbl" colspan="2">Note</td>
+      <td class="lbl">Plan</td>
+      <td class="lbl">Discharge to</td>
+    </tr>
+    <tr>
+      <td class="inp" colspan="2"><textarea style="min-height:110px"></textarea></td>
+      <td class="inp"><textarea style="min-height:110px"></textarea></td>
+      <td class="inp"><textarea style="min-height:110px"></textarea></td>
+    </tr>
+  </table>
+
+  <div style="text-align:right;margin-top:8px;font-size:11px;color:#888;font-style:italic;">
+    by Jennifer Minja Lee
+  </div>
+
+  </section>
+<div class="disclaimer">
+  The patient profiles and handoff reports used in this exercise are fictional and created solely for educational purposes.<br>
+  본 자료는 교육 목적으로 제작된 가상의 환자 사례입니다.
+</div>
+
+<div class="actions">
+  <button class="btn btn-print" onclick="window.print()">🖨 Print / Save PDF</button>
+  <button class="btn btn-clear" onclick="clearAll()">Clear All</button>
+</div>
+
+<script>
+function clearAll(){
+  if(!confirm('모든 입력 내용을 지울까요?'))return;
+  document.querySelectorAll('input,textarea').forEach(el=>el.value='');
+  document.querySelectorAll('textarea').forEach(ta=>{ta.style.height='auto';});
+}
+document.querySelectorAll('textarea').forEach(ta=>{
+  ta.addEventListener('input',function(){
+    this.style.height='auto';
+    this.style.height=this.scrollHeight+'px';
+  });
+});
+</script>
+</body>
+</html>
