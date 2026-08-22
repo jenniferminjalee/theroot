@@ -3103,6 +3103,8 @@ const FB_DB_URL = 'https://the-root-v-hospital-default-rtdb.firebaseio.com';
 // ▲▲▲ 여기까지 ─────────────────────────────────────────────────
 
 const _urlClass = new URLSearchParams(location.search).get('class') || '';
+// 참여자 배지는 강사 화면에서만 — URL 끝에 &teacher=1 을 붙이면 보입니다
+const IS_TEACHER = new URLSearchParams(location.search).get('teacher') === '1';
 const CLASS_ID = (_urlClass || 'theroot').replace(/[^a-zA-Z0-9\-_]/g, '_');
 
 // ── 세션 코드 (비공개) ──────────────────────────────────────────
@@ -3318,7 +3320,7 @@ function joinClass() {
   if (!classMode || !myName) return;
   pushProgress();
   fbListen(`classes/${CLASS_ID}/students`, renderParticipants);
-  document.getElementById('cm-badge').style.display = 'flex';
+  if (IS_TEACHER) document.getElementById('cm-badge').style.display = 'flex';
 }
 
 function pushProgress(extra) {
