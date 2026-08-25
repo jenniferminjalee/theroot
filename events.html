@@ -37,12 +37,17 @@ nav{position:sticky;top:0;z-index:100;height:56px;display:flex;align-items:cente
 .hero-h1 em{color:#A8D5B8;font-style:italic}
 .hero-sub{font-size:16px;color:rgba(255,255,255,0.58);line-height:1.65;max-width:480px;margin:0 auto}
 
-main{max-width:var(--max);margin:0 auto;padding:56px var(--g) 96px}
+main{max-width:var(--max);margin:0 auto;padding:56px var(--g) 96px;display:flex;flex-direction:column}
+.sec-block{display:block}
 
 /* SECTION LABEL */
 .sec-label{display:flex;align-items:center;gap:12px;margin-bottom:24px}
 .sec-label-text{font-size:11px;font-weight:700;letter-spacing:0.10em;text-transform:uppercase;color:var(--t3);white-space:nowrap}
 .sec-label-line{flex:1;height:1px;background:var(--bdrw)}
+.cal-toggle{display:none;align-items:center;gap:5px;background:var(--white);border:1px solid var(--bdrw);color:var(--t2);font-family:inherit;font-size:12px;font-weight:600;padding:7px 14px;border-radius:99px;cursor:pointer;white-space:nowrap;transition:border-color .15s,color .15s}
+.cal-toggle:hover{border-color:var(--green);color:var(--t1)}
+.cal-toggle .arw{transition:transform .2s;display:inline-block}
+.cal-toggle[aria-expanded="true"] .arw{transform:rotate(180deg)}
 
 /* LOADING */
 .loading{text-align:center;padding:48px 24px;color:var(--t3);font-size:14px}
@@ -156,12 +161,54 @@ footer{border-top:1px solid var(--bdrw);padding:36px var(--g)}
 .footer-copy{font-size:12px;color:var(--t3)}
 
 @media(max-width:720px){
-  .cal-grid{grid-template-columns:1fr}
+  /* 여백 줄여서 날짜 칸 확보 (39px -> 45px) */
+  main{padding:36px 16px 80px;gap:0}
+  .hero{padding:56px 20px 48px}
+
+  /* 순서 뒤집기 — 다가오는 세션이 맨 위 */
+  #blockUpcoming{order:1}
+  #blockCal{order:2;margin-top:8px}
+  #blockPast{order:3}
+
+  /* 캘린더는 접어두고 버튼으로 펼치기 */
+  .cal-toggle{display:inline-flex}
+  .calendar-wrap{display:none;margin-bottom:40px}
+  .calendar-wrap.open{display:block}
+
+  .cal-grid{grid-template-columns:1fr;gap:14px}
+  .cal-month{padding:18px 16px;border-radius:20px}
+  .cal-month-header{margin-bottom:14px}
+  .cal-days{gap:2px}
+  .cal-days-header{gap:2px}
+  .cal-day{font-size:14px;border-radius:10px}
+  .cal-day.today{box-shadow:inset 0 0 0 2px var(--green-lt)}
+  .cal-event-dot{bottom:5px;gap:3px}
+  .cal-event-dot span{width:6px;height:6px}
+  .cal-legend{gap:5px}
+  .cal-legend-item{font-size:10px}
+
+  /* 카드 */
+  .events-list{gap:14px;margin-bottom:44px}
   .ev-body{grid-template-columns:1fr}
-  .ev-right{padding:24px 28px}
-  .ev-left{padding:24px 24px 20px}
-  .ev-compact-inner{flex-direction:column;align-items:flex-start}
-  .ev-bigdate{text-align:left}
+  .ev-card-bar{padding:12px 18px;gap:8px}
+  .ev-status{margin-left:0;width:100%;text-align:center;padding:4px 9px}
+  .ev-left{padding:22px 20px 20px}
+  .ev-right{padding:22px 20px}
+  .ev-compact-inner{padding:22px 20px;flex-direction:column;align-items:flex-start;gap:16px}
+  .ev-bigdate{text-align:left;display:flex;align-items:baseline;gap:8px}
+  .ev-bigdate-lbl{margin-top:0}
+  .ev-btn,.ev-btn-ghost{width:100%;justify-content:center;text-align:center}
+  .ev-title{font-size:20px!important}
+  .ev-title-sub{font-size:15px!important}
+
+  .past-grid{grid-template-columns:1fr;gap:12px}
+  .sec-label{margin-bottom:18px}
+}
+@media(max-width:400px){
+  main{padding:32px 12px 72px}
+  .cal-month{padding:16px 12px}
+  .cal-days,.cal-days-header{gap:1px}
+  .ev-left,.ev-right,.ev-compact-inner{padding-left:16px;padding-right:16px}
 }
 </style>
 </head>
@@ -184,32 +231,41 @@ footer{border-top:1px solid var(--bdrw);padding:36px var(--g)}
 
 <main>
 
-  <!-- CALENDAR -->
-  <div class="sec-label fade">
-    <span class="sec-label-text">📅 일정</span>
-    <span class="sec-label-line"></span>
-  </div>
-  <div class="calendar-wrap fade">
-    <div class="cal-grid" id="calGrid">
+  <!-- UPCOMING -->
+  <section class="sec-block" id="blockUpcoming">
+    <div class="sec-label fade">
+      <span class="sec-label-text">🌱 다가오는 세션</span>
+      <span class="sec-label-line"></span>
+    </div>
+    <div class="events-list" id="upcomingList">
       <div class="loading"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span></div>
     </div>
-  </div>
+  </section>
 
-  <!-- UPCOMING -->
-  <div class="sec-label fade">
-    <span class="sec-label-text">🌱 다가오는 세션</span>
-    <span class="sec-label-line"></span>
-  </div>
-  <div class="events-list" id="upcomingList">
-    <div class="loading"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span></div>
-  </div>
+  <!-- CALENDAR -->
+  <section class="sec-block" id="blockCal">
+    <div class="sec-label fade">
+      <span class="sec-label-text">📅 일정</span>
+      <span class="sec-label-line"></span>
+      <button class="cal-toggle" id="calToggle" aria-expanded="false" onclick="toggleCal()">
+        달력 보기 <span class="arw">▾</span>
+      </button>
+    </div>
+    <div class="calendar-wrap fade" id="calWrap">
+      <div class="cal-grid" id="calGrid">
+        <div class="loading"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span></div>
+      </div>
+    </div>
+  </section>
 
   <!-- PAST -->
-  <div class="sec-label fade">
-    <span class="sec-label-text">📂 지난 세션</span>
-    <span class="sec-label-line"></span>
-  </div>
-  <div id="pastList"></div>
+  <section class="sec-block" id="blockPast">
+    <div class="sec-label fade">
+      <span class="sec-label-text">📂 지난 세션</span>
+      <span class="sec-label-line"></span>
+    </div>
+    <div id="pastList"></div>
+  </section>
 
   <p class="src-note" id="srcNote"></p>
 
@@ -227,7 +283,7 @@ footer{border-top:1px solid var(--bdrw);padding:36px var(--g)}
    ① 구글 시트 주소 — 여기 한 줄만 바꾸면 끝
    시트 → 파일 → 공유 → 웹에 게시 → CSV 선택 → 주소 복사
    ══════════════════════════════════════════════════ */
-const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1OrmDfwmJu4Q0UWrk4WGytSynVqZfp7jfqWkdWBONs_w/gviz/tq?tqx=out:csv';   // ← 여기에 CSV 주소를 붙여넣으세요
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/1OrmDfwmJu4Q0UWrk4WGytSynVqZfp7jfqWkdWBONs_w/gviz/tq?tqx=out:csv&gid=2055217065';
 
 /* ══════════════════════════════════════════════════
    ② FALLBACK — 시트를 못 읽을 때 보여줄 기본 데이터
@@ -244,8 +300,8 @@ const FALLBACK = [
   {date:'2026-07-22',type:'vhe',layout:'compact',title:'VHE 멘티 세션',subtitle:'Sophia와 함께',
    format:'멘티 전용 세션 · Zoom · 소그룹',note:'초대 전용 세션',publish:'yes'},
   {date:'2026-08-01',type:'cs',layout:'tease',vol:'Vol. 2',title:'Career Stories #2',
-   subtitle:'Dialysis Nursing Beyond Borders',
-   note:'선착순 모집 마감',publish:'yes'},
+   subtitle:'게스트 · 주제 · 신청 방법 공개 예정',
+   note:'7월 20일에 공개돼요 — 인스타 팔로우하고 기다려요',publish:'yes'},
   {date:'2026-08-22',type:'vhe',layout:'compact',title:'Clinical Lab 첫 세션',
    subtitle:'미국 병동 임상 케이스 라이브',
    speaker_name:'Jennifer Minja Lee',speaker_role:'California RN · THE ROOT RN',
@@ -451,6 +507,15 @@ function renderCalendars(sessions){
       if(t)t.scrollIntoView({behavior:'smooth',block:'center'});
     });
   });
+}
+
+/* ── 캘린더 접기/펼치기 (모바일) ── */
+function toggleCal(){
+  const w=document.getElementById('calWrap');
+  const b=document.getElementById('calToggle');
+  const open=w.classList.toggle('open');
+  b.setAttribute('aria-expanded', open? 'true':'false');
+  b.innerHTML = (open? '달력 닫기':'달력 보기') + ' <span class="arw">▾</span>';
 }
 
 /* ── 전체 렌더 ── */
